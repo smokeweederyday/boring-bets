@@ -2,86 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="2026 MLB Trade Deadline War Room: confirmed trades, rumors, team market tiers and betting impact.">
-  <title>2026 MLB Trade Deadline War Room</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Boring Bets — data over hype. Daily betting analysis, tracked results, and tools.">
+  <title>Boring Bets</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <header class="hero">
-    <div>
-      <p class="eyebrow">BORING BETS • MLB DEADLINE</p>
-      <h1>Trade Deadline War Room</h1>
-      <p class="lede">Confirmed moves first. Rumors labeled. Betting impact attached.</p>
-    </div>
-    <div class="deadline-card">
-      <span>Deadline</span>
-      <strong>August 3, 2026 • 6:00 PM ET</strong>
-      <div id="countdown">Loading countdown…</div>
-    </div>
+
+<body class="home-page">
+
+  <header class="site-header">
+    <a class="brand" href="index.html">BORING BETS</a>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="#card">Today’s Card</a>
+      <a href="#results">Results</a>
+      <a href="#articles">Articles</a>
+      <a href="#tools">Tools</a>
+      <a href="#discord">Discord</a>
+    </nav>
   </header>
 
   <main>
-    <section class="statusbar">
-      <div><span>Last refresh</span><strong id="lastUpdated">—</strong></div>
-      <div><span>Confirmed trades</span><strong id="tradeCount">—</strong></div>
-      <div><span>Active rumors</span><strong id="rumorCount">—</strong></div>
-      <div><span>Teams within 4 WC games</span><strong id="raceCount">—</strong></div>
-    </section>
 
-    <nav class="tabs" aria-label="Dashboard sections">
-      <button class="active" data-tab="trades">Confirmed Trades</button>
-      <button data-tab="rumors">Rumor Board</button>
-      <button data-tab="market">Team Market</button>
-      <button data-tab="betting">Betting Impact</button>
-    </nav>
+    <section class="home-hero">
+      <p class="eyebrow">BORING BETS</p>
+      <h1>Data over hype.</h1>
+      <p class="home-intro">
+        Daily sports betting analysis, tracked results, and practical tools.
+      </p>
 
-    <section id="trades" class="tab-panel active">
-      <div class="section-head">
-        <div><p class="kicker">OFFICIAL MOVES</p><h2>Confirmed Trades</h2></div>
-        <input id="tradeSearch" class="search" placeholder="Search team or player">
-      </div>
-      <div id="tradeCards" class="cards"></div>
-    </section>
-
-    <section id="rumors" class="tab-panel">
-      <div class="section-head">
-        <div><p class="kicker">SOURCE-GRADED</p><h2>Rumor Board</h2></div>
-        <select id="confidenceFilter">
-          <option value="">All confidence levels</option>
-          <option>High</option><option>Medium</option><option>Low</option>
-        </select>
-      </div>
-      <div class="notice">Rumors are not confirmed transactions. Every item must include a source and confidence rating.</div>
-      <div id="rumorCards" class="cards"></div>
-    </section>
-
-    <section id="market" class="tab-panel">
-      <div class="section-head">
-        <div><p class="kicker">BUY / SELL LANDSCAPE</p><h2>Team Market</h2></div>
-        <select id="tierFilter">
-          <option value="">All market tiers</option>
-          <option>Aggressive Buyer</option><option>Buyer</option><option>Bubble</option>
-          <option>Seller</option><option>Rebuilder</option>
-        </select>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Team</th><th>W-L</th><th>WCGB</th><th>Run Diff</th><th>Tier</th><th>Primary Need</th><th>Betting Note</th></tr></thead>
-          <tbody id="teamRows"></tbody>
-        </table>
+      <div class="hero-actions">
+        <a class="primary-button" href="#card">View Today’s Card</a>
+        <a class="secondary-button" href="#results">View Results</a>
       </div>
     </section>
 
-    <section id="betting" class="tab-panel">
-      <div class="section-head"><div><p class="kicker">MARKET REACTION</p><h2>Betting Impact Guide</h2></div></div>
-      <div id="impactCards" class="impact-grid"></div>
+    <section id="card" class="home-section">
+      <div class="section-heading">
+        <p class="kicker">DAILY PLAYS</p>
+        <h2>Today’s Card</h2>
+      </div>
+
+      <div class="home-card">
+        <p class="empty-label">Today’s card has not been posted yet.</p>
+        <p>
+          This section will contain each wager, price, unit size, and full analysis.
+        </p>
+      </div>
     </section>
+
+    <section id="results" class="home-section">
+      <div class="section-heading">
+        <p class="kicker">TRACKED PERFORMANCE</p>
+        <h2>Results</h2>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span>Units</span>
+          <strong>Coming soon</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>ROI</span>
+          <strong>Coming soon</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Tracked Bets</span>
+          <strong>Coming soon</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Record</span>
+          <strong>Coming soon</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="articles" class="home-section">
+      <div class="section-heading">
+        <p class="kicker">LATEST ANALYSIS</p>
+        <h2>Articles</h2>
+      </div>
+
+      <div class="home-card">
+        <h3>Daily betting writeups</h3>
+        <p>
+          Full game analysis, matchup notes, bullpen information, weather, and betting angles will appear here.
+        </p>
+      </div>
+    </section>
+
+    <section id="tools" class="home-section">
+      <div class="section-heading">
+        <p class="kicker">BETTING TOOLS</p>
+        <h2>Tools</h2>
+      </div>
+
+      <div class="tool-grid">
+        <a class="tool-card" href="trade-deadline.html">
+          <span>MLB</span>
+          <h3>Trade Deadline War Room</h3>
+          <p>Confirmed trades, rumors, team needs, and betting impact.</p>
+        </a>
+
+        <div class="tool-card muted-card">
+          <span>CALCULATOR</span>
+          <h3>Unit Size Calculator</h3>
+          <p>Coming soon.</p>
+        </div>
+
+        <div class="tool-card muted-card">
+          <span>CALCULATOR</span>
+          <h3>Odds Converter</h3>
+          <p>Coming soon.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="discord" class="home-section discord-section">
+      <p class="kicker">COMMUNITY</p>
+      <h2>Join the Discord</h2>
+      <p>Daily cards, analysis, discussion, and tracked results.</p>
+      <a class="primary-button" href="#">Discord link coming soon</a>
+    </section>
+
   </main>
 
-  <footer>
-    <p>Data sources are linked on each item. Market classifications are editorial, not official MLB designations.</p>
+  <footer class="site-footer">
+    <strong>Boring Bets</strong>
+    <span>Data over hype.</span>
   </footer>
-  <script src="app.js"></script>
+
 </body>
 </html>
