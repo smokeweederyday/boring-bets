@@ -1,0 +1,64 @@
+/* ==========================================
+   BORING BETS DESIGN SYSTEM v1.0
+   ========================================== */
+
+:root {
+
+  /* ========= COLORS ========= */
+
+  --bg: #050806;
+  --bg-soft: #0b100d;
+  --panel: #101814;
+  --panel-light: #16211b;
+
+  --green: #39FF88;
+  --green-soft: #6CFFAC;
+  --green-dark: #1E6F47;
+
+  --teal: #18D8D8;
+  --teal-soft: #7CF4F4;
+  --teal-dark: #0C7070;
+
+  --white: #F5F7F6;
+  --text: #C6D0C9;
+  --muted: #8A9690;
+
+  --gold: #FFD166;
+  --red: #FF5A6E;
+
+  --border: #22342B;
+
+  /* ========= SHADOWS ========= */
+
+  --shadow-sm: 0 4px 12px rgba(0,0,0,.18);
+
+  --shadow-md: 0 12px 30px rgba(0,0,0,.28);
+
+  --shadow-lg: 0 24px 60px rgba(0,0,0,.45);
+
+  --glow-green: 0 0 20px rgba(57,255,136,.15);
+
+  --glow-teal: 0 0 20px rgba(24,216,216,.15);
+
+  /* ========= RADII ========= */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  /* ========= SPACING ========= */
+
+  --space-1: 6px;
+  --space-2: 12px;
+  --space-3: 18px;
+  --space-4: 28px;
+  --space-5: 42px;
+  --space-6: 64px;
+
+  /* ========= TRANSITIONS ========= */
+
+  --speed-fast: .18s;
+  --speed-normal: .28s;
+  --speed-slow: .45s;
+
+}
