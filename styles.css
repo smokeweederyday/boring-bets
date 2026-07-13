@@ -405,3 +405,237 @@ footer{padding:24px max(5vw,24px);border-top:1px solid var(--line);color:var(--m
     flex-basis: 48px;
   }
 }
+
+/* =========================
+   PLAY DETAILS PAGE
+   ========================= */
+
+.play-page {
+  min-height: 100vh;
+  background: #050806;
+  color: #f4f7f4;
+}
+
+.play-page .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 5vw;
+  background: rgba(5, 8, 6, 0.95);
+  border-bottom: 1px solid #1f3527;
+}
+
+.play-page .brand {
+  color: #eaf7ed;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.play-page .main-nav {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+}
+
+.play-page .main-nav a {
+  color: #aebbb1;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.play-page .main-nav a:hover {
+  color: #55d47d;
+}
+
+.play-main {
+  width: min(1050px, 90%);
+  margin: 0 auto;
+  padding: 60px 0 80px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #55d47d;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.play-matchup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 30px;
+  padding: 28px;
+  background: #0a100c;
+  border: 1px solid #1d3224;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.play-team {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.play-team:first-child {
+  justify-content: flex-start;
+  animation: playAwayReveal 0.8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.play-team:last-child {
+  justify-content: flex-end;
+  animation: playHomeReveal 0.8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.play-team img {
+  display: block;
+  width: 76px !important;
+  height: 76px !important;
+  max-width: 76px !important;
+  max-height: 76px !important;
+  flex: 0 0 76px;
+  object-fit: contain;
+}
+
+.play-versus {
+  text-align: center;
+  color: #55d47d;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.play-header {
+  margin-bottom: 34px;
+}
+
+.play-header h1 {
+  margin: 6px 0 22px;
+  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.play-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.play-facts > div {
+  padding: 18px;
+  background: #0a100c;
+  border: 1px solid #1d3224;
+  border-radius: 12px;
+}
+
+.play-facts span {
+  display: block;
+  color: #8e9b91;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.play-facts strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.15rem;
+}
+
+.analysis-section {
+  padding: 26px;
+  background: #0a100c;
+  border: 1px solid #1d3224;
+  border-radius: 12px;
+}
+
+#playAnalysis {
+  color: #b3beb6;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.play-page .site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 5vw;
+  color: #8e9b91;
+  border-top: 1px solid #17261c;
+}
+
+@keyframes playAwayReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-45px) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes playHomeReveal {
+  from {
+    opacity: 0;
+    transform: translateX(45px) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .play-page .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .play-page .main-nav {
+    width: 100%;
+  }
+
+  .play-matchup {
+    grid-template-columns: 1fr 30px 1fr;
+    padding: 20px 14px;
+  }
+
+  .play-team {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .play-team img {
+    width: 56px !important;
+    height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    flex-basis: 56px;
+  }
+
+  .play-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .play-page .site-footer {
+    flex-direction: column;
+  }
+}
+

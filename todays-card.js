@@ -39,6 +39,21 @@ async function loadCard() {
       const card = document.createElement("div");
 
       card.className = "play-card";
+      card.tabIndex = 0;
+card.setAttribute("role", "link");
+
+card.addEventListener("click", () => {
+  window.location.href =
+    `play.html?id=${encodeURIComponent(play.id)}`;
+});
+
+card.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    window.location.href =
+      `play.html?id=${encodeURIComponent(play.id)}`;
+  }
+});
 
       card.innerHTML = `
   <div class="matchup-logos">
