@@ -3,138 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Boring Bets — data over hype. Daily betting analysis, tracked results, and tools.">
-  <title>Boring Bets</title>
+  <meta name="description" content="Boring Bets — daily betting analysis, tracked results, and practical tools. Data over hype.">
+  <title>Boring Bets | Data over hype.</title>
+  <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="home-page">
-
   <header class="site-header">
-    <a class="brand" href="index.html">BORING BETS</a>
-
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
+    <a class="brand" href="index.html"><span class="brand-mark">BB</span>BORING BETS</a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="index.html" aria-current="page">Home</a>
       <a href="todays-card.html">Today’s Card</a>
       <a href="#results">Results</a>
-      <a href="#articles">Articles</a>
+      <a href="#articles">Analysis</a>
       <a href="#tools">Tools</a>
       <a href="#discord">Discord</a>
     </nav>
   </header>
 
   <main>
-
     <section class="home-hero">
-      <p class="eyebrow">BORING BETS</p>
-      <h1>Data over hype.</h1>
-      <p class="home-intro">
-        Daily sports betting analysis, tracked results, and practical tools.
-      </p>
-
-      <div class="hero-actions">
-        <a class="primary-button" href="todays-card.html">View Today’s Card</a>
-        <a class="secondary-button" href="#results">View Results</a>
+      <div>
+        <p class="eyebrow">INDEPENDENT SPORTS BETTING ANALYSIS</p>
+        <h1>Data<br><span>over hype.</span></h1>
+        <p class="home-intro">Daily cards, long-form matchup analysis, tracked performance, and betting tools built for people putting real money at risk.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="todays-card.html">Open Today’s Card →</a>
+          <a class="secondary-button" href="trade-deadline.html">MLB Deadline War Room</a>
+        </div>
       </div>
+      <aside class="terminal-panel" aria-label="Boring Bets status">
+        <div class="terminal-line"><span><i class="terminal-dot"></i>System</span><strong>ONLINE</strong></div>
+        <div class="terminal-line"><span>Today’s plays</span><strong id="homePlayCount">—</strong></div>
+        <div class="terminal-line"><span>Card exposure</span><strong id="homeUnitCount">—</strong></div>
+        <div class="terminal-line"><span>Last card update</span><strong id="homeUpdated">—</strong></div>
+        <div class="terminal-line"><span>Primary tool</span><strong>MLB WAR ROOM</strong></div>
+      </aside>
     </section>
 
     <section id="card" class="home-section">
       <div class="section-heading">
-        <p class="kicker">DAILY PLAYS</p>
-        <h2>Today’s Card</h2>
+        <div><p class="kicker">DAILY PLAYS</p><h2>Today’s Card</h2></div>
+        <a class="text-link" href="todays-card.html">View full card →</a>
       </div>
-
-      <div class="home-card">
-        <p class="empty-label">Today’s card has not been posted yet.</p>
-        <p>
-          This section will contain each wager, price, unit size, and full analysis.
-        </p>
+      <div id="featuredPlays" class="featured-grid">
+        <div class="home-card"><p>Loading today’s plays…</p></div>
       </div>
     </section>
 
     <section id="results" class="home-section">
       <div class="section-heading">
-        <p class="kicker">TRACKED PERFORMANCE</p>
-        <h2>Results</h2>
+        <div><p class="kicker">TRACKED PERFORMANCE</p><h2>Results, not claims.</h2></div>
+        <p>Public performance data will replace screenshots and cherry-picked streaks.</p>
       </div>
-
       <div class="stat-grid">
-        <div class="stat-card">
-          <span>Units</span>
-          <strong>Coming soon</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>ROI</span>
-          <strong>Coming soon</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Tracked Bets</span>
-          <strong>Coming soon</strong>
-        </div>
-
-        <div class="stat-card">
-          <span>Record</span>
-          <strong>Coming soon</strong>
-        </div>
+        <div class="stat-card"><span>Units</span><strong>COMING SOON</strong></div>
+        <div class="stat-card"><span>ROI</span><strong>COMING SOON</strong></div>
+        <div class="stat-card"><span>Tracked Bets</span><strong>COMING SOON</strong></div>
+        <div class="stat-card"><span>Closing Line</span><strong>COMING SOON</strong></div>
       </div>
     </section>
 
     <section id="articles" class="home-section">
       <div class="section-heading">
-        <p class="kicker">LATEST ANALYSIS</p>
-        <h2>Articles</h2>
+        <div><p class="kicker">GAME ANALYSIS</p><h2>The reasoning travels with the pick.</h2></div>
       </div>
-
       <div class="home-card">
-        <h3>Daily betting writeups</h3>
-        <p>
-          Full game analysis, matchup notes, bullpen information, weather, and betting angles will appear here.
-        </p>
+        <h3>Starting pitching. Bullpens. Weather. Market price.</h3>
+        <p>Each posted play opens into a dedicated analysis page. The card tells you what the bet is; the play page shows the case behind it.</p>
+        <a class="text-link" href="todays-card.html">Read today’s analysis →</a>
       </div>
     </section>
 
     <section id="tools" class="home-section">
-      <div class="section-heading">
-        <p class="kicker">BETTING TOOLS</p>
-        <h2>Tools</h2>
-      </div>
-
+      <div class="section-heading"><div><p class="kicker">BETTING TOOLS</p><h2>Decision support.</h2></div></div>
       <div class="tool-grid">
-        <a class="tool-card" href="trade-deadline.html">
-          <span>MLB</span>
-          <h3>Trade Deadline War Room</h3>
-          <p>Confirmed trades, rumors, team needs, and betting impact.</p>
-        </a>
-
-        <div class="tool-card muted-card">
-          <span>CALCULATOR</span>
-          <h3>Unit Size Calculator</h3>
-          <p>Coming soon.</p>
-        </div>
-
-        <div class="tool-card muted-card">
-          <span>CALCULATOR</span>
-          <h3>Odds Converter</h3>
-          <p>Coming soon.</p>
-        </div>
+        <a class="tool-card" href="trade-deadline.html"><span>MLB // LIVE DATA</span><h3>Trade Deadline War Room</h3><p>Confirmed trades, rumors, team direction, roster needs, and betting implications.</p></a>
+        <div class="tool-card muted-card"><span>CALCULATOR</span><h3>Unit Size Calculator</h3><p>Bankroll-based sizing is scheduled for a later sprint.</p></div>
+        <div class="tool-card muted-card"><span>CALCULATOR</span><h3>Odds & Probability</h3><p>American odds, implied probability, and fair-price tools are coming next.</p></div>
       </div>
     </section>
 
-    <section id="discord" class="home-section discord-section">
-      <p class="kicker">COMMUNITY</p>
-      <h2>Join the Discord</h2>
-      <p>Daily cards, analysis, discussion, and tracked results.</p>
-      <a class="primary-button" href="#">Discord link coming soon</a>
+    <section id="discord" class="home-section">
+      <div class="discord-section">
+        <div><p class="kicker">BORING BETS DISCORD</p><h2>Cards, discussion, and updates.</h2><p>Replace this button with your permanent Discord invite when ready.</p></div>
+        <a class="primary-button" href="#">Invite link coming soon</a>
+      </div>
     </section>
-
   </main>
 
-  <footer class="site-footer">
-    <strong>Boring Bets</strong>
-    <span>Data over hype.</span>
-  </footer>
-
+  <footer class="site-footer"><strong>BORING BETS</strong><span>Data over hype. • Betting involves risk.</span></footer>
+  <script src="assets/js/home.js"></script>
 </body>
 </html>
