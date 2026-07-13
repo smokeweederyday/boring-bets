@@ -283,4 +283,125 @@ footer{padding:24px max(5vw,24px);border-top:1px solid var(--line);color:var(--m
     flex-direction: column;
   }
 }
+/* Matchup logos */
 
+.card-page .matchup-logos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 18px;
+  background: #07100a;
+  border: 1px solid #1d3224;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-page .team-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  font-weight: 900;
+}
+
+.card-page .team-logo img {
+  display: block;
+  width: 64px !important;
+  height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  object-fit: contain;
+  flex: 0 0 64px;
+}
+
+.card-page .away-logo {
+  justify-content: flex-start;
+  animation: awayLogoEntrance 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.card-page .home-logo {
+  justify-content: flex-end;
+  animation: homeLogoEntrance 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.card-page .matchup-at {
+  text-align: center;
+  color: #55d47d;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.card-page .team-logo:hover img {
+  animation: logoPulse 0.7s ease;
+}
+
+@keyframes awayLogoEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-90px) scale(0.7) rotate(-8deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(8px) scale(1.05) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes homeLogoEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(90px) scale(0.7) rotate(8deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(-8px) scale(1.05) rotate(-2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.14);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .card-page .matchup-logos {
+    grid-template-columns: 1fr 28px 1fr;
+    padding: 14px;
+  }
+
+  .card-page .team-logo {
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+  }
+
+  .card-page .team-logo img {
+    width: 48px !important;
+    height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    flex-basis: 48px;
+  }
+}

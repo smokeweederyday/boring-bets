@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-13",
+  "status": "published",
+  "updated_at": "2026-07-13T12:00:00-04:00",
+  "plays": [
+    {
+      "id": "example-mlb-1",
+      "sport": "MLB",
+      "game": "Phillies at Mets",
+      "away_team": "PHI",
+      "away_team_id": 143,
+      "home_team": "NYM",
+      "home_team_id": 121,
+      "play": "Phillies Moneyline",
+      "odds": "-120",
+      "units": 1,
+      "rating": 4,
+      "handicapper": "Mark",
+      "analysis": "This is a temporary example showing how a published wager will appear on the card."
+    },
+    {
+      "id": "example-mlb-2",
+      "sport": "MLB",
+      "game": "Brewers at Cubs",
+      "away_team": "MIL",
+      "away_team_id": 158,
+      "home_team": "CHC",
+      "home_team_id": 112,
+      "play": "Over 8.5",
+      "odds": "-110",
+      "units": 0.5,
+      "rating": 3,
+      "handicapper": "Mark",
+      "analysis": "Each play can include the matchup, market, odds, units, rating, handicapper, and full analysis."
+    }
+  ]
+}
