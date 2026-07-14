@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-07-14T23:19:12.256771+00:00",
+  "days": [
+    {
+      "id": "2026-05-16-mlb",
+      "date": "2026-05-16",
+      "sport": "MLB",
+      "state": "completed",
+      "previous_day": "2026-05-15",
+      "next_day": "2026-05-17",
+      "game_ids": [
+        "2026-05-16-tor-det",
+        "2026-05-16-kc-stl",
+        "2026-05-16-ari-col",
+        "2026-05-16-bal-wsh",
+        "2026-05-16-phi-pit",
+        "2026-05-16-mia-tb",
+        "2026-05-16-cin-cle",
+        "2026-05-16-chc-cws",
+        "2026-05-16-mil-min",
+        "2026-05-16-tex-hou",
+        "2026-05-16-bos-atl",
+        "2026-05-16-nyy-nym",
+        "2026-05-16-sd-sea",
+        "2026-05-16-lad-laa",
+        "2026-05-16-sfg-ath"
+      ],
+      "official_play_ids": [],
+      "workflow": {
+        "research_complete": false,
+        "plays_published": false,
+        "results_complete": true,
+        "evaluations_complete": false,
+        "archived": false
+      },
+      "summary": {
+        "games": 15,
+        "official_plays": 0,
+        "research_ready": 0
+      }
+    },
+    {
+      "id": "2026-07-08-mlb",
+      "date": "2026-07-08",
+      "sport": "MLB",
+      "state": "completed",
+      "previous_day": "2026-07-07",
+      "next_day": "2026-07-09",
+      "game_ids": [
+        "2026-07-08-tor-sfg",
+        "2026-07-08-chc-bal",
+        "2026-07-08-ath-det",
+        "2026-07-08-atl-pit",
+        "2026-07-08-nyy-tb",
+        "2026-07-08-sea-mia",
+        "2026-07-08-hou-wsh",
+        "2026-07-08-kc-nym",
+        "2026-07-08-phi-cin",
+        "2026-07-08-bos-cws",
+        "2026-07-08-cle-min",
+        "2026-07-08-mil-stl",
+        "2026-07-08-laa-tex",
+        "2026-07-08-ari-sd",
+        "2026-07-08-col-lad"
+      ],
+      "official_play_ids": [
+        "2026-07-08-chc-bal-over",
+        "2026-07-08-ath-det-tigers",
+        "2026-07-08-atl-pit-over",
+        "2026-07-08-hou-wsh-tt",
+        "2026-07-08-kc-nym-mets-tt",
+        "2026-07-08-kc-nym-over"
+      ],
+      "workflow": {
+        "research_complete": false,
+        "plays_published": true,
+        "results_complete": true,
+        "evaluations_complete": false,
+        "archived": false
+      },
+      "summary": {
+        "games": 15,
+        "official_plays": 6,
+        "research_ready": 0
+      }
+    },
+    {
+      "id": "2026-07-14-mlb",
+      "date": "2026-07-14",
+      "sport": "MLB",
+      "state": "today",
+      "previous_day": "2026-07-13",
+      "next_day": "2026-07-15",
+      "game_ids": [
+        "2026-07-14-away-home"
+      ],
+      "official_play_ids": [],
+      "workflow": {
+        "research_complete": false,
+        "plays_published": false,
+        "results_complete": false,
+        "evaluations_complete": false,
+        "archived": false
+      },
+      "summary": {
+        "games": 1,
+        "official_plays": 0,
+        "research_ready": 0
+      }
+    }
+  ]
+}

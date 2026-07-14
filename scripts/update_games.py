@@ -15,35 +15,54 @@ from mlb.schedule import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
 GAMES_FILE = ROOT / "data/games.json"
+DAYS_FILE = ROOT / "data/days.json"
+PLAYS_FILE = ROOT / "data/todays-card.json"
+PLAYS_ARCHIVE_FILE = ROOT / "data/plays.json"
+RESULTS_FILE = ROOT / "data/results.json"
+EVALUATIONS_FILE = ROOT / "data/evaluations.json"
+
+
+def load_json_file(
+    path: Path,
+    default: dict[str, Any],
+) -> dict[str, Any]:
+    if not path.exists():
+        return default
+
+    try:
+        return json.loads(
+            path.read_text(
+                encoding="utf-8"
+            )
+        )
+    except (
+        json.JSONDecodeError,
+        OSError,
+    ) as error:
+        print(
+            f"Could not read {path.name}; "
+            f"using safe defaults: {error}"
+        )
+        return default
 
 
 def load_games_file() -> dict[str, Any]:
-    if not GAMES_FILE.exists():
-        return {
-            "schema_version": "3.0",
+    return load_json_file(
+        GAMES_FILE,
+        {
+            "schema_version": "3.1",
             "default_controls": {
                 "timeframe": "last_30",
                 "location": "all",
             },
             "games": [],
-        }
-
-    return json.loads(
-        GAMES_FILE.read_text(
-            encoding="utf-8"
-        )
+        },
     )
 
 
 def create_default_workflow() -> dict[str, Any]:
-    """
-    Stable lifecycle states for one game.
-
-    Detailed data remains inside pitchers, lineups,
-    weather, market and other game modules.
-    """
-
     return {
         "research_state": "pending",
         "publication_state": "unpublished",
@@ -60,11 +79,6 @@ def create_default_workflow() -> dict[str, Any]:
 def normalize_workflow(
     workflow: dict[str, Any] | None,
 ) -> dict[str, Any]:
-    """
-    Fill missing workflow fields without overwriting
-    existing lifecycle data.
-    """
-
     normalized = create_default_workflow()
     normalized.update(workflow or {})
 
@@ -81,11 +95,6 @@ def merge_schedule_game(
     existing: dict[str, Any] | None,
     schedule_game: dict[str, Any],
 ) -> dict[str, Any]:
-    """
-    Update schedule-controlled fields while preserving
-    existing research, statistics, notes and editorial data.
-    """
-
     game = dict(existing or {})
 
     game["id"] = schedule_game["id"]
@@ -224,11 +233,6 @@ def merge_pitcher(
 def migrate_existing_games(
     games: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """
-    Add current schema defaults to every stored game
-    while preserving all existing research data.
-    """
-
     migrated = []
 
     for stored_game in games:
@@ -257,6 +261,706 @@ def migrate_existing_games(
 
     return migrated
 
+
+def determine_day_state(
+    day_date: str,
+    games: list[dict[str, Any]],
+) -> str:
+    today = date.today().isoformat()
+
+    if day_date > today:
+        return "future"
+
+    statuses = {
+        game.get("status", "scheduled")
+        for game in games
+    }
+
+    if "live" in statuses:
+        return "live"
+
+    completed_statuses = {
+        "final",
+        "postponed",
+        "cancelled",
+    }
+
+    if (
+        statuses
+        and statuses.issubset(
+            completed_statuses
+        )
+    ):
+        return "completed"
+
+    if day_date < today:
+        return "past"
+
+    return "today"
+
+
+def build_days_index(
+    games: list[dict[str, Any]],
+) -> dict[str, Any]:
+    grouped: dict[
+        tuple[str, str],
+        list[dict[str, Any]],
+    ] = {}
+
+    for game in games:
+        game_date = game.get("date")
+        sport = str(
+            game.get("sport") or "MLB"
+        ).upper()
+
+        if (
+            not game_date
+            or not game.get("id")
+        ):
+            continue
+
+        grouped.setdefault(
+            (game_date, sport),
+            [],
+        ).append(game)
+
+    days = []
+
+    for (
+        day_date,
+        sport,
+    ), day_games in grouped.items():
+        ordered_games = sorted(
+            day_games,
+            key=lambda game: (
+                game.get("game_time") or "",
+                game.get("id") or "",
+            ),
+        )
+
+        official_play_ids = []
+
+        for game in ordered_games:
+            play_ids = (
+                game
+                .get("workflow", {})
+                .get("official_play_ids", [])
+            )
+
+            if isinstance(play_ids, list):
+                official_play_ids.extend(
+                    play_ids
+                )
+
+        days.append(
+            {
+                "id": f"{day_date}-{sport.lower()}",
+                "date": day_date,
+                "sport": sport,
+                "state": determine_day_state(
+                    day_date,
+                    ordered_games,
+                ),
+                "previous_day": shift_date(
+                    day_date,
+                    -1,
+                ),
+                "next_day": shift_date(
+                    day_date,
+                    1,
+                ),
+                "game_ids": [
+                    game["id"]
+                    for game in ordered_games
+                ],
+                "official_play_ids":
+                    official_play_ids,
+                "workflow": {
+                    "research_complete":
+                        bool(ordered_games)
+                        and all(
+                            game
+                            .get("workflow", {})
+                            .get("research_state")
+                            == "ready"
+                            for game in ordered_games
+                        ),
+                    "plays_published":
+                        bool(
+                            official_play_ids
+                        ),
+                    "results_complete":
+                        bool(ordered_games)
+                        and all(
+                            game.get("status")
+                            in {
+                                "final",
+                                "postponed",
+                                "cancelled",
+                            }
+                            for game in ordered_games
+                        ),
+                    "evaluations_complete":
+                        False,
+                    "archived":
+                        False,
+                },
+                "summary": {
+                    "games":
+                        len(ordered_games),
+                    "official_plays":
+                        len(
+                            official_play_ids
+                        ),
+                    "research_ready":
+                        sum(
+                            game
+                            .get("workflow", {})
+                            .get("research_state")
+                            == "ready"
+                            for game in ordered_games
+                        ),
+                },
+            }
+        )
+
+    days.sort(
+        key=lambda item: (
+            item["date"],
+            item["sport"],
+        )
+    )
+
+    return {
+        "schema_version": "1.0",
+        "updated_at": datetime.now(
+            timezone.utc
+        ).isoformat(),
+        "days": days,
+    }
+
+
+def shift_date(
+    date_string: str,
+    amount: int,
+) -> str:
+    parsed = datetime.strptime(
+        date_string,
+        "%Y-%m-%d",
+    ).date()
+
+    return date.fromordinal(
+        parsed.toordinal() + amount
+    ).isoformat()
+
+
+def load_plays_file() -> dict[str, Any]:
+    return load_json_file(
+        PLAYS_FILE,
+        {
+            "plays": [],
+        },
+    )
+
+
+def load_plays_archive() -> dict[str, Any]:
+    return load_json_file(
+        PLAYS_ARCHIVE_FILE,
+        {
+            "schema_version": "1.1",
+            "updated_at": None,
+            "plays": [],
+        },
+    )
+
+
+def normalize_play(
+    play: dict[str, Any],
+) -> dict[str, Any]:
+    normalized = dict(play)
+
+    play_id = normalized.get("id")
+
+    normalized.setdefault(
+        "game_id",
+        None,
+    )
+    normalized.setdefault(
+        "is_best_bet",
+        False,
+    )
+    normalized.setdefault(
+        "publication_state",
+        "published",
+    )
+    normalized.setdefault(
+        "result",
+        "pending",
+    )
+    normalized.setdefault(
+        "units_result",
+        None,
+    )
+    normalized.setdefault(
+        "closing_odds",
+        None,
+    )
+    normalized.setdefault(
+        "closing_line",
+        None,
+    )
+    normalized.setdefault(
+        "final_score",
+        None,
+    )
+    normalized.setdefault(
+        "graded_at",
+        None,
+    )
+    normalized.setdefault(
+        "evaluation_id",
+        None,
+    )
+    normalized.setdefault(
+        "result_id",
+        (
+            f"result-{play_id}"
+            if play_id
+            else None
+        ),
+    )
+
+    return normalized
+
+
+def merge_plays_archive(
+    archived_plays: list[dict[str, Any]],
+    current_plays: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    plays_by_id = {
+        play["id"]: normalize_play(play)
+        for play in archived_plays
+        if play.get("id")
+    }
+
+    for play in current_plays:
+        if not play.get("id"):
+            continue
+
+        existing = plays_by_id.get(
+            play["id"],
+            {},
+        )
+
+        merged = dict(existing)
+        merged.update(play)
+
+        plays_by_id[play["id"]] = (
+            normalize_play(merged)
+        )
+
+    plays = list(
+        plays_by_id.values()
+    )
+
+    plays.sort(
+        key=lambda play: (
+            play.get("date") or "",
+            play.get("sport") or "",
+            play.get("game_id") or "",
+            play.get("id") or "",
+        )
+    )
+
+    return plays
+
+
+def sync_plays_to_games(
+    games: list[dict[str, Any]],
+    plays: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    plays_by_game: dict[
+        str,
+        list[dict[str, Any]],
+    ] = {}
+
+    for play in plays:
+        game_id = play.get("game_id")
+
+        if not game_id:
+            continue
+
+        plays_by_game.setdefault(
+            game_id,
+            [],
+        ).append(play)
+
+    synced_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        workflow = normalize_workflow(
+            game.get("workflow")
+        )
+
+        matching_plays = plays_by_game.get(
+            game.get("id"),
+            [],
+        )
+
+        official_play_ids = [
+            play["id"]
+            for play in matching_plays
+            if play.get("id")
+        ]
+
+        best_bet = next(
+            (
+                play
+                for play in matching_plays
+                if play.get("is_best_bet")
+            ),
+            None,
+        )
+
+        workflow["official_play_ids"] = (
+            official_play_ids
+        )
+
+        workflow["best_bet_id"] = (
+            best_bet.get("id")
+            if best_bet
+            else None
+        )
+
+        if official_play_ids:
+            workflow[
+                "publication_state"
+            ] = "published"
+
+            workflow[
+                "grading_state"
+            ] = (
+                "graded"
+                if all(
+                    str(
+                        play.get("result") or ""
+                    ).lower()
+                    not in {
+                        "",
+                        "pending",
+                    }
+                    for play in matching_plays
+                )
+                else "pending"
+            )
+        else:
+            workflow[
+                "publication_state"
+            ] = "unpublished"
+
+            workflow[
+                "grading_state"
+            ] = "not_applicable"
+
+        game["workflow"] = workflow
+        synced_games.append(game)
+
+    return synced_games
+
+
+def load_results_archive() -> dict[str, Any]:
+    return load_json_file(
+        RESULTS_FILE,
+        {
+            "schema_version": "1.0",
+            "updated_at": None,
+            "results": [],
+        },
+    )
+
+
+def normalize_result(
+    result: dict[str, Any],
+) -> dict[str, Any]:
+    normalized = dict(result)
+
+    normalized.setdefault(
+        "play_id",
+        None,
+    )
+    normalized.setdefault(
+        "game_id",
+        None,
+    )
+    normalized.setdefault(
+        "date",
+        None,
+    )
+    normalized.setdefault(
+        "sport",
+        None,
+    )
+    normalized.setdefault(
+        "status",
+        "pending",
+    )
+    normalized.setdefault(
+        "units_risked",
+        0.0,
+    )
+    normalized.setdefault(
+        "units_result",
+        None,
+    )
+    normalized.setdefault(
+        "opening_odds",
+        None,
+    )
+    normalized.setdefault(
+        "closing_odds",
+        None,
+    )
+    normalized.setdefault(
+        "closing_line",
+        None,
+    )
+    normalized.setdefault(
+        "final_score",
+        None,
+    )
+    normalized.setdefault(
+        "graded_at",
+        None,
+    )
+    normalized.setdefault(
+        "evaluation_id",
+        None,
+    )
+
+    return normalized
+
+
+def result_from_play(
+    play: dict[str, Any],
+) -> dict[str, Any]:
+    play_id = play.get("id")
+
+    result_status = str(
+        play.get("result") or "pending"
+    ).lower()
+
+    return normalize_result(
+        {
+            "id": (
+                play.get("result_id")
+                or (
+                    f"result-{play_id}"
+                    if play_id
+                    else None
+                )
+            ),
+            "play_id": play_id,
+            "game_id": play.get("game_id"),
+            "date": play.get("date"),
+            "sport": play.get("sport"),
+            "status": result_status,
+            "units_risked": float(
+                play.get("units") or 0
+            ),
+            "units_result":
+                play.get("units_result"),
+            "opening_odds":
+                play.get("odds"),
+            "closing_odds":
+                play.get("closing_odds"),
+            "closing_line":
+                play.get("closing_line"),
+            "final_score":
+                play.get("final_score"),
+            "graded_at":
+                play.get("graded_at"),
+            "evaluation_id":
+                play.get("evaluation_id"),
+        }
+    )
+
+
+def merge_results_archive(
+    archived_results: list[dict[str, Any]],
+    plays: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    results_by_play_id = {
+        result.get("play_id"):
+            normalize_result(result)
+        for result in archived_results
+        if result.get("play_id")
+    }
+
+    for play in plays:
+        play_id = play.get("id")
+
+        if not play_id:
+            continue
+
+        incoming = result_from_play(play)
+
+        existing = results_by_play_id.get(
+            play_id,
+            {},
+        )
+
+        merged = dict(existing)
+
+        for key, value in incoming.items():
+            if (
+                value is not None
+                or key
+                in {
+                    "id",
+                    "play_id",
+                    "game_id",
+                    "date",
+                    "sport",
+                    "status",
+                    "units_risked",
+                    "opening_odds",
+                }
+            ):
+                merged[key] = value
+
+        results_by_play_id[play_id] = (
+            normalize_result(merged)
+        )
+
+    results = list(
+        results_by_play_id.values()
+    )
+
+    results.sort(
+        key=lambda result: (
+            result.get("date") or "",
+            result.get("sport") or "",
+            result.get("game_id") or "",
+            result.get("play_id") or "",
+        )
+    )
+
+    return results
+
+
+
+def load_evaluations_archive() -> dict[str, Any]:
+    return load_json_file(
+        EVALUATIONS_FILE,
+        {
+            "schema_version": "1.0",
+            "updated_at": None,
+            "evaluations": [],
+        },
+    )
+
+
+def normalize_evaluation(
+    evaluation: dict[str, Any],
+) -> dict[str, Any]:
+    normalized = dict(evaluation)
+
+    normalized.setdefault("play_id", None)
+    normalized.setdefault("result_id", None)
+    normalized.setdefault("game_id", None)
+    normalized.setdefault("date", None)
+    normalized.setdefault("sport", None)
+    normalized.setdefault("status", "pending")
+    normalized.setdefault("decision_quality", None)
+    normalized.setdefault("model_quality", None)
+    normalized.setdefault("variance", None)
+    normalized.setdefault("summary", "")
+    normalized.setdefault("lessons", [])
+    normalized.setdefault("reviewed_by", None)
+    normalized.setdefault("reviewed_at", None)
+
+    if not isinstance(
+        normalized.get("lessons"),
+        list,
+    ):
+        normalized["lessons"] = []
+
+    return normalized
+
+
+def evaluation_from_play(
+    play: dict[str, Any],
+) -> dict[str, Any]:
+    play_id = play.get("id")
+    result_id = play.get("result_id")
+
+    return normalize_evaluation(
+        {
+            "id": (
+                play.get("evaluation_id")
+                or (
+                    f"evaluation-{play_id}"
+                    if play_id
+                    else None
+                )
+            ),
+            "play_id": play_id,
+            "result_id": result_id,
+            "game_id": play.get("game_id"),
+            "date": play.get("date"),
+            "sport": play.get("sport"),
+            "status": "pending",
+        }
+    )
+
+
+def merge_evaluations_archive(
+    archived_evaluations: list[dict[str, Any]],
+    plays: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    evaluations_by_play_id = {
+        evaluation.get("play_id"):
+            normalize_evaluation(evaluation)
+        for evaluation in archived_evaluations
+        if evaluation.get("play_id")
+    }
+
+    for play in plays:
+        play_id = play.get("id")
+
+        if not play_id:
+            continue
+
+        incoming = evaluation_from_play(play)
+
+        existing = evaluations_by_play_id.get(
+            play_id,
+            {},
+        )
+
+        merged = dict(incoming)
+        merged.update(existing)
+
+        evaluations_by_play_id[play_id] = (
+            normalize_evaluation(merged)
+        )
+
+    evaluations = list(
+        evaluations_by_play_id.values()
+    )
+
+    evaluations.sort(
+        key=lambda evaluation: (
+            evaluation.get("date") or "",
+            evaluation.get("sport") or "",
+            evaluation.get("game_id") or "",
+            evaluation.get("play_id") or "",
+        )
+    )
+
+    return evaluations
 
 def main() -> None:
     target_date = (
@@ -317,16 +1021,141 @@ def main() -> None:
 
     current["games"].sort(
         key=lambda game: (
-            game.get("date", ""),
-            game.get("game_time", ""),
+            game.get("date") or "",
+            game.get("game_time") or "",
+            game.get("id") or "",
         )
     )
 
-    current["schema_version"] = "3.0"
+    plays_data = load_plays_file()
+
+    plays = (
+        plays_data.get("plays", [])
+        if isinstance(
+            plays_data.get("plays"),
+            list,
+        )
+        else []
+    )
+
+    plays_archive = load_plays_archive()
+
+    archived_plays = (
+        plays_archive.get("plays", [])
+        if isinstance(
+            plays_archive.get("plays"),
+            list,
+        )
+        else []
+    )
+
+    all_plays = merge_plays_archive(
+        archived_plays,
+        plays,
+    )
+
+    current["games"] = sync_plays_to_games(
+        current["games"],
+        all_plays,
+    )
+
+    current["schema_version"] = "3.1"
 
     GAMES_FILE.write_text(
         json.dumps(
             current,
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    PLAYS_ARCHIVE_FILE.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.1",
+                "updated_at": datetime.now(
+                    timezone.utc
+                ).isoformat(),
+                "plays": all_plays,
+            },
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    results_archive = load_results_archive()
+
+    archived_results = (
+        results_archive.get("results", [])
+        if isinstance(
+            results_archive.get("results"),
+            list,
+        )
+        else []
+    )
+
+    all_results = merge_results_archive(
+        archived_results,
+        all_plays,
+    )
+
+    RESULTS_FILE.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                "updated_at": datetime.now(
+                    timezone.utc
+                ).isoformat(),
+                "results": all_results,
+            },
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+
+    evaluations_archive = load_evaluations_archive()
+
+    archived_evaluations = (
+        evaluations_archive.get(
+            "evaluations",
+            [],
+        )
+        if isinstance(
+            evaluations_archive.get(
+                "evaluations"
+            ),
+            list,
+        )
+        else []
+    )
+
+    all_evaluations = merge_evaluations_archive(
+        archived_evaluations,
+        all_plays,
+    )
+
+    EVALUATIONS_FILE.write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                "updated_at": datetime.now(
+                    timezone.utc
+                ).isoformat(),
+                "evaluations": all_evaluations,
+            },
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    days_index = build_days_index(
+        current["games"]
+    )
+
+    DAYS_FILE.write_text(
+        json.dumps(
+            days_index,
             indent=2,
         ) + "\n",
         encoding="utf-8",
@@ -340,6 +1169,27 @@ def main() -> None:
     print(
         f"games.json now contains "
         f"{len(current['games'])} total game(s)."
+    )
+
+    print(
+        f"days.json now contains "
+        f"{len(days_index['days'])} "
+        f"sport-day record(s)."
+    )
+
+    print(
+        f"plays.json now contains "
+        f"{len(all_plays)} archived play(s)."
+    )
+
+    print(
+        f"results.json now contains "
+        f"{len(all_results)} result record(s)."
+    )
+
+    print(
+        f"evaluations.json now contains "
+        f"{len(all_evaluations)} evaluation record(s)."
     )
 
 

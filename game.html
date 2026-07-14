@@ -2,22 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Boring Bets matchup deep dive">
-  <title>Matchup Deep Dive | Boring Bets</title>
 
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="styles.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Boring Bets matchup deep dive"
+  >
+
+  <title>Game Center | Boring Bets</title>
+
+  <link
+    rel="stylesheet"
+    href="assets/css/variables.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
 </head>
 
 <body class="game-page">
-
   <header class="site-header">
-    <a class="brand" href="index.html">BORING BETS</a>
+    <a class="brand" href="index.html">
+      BORING BETS
+    </a>
 
     <nav class="main-nav">
       <a href="index.html">Home</a>
-      <a href="todays-card.html">Today’s Card</a>
+
+      <a
+        id="gameCenterNavLink"
+        href="todays-card.html"
+      >
+        MLB Game Center
+      </a>
+
       <a href="index.html#results">Results</a>
       <a href="index.html#articles">Articles</a>
       <a href="index.html#tools">Tools</a>
@@ -25,17 +49,114 @@
   </header>
 
   <main class="game-main">
+    <section
+      class="game-context-navigation"
+      aria-label="Game Center navigation"
+    >
+      <div class="game-context-top">
+        <a
+          id="backToSlateLink"
+          class="back-link"
+          href="todays-card.html"
+        >
+          ← Back to MLB slate
+        </a>
 
-    <a class="back-link" href="todays-card.html">
-      ← Back to Today’s Card
-    </a>
+        <div
+          class="sport-mode-switcher"
+          aria-label="Sport mode"
+        >
+          <a
+            class="sport-mode active"
+            href="todays-card.html"
+            aria-current="page"
+          >
+            MLB
+          </a>
 
-    <div id="gameStatus" class="card-message">
+          <span
+            class="sport-mode disabled"
+            aria-disabled="true"
+          >
+            NFL
+          </span>
+
+          <span
+            class="sport-mode disabled"
+            aria-disabled="true"
+          >
+            NBA
+          </span>
+
+          <span
+            class="sport-mode disabled"
+            aria-disabled="true"
+          >
+            NHL
+          </span>
+
+          <span
+            class="sport-mode disabled"
+            aria-disabled="true"
+          >
+            Soccer
+          </span>
+        </div>
+      </div>
+
+      <div class="game-date-navigation">
+        <a
+          id="previousDayLink"
+          class="game-date-link"
+          href="#"
+        >
+          ← Previous day
+        </a>
+
+        <strong id="gameDateLabel">
+          Loading date…
+        </strong>
+
+        <a
+          id="nextDayLink"
+          class="game-date-link"
+          href="#"
+        >
+          Next day →
+        </a>
+      </div>
+
+      <div class="game-sequence-navigation">
+        <a
+          id="previousGameLink"
+          class="game-sequence-link"
+          href="#"
+        >
+          ← Previous MLB game
+        </a>
+
+        <span id="gamePosition">
+          Game — of —
+        </span>
+
+        <a
+          id="nextGameLink"
+          class="game-sequence-link"
+          href="#"
+        >
+          Next MLB game →
+        </a>
+      </div>
+    </section>
+
+    <div
+      id="gameStatus"
+      class="card-message"
+    >
       Loading matchup…
     </div>
 
     <article id="gameDetails" hidden>
-
       <section class="game-matchup">
         <div class="game-team">
           <img id="gameAwayLogo" alt="">
@@ -50,119 +171,1037 @@
         </div>
       </section>
 
-<section class="game-status-strip">
-  <span id="gameUpdatedStatus">
-    UPDATED —
-  </span>
+      <section class="game-status-strip">
+        <span id="gameUpdatedStatus">
+          UPDATED —
+        </span>
 
-  <span id="lineupStatus">
-    PROJECTED LINEUP
-  </span>
+        <span id="lineupStatus">
+          PROJECTED LINEUP
+        </span>
 
-  <span id="starterStatus">
-    STARTERS —
-  </span>
-</section>
+        <span id="starterStatus">
+          STARTERS —
+        </span>
+      </section>
 
       <section class="game-controls-panel">
-  <div class="control-group">
-    <span class="control-label">TIMEFRAME</span>
+        <div class="control-group">
+          <span class="control-label">
+            TIMEFRAME
+          </span>
 
-    <div class="segmented-control">
-      <button type="button" data-timeframe="last_7">
-        7 Days
-      </button>
+          <div class="segmented-control">
+            <button
+              type="button"
+              data-timeframe="last_7"
+            >
+              7 Days
+            </button>
 
-      <button type="button" data-timeframe="last_30">
-        30 Days
-      </button>
+            <button
+              type="button"
+              data-timeframe="last_30"
+            >
+              30 Days
+            </button>
 
-      <button type="button" data-timeframe="season">
-        Season
-      </button>
-    </div>
-  </div>
+            <button
+              type="button"
+              data-timeframe="season"
+            >
+              Season
+            </button>
+          </div>
+        </div>
 
-  <div class="control-group">
-    <span class="control-label">LOCATION</span>
+        <div class="control-group">
+          <span class="control-label">
+            LOCATION
+          </span>
 
-    <div class="segmented-control">
-      <button type="button" data-location="all">
-        All
-      </button>
+          <div class="segmented-control">
+            <button
+              type="button"
+              data-location="all"
+            >
+              All
+            </button>
 
-      <button type="button" data-location="home">
-        Home
-      </button>
+            <button
+              type="button"
+              data-location="home"
+            >
+              Home
+            </button>
 
-      <button type="button" data-location="away">
-        Away
-      </button>
-    </div>
-  </div>
-</section>
+            <button
+              type="button"
+              data-location="away"
+            >
+              Away
+            </button>
+          </div>
+        </div>
+      </section>
 
-<section id="pitching" class="matchup-console">
+      <section
+        id="pitching"
+        class="matchup-console"
+      >
+        <article class="matchup-column">
+          <div
+            id="awayPitcherCard"
+            class="pitcher-comparison-card"
+          ></div>
 
-  <article class="matchup-column">
-    <div
-      id="awayPitcherCard"
-      class="pitcher-comparison-card"
-    ></div>
+          <div
+            id="homeOffenseCard"
+            class="offense-comparison-card"
+          ></div>
 
-    <div
-      id="homeOffenseCard"
-      class="offense-comparison-card"
-    ></div>
+          <div
+            id="awayPitcherLineupCard"
+            class="lineup-matchup-card"
+          ></div>
+        </article>
 
-    <div
-      id="awayPitcherLineupCard"
-      class="lineup-matchup-card"
-    ></div>
-  </article>
+        <article class="matchup-column">
+          <div
+            id="homePitcherCard"
+            class="pitcher-comparison-card"
+          ></div>
 
-  <article class="matchup-column">
-    <div
-      id="homePitcherCard"
-      class="pitcher-comparison-card"
-    ></div>
+          <div
+            id="awayOffenseCard"
+            class="offense-comparison-card"
+          ></div>
 
-    <div
-      id="awayOffenseCard"
-      class="offense-comparison-card"
-    ></div>
+          <div
+            id="homePitcherLineupCard"
+            class="lineup-matchup-card"
+          ></div>
+        </article>
+      </section>
 
-    <div
-      id="homePitcherLineupCard"
-      class="lineup-matchup-card"
-    ></div>
-  </article>
+      <section
+        id="bullpens"
+        class="bullpen-console"
+      >
+        <div class="bullpen-comparison-grid">
+          <article
+            id="awayBullpenCard"
+            class="bullpen-card"
+          ></article>
 
-</section>
+          <article
+            id="homeBullpenCard"
+            class="bullpen-card"
+          ></article>
+        </div>
+      </section>
 
-<section id="bullpens" class="bullpen-console">
+      <section class="intelligence-grid">
+        <a
+          id="weather"
+          class="intelligence-card"
+          href="#"
+        >
+          <p class="kicker">WEATHER</p>
+          <h3>Park Conditions</h3>
 
-  <div class="bullpen-comparison-grid">
-    <article id="awayBullpenCard" class="bullpen-card"></article>
+          <p>
+            Hourly weather and park impact
+            will appear here.
+          </p>
+        </a>
+        <a
+          id="market"
+          class="intelligence-card"
+          href="#"
+        >
+          <p class="kicker">MARKET</p>
+          <h3>Line Movement</h3>
 
-    <article id="homeBullpenCard" class="bullpen-card"></article>
-  </div>
-</section>
-<section class="intelligence-grid">
-  <a id="weather" class="intelligence-card" href="#">
-    <p class="kicker">WEATHER</p>
-    <h3>Park Conditions</h3>
-    <p>Hourly weather and park impact will appear here.</p>
-  </a>
+          <p>
+            Opening lines, current prices,
+            and movement.
+          </p>
+        </a>
+      </section>
 
-  <a id="market" class="intelligence-card" href="#">
-    <p class="kicker">MARKET</p>
-    <h3>Line Movement</h3>
-    <p>Opening lines, current prices, and movement.</p>
-  </a>
-</section>
+      #!/usr/bin/env python3
+
+from __future__ import annotations
+
+from datetime import date, datetime, timezone
+from pathlib import Path
+from typing import Any
+import json
+import sys
+
+from mlb.schedule import (
+    fetch_schedule,
+    parse_schedule,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+GAMES_FILE = ROOT / "data/games.json"
+DAYS_FILE = ROOT / "data/days.json"
+PLAYS_FILE = ROOT / "data/todays-card.json"
+PLAYS_ARCHIVE_FILE = ROOT / "data/plays.json"
+
+def load_games_file() -> dict[str, Any]:
+    if not GAMES_FILE.exists():
+        return {
+            "schema_version": "3.0",
+            "default_controls": {
+                "timeframe": "last_30",
+                "location": "all",
+            },
+            "games": [],
+        }
+
+    return json.loads(
+        GAMES_FILE.read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def create_default_workflow() -> dict[str, Any]:
+    return {
+        "research_state": "pending",
+        "publication_state": "unpublished",
+        "grading_state": "not_applicable",
+        "archive_state": "active",
+        "official_play_ids": [],
+        "best_bet_id": None,
+        "published_at": None,
+        "graded_at": None,
+        "archived_at": None,
+    }
+
+
+def normalize_workflow(
+    workflow: dict[str, Any] | None,
+) -> dict[str, Any]:
+    normalized = create_default_workflow()
+    normalized.update(workflow or {})
+
+    if not isinstance(
+        normalized.get("official_play_ids"),
+        list,
+    ):
+        normalized["official_play_ids"] = []
+
+    return normalized
+
+
+def merge_schedule_game(
+    existing: dict[str, Any] | None,
+    schedule_game: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Update schedule-controlled fields while preserving
+    existing research, statistics, notes and editorial data.
+    """
+
+    game = dict(existing or {})
+
+    game["id"] = schedule_game["id"]
+
+    game["mlb_game_pk"] = schedule_game.get(
+        "mlb_game_pk"
+    )
+
+    game["date"] = schedule_game.get(
+        "date"
+    )
+
+    game["game_time"] = schedule_game.get(
+        "game_time"
+    )
+
+    game["sport"] = "MLB"
+
+    game["status"] = schedule_game.get(
+        "status",
+        "scheduled",
+    )
+
+    game["venue"] = schedule_game.get(
+        "venue",
+        {},
+    )
+
+    game["away_team"] = schedule_game.get(
+        "away_team",
+        {},
+    )
+
+    game["home_team"] = schedule_game.get(
+        "home_team",
+        {},
+    )
+
+    game.setdefault(
+        "controls",
+        {
+            "default_timeframe": "last_30",
+            "default_location": "all",
+        },
+    )
+
+    existing_pitchers = game.get(
+        "pitchers",
+        {},
+    )
+
+    game["pitchers"] = {
+        "away": merge_pitcher(
+            existing_pitchers.get("away"),
+            schedule_game
+            .get("pitchers", {})
+            .get("away", {}),
+        ),
+
+        "home": merge_pitcher(
+            existing_pitchers.get("home"),
+            schedule_game
+            .get("pitchers", {})
+            .get("home", {}),
+        ),
+    }
+
+    game["workflow"] = normalize_workflow(
+        game.get("workflow")
+    )
+
+    game.setdefault("offense", {})
+    game.setdefault("lineups", {})
+
+    game.setdefault(
+        "pitcher_vs_lineup",
+        game.get(
+            "pitcher_vs_projected_lineup",
+            {},
+        ),
+    )
+
+    game.setdefault("bullpens", {})
+    game.setdefault("weather", {})
+    game.setdefault("market", {})
+    game.setdefault("injuries", [])
+    game.setdefault("notes", "")
+
+    game["last_updated"] = datetime.now(
+        timezone.utc
+    ).isoformat()
+
+    return game
+
+
+def merge_pitcher(
+    existing: dict[str, Any] | None,
+    incoming: dict[str, Any],
+) -> dict[str, Any]:
+    pitcher = dict(existing or {})
+
+    incoming_id = incoming.get("id")
+    existing_id = pitcher.get("id")
+
+    if incoming_id and incoming_id != existing_id:
+        pitcher = {}
+
+    pitcher["id"] = incoming_id
+
+    pitcher["name"] = incoming.get(
+        "name",
+        "Starter TBD",
+    )
+
+    pitcher["status"] = incoming.get(
+        "status",
+        "unknown",
+    )
+
+    pitcher.setdefault("age", None)
+    pitcher.setdefault("throws", None)
+    pitcher.setdefault("profile_url", "#")
+
+    pitcher.setdefault(
+        "stats",
+        {
+            "last_7": {
+                "all": {},
+                "home": {},
+                "away": {},
+            },
+
+            "last_30": {
+                "all": {},
+                "home": {},
+                "away": {},
+            },
+
+            "season": {
+                "all": {},
+                "home": {},
+                "away": {},
+            },
+
+            "vs_lhh": {},
+            "vs_rhh": {},
+        },
+    )
+
+    return pitcher
+
+
+def migrate_existing_games(
+    games: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Add current schema defaults to every stored game
+    while preserving existing research data.
+    """
+
+    migrated = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        game["workflow"] = normalize_workflow(
+            game.get("workflow")
+        )
+
+        game.setdefault("offense", {})
+        game.setdefault("lineups", {})
+
+        game.setdefault(
+            "pitcher_vs_lineup",
+            game.get(
+                "pitcher_vs_projected_lineup",
+                {},
+            ),
+        )
+
+        game.setdefault("bullpens", {})
+        game.setdefault("weather", {})
+        game.setdefault("market", {})
+        game.setdefault("injuries", [])
+        game.setdefault("notes", "")
+
+        migrated.append(game)
+
+    return migrated
+
+
+def determine_day_state(
+    day_date: str,
+    games: list[dict[str, Any]],
+) -> str:
+    today = date.today().isoformat()
+
+    if day_date > today:
+        return "future"
+
+    statuses = {
+        game.get("status", "scheduled")
+        for game in games
+    }
+
+    if "live" in statuses:
+        return "live"
+
+    completed_statuses = {
+        "final",
+        "postponed",
+        "cancelled",
+    }
+
+    if (
+        statuses
+        and statuses.issubset(
+            completed_statuses
+        )
+    ):
+        return "completed"
+
+    if day_date < today:
+        return "past"
+
+    return "today"
+
+
+def build_days_index(
+    games: list[dict[str, Any]],
+) -> dict[str, Any]:
+    grouped: dict[
+        tuple[str, str],
+        list[dict[str, Any]],
+    ] = {}
+
+    for game in games:
+        game_date = game.get("date")
+
+        sport = str(
+            game.get("sport") or "MLB"
+        ).upper()
+
+        if (
+            not game_date
+            or not game.get("id")
+        ):
+            continue
+
+        grouped.setdefault(
+            (game_date, sport),
+            [],
+        ).append(game)
+
+    days = []
+
+    for (
+        day_date,
+        sport,
+    ), day_games in grouped.items():
+
+        ordered_games = sorted(
+            day_games,
+            key=lambda game: (
+                game.get("game_time") or "",
+                game.get("id") or "",
+            ),
+        )
+
+        official_play_ids = []
+
+        for game in ordered_games:
+            workflow = game.get(
+                "workflow",
+                {},
+            )
+
+            play_ids = workflow.get(
+                "official_play_ids",
+                [],
+            )
+
+            if isinstance(play_ids, list):
+                official_play_ids.extend(
+                    play_ids
+                )
+
+        days.append(
+            {
+                "id":
+                    f"{day_date}-{sport.lower()}",
+
+                "date":
+                    day_date,
+
+                "sport":
+                    sport,
+
+                "state":
+                    determine_day_state(
+                        day_date,
+                        ordered_games,
+                    ),
+
+                "previous_day":
+                    shift_date(
+                        day_date,
+                        -1,
+                    ),
+
+                "next_day":
+                    shift_date(
+                        day_date,
+                        1,
+                    ),
+
+                "game_ids": [
+                    game["id"]
+                    for game in ordered_games
+                ],
+
+                "official_play_ids":
+                    official_play_ids,
+
+                "workflow": {
+                    "research_complete":
+                        bool(ordered_games)
+                        and all(
+                            game
+                            .get("workflow", {})
+                            .get("research_state")
+                            == "ready"
+                            for game in ordered_games
+                        ),
+
+                    "plays_published":
+                        bool(
+                            official_play_ids
+                        ),
+
+                    "results_complete":
+                        bool(ordered_games)
+                        and all(
+                            game.get("status")
+                            in {
+                                "final",
+                                "postponed",
+                                "cancelled",
+                            }
+                            for game in ordered_games
+                        ),
+
+                    "evaluations_complete":
+                        False,
+
+                    "archived":
+                        False,
+                },
+
+                "summary": {
+                    "games":
+                        len(ordered_games),
+
+                    "official_plays":
+                        len(
+                            official_play_ids
+                        ),
+
+                    "research_ready":
+                        sum(
+                            game
+                            .get("workflow", {})
+                            .get("research_state")
+                            == "ready"
+                            for game in ordered_games
+                        ),
+                },
+            }
+        )
+
+    days.sort(
+        key=lambda item: (
+            item["date"],
+            item["sport"],
+        )
+    )
+
+    return {
+        "schema_version": "1.0",
+
+        "updated_at": datetime.now(
+            timezone.utc
+        ).isoformat(),
+
+        "days": days,
+    }
+
+
+def shift_date(
+    date_string: str,
+    amount: int,
+) -> str:
+    parsed = datetime.strptime(
+        date_string,
+        "%Y-%m-%d",
+    ).date()
+
+    return date.fromordinal(
+        parsed.toordinal() + amount
+    ).isoformat()
+
+def load_plays_file() -> dict[str, Any]:
+    if not PLAYS_FILE.exists():
+        return {
+            "plays": [],
+        }
+
+    return json.loads(
+        PLAYS_FILE.read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def sync_plays_to_games(
+    games: list[dict[str, Any]],
+    plays: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Attach official play IDs and best-bet IDs
+    to their matching game workflow.
+    """
+
+    plays_by_game: dict[
+        str,
+        list[dict[str, Any]],
+    ] = {}
+
+    for play in plays:
+        game_id = play.get("game_id")
+
+        if not game_id:
+            continue
+
+        plays_by_game.setdefault(
+            game_id,
+            [],
+        ).append(play)
+
+    synced_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        workflow = normalize_workflow(
+            game.get("workflow")
+        )
+
+        matching_plays = plays_by_game.get(
+            game.get("id"),
+            [],
+        )
+
+        official_play_ids = [
+            play["id"]
+            for play in matching_plays
+            if play.get("id")
+        ]
+
+        best_bet = next(
+            (
+                play
+                for play in matching_plays
+                if play.get("is_best_bet")
+            ),
+            None,
+        )
+
+        workflow["official_play_ids"] = (
+            official_play_ids
+        )
+
+        workflow["best_bet_id"] = (
+            best_bet.get("id")
+            if best_bet
+            else None
+        )
+
+        if official_play_ids:
+            workflow[
+                "publication_state"
+            ] = "published"
+
+            workflow[
+                "grading_state"
+            ] = (
+                "graded"
+                if all(
+                    play.get("result")
+                    not in {
+                        None,
+                        "",
+                        "pending",
+                    }
+                    for play in matching_plays
+                )
+                else "pending"
+            )
+        else:
+            workflow[
+                "publication_state"
+            ] = "unpublished"
+
+            workflow[
+                "grading_state"
+            ] = "not_applicable"
+
+        game["workflow"] = workflow
+        synced_games.append(game)
+
+    return synced_games
+
+def load_plays_archive() -> dict[str, Any]:
+    if not PLAYS_ARCHIVE_FILE.exists():
+        return {
+            "schema_version": "1.0",
+            "updated_at": None,
+            "plays": [],
+        }
+
+    return json.loads(
+        PLAYS_ARCHIVE_FILE.read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def normalize_play(
+    play: dict[str, Any],
+) -> dict[str, Any]:
+    normalized = dict(play)
+
+    normalized.setdefault(
+        "game_id",
+        None,
+    )
+
+    normalized.setdefault(
+        "is_best_bet",
+        False,
+    )
+
+    normalized.setdefault(
+        "publication_state",
+        "published",
+    )
+
+    normalized.setdefault(
+        "result",
+        "pending",
+    )
+
+    normalized.setdefault(
+        "units_result",
+        None,
+    )
+
+    normalized.setdefault(
+        "closing_odds",
+        None,
+    )
+
+    normalized.setdefault(
+        "closing_line",
+        None,
+    )
+
+    normalized.setdefault(
+        "final_score",
+        None,
+    )
+
+    normalized.setdefault(
+        "graded_at",
+        None,
+    )
+
+    normalized.setdefault(
+        "evaluation_id",
+        None,
+    )
+
+    return normalized
+
+
+def merge_plays_archive(
+    archived_plays: list[dict[str, Any]],
+    current_plays: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Add or update plays by ID without deleting
+    plays from earlier dates.
+    """
+
+    plays_by_id = {
+        play["id"]: normalize_play(play)
+        for play in archived_plays
+        if play.get("id")
+    }
+
+    for play in current_plays:
+        if not play.get("id"):
+            continue
+
+        existing = plays_by_id.get(
+            play["id"],
+            {},
+        )
+
+        merged = dict(existing)
+        merged.update(play)
+
+        plays_by_id[play["id"]] = (
+            normalize_play(merged)
+        )
+
+    plays = list(
+        plays_by_id.values()
+    )
+
+    plays.sort(
+        key=lambda play: (
+            play.get("date") or "",
+            play.get("sport") or "",
+            play.get("game_id") or "",
+            play.get("id") or "",
+        )
+    )
+
+    return plays
+
+def main() -> None:
+    target_date = (
+        sys.argv[1]
+        if len(sys.argv) > 1
+        else date.today().isoformat()
+    )
+
+    current = load_games_file()
+
+    current["games"] = migrate_existing_games(
+        current.get("games", [])
+    )
+
+    existing_games = {
+        game["id"]: game
+        for game in current.get(
+            "games",
+            [],
+        )
+        if game.get("id")
+    }
+
+    raw_schedule = fetch_schedule(
+        target_date
+    )
+
+    schedule_games = parse_schedule(
+        raw_schedule
+    )
+
+    merged_games = []
+
+    for schedule_game in schedule_games:
+        existing = existing_games.get(
+            schedule_game["id"]
+        )
+
+        merged_games.append(
+            merge_schedule_game(
+                existing,
+                schedule_game,
+            )
+        )
+
+    other_dates = [
+        game
+        for game in current.get(
+            "games",
+            [],
+        )
+        if game.get("date") != target_date
+    ]
+
+    current["games"] = (
+        other_dates + merged_games
+    )
+
+    current["games"].sort(
+        key=lambda game: (
+            game.get("date") or "",
+            game.get("game_time") or "",
+            game.get("id") or "",
+        )
+        
+    )
+    plays_data = load_plays_file()
+
+    plays + (
+        plays_data.get("plays", [])
+        if isinstance(
+            plays_data.get("plays"),
+            list,
+        )
+        else []
+    )
+
+    current["games"] = sync_plays_to_games(
+        current["games"],
+)
+    current["schema_version"] = "3.0"
+
+    GAMES_FILE.write_text(
+        json.dumps(
+            current,
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    days_index = build_days_index(
+        current["games"]
+    )
+
+    DAYS_FILE.write_text(
+        json.dumps(
+            days_index,
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    print(
+        f"Updated {len(merged_games)} MLB game(s) "
+        f"for {target_date}."
+    )
+
+    print(
+        f"games.json now contains "
+        f"{len(current['games'])} total game(s)."
+    )
+
+    print(
+        f"days.json now contains "
+        f"{len(days_index['days'])} "
+        f"sport-day record(s)."
+    )
+
+
+if __name__ == "__main__":
+    main()
+
+
+      <section
+        class="game-sequence-navigation
+               game-sequence-navigation-bottom"
+        aria-label="Continue through MLB games"
+      >
+        <a
+          id="previousGameBottomLink"
+          class="game-sequence-link"
+          href="#"
+        >
+          ← Previous MLB game
+        </a>
+
+        <a
+          id="backToSlateBottomLink"
+          class="game-date-link"
+          href="todays-card.html"
+        >
+          View full MLB slate
+        </a>
+
+        <a
+          id="nextGameBottomLink"
+          class="game-sequence-link"
+          href="#"
+        >
+          Next MLB game →
+        </a>
+      </section>
     </article>
-
   </main>
 
   <footer class="site-footer">
@@ -170,6 +1209,9 @@
     <span>Data over hype.</span>
   </footer>
 
-  <script type="module" src="game.js"></script>
+  <script
+    type="module"
+    src="game.js"
+  ></script>
 </body>
 </html>

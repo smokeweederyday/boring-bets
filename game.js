@@ -36,49 +36,112 @@ const GAME_LOGO_BASE =
 
 const state = {
   game: null,
+  games: [],
+  days: [],
+  plays: [],
+  results: [],
+  evaluations: [],
   timeframe: "last_30",
   location: "all"
 };
 
 async function loadGame() {
-  const status = document.getElementById("gameStatus");
-  const details = document.getElementById("gameDetails");
+  const status =
+    document.getElementById("gameStatus");
+
+  const details =
+    document.getElementById("gameDetails");
 
   try {
     const params =
-      new URLSearchParams(window.location.search);
+      new URLSearchParams(
+        window.location.search
+      );
 
-    const requestedGameId = params.get("id");
-    const requestedPlayId = params.get("play");
+    const requestedGameId =
+      params.get("id");
 
-    const [gamesResponse, cardResponse] =
-      await Promise.all([
-        fetch(`data/games.json?v=${Date.now()}`),
-        fetch(`data/todays-card.json?v=${Date.now()}`)
-      ]);
+    const requestedPlayId =
+      params.get("play");
+
+    const [
+      gamesResponse,
+      daysResponse,
+      cardResponse,
+      playsResponse,
+      resultsResponse,
+      evaluationsResponse
+    ] = await Promise.all([
+      fetch(
+        `data/games.json?v=${Date.now()}`
+      ),
+      fetch(
+        `data/days.json?v=${Date.now()}`
+      ),
+      fetch(
+        `data/todays-card.json?v=${Date.now()}`
+      ),
+      fetch(
+        `data/plays.json?v=${Date.now()}`
+      ),
+      fetch(
+        `data/results.json?v=${Date.now()}`
+      ),
+      fetch(
+        `data/evaluations.json?v=${Date.now()}`
+      )
+    ]);
 
     if (!gamesResponse.ok) {
-      throw new Error("Unable to load game data.");
+      throw new Error(
+        "Unable to load game data."
+      );
     }
 
     const gamesData =
       await gamesResponse.json();
 
+    const daysData =
+      daysResponse.ok
+        ? await daysResponse.json()
+        : { days: [] };
+
+    const playsData =
+      playsResponse.ok
+        ? await playsResponse.json()
+        : { plays: [] };
+
+    const resultsData =
+      resultsResponse.ok
+        ? await resultsResponse.json()
+        : { results: [] };
+
+    const evaluationsData =
+      evaluationsResponse.ok
+        ? await evaluationsResponse.json()
+        : { evaluations: [] };
+
     const games =
-      gamesData.games || [];
+      Array.isArray(gamesData.games)
+        ? gamesData.games
+        : [];
 
     const cardData =
       cardResponse.ok
         ? await cardResponse.json()
         : { plays: [] };
 
-    let gameId = requestedGameId;
-    let selectedPlay = null;
+    let gameId =
+      requestedGameId;
+
+    let selectedPlay =
+      null;
 
     if (requestedPlayId) {
       selectedPlay =
         (cardData.plays || []).find(
-          play => play.id === requestedPlayId
+          play =>
+            play.id === requestedPlayId
         );
 
       if (selectedPlay && !gameId) {
@@ -89,14 +152,20 @@ async function loadGame() {
     }
 
     if (!gameId) {
-      gameId = games[0]?.id;
+      gameId =
+        games[0]?.id;
     }
 
     let game =
-      games.find(item => item.id === gameId);
+      games.find(
+        item => item.id === gameId
+      );
 
     if (!game && selectedPlay) {
-      game = createFallbackGame(selectedPlay);
+      game =
+        createFallbackGame(
+          selectedPlay
+        );
     }
 
     if (!game) {
@@ -105,7 +174,33 @@ async function loadGame() {
       );
     }
 
-    state.game = game;
+    state.game =
+      game;
+
+    state.games =
+      games;
+
+    state.days =
+      Array.isArray(daysData.days)
+        ? daysData.days
+        : [];
+
+    state.plays =
+      Array.isArray(playsData.plays)
+        ? playsData.plays
+        : [];
+
+    state.results =
+      Array.isArray(resultsData.results)
+        ? resultsData.results
+        : [];
+
+    state.evaluations =
+      Array.isArray(
+        evaluationsData.evaluations
+      )
+        ? evaluationsData.evaluations
+        : [];
 
     state.timeframe =
       game.controls?.default_timeframe ||
@@ -120,12 +215,14 @@ async function loadGame() {
     renderAll();
 
     document.title =
-      `${game.away_team.abbr} at ${game.home_team.abbr} | Boring Bets`;
+      `${game.away_team?.abbr || "Away"} at ` +
+      `${game.home_team?.abbr || "Home"} | Boring Bets`;
 
     status?.remove();
 
     if (details) {
-      details.hidden = false;
+      details.hidden =
+        false;
     }
   } catch (error) {
     console.error(error);
@@ -139,6 +236,7 @@ async function loadGame() {
 }
 
 function renderAll() {
+  renderGameNavigation();
   renderGameHeader();
   renderStatusStrip();
   renderControls();
@@ -147,10 +245,186 @@ function renderAll() {
   renderLineupMatchups();
   renderBullpens();
   renderContextCards();
+  renderGameLifecycle();
+}
+
+function renderGameNavigation() {
+  const game =
+    state.game;
+
+  const sport =
+    normalizeSport(
+      game.sport
+    );
+
+  const gameDate =
+    game.date;
+
+  const dayRecord =
+    state.days.find(day => {
+      return (
+        day.date === gameDate &&
+        normalizeSport(day.sport) === sport
+      );
+    });
+
+  const orderedGameIds =
+    Array.isArray(dayRecord?.game_ids)
+      ? dayRecord.game_ids
+      : [];
+
+  let datedSportGames =
+    orderedGameIds
+      .map(gameId =>
+        state.games.find(
+          item => item.id === gameId
+        )
+      )
+      .filter(Boolean);
+
+  if (!datedSportGames.length) {
+    datedSportGames =
+      state.games
+        .filter(item => {
+          return (
+            item.date === gameDate &&
+            normalizeSport(
+              item.sport
+            ) === sport
+          );
+        })
+        .sort(sortGames);
+  }
+
+  let currentIndex =
+    datedSportGames.findIndex(
+      item => item.id === game.id
+    );
+
+  if (currentIndex === -1) {
+    datedSportGames.push(game);
+    datedSportGames.sort(sortGames);
+
+    currentIndex =
+      datedSportGames.findIndex(
+        item => item.id === game.id
+      );
+  }
+
+  const previousGame =
+    currentIndex > 0
+      ? datedSportGames[
+          currentIndex - 1
+        ]
+      : null;
+
+  const nextGame =
+    currentIndex >= 0 &&
+    currentIndex <
+      datedSportGames.length - 1
+      ? datedSportGames[
+          currentIndex + 1
+        ]
+      : null;
+
+  const slateUrl =
+    buildSlateUrl(
+      gameDate,
+      sport
+    );
+
+  setLink(
+    "backToSlateLink",
+    slateUrl,
+    `← Back to ${sport} slate`
+  );
+
+  setLink(
+    "backToSlateBottomLink",
+    slateUrl,
+    `View full ${sport} slate`
+  );
+
+  setLink(
+    "gameCenterNavLink",
+    slateUrl,
+    `${sport} Game Center`
+  );
+
+  setText(
+    "gameDateLabel",
+    formatGameDate(gameDate)
+  );
+
+  setText(
+    "gamePosition",
+    currentIndex >= 0
+      ? `Game ${currentIndex + 1} of ${
+          datedSportGames.length
+        }`
+      : `Game — of ${
+          datedSportGames.length
+        }`
+  );
+
+  setGameNavigationLink(
+    "previousGameLink",
+    previousGame,
+    `← Previous ${sport} game`
+  );
+
+  setGameNavigationLink(
+    "previousGameBottomLink",
+    previousGame,
+    `← Previous ${sport} game`
+  );
+
+  setGameNavigationLink(
+    "nextGameLink",
+    nextGame,
+    `Next ${sport} game →`
+  );
+
+  setGameNavigationLink(
+    "nextGameBottomLink",
+    nextGame,
+    `Next ${sport} game →`
+  );
+
+  const previousDate =
+    shiftDate(
+      gameDate,
+      -1
+    );
+
+  const nextDate =
+    shiftDate(
+      gameDate,
+      1
+    );
+
+  setLink(
+    "previousDayLink",
+    buildSlateUrl(
+      previousDate,
+      sport
+    ),
+    "← Previous day"
+  );
+
+  setLink(
+    "nextDayLink",
+    buildSlateUrl(
+      nextDate,
+      sport
+    ),
+    "Next day →"
+  );
 }
 
 function renderGameHeader() {
-  const game = state.game;
+  const game =
+    state.game;
 
   setLogo(
     "gameAwayLogo",
@@ -176,63 +450,72 @@ function renderGameHeader() {
 }
 
 function renderStatusStrip() {
-  const game = state.game;
+  const game =
+    state.game;
 
   const confirmedStarters = [
     game.pitchers?.away?.status,
     game.pitchers?.home?.status
   ].filter(
-    value => value === "confirmed"
+    value =>
+      value === "confirmed"
   ).length;
 
   setText(
     "gameUpdatedStatus",
-    `UPDATED ${formatUpdatedTime(game.last_updated)}`
+    `UPDATED ${formatUpdatedTime(
+      game.last_updated
+    )}`
   );
 
   const awayLineupStatus =
-  game.lineups?.away?.status ||
-  "projected";
+    game.lineups?.away?.status ||
+    "projected";
 
-const homeLineupStatus =
-  game.lineups?.home?.status ||
-  "projected";
+  const homeLineupStatus =
+    game.lineups?.home?.status ||
+    "projected";
 
-const confirmedLineups = [
-  awayLineupStatus,
-  homeLineupStatus
-].filter(
-  status => status === "confirmed"
-).length;
+  const confirmedLineups = [
+    awayLineupStatus,
+    homeLineupStatus
+  ].filter(
+    value =>
+      value === "confirmed"
+  ).length;
 
-const lineupStatusText =
-  confirmedLineups === 2
-    ? "2 LINEUPS CONFIRMED"
-    : confirmedLineups === 1
-      ? "1 LINEUP CONFIRMED"
-      : "PROJECTED LINEUPS";
+  const lineupStatusText =
+    confirmedLineups === 2
+      ? "2 LINEUPS CONFIRMED"
+      : confirmedLineups === 1
+        ? "1 LINEUP CONFIRMED"
+        : "PROJECTED LINEUPS";
 
-setStatusText(
-  "lineupStatus",
-  lineupStatusText,
-  confirmedLineups === 2
-    ? "confirmed"
-    : confirmedLineups === 1
-      ? "partial"
-      : "projected"
-);
+  setStatusText(
+    "lineupStatus",
+    lineupStatusText,
+    confirmedLineups === 2
+      ? "confirmed"
+      : confirmedLineups === 1
+        ? "partial"
+        : "projected"
+  );
 
   setText(
     "starterStatus",
     `${confirmedStarters} STARTER${
-      confirmedStarters === 1 ? "" : "S"
+      confirmedStarters === 1
+        ? ""
+        : "S"
     } CONFIRMED`
   );
 }
 
 function renderControls() {
   document
-    .querySelectorAll("[data-timeframe]")
+    .querySelectorAll(
+      "[data-timeframe]"
+    )
     .forEach(button => {
       const value =
         button.dataset.timeframe;
@@ -243,13 +526,17 @@ function renderControls() {
       );
 
       button.onclick = () => {
-        state.timeframe = value;
+        state.timeframe =
+          value;
+
         renderAll();
       };
     });
 
   document
-    .querySelectorAll("[data-location]")
+    .querySelectorAll(
+      "[data-location]"
+    )
     .forEach(button => {
       const value =
         button.dataset.location;
@@ -260,21 +547,26 @@ function renderControls() {
       );
 
       button.onclick = () => {
-        state.location = value;
+        state.location =
+          value;
+
         renderAll();
       };
     });
 }
 
 function renderPitchers() {
-  const game = state.game;
+  const game =
+    state.game;
 
   const awayPitcherModule =
     buildMlbPitcherModule({
       game,
       side: "away",
-      timeframe: state.timeframe,
-      location: state.location
+      timeframe:
+        state.timeframe,
+      location:
+        state.location
     });
 
   renderPitcherWidget({
@@ -282,15 +574,19 @@ function renderPitchers() {
       document.getElementById(
         "awayPitcherCard"
       ),
-    module: awayPitcherModule
+
+    module:
+      awayPitcherModule
   });
 
   const homePitcherModule =
     buildMlbPitcherModule({
       game,
       side: "home",
-      timeframe: state.timeframe,
-      location: state.location
+      timeframe:
+        state.timeframe,
+      location:
+        state.location
     });
 
   renderPitcherWidget({
@@ -298,19 +594,24 @@ function renderPitchers() {
       document.getElementById(
         "homePitcherCard"
       ),
-    module: homePitcherModule
+
+    module:
+      homePitcherModule
   });
 }
 
 function renderOffenses() {
-  const game = state.game;
+  const game =
+    state.game;
 
   const homeOffenseModule =
     buildMlbOffenseModule({
       game,
       side: "home",
-      timeframe: state.timeframe,
-      location: state.location
+      timeframe:
+        state.timeframe,
+      location:
+        state.location
     });
 
   renderOffenseWidget({
@@ -318,15 +619,19 @@ function renderOffenses() {
       document.getElementById(
         "homeOffenseCard"
       ),
-    module: homeOffenseModule
+
+    module:
+      homeOffenseModule
   });
 
   const awayOffenseModule =
     buildMlbOffenseModule({
       game,
       side: "away",
-      timeframe: state.timeframe,
-      location: state.location
+      timeframe:
+        state.timeframe,
+      location:
+        state.location
     });
 
   renderOffenseWidget({
@@ -334,12 +639,15 @@ function renderOffenses() {
       document.getElementById(
         "awayOffenseCard"
       ),
-    module: awayOffenseModule
+
+    module:
+      awayOffenseModule
   });
 }
 
 function renderLineupMatchups() {
-  const game = state.game;
+  const game =
+    state.game;
 
   const awayPitcherMatchupModule =
     buildMlbMatchupModule({
@@ -352,7 +660,9 @@ function renderLineupMatchups() {
       document.getElementById(
         "awayPitcherLineupCard"
       ),
-    module: awayPitcherMatchupModule
+
+    module:
+      awayPitcherMatchupModule
   });
 
   const homePitcherMatchupModule =
@@ -366,19 +676,24 @@ function renderLineupMatchups() {
       document.getElementById(
         "homePitcherLineupCard"
       ),
-    module: homePitcherMatchupModule
+
+    module:
+      homePitcherMatchupModule
   });
 }
 
 function renderBullpens() {
-  const game = state.game;
+  const game =
+    state.game;
 
   const awayBullpenModule =
     buildMlbBullpenModule({
       game,
       side: "away",
-      timeframe: state.timeframe,
-      location: state.location
+      timeframe:
+        state.timeframe,
+      location:
+        state.location
     });
 
   renderBullpenWidget({
@@ -386,15 +701,19 @@ function renderBullpens() {
       document.getElementById(
         "awayBullpenCard"
       ),
-    module: awayBullpenModule
+
+    module:
+      awayBullpenModule
   });
 
   const homeBullpenModule =
     buildMlbBullpenModule({
       game,
       side: "home",
-      timeframe: state.timeframe,
-      location: state.location
+      timeframe:
+        state.timeframe,
+      location:
+        state.location
     });
 
   renderBullpenWidget({
@@ -402,12 +721,15 @@ function renderBullpens() {
       document.getElementById(
         "homeBullpenCard"
       ),
-    module: homeBullpenModule
+
+    module:
+      homeBullpenModule
   });
 }
 
 function renderContextCards() {
-  const game = state.game;
+  const game =
+    state.game;
 
   const weatherModule =
     buildMlbWeatherModule({
@@ -416,8 +738,12 @@ function renderContextCards() {
 
   renderWeatherWidget({
     container:
-      document.getElementById("weather"),
-    module: weatherModule
+      document.getElementById(
+        "weather"
+      ),
+
+    module:
+      weatherModule
   });
 
   const marketModule =
@@ -427,9 +753,477 @@ function renderContextCards() {
 
   renderMarketWidget({
     container:
-      document.getElementById("market"),
-    module: marketModule
+      document.getElementById(
+        "market"
+      ),
+
+    module:
+      marketModule
   });
+}
+
+function renderGameLifecycle() {
+  const gameId =
+    state.game?.id;
+
+  const gamePlays =
+    state.plays.filter(
+      play => play.game_id === gameId
+    );
+
+  const gameResults =
+    state.results.filter(
+      result => result.game_id === gameId
+    );
+
+  const gameEvaluations =
+    state.evaluations.filter(
+      evaluation =>
+        evaluation.game_id === gameId
+    );
+
+  setText(
+    "gameLifecycleStatus",
+    formatLifecycleStatus(
+      gamePlays,
+      gameResults,
+      gameEvaluations
+    )
+  );
+
+  renderOfficialPlays(
+    gamePlays
+  );
+
+  renderResults(
+    gameResults
+  );
+
+  renderEvaluations(
+    gameEvaluations
+  );
+}
+
+function renderOfficialPlays(plays) {
+  const container =
+    document.getElementById(
+      "gameOfficialPlays"
+    );
+
+  if (!container) return;
+
+  if (!plays.length) {
+    container.innerHTML = `
+      <p class="module-note">
+        No official plays published.
+      </p>
+    `;
+    return;
+  }
+
+  container.innerHTML = plays
+    .map(play => `
+      <a
+        class="lifecycle-item"
+        href="play.html?id=${encodeURIComponent(
+          play.id
+        )}"
+      >
+        <strong>
+          ${escapeHtml(
+            play.play || "Official play"
+          )}
+        </strong>
+
+        <span>
+          ${escapeHtml(
+            play.odds || "Odds pending"
+          )}
+          ·
+          ${formatUnits(
+            play.units
+          )}
+          units
+        </span>
+      </a>
+    `)
+    .join("");
+}
+
+function renderResults(results) {
+  const container =
+    document.getElementById(
+      "gameResults"
+    );
+
+  if (!container) return;
+
+  if (!results.length) {
+    container.innerHTML = `
+      <p class="module-note">
+        Results pending.
+      </p>
+    `;
+    return;
+  }
+
+  container.innerHTML = results
+    .map(result => `
+      <div class="lifecycle-item">
+        <strong>
+          ${escapeHtml(
+            formatResultStatus(
+              result.status
+            )
+          )}
+        </strong>
+
+        <span>
+          ${escapeHtml(
+            result.final_score ||
+            "Final score pending"
+          )}
+        </span>
+
+        <small>
+          ${formatResultUnits(
+            result.units_result
+          )}
+        </small>
+      </div>
+    `)
+    .join("");
+}
+
+function renderEvaluations(evaluations) {
+  const container =
+    document.getElementById(
+      "gameEvaluations"
+    );
+
+  if (!container) return;
+
+  const completed =
+    evaluations.filter(
+      evaluation =>
+        evaluation.status !== "pending"
+    );
+
+  if (!completed.length) {
+    container.innerHTML = `
+      <p class="module-note">
+        Postgame evaluation pending.
+      </p>
+    `;
+    return;
+  }
+
+  container.innerHTML = completed
+    .map(evaluation => `
+      <div class="lifecycle-item">
+        <strong>
+          ${escapeHtml(
+            formatEvaluationHeading(
+              evaluation
+            )
+          )}
+        </strong>
+
+        <span>
+          ${escapeHtml(
+            evaluation.summary ||
+            "Evaluation completed."
+          )}
+        </span>
+      </div>
+    `)
+    .join("");
+}
+
+function formatLifecycleStatus(
+  plays,
+  results,
+  evaluations
+) {
+  if (!plays.length) {
+    return "NO OFFICIAL PLAY";
+  }
+
+  const allResultsGraded =
+    results.length === plays.length &&
+    results.every(result =>
+      !["", "pending"].includes(
+        String(result.status || "").toLowerCase()
+      )
+    );
+
+  if (!allResultsGraded) {
+    return "RESULTS PENDING";
+  }
+
+  const allEvaluated =
+    evaluations.length === plays.length &&
+    evaluations.every(evaluation =>
+      String(
+        evaluation.status || ""
+      ).toLowerCase() !== "pending"
+    );
+
+  return allEvaluated
+    ? "EVALUATED"
+    : "GRADING COMPLETE";
+}
+
+function formatUnits(value) {
+  const number =
+    Number(value);
+
+  return Number.isFinite(number)
+    ? number.toFixed(2)
+    : "0.00";
+}
+
+function formatResultUnits(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+    return "Units pending";
+  }
+
+  const number =
+    Number(value);
+
+  if (!Number.isFinite(number)) {
+    return "Units pending";
+  }
+
+  const prefix =
+    number > 0
+      ? "+"
+      : "";
+
+  return `${prefix}${number.toFixed(2)} units`;
+}
+
+function formatResultStatus(value) {
+  const status =
+    String(value || "pending").toLowerCase();
+
+  if (status === "win") return "WIN";
+  if (status === "loss") return "LOSS";
+  if (status === "push") return "PUSH";
+  if (status === "void") return "VOID";
+
+  return "PENDING";
+}
+
+function formatEvaluationHeading(evaluation) {
+  return (
+    evaluation.decision_quality ||
+    evaluation.model_quality ||
+    "POSTGAME EVALUATION"
+  ).toString().toUpperCase();
+}
+
+function setGameNavigationLink(
+  id,
+  game,
+  label
+) {
+  const element =
+    document.getElementById(id);
+
+  if (!element) return;
+
+  element.textContent =
+    label;
+
+  element.classList.remove(
+    "disabled"
+  );
+
+  element.removeAttribute(
+    "aria-disabled"
+  );
+
+  if (!game?.id) {
+    element.removeAttribute(
+      "href"
+    );
+
+    element.classList.add(
+      "disabled"
+    );
+
+    element.setAttribute(
+      "aria-disabled",
+      "true"
+    );
+
+    return;
+  }
+
+  element.href =
+    `game.html?id=${encodeURIComponent(
+      game.id
+    )}`;
+}
+
+function setLink(
+  id,
+  href,
+  label
+) {
+  const element =
+    document.getElementById(id);
+
+  if (!element) return;
+
+  element.href =
+    href;
+
+  if (label) {
+    element.textContent =
+      label;
+  }
+}
+
+function buildSlateUrl(
+  date,
+  sport
+) {
+  const params =
+    new URLSearchParams();
+
+  if (date) {
+    params.set(
+      "date",
+      date
+    );
+  }
+
+  if (sport) {
+    params.set(
+      "sport",
+      sport.toLowerCase()
+    );
+  }
+
+  return (
+    `todays-card.html?${params.toString()}`
+  );
+}
+
+function normalizeSport(value) {
+  return String(
+    value || "MLB"
+  ).toUpperCase();
+}
+
+function sortGames(a, b) {
+  const timeComparison =
+    String(
+      a.game_time || ""
+    ).localeCompare(
+      String(
+        b.game_time || ""
+      )
+    );
+
+  if (timeComparison !== 0) {
+    return timeComparison;
+  }
+
+  return String(
+    a.id || ""
+  ).localeCompare(
+    String(
+      b.id || ""
+    )
+  );
+}
+
+function shiftDate(
+  dateString,
+  amount
+) {
+  if (
+    !dateString ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(
+      dateString
+    )
+  ) {
+    return "";
+  }
+
+  const date =
+    new Date(
+      `${dateString}T12:00:00`
+    );
+
+  date.setDate(
+    date.getDate() + amount
+  );
+
+  return formatDateKey(
+    date
+  );
+}
+
+function formatDateKey(date) {
+  const year =
+    date.getFullYear();
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+  return (
+    `${year}-${month}-${day}`
+  );
+}
+
+function formatGameDate(value) {
+  if (!value) {
+    return "Date unavailable";
+  }
+
+  const date =
+    new Date(
+      `${value}T12:00:00`
+    );
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return value;
+  }
+
+  return date.toLocaleDateString(
+    "en-US",
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }
+  );
 }
 
 function createGameId(play) {
@@ -446,86 +1240,187 @@ function createGameId(play) {
 
 function createFallbackGame(play) {
   return {
-    id: createGameId(play),
-    date: play.date,
-    sport: play.sport || "MLB",
-    last_updated: null,
-    lineup_label: "Projected Lineup",
+    id:
+      createGameId(play),
+
+    date:
+      play.date,
+
+    game_time:
+      null,
+
+    sport:
+      play.sport || "MLB",
+
+    last_updated:
+      null,
+
+    lineup_label:
+      "Projected Lineup",
 
     away_team: {
-      abbr: play.away_team,
-      name: play.away_team,
-      team_id: play.away_team_id
+      abbr:
+        play.away_team,
+
+      name:
+        play.away_team,
+
+      team_id:
+        play.away_team_id
     },
 
     home_team: {
-      abbr: play.home_team,
-      name: play.home_team,
-      team_id: play.home_team_id
+      abbr:
+        play.home_team,
+
+      name:
+        play.home_team,
+
+      team_id:
+        play.home_team_id
     },
 
     controls: {
-      default_timeframe: "last_30",
-      default_location: "all"
+      default_timeframe:
+        "last_30",
+
+      default_location:
+        "all"
+    },
+
+    workflow: {
+      research_state:
+        "pending",
+
+      publication_state:
+        "published",
+
+      grading_state:
+        "pending",
+
+      archive_state:
+        "active",
+
+      official_play_ids: [
+        play.id
+      ],
+
+      best_bet_id:
+        play.is_best_bet
+          ? play.id
+          : null,
+
+      published_at:
+        null,
+
+      graded_at:
+        null,
+
+      archived_at:
+        null
     },
 
     pitchers: {
-      away: createUnknownPitcher(),
-      home: createUnknownPitcher()
+      away:
+        createUnknownPitcher(),
+
+      home:
+        createUnknownPitcher()
     },
 
     offense: {},
 
-lineups: {
-  away: {
-    team: play.away_team,
-    status: "projected",
-    status_label: "Projected Lineup",
-    last_updated: null,
-    players: []
-  },
+    lineups: {
+      away: {
+        team:
+          play.away_team,
 
-  home: {
-    team: play.home_team,
-    status: "projected",
-    status_label: "Projected Lineup",
-    last_updated: null,
-    players: []
-  }
-},
+        status:
+          "projected",
 
-pitcher_vs_lineup: {
-  away_pitcher: {
-    pitcher: "Starter TBD",
-    opponent: play.home_team,
-    lineup_status: "projected",
-    lineup_label: "Projected Lineup",
-    summary: {},
-    batters: []
-  },
+        status_label:
+          "Projected Lineup",
 
-  home_pitcher: {
-    pitcher: "Starter TBD",
-    opponent: play.away_team,
-    lineup_status: "projected",
-    lineup_label: "Projected Lineup",
-    summary: {},
-    batters: []
-  }
-},
+        last_updated:
+          null,
 
-bullpens: {},
-weather: {},
-market: {}
+        players: []
+      },
+
+      home: {
+        team:
+          play.home_team,
+
+        status:
+          "projected",
+
+        status_label:
+          "Projected Lineup",
+
+        last_updated:
+          null,
+
+        players: []
+      }
+    },
+
+    pitcher_vs_lineup: {
+      away_pitcher: {
+        pitcher:
+          "Starter TBD",
+
+        opponent:
+          play.home_team,
+
+        lineup_status:
+          "projected",
+
+        lineup_label:
+          "Projected Lineup",
+
+        summary: {},
+        batters: []
+      },
+
+      home_pitcher: {
+        pitcher:
+          "Starter TBD",
+
+        opponent:
+          play.away_team,
+
+        lineup_status:
+          "projected",
+
+        lineup_label:
+          "Projected Lineup",
+
+        summary: {},
+        batters: []
+      }
+    },
+
+    bullpens: {},
+    weather: {},
+    market: {},
+    injuries: [],
+    notes: ""
   };
 }
 
 function createUnknownPitcher() {
   return {
-    name: "Starter TBD",
-    age: null,
-    throws: null,
-    status: "unknown",
+    name:
+      "Starter TBD",
+
+    age:
+      null,
+
+    throws:
+      null,
+
+    status:
+      "unknown",
 
     stats: {
       last_7: {
@@ -553,11 +1448,18 @@ function createUnknownPitcher() {
 }
 
 function formatUpdatedTime(value) {
-  if (!value) return "—";
+  if (!value) {
+    return "—";
+  }
 
-  const date = new Date(value);
+  const date =
+    new Date(value);
 
-  if (Number.isNaN(date.getTime())) {
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
     return "—";
   }
 
@@ -595,7 +1497,10 @@ function setStatusText(
   );
 }
 
-function setText(id, value) {
+function setText(
+  id,
+  value
+) {
   const element =
     document.getElementById(id);
 
@@ -616,7 +1521,9 @@ function setLogo(
   if (!img) return;
 
   if (!teamId) {
-    img.removeAttribute("src");
+    img.removeAttribute(
+      "src"
+    );
 
     img.alt =
       `${team || "Team"} logo unavailable`;
@@ -625,7 +1532,9 @@ function setLogo(
   }
 
   img.src =
-    `${GAME_LOGO_BASE}/${Number(teamId)}.svg`;
+    `${GAME_LOGO_BASE}/${Number(
+      teamId
+    )}.svg`;
 
   img.alt =
     `${team || "Team"} logo`;
@@ -638,10 +1547,6 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-function escapeAttribute(value) {
-  return escapeHtml(value || "#");
 }
 
 loadGame();
