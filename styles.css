@@ -1294,3 +1294,41 @@ grid-template-columns:1fr;
   }
 }
 
+/* Play page title refinement */
+.play-header h1 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.15;
+  margin: 5px 0 12px;
+}
+
+/* ==========================================
+   MATCHUP SNAPSHOT HEAT
+   ========================================== */
+
+.snapshot-value-good {
+  color: #8fffb4;
+}
+
+.snapshot-value-neutral {
+  color: var(--text);
+}
+
+.snapshot-value-poor {
+  color: #ff8e9d;
+}
+
+.snapshot-value-missing {
+  color: var(--muted);
+}
+
+/* Keep the snapshot compact and readable */
+.snapshot-row strong {
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.snapshot-row strong span + span::before {
+  content: " · ";
+  color: var(--muted);
+}
+

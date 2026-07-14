@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.1",
+  "schema_version": "2.2",
   "default_controls": {
     "timeframe": "last_30",
     "location": "all"
@@ -227,11 +227,29 @@
           }
         }
       },
-      "pitcher_vs_projected_lineup": {
+      "lineups": {
+        "away": {
+          "team": "TOR",
+          "status": "projected",
+          "status_label": "Projected Lineup",
+          "last_updated": null,
+          "players": []
+        },
+        "home": {
+          "team": "SFG",
+          "status": "projected",
+          "status_label": "Projected Lineup",
+          "last_updated": null,
+          "players": []
+        }
+      },
+      "pitcher_vs_lineup": {
         "away_pitcher": {
           "pitcher_id": 656302,
           "pitcher": "Dylan Cease",
           "opponent": "SFG",
+          "lineup_status": "projected",
+          "lineup_label": "Projected Lineup",
           "summary": {
             "pa": null,
             "k": null,
@@ -246,6 +264,8 @@
           "pitcher_id": 657277,
           "pitcher": "Logan Webb",
           "opponent": "TOR",
+          "lineup_status": "projected",
+          "lineup_label": "Projected Lineup",
           "summary": {
             "pa": null,
             "k": null,

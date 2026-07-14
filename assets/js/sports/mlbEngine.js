@@ -326,10 +326,15 @@ export function buildMlbMatchupModule({
   const isAwayPitcher =
     side === "away";
 
-  const matchupData =
-    isAwayPitcher
-      ? game.pitcher_vs_projected_lineup?.away_pitcher
-      : game.pitcher_vs_projected_lineup?.home_pitcher;
+  const lineupMatchups =
+  game.pitcher_vs_lineup ||
+  game.pitcher_vs_projected_lineup ||
+  {};
+
+const matchupData =
+  isAwayPitcher
+    ? lineupMatchups.away_pitcher
+    : lineupMatchups.home_pitcher;
 
   const pitcher =
     isAwayPitcher
@@ -346,6 +351,18 @@ export function buildMlbMatchupModule({
     matchupData ||
     {};
 
+    const lineupStatus =
+  matchupData?.lineup_status ||
+  "projected";
+
+const lineupLabel =
+  matchupData?.lineup_label ||
+  (
+    lineupStatus === "confirmed"
+      ? "Confirmed Lineup"
+      : "Projected Lineup"
+  );
+
   return {
     title:
       `${matchupData?.pitcher ||
@@ -355,6 +372,8 @@ export function buildMlbMatchupModule({
         opponent?.abbr ||
         "Opponent"
       }`,
+      lineupStatus,
+      lineupLabel,
 
     metrics: [
       normalizeMatchupMetric(

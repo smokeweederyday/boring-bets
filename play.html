@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Boring Bets play analysis">
+
   <title>Play Analysis | Boring Bets</title>
+
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,7 +14,9 @@
 <body class="play-page">
 
   <header class="site-header">
-    <a class="brand" href="index.html">BORING BETS</a>
+    <a class="brand" href="index.html">
+      BORING BETS
+    </a>
 
     <nav class="main-nav">
       <a href="index.html">Home</a>
@@ -25,7 +29,9 @@
   </header>
 
   <main class="play-main">
-    <a class="back-link" href="todays-card.html">← Back to Today’s Card</a>
+    <a class="back-link" href="todays-card.html">
+      ← Back to Today’s Card
+    </a>
 
     <div id="playStatus" class="card-message">
       Loading play…
@@ -48,6 +54,7 @@
 
       <section class="play-header">
         <p id="playSport" class="kicker"></p>
+
         <h1 id="playTitle"></h1>
 
         <div class="play-facts">
@@ -74,16 +81,53 @@
       </section>
 
       <section class="analysis-section">
-  <p class="kicker">FULL ANALYSIS</p>
-  <div id="playAnalysis"></div>
-</section>
+        <p class="kicker">FULL ANALYSIS</p>
+        <div id="playAnalysis"></div>
+      </section>
 
-<section class="deep-dive-panel">
-  <a id="deepDiveLink" class="deep-dive-button" href="#">
-    <span>DEEP DIVE</span>
-    <strong>Explore the full matchup data →</strong>
-  </a>
-</section>
+      <section class="matchup-snapshot">
+        <div class="matchup-snapshot-heading">
+          <p class="kicker">MATCHUP SNAPSHOT</p>
+
+          <span id="snapshotStatus" class="snapshot-status">
+            Loading matchup data…
+          </span>
+        </div>
+
+        <div class="snapshot-grid">
+          <div class="snapshot-row">
+            <span>Starting Pitching</span>
+            <strong id="snapshotPitching">—</strong>
+          </div>
+
+          <div class="snapshot-row">
+            <span>Offense</span>
+            <strong id="snapshotOffense">—</strong>
+          </div>
+
+          <div class="snapshot-row">
+            <span>Bullpen</span>
+            <strong id="snapshotBullpen">—</strong>
+          </div>
+
+          <div class="snapshot-row">
+            <span>Weather</span>
+            <strong id="snapshotWeather">—</strong>
+          </div>
+
+          <div class="snapshot-row">
+            <span>Market</span>
+            <strong id="snapshotMarket">—</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="deep-dive-panel">
+        <a id="deepDiveLink" class="deep-dive-button" href="#">
+          <span>DEEP DIVE</span>
+          <strong>Explore the full matchup data →</strong>
+        </a>
+      </section>
     </article>
   </main>
 

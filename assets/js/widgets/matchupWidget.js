@@ -31,8 +31,13 @@ export function renderMatchupWidget({
       <div class="module-heading compact-heading">
         <div>
           <span class="data-label">
-            PITCHER VS PROJECTED LINEUP
-          </span>
+  PITCHER VS ${escapeHtml(
+    String(
+      module.lineupLabel ||
+      "Projected Lineup"
+    ).toUpperCase()
+  )}
+</span>
 
           <h3>
             ${escapeHtml(

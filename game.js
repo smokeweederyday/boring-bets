@@ -190,10 +190,32 @@ function renderStatusStrip() {
     `UPDATED ${formatUpdatedTime(game.last_updated)}`
   );
 
-  setText(
-    "lineupStatus",
-    "PROJECTED LINEUP"
-  );
+  const awayLineupStatus =
+  game.lineups?.away?.status ||
+  "projected";
+
+const homeLineupStatus =
+  game.lineups?.home?.status ||
+  "projected";
+
+const confirmedLineups = [
+  awayLineupStatus,
+  homeLineupStatus
+].filter(
+  status => status === "confirmed"
+).length;
+
+const lineupStatusText =
+  confirmedLineups === 2
+    ? "2 LINEUPS CONFIRMED"
+    : confirmedLineups === 1
+      ? "1 LINEUP CONFIRMED"
+      : "PROJECTED LINEUPS";
+
+setText(
+  "lineupStatus",
+  lineupStatusText
+);
 
   setText(
     "starterStatus",
