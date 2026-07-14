@@ -78,9 +78,9 @@ async function loadPlay() {
       });
 
     const deepDiveLink =
-      document.getElementById("deepDiveLink");
+  document.getElementById("deepDiveLink");
 
-    if (deepDiveLink) {
+if (deepDiveLink) {
   const gameId =
     play.game_id ||
     [
