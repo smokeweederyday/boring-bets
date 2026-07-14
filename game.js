@@ -212,9 +212,14 @@ const lineupStatusText =
       ? "1 LINEUP CONFIRMED"
       : "PROJECTED LINEUPS";
 
-setText(
+setStatusText(
   "lineupStatus",
-  lineupStatusText
+  lineupStatusText,
+  confirmedLineups === 2
+    ? "confirmed"
+    : confirmedLineups === 1
+      ? "partial"
+      : "projected"
 );
 
   setText(
@@ -470,10 +475,48 @@ function createFallbackGame(play) {
     },
 
     offense: {},
-    pitcher_vs_projected_lineup: {},
-    bullpens: {},
-    weather: {},
-    market: {}
+
+lineups: {
+  away: {
+    team: play.away_team,
+    status: "projected",
+    status_label: "Projected Lineup",
+    last_updated: null,
+    players: []
+  },
+
+  home: {
+    team: play.home_team,
+    status: "projected",
+    status_label: "Projected Lineup",
+    last_updated: null,
+    players: []
+  }
+},
+
+pitcher_vs_lineup: {
+  away_pitcher: {
+    pitcher: "Starter TBD",
+    opponent: play.home_team,
+    lineup_status: "projected",
+    lineup_label: "Projected Lineup",
+    summary: {},
+    batters: []
+  },
+
+  home_pitcher: {
+    pitcher: "Starter TBD",
+    opponent: play.away_team,
+    lineup_status: "projected",
+    lineup_label: "Projected Lineup",
+    summary: {},
+    batters: []
+  }
+},
+
+bullpens: {},
+weather: {},
+market: {}
   };
 }
 
@@ -525,6 +568,30 @@ function formatUpdatedTime(value) {
       minute: "2-digit",
       timeZoneName: "short"
     }
+  );
+}
+
+function setStatusText(
+  id,
+  value,
+  status
+) {
+  const element =
+    document.getElementById(id);
+
+  if (!element) return;
+
+  element.textContent =
+    value ?? "—";
+
+  element.classList.remove(
+    "status-confirmed",
+    "status-partial",
+    "status-projected"
+  );
+
+  element.classList.add(
+    `status-${status}`
   );
 }
 

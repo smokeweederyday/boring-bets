@@ -30,7 +30,9 @@ export function renderMatchupWidget({
     >
       <div class="module-heading compact-heading">
         <div>
-          <span class="data-label">
+          <span class="data-label ${getLineupStatusClass(
+  module.lineupStatus
+)}">
   PITCHER VS ${escapeHtml(
     String(
       module.lineupLabel ||
@@ -83,6 +85,12 @@ function renderMatchupMetric(metric) {
       </strong>
     </span>
   `;
+}
+
+function getLineupStatusClass(status) {
+  return status === "confirmed"
+    ? "lineup-status-confirmed"
+    : "lineup-status-projected";
 }
 
 function renderEmptyMetric() {

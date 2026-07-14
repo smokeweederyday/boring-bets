@@ -1332,3 +1332,24 @@ grid-template-columns:1fr;
   color: var(--muted);
 }
 
+/* Lineup status emphasis */
+.lineup-status-confirmed {
+  color: var(--green);
+}
+
+.lineup-status-projected {
+  color: var(--muted);
+}
+
+/* Status strip state colors */
+.status-confirmed {
+  color: var(--green);
+}
+
+.status-partial {
+  color: #e6c96b;
+}
+
+.status-projected {
+  color: var(--muted);
+}

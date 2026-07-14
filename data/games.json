@@ -228,21 +228,131 @@
         }
       },
       "lineups": {
-        "away": {
-          "team": "TOR",
-          "status": "projected",
-          "status_label": "Projected Lineup",
-          "last_updated": null,
-          "players": []
-        },
-        "home": {
-          "team": "SFG",
-          "status": "projected",
-          "status_label": "Projected Lineup",
-          "last_updated": null,
-          "players": []
-        }
+  "away": {
+    "team": "TOR",
+    "status": "projected",
+    "status_label": "Projected Lineup",
+    "last_updated": null,
+    "players": [
+      {
+        "id": null,
+        "name": "Batter 1",
+        "position": "SS",
+        "bats": "R"
       },
+      {
+        "id": null,
+        "name": "Batter 2",
+        "position": "1B",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 3",
+        "position": "RF",
+        "bats": "S"
+      },
+      {
+        "id": null,
+        "name": "Batter 4",
+        "position": "DH",
+        "bats": "L"
+      },
+      {
+        "id": null,
+        "name": "Batter 5",
+        "position": "3B",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 6",
+        "position": "LF",
+        "bats": "L"
+      },
+      {
+        "id": null,
+        "name": "Batter 7",
+        "position": "2B",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 8",
+        "position": "C",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 9",
+        "position": "CF",
+        "bats": "L"
+      }
+    ]
+  },
+  "home": {
+    "team": "SFG",
+    "status": "projected",
+    "status_label": "Projected Lineup",
+    "last_updated": null,
+    "players": [
+      {
+        "id": null,
+        "name": "Batter 1",
+        "position": "CF",
+        "bats": "L"
+      },
+      {
+        "id": null,
+        "name": "Batter 2",
+        "position": "2B",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 3",
+        "position": "DH",
+        "bats": "L"
+      },
+      {
+        "id": null,
+        "name": "Batter 4",
+        "position": "1B",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 5",
+        "position": "RF",
+        "bats": "L"
+      },
+      {
+        "id": null,
+        "name": "Batter 6",
+        "position": "3B",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 7",
+        "position": "LF",
+        "bats": "L"
+      },
+      {
+        "id": null,
+        "name": "Batter 8",
+        "position": "C",
+        "bats": "R"
+      },
+      {
+        "id": null,
+        "name": "Batter 9",
+        "position": "SS",
+        "bats": "R"
+      }
+    ]
+  }
+},
       "pitcher_vs_lineup": {
         "away_pitcher": {
           "pitcher_id": 656302,
