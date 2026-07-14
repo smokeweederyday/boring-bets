@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-14T15:00:58.986191+00:00",
+    "updated_at": "2026-07-14T19:40:02.977479+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -343,6 +343,24 @@
       "players": "Brandon Eisert; Jacob Gonzalez",
       "return": "Jaden Woods; future considerations",
       "betting_impact": "Low immediate impact; monitor bullpen assignments.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-14",
+      "from": "See description",
+      "to": "See description",
+      "players": "Milwaukee Brewers traded RHP Easton McGee to Kansas City Royals for cash.",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-14",
+      "from": "See description",
+      "to": "See description",
+      "players": "Detroit Tigers traded OF Jahmai Jones to Boston Red Sox for Player To Be Named Later.",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
       "source": "https://www.mlb.com/transactions"
     }
   ],
