@@ -86,6 +86,7 @@ async function loadGame() {
     renderStatusStrip();
     renderControls();
     renderPitchers();
+    renderOffenses();
 
     document.title =
       `${game.away_team.abbr} at ${game.home_team.abbr} | Boring Bets`;
@@ -188,6 +189,7 @@ function renderControls() {
 
       renderControls();
       renderPitchers();
+      renderOffenses();
     };
   });
 
@@ -204,6 +206,7 @@ function renderControls() {
 
       renderControls();
       renderPitchers();
+      renderOffenses();
     };
   });
 }
