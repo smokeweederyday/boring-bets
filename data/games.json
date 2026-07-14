@@ -6,6 +6,1371 @@
   },
   "games": [
     {
+      "id": "2026-05-16-tor-det",
+      "mlb_game_pk": 824278,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T17:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 2394,
+        "name": "Comerica Park"
+      },
+      "away_team": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "team_id": 141
+      },
+      "home_team": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "team_id": 116
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 689254,
+          "name": "Mason Fluharty",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 663554,
+          "name": "Casey Mize",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.169904+00:00"
+    },
+    {
+      "id": "2026-05-16-kc-stl",
+      "mlb_game_pk": 823060,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T18:15:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 2889,
+        "name": "Busch Stadium"
+      },
+      "away_team": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "team_id": 118
+      },
+      "home_team": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "team_id": 138
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 702070,
+          "name": "Noah Cameron",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 681517,
+          "name": "Kyle Leahy",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.169953+00:00"
+    },
+    {
+      "id": "2026-05-16-ari-col",
+      "mlb_game_pk": 824359,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T19:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 19,
+        "name": "Coors Field"
+      },
+      "away_team": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "team_id": 109
+      },
+      "home_team": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "team_id": 115
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 593958,
+          "name": "Eduardo Rodriguez",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 608372,
+          "name": "Tomoyuki Sugano",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.169973+00:00"
+    },
+    {
+      "id": "2026-05-16-bal-wsh",
+      "mlb_game_pk": 822737,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T20:05:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 3309,
+        "name": "Nationals Park"
+      },
+      "away_team": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "team_id": 110
+      },
+      "home_team": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "team_id": 120
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 605135,
+          "name": "Chris Bassitt",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 676917,
+          "name": "Cade Cavalli",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.169986+00:00"
+    },
+    {
+      "id": "2026-05-16-phi-pit",
+      "mlb_game_pk": 823382,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T20:05:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 31,
+        "name": "PNC Park"
+      },
+      "away_team": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "team_id": 143
+      },
+      "home_team": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "team_id": 134
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 650911,
+          "name": "Cristopher S\u00e1nchez",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 696149,
+          "name": "Bubba Chandler",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170004+00:00"
+    },
+    {
+      "id": "2026-05-16-mia-tb",
+      "mlb_game_pk": 822981,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T20:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 12,
+        "name": "Tropicana Field"
+      },
+      "away_team": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "team_id": 146
+      },
+      "home_team": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "team_id": 139
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 645261,
+          "name": "Sandy Alcantara",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 607259,
+          "name": "Nick Martinez",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170018+00:00"
+    },
+    {
+      "id": "2026-05-16-cin-cle",
+      "mlb_game_pk": 824435,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T22:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 5,
+        "name": "Progressive Field"
+      },
+      "away_team": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "team_id": 113
+      },
+      "home_team": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "team_id": 114
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 663978,
+          "name": "Chris Paddack",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 676282,
+          "name": "Joey Cantillo",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170030+00:00"
+    },
+    {
+      "id": "2026-05-16-tex-hou",
+      "mlb_game_pk": 824193,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T23:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 2392,
+        "name": "Daikin Park"
+      },
+      "away_team": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "team_id": 140
+      },
+      "home_team": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "team_id": 117
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 594798,
+          "name": "Jacob deGrom",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 678906,
+          "name": "Kai-Wei Teng",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170043+00:00"
+    },
+    {
+      "id": "2026-05-16-chc-cws",
+      "mlb_game_pk": 824600,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T23:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 4,
+        "name": "Rate Field"
+      },
+      "away_team": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "team_id": 112
+      },
+      "home_team": {
+        "abbr": "CWS",
+        "name": "Chicago White Sox",
+        "team_id": 145
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 592791,
+          "name": "Jameson Taillon",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 663436,
+          "name": "Davis Martin",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170060+00:00"
+    },
+    {
+      "id": "2026-05-16-mil-min",
+      "mlb_game_pk": 823706,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T23:10:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 3312,
+        "name": "Target Field"
+      },
+      "away_team": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "team_id": 158
+      },
+      "home_team": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "team_id": 142
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 701656,
+          "name": "Logan Henderson",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 687570,
+          "name": "Connor Prielipp",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170074+00:00"
+    },
+    {
+      "id": "2026-05-16-sd-sea",
+      "mlb_game_pk": 823139,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T23:15:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 680,
+        "name": "T-Mobile Park"
+      },
+      "away_team": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "team_id": 135
+      },
+      "home_team": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "team_id": 136
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 621111,
+          "name": "Walker Buehler",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 669302,
+          "name": "Logan Gilbert",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170090+00:00"
+    },
+    {
+      "id": "2026-05-16-bos-atl",
+      "mlb_game_pk": 824924,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T23:15:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 4705,
+        "name": "Truist Park"
+      },
+      "away_team": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "team_id": 111
+      },
+      "home_team": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "team_id": 144
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 801139,
+          "name": "Payton Tolle",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 693821,
+          "name": "Bryce Elder",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170106+00:00"
+    },
+    {
+      "id": "2026-05-16-nyy-nym",
+      "mlb_game_pk": 823627,
+      "date": "2026-05-16",
+      "game_time": "2026-05-16T23:15:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 3289,
+        "name": "Citi Field"
+      },
+      "away_team": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "team_id": 147
+      },
+      "home_team": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "team_id": 121
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 607074,
+          "name": "Carlos Rod\u00f3n",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 623211,
+          "name": "Huascar Brazob\u00e1n",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170118+00:00"
+    },
+    {
+      "id": "2026-05-16-lad-laa",
+      "mlb_game_pk": 824038,
+      "date": "2026-05-16",
+      "game_time": "2026-05-17T01:38:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 1,
+        "name": "Angel Stadium"
+      },
+      "away_team": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "team_id": 119
+      },
+      "home_team": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "team_id": 108
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 680736,
+          "name": "Justin Wrobleski",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 667755,
+          "name": "Jos\u00e9 Soriano",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170131+00:00"
+    },
+    {
+      "id": "2026-05-16-sfg-ath",
+      "mlb_game_pk": 825007,
+      "date": "2026-05-16",
+      "game_time": "2026-05-17T01:40:00Z",
+      "sport": "MLB",
+      "status": "final",
+      "venue": {
+        "id": 2529,
+        "name": "Sutter Health Park"
+      },
+      "away_team": {
+        "abbr": "SFG",
+        "name": "San Francisco Giants",
+        "team_id": 137
+      },
+      "home_team": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "team_id": 133
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 686790,
+          "name": "Trevor McDonald",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 622663,
+          "name": "Luis Severino",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:36.170146+00:00"
+    },
+    {
       "id": "2026-07-08-tor-sf",
       "date": "2026-07-08",
       "sport": "MLB",
@@ -228,131 +1593,131 @@
         }
       },
       "lineups": {
-  "away": {
-    "team": "TOR",
-    "status": "projected",
-    "status_label": "Projected Lineup",
-    "last_updated": null,
-    "players": [
-      {
-        "id": null,
-        "name": "Batter 1",
-        "position": "SS",
-        "bats": "R"
+        "away": {
+          "team": "TOR",
+          "status": "projected",
+          "status_label": "Projected Lineup",
+          "last_updated": null,
+          "players": [
+            {
+              "id": null,
+              "name": "Batter 1",
+              "position": "SS",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 2",
+              "position": "1B",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 3",
+              "position": "RF",
+              "bats": "S"
+            },
+            {
+              "id": null,
+              "name": "Batter 4",
+              "position": "DH",
+              "bats": "L"
+            },
+            {
+              "id": null,
+              "name": "Batter 5",
+              "position": "3B",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 6",
+              "position": "LF",
+              "bats": "L"
+            },
+            {
+              "id": null,
+              "name": "Batter 7",
+              "position": "2B",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 8",
+              "position": "C",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 9",
+              "position": "CF",
+              "bats": "L"
+            }
+          ]
+        },
+        "home": {
+          "team": "SFG",
+          "status": "projected",
+          "status_label": "Projected Lineup",
+          "last_updated": null,
+          "players": [
+            {
+              "id": null,
+              "name": "Batter 1",
+              "position": "CF",
+              "bats": "L"
+            },
+            {
+              "id": null,
+              "name": "Batter 2",
+              "position": "2B",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 3",
+              "position": "DH",
+              "bats": "L"
+            },
+            {
+              "id": null,
+              "name": "Batter 4",
+              "position": "1B",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 5",
+              "position": "RF",
+              "bats": "L"
+            },
+            {
+              "id": null,
+              "name": "Batter 6",
+              "position": "3B",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 7",
+              "position": "LF",
+              "bats": "L"
+            },
+            {
+              "id": null,
+              "name": "Batter 8",
+              "position": "C",
+              "bats": "R"
+            },
+            {
+              "id": null,
+              "name": "Batter 9",
+              "position": "SS",
+              "bats": "R"
+            }
+          ]
+        }
       },
-      {
-        "id": null,
-        "name": "Batter 2",
-        "position": "1B",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 3",
-        "position": "RF",
-        "bats": "S"
-      },
-      {
-        "id": null,
-        "name": "Batter 4",
-        "position": "DH",
-        "bats": "L"
-      },
-      {
-        "id": null,
-        "name": "Batter 5",
-        "position": "3B",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 6",
-        "position": "LF",
-        "bats": "L"
-      },
-      {
-        "id": null,
-        "name": "Batter 7",
-        "position": "2B",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 8",
-        "position": "C",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 9",
-        "position": "CF",
-        "bats": "L"
-      }
-    ]
-  },
-  "home": {
-    "team": "SFG",
-    "status": "projected",
-    "status_label": "Projected Lineup",
-    "last_updated": null,
-    "players": [
-      {
-        "id": null,
-        "name": "Batter 1",
-        "position": "CF",
-        "bats": "L"
-      },
-      {
-        "id": null,
-        "name": "Batter 2",
-        "position": "2B",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 3",
-        "position": "DH",
-        "bats": "L"
-      },
-      {
-        "id": null,
-        "name": "Batter 4",
-        "position": "1B",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 5",
-        "position": "RF",
-        "bats": "L"
-      },
-      {
-        "id": null,
-        "name": "Batter 6",
-        "position": "3B",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 7",
-        "position": "LF",
-        "bats": "L"
-      },
-      {
-        "id": null,
-        "name": "Batter 8",
-        "position": "C",
-        "bats": "R"
-      },
-      {
-        "id": null,
-        "name": "Batter 9",
-        "position": "SS",
-        "bats": "R"
-      }
-    ]
-  }
-},
       "pitcher_vs_lineup": {
         "away_pitcher": {
           "pitcher_id": 656302,
@@ -445,6 +1810,97 @@
       },
       "injuries": [],
       "notes": ""
+    },
+    {
+      "id": "2026-07-14-away-home",
+      "mlb_game_pk": 823443,
+      "date": "2026-07-14",
+      "game_time": "2026-07-15T00:00:00Z",
+      "sport": "MLB",
+      "status": "scheduled",
+      "venue": {
+        "id": 2681,
+        "name": "Citizens Bank Park"
+      },
+      "away_team": {
+        "abbr": "AWAY",
+        "name": "American League All-Stars",
+        "team_id": 159
+      },
+      "home_team": {
+        "abbr": "HOME",
+        "name": "National League All-Stars",
+        "team_id": 160
+      },
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "pitchers": {
+        "away": {
+          "id": 656302,
+          "name": "Dylan Cease",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        },
+        "home": {
+          "id": 650911,
+          "name": "Cristopher S\u00e1nchez",
+          "status": "probable",
+          "age": null,
+          "throws": null,
+          "profile_url": "#",
+          "stats": {
+            "last_7": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {},
+              "home": {},
+              "away": {}
+            },
+            "vs_lhh": {},
+            "vs_rhh": {}
+          }
+        }
+      },
+      "offense": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "injuries": [],
+      "notes": "",
+      "last_updated": "2026-07-14T14:41:19.795007+00:00"
     }
   ]
 }
