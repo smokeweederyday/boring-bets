@@ -948,3 +948,349 @@ grid-template-columns:1fr;
 }
 
 
+/* ==========================================
+   DENSITY PASS — PITCHER + OFFENSE ONLY
+   ========================================== */
+
+.matchup-console {
+  gap: 8px;
+  margin: 8px 0 12px;
+}
+
+.matchup-column {
+  gap: 6px;
+}
+
+/* Do not affect bullpen, weather, or market cards */
+.pitcher-comparison-card,
+.offense-comparison-card,
+.lineup-matchup-card {
+  border-radius: 4px;
+}
+
+.pitcher-card-link,
+.offense-comparison-card,
+.lineup-matchup-card {
+  padding: 7px 9px;
+}
+
+/* Pitcher identity row */
+.pitcher-card-heading {
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.pitcher-card-heading h2 {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.05;
+}
+
+.pitcher-card-heading p {
+  margin: 1px 0 0;
+  font-size: 0.62rem;
+  line-height: 1.1;
+}
+
+.data-label,
+.open-data {
+  font-size: 0.52rem;
+  letter-spacing: 0.055em;
+}
+
+.open-data {
+  margin: 0;
+}
+
+/* Spreadsheet-density tables */
+.pitcher-comparison-card .data-table,
+.offense-comparison-card .data-table,
+.lineup-matchup-card .data-table {
+  font-size: 0.63rem;
+  line-height: 1;
+}
+
+.pitcher-comparison-card .data-table th,
+.pitcher-comparison-card .data-table td,
+.offense-comparison-card .data-table th,
+.offense-comparison-card .data-table td,
+.lineup-matchup-card .data-table th,
+.lineup-matchup-card .data-table td {
+  padding: 3px 4px;
+}
+
+.pitcher-comparison-card .data-table thead th,
+.offense-comparison-card .data-table thead th,
+.lineup-matchup-card .data-table thead th {
+  font-size: 0.5rem;
+  letter-spacing: 0.025em;
+}
+
+.pitcher-comparison-card .data-table tbody th,
+.offense-comparison-card .data-table tbody th,
+.lineup-matchup-card .data-table tbody th {
+  font-size: 0.59rem;
+}
+
+/* Compact offense and lineup headings */
+.offense-comparison-card h3,
+.lineup-matchup-card h3 {
+  margin: 1px 0 4px;
+  font-size: 0.78rem;
+  line-height: 1.05;
+}
+
+.offense-comparison-card .kicker,
+.lineup-matchup-card .kicker {
+  margin: 0 0 1px;
+  font-size: 0.49rem;
+}
+
+/* Remove unnecessary vertical space before bullpen cards */
+.bullpen-console {
+  margin-top: 10px;
+}
+
+/* Preserve bullpen card dimensions */
+.bullpen-card {
+  padding: 16px;
+}
+
+@media (max-width: 620px) {
+  .pitcher-card-link,
+  .offense-comparison-card,
+  .lineup-matchup-card {
+    padding: 7px;
+  }
+
+  .pitcher-comparison-card .data-table,
+  .offense-comparison-card .data-table,
+  .lineup-matchup-card .data-table {
+    font-size: 0.61rem;
+  }
+
+  .pitcher-card-heading {
+    align-items: flex-start;
+  }
+}
+
+
+/* ==========================================
+   TRUE MODULE WIDTH COMPRESSION
+   ========================================== */
+
+/* Two compact matchup columns instead of two full-width halves */
+.matchup-console {
+  grid-template-columns: repeat(2, minmax(330px, 410px));
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+}
+
+/* Prevent each column from stretching unnecessarily */
+.matchup-column {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Modules now follow the narrower column width */
+.pitcher-comparison-card,
+.offense-comparison-card,
+.lineup-matchup-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Stop research tables from stretching across the whole card */
+.pitcher-comparison-card .data-table,
+.offense-comparison-card .data-table,
+.lineup-matchup-card .data-table {
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  table-layout: auto;
+}
+
+/* Keep every statistical column compact */
+.pitcher-comparison-card .data-table th,
+.pitcher-comparison-card .data-table td,
+.offense-comparison-card .data-table th,
+.offense-comparison-card .data-table td,
+.lineup-matchup-card .data-table th,
+.lineup-matchup-card .data-table td {
+  width: 1%;
+  min-width: 42px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* Metric names only need a small first column */
+.pitcher-comparison-card .data-table th:first-child,
+.offense-comparison-card .data-table th:first-child,
+.lineup-matchup-card .data-table th:first-child,
+.pitcher-comparison-card .data-table td:first-child,
+.offense-comparison-card .data-table td:first-child,
+.lineup-matchup-card .data-table td:first-child {
+  width: 52px;
+  min-width: 52px;
+  max-width: 62px;
+}
+
+/* Remove excess empty room around the table */
+.pitcher-comparison-card .table-scroll,
+.offense-comparison-card .table-scroll,
+.lineup-matchup-card .table-scroll {
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Slightly wider layouts can use larger compact modules */
+@media (min-width: 1250px) {
+  .matchup-console {
+    grid-template-columns: repeat(2, minmax(360px, 440px));
+  }
+}
+
+/* Phone: retain one-column layout and full available width */
+@media (max-width: 760px) {
+  .matchup-console {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+
+  .pitcher-comparison-card .data-table,
+  .offense-comparison-card .data-table,
+  .lineup-matchup-card .data-table {
+    width: max-content;
+  }
+}
+
+/* ==========================================
+   FINAL CONSOLE ALIGNMENT OVERRIDE
+   ========================================== */
+
+.game-controls-panel,
+.matchup-console,
+.bullpen-console,
+.bullpen-comparison-grid {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box;
+}
+
+.matchup-console,
+.bullpen-comparison-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  justify-content: stretch !important;
+  align-items: start;
+  gap: 10px !important;
+}
+
+.matchup-column,
+.pitcher-comparison-card,
+.offense-comparison-card,
+.lineup-matchup-card,
+.bullpen-card {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+.matchup-console {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .matchup-console,
+  .bullpen-comparison-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+
+/* ==========================================
+   ALIGN MATCHUP MODULES WITH FULL CONSOLE
+   ========================================== */
+
+/* Restore the matchup area to the full available width */
+.matchup-console {
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: stretch;
+  gap: 10px;
+}
+
+/* Each side aligns with the controls and bullpen columns */
+.matchup-column,
+.pitcher-comparison-card,
+.offense-comparison-card,
+.lineup-matchup-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Keep the contents dense without shrinking the outer modules */
+.pitcher-comparison-card .table-scroll,
+.offense-comparison-card .table-scroll,
+.lineup-matchup-card .table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Tables use the card width, but columns stay tightly proportioned */
+.pitcher-comparison-card .data-table,
+.offense-comparison-card .data-table,
+.lineup-matchup-card .data-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Compact first column for ERA, WHIP, AVG, etc. */
+.pitcher-comparison-card .data-table th:first-child,
+.pitcher-comparison-card .data-table td:first-child,
+.offense-comparison-card .data-table th:first-child,
+.offense-comparison-card .data-table td:first-child,
+.lineup-matchup-card .data-table th:first-child,
+.lineup-matchup-card .data-table td:first-child {
+  width: 18%;
+  min-width: 0;
+  max-width: none;
+}
+
+/* Remaining statistical columns divide the available room evenly */
+.pitcher-comparison-card .data-table th:not(:first-child),
+.pitcher-comparison-card .data-table td:not(:first-child),
+.offense-comparison-card .data-table th:not(:first-child),
+.offense-comparison-card .data-table td:not(:first-child),
+.lineup-matchup-card .data-table th:not(:first-child),
+.lineup-matchup-card .data-table td:not(:first-child) {
+  width: auto;
+  min-width: 0;
+}
+
+/* Keep the two bullpen cards on the exact same column grid */
+.bullpen-comparison-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 760px) {
+  .matchup-console,
+  .bullpen-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pitcher-comparison-card .data-table,
+  .offense-comparison-card .data-table,
+  .lineup-matchup-card .data-table {
+    min-width: 420px;
+  }
+}
+
