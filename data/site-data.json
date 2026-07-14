@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-14T16:24:22.650330+00:00",
+    "updated_at": "2026-07-14T17:43:58.320530+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -343,6 +343,15 @@
       "players": "Brandon Eisert; Jacob Gonzalez",
       "return": "Jaden Woods; future considerations",
       "betting_impact": "Low immediate impact; monitor bullpen assignments.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-14",
+      "from": "See description",
+      "to": "See description",
+      "players": "Milwaukee Brewers traded RHP Easton McGee to Kansas City Royals for cash.",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
       "source": "https://www.mlb.com/transactions"
     }
   ],
