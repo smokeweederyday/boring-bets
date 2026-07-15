@@ -17,6 +17,10 @@ from mlb.pitchers import (
     build_pitcher_snapshot,
 )
 
+from mlb.offense import (
+    build_team_offense_snapshot,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -336,6 +340,146 @@ def enrich_probable_pitchers(
 
     return enriched_games
 
+
+
+def enrich_team_offenses(
+    games: list[dict[str, Any]],
+    target_date: str,
+) -> list[dict[str, Any]]:
+    """
+    Populate both team offenses for each game.
+
+    The offense is matched to the opposing starter's handedness.
+    Each team/hand combination is fetched once per run. Existing
+    offense data is preserved if a request fails.
+    """
+
+    cache: dict[
+        tuple[int, str | None],
+        dict[str, Any],
+    ] = {}
+
+    enriched_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        offense = dict(
+            game.get("offense", {})
+        )
+
+        pitchers = game.get(
+            "pitchers",
+            {},
+        )
+
+        team_pairs = (
+            (
+                "away",
+                game.get("away_team", {}),
+                pitchers.get("home", {}),
+            ),
+            (
+                "home",
+                game.get("home_team", {}),
+                pitchers.get("away", {}),
+            ),
+        )
+
+        for (
+            side,
+            team,
+            opposing_pitcher,
+        ) in team_pairs:
+            team_id = team.get(
+                "team_id"
+            )
+
+            if not team_id:
+                continue
+
+            try:
+                numeric_team_id = int(
+                    team_id
+                )
+            except (
+                TypeError,
+                ValueError,
+            ):
+                print(
+                    f"Skipped invalid team ID "
+                    f"{team_id!r} for {game.get('id')}."
+                )
+                continue
+
+            opponent_throws = str(
+                opposing_pitcher.get(
+                    "throws"
+                )
+                or ""
+            ).upper() or None
+
+            cache_key = (
+                numeric_team_id,
+                opponent_throws,
+            )
+
+            if cache_key not in cache:
+                try:
+                    print(
+                        "Fetching offense data: "
+                        f"{team.get('abbr', numeric_team_id)} "
+                        f"vs {opponent_throws or 'TBD'}HP"
+                    )
+
+                    cache[cache_key] = (
+                        build_team_offense_snapshot(
+                            numeric_team_id,
+                            opponent_throws,
+                            target_date,
+                        )
+                    )
+                except Exception as error:
+                    print(
+                        "Offense refresh retained prior data "
+                        f"for {team.get('abbr', numeric_team_id)}: "
+                        f"{error}"
+                    )
+
+                    cache[cache_key] = {}
+
+            snapshot = cache.get(
+                cache_key,
+                {},
+            )
+
+            if not snapshot:
+                continue
+
+            existing_offense = dict(
+                offense.get(side, {})
+            )
+
+            merged_offense = dict(
+                existing_offense
+            )
+
+            merged_offense.update(
+                snapshot
+            )
+
+            merged_offense["team"] = (
+                team.get("abbr")
+            )
+
+            offense[side] = (
+                merged_offense
+            )
+
+        game["offense"] = offense
+        enriched_games.append(game)
+
+    return enriched_games
 
 def migrate_existing_games(
     games: list[dict[str, Any]],
@@ -1118,6 +1262,11 @@ def main() -> None:
         target_date,
     )
 
+    merged_games = enrich_team_offenses(
+        merged_games,
+        target_date,
+    )
+
     other_dates = [
         game
         for game in current.get(
@@ -1171,7 +1320,7 @@ def main() -> None:
         all_plays,
     )
 
-    current["schema_version"] = "3.2"
+    current["schema_version"] = "3.3"
 
     GAMES_FILE.write_text(
         json.dumps(

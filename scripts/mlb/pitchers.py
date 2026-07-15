@@ -33,8 +33,6 @@ def get_json(
 def fetch_pitcher_profile(
     pitcher_id: int,
 ) -> dict[str, Any]:
-    """Fetch biographical information for one pitcher."""
-
     raw = get_json(
         f"{MLB_API_BASE}/people/{pitcher_id}"
     )
@@ -80,15 +78,8 @@ def fetch_pitching_stats(
     season: int,
     start_date: str | None = None,
     end_date: str | None = None,
+    sit_code: str | None = None,
 ) -> dict[str, Any]:
-    """
-    Fetch one MLB pitching-stat split.
-
-    Supported initial stat types:
-    - season
-    - byDateRange
-    """
-
     params: dict[str, Any] = {
         "stats": stat_type,
         "group": "pitching",
@@ -101,6 +92,9 @@ def fetch_pitching_stats(
     if end_date:
         params["endDate"] = end_date
 
+    if sit_code:
+        params["sitCodes"] = sit_code
+
     query = urllib.parse.urlencode(
         params
     )
@@ -110,18 +104,18 @@ def fetch_pitching_stats(
         f"{pitcher_id}/stats?{query}"
     )
 
-    return parse_pitching_stat_block(raw)
+    return parse_pitching_stat_block(
+        raw
+    )
 
 
 def parse_pitching_stat_block(
     raw: dict[str, Any],
 ) -> dict[str, Any]:
-    stats_groups = raw.get(
+    for group in raw.get(
         "stats",
         [],
-    )
-
-    for group in stats_groups:
+    ):
         splits = group.get(
             "splits",
             [],
@@ -135,47 +129,87 @@ def parse_pitching_stat_block(
             {},
         )
 
-        return {
-            "era": to_float(
-                stat.get("era")
-            ),
-            "whip": to_float(
-                stat.get("whip")
-            ),
-            "fip": None,
-            "xfip": None,
-            "avg_against": to_float(
-                stat.get("avg")
-                or stat.get("avgAgainst")
-            ),
-            "innings_pitched":
-                stat.get("inningsPitched"),
-            "games_started": to_int(
-                stat.get("gamesStarted")
-            ),
-            "strikeouts": to_int(
-                stat.get("strikeOuts")
-            ),
-            "walks": to_int(
-                stat.get("baseOnBalls")
-            ),
-            "home_runs": to_int(
-                stat.get("homeRuns")
-            ),
-        }
+        return normalize_pitching_stat(
+            stat
+        )
 
     return {}
+
+
+def normalize_pitching_stat(
+    stat: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "era": to_float(
+            stat.get("era")
+        ),
+        "whip": to_float(
+            stat.get("whip")
+        ),
+        "fip": None,
+        "xfip": None,
+        "avg_against": to_float(
+            stat.get("avg")
+            or stat.get("avgAgainst")
+        ),
+        "innings_pitched":
+            stat.get("inningsPitched"),
+        "games": to_int(
+            stat.get("gamesPlayed")
+            or stat.get("gamesPitched")
+        ),
+        "games_started": to_int(
+            stat.get("gamesStarted")
+        ),
+        "strikeouts": to_int(
+            stat.get("strikeOuts")
+        ),
+        "walks": to_int(
+            stat.get("baseOnBalls")
+        ),
+        "home_runs": to_int(
+            stat.get("homeRuns")
+        ),
+        "hits": to_int(
+            stat.get("hits")
+        ),
+        "earned_runs": to_int(
+            stat.get("earnedRuns")
+        ),
+    }
+
+
+def fetch_safe_split(
+    pitcher_id: int,
+    season: int,
+    sit_code: str,
+) -> dict[str, Any]:
+    """
+    Fetch one season split without failing the full pitcher refresh.
+
+    MLB's Stats API can return an empty split when a pitcher has no
+    applicable appearances or when a split is not available.
+    """
+
+    try:
+        return fetch_pitching_stats(
+            pitcher_id=pitcher_id,
+            stat_type="statSplits",
+            season=season,
+            sit_code=sit_code,
+        )
+    except Exception as error:
+        print(
+            f"Split {sit_code} unavailable "
+            f"for pitcher {pitcher_id}: {error}"
+        )
+        return {}
 
 
 def build_pitcher_snapshot(
     pitcher_id: int,
     target_date: str,
 ) -> dict[str, Any]:
-    """
-    Build the first useful Boring Bets pitcher object:
-    profile + season + last 7 days + last 30 days.
-    """
-
     target = datetime.strptime(
         target_date,
         "%Y-%m-%d",
@@ -213,6 +247,30 @@ def build_pitcher_snapshot(
         end_date=target.isoformat(),
     )
 
+    season_home = fetch_safe_split(
+        pitcher_id,
+        season,
+        "h",
+    )
+
+    season_away = fetch_safe_split(
+        pitcher_id,
+        season,
+        "a",
+    )
+
+    vs_lhh = fetch_safe_split(
+        pitcher_id,
+        season,
+        "vl",
+    )
+
+    vs_rhh = fetch_safe_split(
+        pitcher_id,
+        season,
+        "vr",
+    )
+
     return {
         **profile,
         "status": "probable",
@@ -232,11 +290,11 @@ def build_pitcher_snapshot(
             },
             "season": {
                 "all": season_stats,
-                "home": {},
-                "away": {},
+                "home": season_home,
+                "away": season_away,
             },
-            "vs_lhh": {},
-            "vs_rhh": {},
+            "vs_lhh": vs_lhh,
+            "vs_rhh": vs_rhh,
         },
     }
 

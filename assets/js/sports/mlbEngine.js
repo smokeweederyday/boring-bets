@@ -45,7 +45,14 @@ export function buildMlbPitcherModule({ game, side, timeframe = "last_30", locat
   const seasonAll = safePitcher.stats?.season?.all || {};
   const matchupLocation = isAway ? "away" : "home";
   const selectedLocationKey = location === "all" ? matchupLocation : location;
-  const selectedLocation = timeframeStats?.[selectedLocationKey] || selectedAll;
+  const locationStats =
+  timeframeStats?.[selectedLocationKey];
+
+const selectedLocation =
+  locationStats &&
+  Object.keys(locationStats).length
+    ? locationStats
+    : selectedAll;
   const vsLeft = safePitcher.stats?.vs_lhh || {};
   const vsRight = safePitcher.stats?.vs_rhh || {};
 
