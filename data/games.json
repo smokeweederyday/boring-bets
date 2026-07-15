@@ -1,5 +1,5 @@
 {
-  "schema_version": "3.4",
+  "schema_version": "3.6",
   "default_controls": {
     "timeframe": "last_30",
     "location": "all"
@@ -2147,7 +2147,152 @@
           "team": "SFG"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "TOR",
+          "team_id": 141,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:58.490726+00:00",
+          "players": [
+            {
+              "id": 676391,
+              "name": "Ernie Clement",
+              "position": "2B",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 664770,
+              "name": "Nathan Lukes",
+              "position": "RF",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 665489,
+              "name": "Vladimir Guerrero Jr.",
+              "position": "1B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 543807,
+              "name": "George Springer",
+              "position": "DH",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 662139,
+              "name": "Daulton Varsho",
+              "position": "CF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 672960,
+              "name": "Kazuma Okamoto",
+              "position": "3B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 672386,
+              "name": "Alejandro Kirk",
+              "position": "C",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 664702,
+              "name": "Myles Straw",
+              "position": "LF",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 665926,
+              "name": "Andr\u00e9s Gim\u00e9nez",
+              "position": "SS",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "SF",
+          "team_id": 137,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:58.490773+00:00",
+          "players": [
+            {
+              "id": 671218,
+              "name": "Heliot Ramos",
+              "position": "LF",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 650333,
+              "name": "Luis Arraez",
+              "position": "2B",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 669477,
+              "name": "Casey Schmitt",
+              "position": "3B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 646240,
+              "name": "Rafael Devers",
+              "position": "1B",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 808982,
+              "name": "Jung Hoo Lee",
+              "position": "RF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 642715,
+              "name": "Willy Adames",
+              "position": "SS",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 805811,
+              "name": "Bryce Eldridge",
+              "position": "DH",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 687551,
+              "name": "Drew Gilbert",
+              "position": "CF",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 701852,
+              "name": "Drew Cavanaugh",
+              "position": "C",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -2383,11 +2528,33 @@
           }
         }
       },
-      "weather": {},
+      "weather": {
+        "venue_id": 2395,
+        "venue_name": "Oracle Park",
+        "latitude": 37.7786,
+        "longitude": -122.3893,
+        "venue_timezone": null,
+        "coordinate_source": "venue_fallback",
+        "forecast_time_utc": "2026-07-08T20:00",
+        "temperature": 63.5,
+        "humidity": 73,
+        "rain_probability": 0,
+        "precipitation": 0.0,
+        "wind_speed": 9.0,
+        "wind_gust": 11.4,
+        "wind_direction": "W",
+        "wind_direction_degrees": 277,
+        "weather_code": 45,
+        "condition": "Fog",
+        "source": "Open-Meteo",
+        "source_type": "historical_forecast",
+        "details_url": "#",
+        "updated_at": "2026-07-15T03:28:06.784232+00:00"
+      },
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451416+00:00"
+      "last_updated": "2026-07-15T03:25:59.911795+00:00"
     },
     {
       "id": "2026-07-08-chc-bal",
@@ -3003,7 +3170,152 @@
           "team": "BAL"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "CHC",
+          "team_id": 112,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:58.892381+00:00",
+          "players": [
+            {
+              "id": 691718,
+              "name": "Pete Crow-Armstrong",
+              "position": "CF",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 608324,
+              "name": "Alex Bregman",
+              "position": "3B",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 683737,
+              "name": "Michael Busch",
+              "position": "1B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 673548,
+              "name": "Seiya Suzuki",
+              "position": "DH",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 664023,
+              "name": "Ian Happ",
+              "position": "LF",
+              "bats": "S",
+              "order": 5
+            },
+            {
+              "id": 663538,
+              "name": "Nico Hoerner",
+              "position": "2B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 681909,
+              "name": "Justin Dean",
+              "position": "RF",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 608348,
+              "name": "Carson Kelly",
+              "position": "C",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 621020,
+              "name": "Dansby Swanson",
+              "position": "SS",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "BAL",
+          "team_id": 110,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:58.892429+00:00",
+          "players": [
+            {
+              "id": 683002,
+              "name": "Gunnar Henderson",
+              "position": "SS",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 668939,
+              "name": "Adley Rutschman",
+              "position": "C",
+              "bats": "S",
+              "order": 2
+            },
+            {
+              "id": 621493,
+              "name": "Taylor Ward",
+              "position": "LF",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 624413,
+              "name": "Pete Alonso",
+              "position": "1B",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 694212,
+              "name": "Samuel Basallo",
+              "position": "DH",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 665750,
+              "name": "Leody Taveras",
+              "position": "CF",
+              "bats": "S",
+              "order": 6
+            },
+            {
+              "id": 641933,
+              "name": "Tyler O'Neill",
+              "position": "RF",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 677942,
+              "name": "Blaze Alexander",
+              "position": "3B",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 702616,
+              "name": "Jackson Holliday",
+              "position": "2B",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -3217,7 +3529,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451449+00:00"
+      "last_updated": "2026-07-15T03:25:59.911824+00:00"
     },
     {
       "id": "2026-07-08-ath-det",
@@ -3833,7 +4145,152 @@
           "team": "DET"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "ATH",
+          "team_id": 133,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:59.250931+00:00",
+          "players": [
+            {
+              "id": 680869,
+              "name": "Zack Gelof",
+              "position": "3B",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 643446,
+              "name": "Jeff McNeil",
+              "position": "1B",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 669127,
+              "name": "Shea Langeliers",
+              "position": "C",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 691016,
+              "name": "Tyler Soderstrom",
+              "position": "DH",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 805779,
+              "name": "Jacob Wilson",
+              "position": "SS",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 671732,
+              "name": "Lawrence Butler",
+              "position": "RF",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 811965,
+              "name": "Joshua Kuroda-Grauer",
+              "position": "2B",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 666126,
+              "name": "Carlos Cortes",
+              "position": "LF",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 703607,
+              "name": "Henry Bolte",
+              "position": "CF",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "DET",
+          "team_id": 116,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:59.250982+00:00",
+          "players": [
+            {
+              "id": 663837,
+              "name": "Matt Vierling",
+              "position": "RF",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 668670,
+              "name": "Jake Rogers",
+              "position": "C",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 805808,
+              "name": "Kevin McGonigle",
+              "position": "SS",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 679529,
+              "name": "Spencer Torkelson",
+              "position": "1B",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 682985,
+              "name": "Riley Greene",
+              "position": "LF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 690993,
+              "name": "Colt Keith",
+              "position": "3B",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 681546,
+              "name": "James Outman",
+              "position": "CF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 681481,
+              "name": "Kerry Carpenter",
+              "position": "DH",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 656716,
+              "name": "Zach McKinstry",
+              "position": "2B",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -4039,7 +4496,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451458+00:00"
+      "last_updated": "2026-07-15T03:25:59.911837+00:00"
     },
     {
       "id": "2026-07-08-atl-pit",
@@ -4655,7 +5112,152 @@
           "team": "PIT"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "ATL",
+          "team_id": 144,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:59.743064+00:00",
+          "players": [
+            {
+              "id": 671739,
+              "name": "Michael Harris II",
+              "position": "CF",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 645277,
+              "name": "Ozzie Albies",
+              "position": "2B",
+              "bats": "S",
+              "order": 2
+            },
+            {
+              "id": 621566,
+              "name": "Matt Olson",
+              "position": "1B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 686948,
+              "name": "Drake Baldwin",
+              "position": "DH",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 643289,
+              "name": "Mauricio Dub\u00f3n",
+              "position": "LF",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 663586,
+              "name": "Austin Riley",
+              "position": "3B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 573262,
+              "name": "Mike Yastrzemski",
+              "position": "RF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 663698,
+              "name": "Joey Bart",
+              "position": "C",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 622761,
+              "name": "Jorge Mateo",
+              "position": "SS",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "PIT",
+          "team_id": 134,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:27:59.743110+00:00",
+          "players": [
+            {
+              "id": 663968,
+              "name": "Jake Mangum",
+              "position": "CF",
+              "bats": "S",
+              "order": 1
+            },
+            {
+              "id": 664040,
+              "name": "Brandon Lowe",
+              "position": "2B",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 668804,
+              "name": "Bryan Reynolds",
+              "position": "LF",
+              "bats": "S",
+              "order": 3
+            },
+            {
+              "id": 699013,
+              "name": "Esmerlyn Valdez",
+              "position": "RF",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 656811,
+              "name": "Ryan O'Hearn",
+              "position": "1B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 693304,
+              "name": "Nick Gonzales",
+              "position": "3B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 542303,
+              "name": "Marcell Ozuna",
+              "position": "DH",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 669707,
+              "name": "Jared Triolo",
+              "position": "SS",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 680779,
+              "name": "Henry Davis",
+              "position": "C",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -4894,7 +5496,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451467+00:00"
+      "last_updated": "2026-07-15T03:25:59.911849+00:00"
     },
     {
       "id": "2026-07-08-nyy-tb",
@@ -5508,7 +6110,152 @@
           "team": "TB"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "NYY",
+          "team_id": 147,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:00.477490+00:00",
+          "players": [
+            {
+              "id": 502671,
+              "name": "Paul Goldschmidt",
+              "position": "1B",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 700250,
+              "name": "Ben Rice",
+              "position": "DH",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 642708,
+              "name": "Amed Rosario",
+              "position": "3B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 641355,
+              "name": "Cody Bellinger",
+              "position": "LF",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 691176,
+              "name": "Jasson Dom\u00ednguez",
+              "position": "RF",
+              "bats": "S",
+              "order": 5
+            },
+            {
+              "id": 683011,
+              "name": "Anthony Volpe",
+              "position": "SS",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 663757,
+              "name": "Trent Grisham",
+              "position": "CF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 669224,
+              "name": "Austin Wells",
+              "position": "C",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 676609,
+              "name": "Jos\u00e9 Caballero",
+              "position": "2B",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "TB",
+          "team_id": 139,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:00.477536+00:00",
+          "players": [
+            {
+              "id": 650490,
+              "name": "Yandy D\u00edaz",
+              "position": "DH",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 666018,
+              "name": "Jonathan Aranda",
+              "position": "1B",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 691406,
+              "name": "Junior Caminero",
+              "position": "3B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 656775,
+              "name": "Cedric Mullins",
+              "position": "CF",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 676356,
+              "name": "Jonny DeLuca",
+              "position": "RF",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 802415,
+              "name": "Chandler Simpson",
+              "position": "LF",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 810938,
+              "name": "Ben Williamson",
+              "position": "2B",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 670764,
+              "name": "Taylor Walls",
+              "position": "SS",
+              "bats": "S",
+              "order": 8
+            },
+            {
+              "id": 663743,
+              "name": "Nick Fortes",
+              "position": "C",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -5764,7 +6511,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451484+00:00"
+      "last_updated": "2026-07-15T03:25:59.911873+00:00"
     },
     {
       "id": "2026-07-08-sea-mia",
@@ -6378,7 +7125,152 @@
           "team": "MIA"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "SEA",
+          "team_id": 136,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:00.067952+00:00",
+          "players": [
+            {
+              "id": 641487,
+              "name": "J.P. Crawford",
+              "position": "3B",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 668227,
+              "name": "Randy Arozarena",
+              "position": "LF",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 686527,
+              "name": "Dominic Canzone",
+              "position": "DH",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 663728,
+              "name": "Cal Raleigh",
+              "position": "C",
+              "bats": "S",
+              "order": 4
+            },
+            {
+              "id": 647304,
+              "name": "Josh Naylor",
+              "position": "1B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 670042,
+              "name": "Luke Raley",
+              "position": "RF",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 702284,
+              "name": "Cole Young",
+              "position": "2B",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 645302,
+              "name": "Victor Robles",
+              "position": "CF",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 806068,
+              "name": "Colt Emerson",
+              "position": "SS",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "MIA",
+          "team_id": 146,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:00.067991+00:00",
+          "players": [
+            {
+              "id": 689414,
+              "name": "Liam Hicks",
+              "position": "DH",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 672640,
+              "name": "Otto Lopez",
+              "position": "SS",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 669364,
+              "name": "Xavier Edwards",
+              "position": "2B",
+              "bats": "S",
+              "order": 3
+            },
+            {
+              "id": 669065,
+              "name": "Kyle Stowers",
+              "position": "1B",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 665052,
+              "name": "Griffin Conine",
+              "position": "RF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 681715,
+              "name": "Heriberto Hern\u00e1ndez",
+              "position": "LF",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 805300,
+              "name": "Jakob Marsee",
+              "position": "CF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 691788,
+              "name": "Joe Mack",
+              "position": "C",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 691594,
+              "name": "Javier Sanoja",
+              "position": "3B",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -6624,7 +7516,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451475+00:00"
+      "last_updated": "2026-07-15T03:25:59.911861+00:00"
     },
     {
       "id": "2026-07-08-hou-wsh",
@@ -7240,7 +8132,152 @@
           "team": "WSH"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "HOU",
+          "team_id": 117,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:00.932300+00:00",
+          "players": [
+            {
+              "id": 514888,
+              "name": "Jose Altuve",
+              "position": "2B",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 670541,
+              "name": "Yordan Alvarez",
+              "position": "DH",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 670623,
+              "name": "Isaac Paredes",
+              "position": "3B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 572233,
+              "name": "Christian Walker",
+              "position": "1B",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 701358,
+              "name": "Cam Smith",
+              "position": "RF",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 673237,
+              "name": "Yainer Diaz",
+              "position": "C",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 694728,
+              "name": "Brice Matthews",
+              "position": "CF",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 701305,
+              "name": "Zach Dezenzo",
+              "position": "LF",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 669397,
+              "name": "Nick Allen",
+              "position": "SS",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "WSH",
+          "team_id": 120,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:00.932348+00:00",
+          "players": [
+            {
+              "id": 695578,
+              "name": "James Wood",
+              "position": "RF",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 671277,
+              "name": "Luis Garc\u00eda Jr.",
+              "position": "1B",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 678554,
+              "name": "Curtis Mead",
+              "position": "3B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 682928,
+              "name": "CJ Abrams",
+              "position": "SS",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 695734,
+              "name": "Daylen Lile",
+              "position": "LF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 686611,
+              "name": "Dylan Crews",
+              "position": "CF",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 678391,
+              "name": "Jorbit Vivas",
+              "position": "2B",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 677588,
+              "name": "Jos\u00e9 Tena",
+              "position": "DH",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 660688,
+              "name": "Keibert Ruiz",
+              "position": "C",
+              "bats": "S",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -7530,7 +8567,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451492+00:00"
+      "last_updated": "2026-07-15T03:25:59.911884+00:00"
     },
     {
       "id": "2026-07-08-kc-nym",
@@ -8147,7 +9184,152 @@
           "team": "NYM"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "KC",
+          "team_id": 118,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:01.411915+00:00",
+          "players": [
+            {
+              "id": 695600,
+              "name": "Carter Jensen",
+              "position": "C",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 677951,
+              "name": "Bobby Witt Jr.",
+              "position": "SS",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 695506,
+              "name": "Jac Caglianone",
+              "position": "1B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 657041,
+              "name": "Lane Thomas",
+              "position": "CF",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 521692,
+              "name": "Salvador Perez",
+              "position": "DH",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 516782,
+              "name": "Starling Marte",
+              "position": "RF",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 679845,
+              "name": "Nick Loftin",
+              "position": "3B",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 686555,
+              "name": "Isaac Collins",
+              "position": "LF",
+              "bats": "S",
+              "order": 8
+            },
+            {
+              "id": 668942,
+              "name": "Josh Rojas",
+              "position": "PH",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "NYM",
+          "team_id": 121,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:01.411975+00:00",
+          "players": [
+            {
+              "id": 805999,
+              "name": "A.J. Ewing",
+              "position": "CF",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 665742,
+              "name": "Juan Soto",
+              "position": "LF",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 666182,
+              "name": "Bo Bichette",
+              "position": "3B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 596019,
+              "name": "Francisco Lindor",
+              "position": "SS",
+              "bats": "S",
+              "order": 4
+            },
+            {
+              "id": 701807,
+              "name": "Carson Benge",
+              "position": "RF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 621438,
+              "name": "Tyrone Taylor",
+              "position": "DH",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 676724,
+              "name": "Jared Young",
+              "position": "1B",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 683146,
+              "name": "Brett Baty",
+              "position": "2B",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 682626,
+              "name": "Francisco Alvarez",
+              "position": "C",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -8471,7 +9653,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451500+00:00"
+      "last_updated": "2026-07-15T03:25:59.911895+00:00"
     },
     {
       "id": "2026-07-08-phi-cin",
@@ -9085,7 +10267,152 @@
           "team": "CIN"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "PHI",
+          "team_id": 143,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:01.997243+00:00",
+          "players": [
+            {
+              "id": 547180,
+              "name": "Bryce Harper",
+              "position": "1B",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 656941,
+              "name": "Kyle Schwarber",
+              "position": "DH",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 669016,
+              "name": "Brandon Marsh",
+              "position": "LF",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 681082,
+              "name": "Bryson Stott",
+              "position": "2B",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 664761,
+              "name": "Alec Bohm",
+              "position": "3B",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 687282,
+              "name": "Gabriel Rincones Jr.",
+              "position": "RF",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 702222,
+              "name": "Justin Crawford",
+              "position": "CF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 665561,
+              "name": "Rafael March\u00e1n",
+              "position": "C",
+              "bats": "S",
+              "order": 8
+            },
+            {
+              "id": 624641,
+              "name": "Edmundo Sosa",
+              "position": "SS",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "CIN",
+          "team_id": 113,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:01.997300+00:00",
+          "players": [
+            {
+              "id": 682829,
+              "name": "Elly De La Cruz",
+              "position": "SS",
+              "bats": "S",
+              "order": 1
+            },
+            {
+              "id": 701398,
+              "name": "Sal Stewart",
+              "position": "3B",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 668709,
+              "name": "JJ Bleday",
+              "position": "LF",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 553993,
+              "name": "Eugenio Su\u00e1rez",
+              "position": "DH",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 668715,
+              "name": "Spencer Steer",
+              "position": "1B",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 682622,
+              "name": "Noelvi Marte",
+              "position": "RF",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 624431,
+              "name": "Jose Trevino",
+              "position": "C",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 695490,
+              "name": "Edwin Arroyo",
+              "position": "2B",
+              "bats": "S",
+              "order": 8
+            },
+            {
+              "id": 670770,
+              "name": "TJ Friedl",
+              "position": "CF",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -9348,7 +10675,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451508+00:00"
+      "last_updated": "2026-07-15T03:25:59.911907+00:00"
     },
     {
       "id": "2026-07-08-bos-cws",
@@ -9962,7 +11289,152 @@
           "team": "CWS"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "BOS",
+          "team_id": 111,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:03.123043+00:00",
+          "players": [
+            {
+              "id": 655316,
+              "name": "Andruw Monasterio",
+              "position": "2B",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 678882,
+              "name": "Ceddanne Rafaela",
+              "position": "CF",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 677800,
+              "name": "Wilyer Abreu",
+              "position": "RF",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 663853,
+              "name": "Romy Gonzalez",
+              "position": "1B",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 807799,
+              "name": "Masataka Yoshida",
+              "position": "DH",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 702332,
+              "name": "Caleb Durbin",
+              "position": "3B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 680776,
+              "name": "Jarren Duran",
+              "position": "LF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 665966,
+              "name": "Carlos Narv\u00e1ez",
+              "position": "C",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 691907,
+              "name": "Tsung-Che Cheng",
+              "position": "SS",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "CWS",
+          "team_id": 145,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:03.123102+00:00",
+          "players": [
+            {
+              "id": 678246,
+              "name": "Miguel Vargas",
+              "position": "1B",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 545341,
+              "name": "Randal Grichuk",
+              "position": "DH",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 695657,
+              "name": "Colson Montgomery",
+              "position": "3B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 805367,
+              "name": "Chase Meidroth",
+              "position": "SS",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 803011,
+              "name": "Sam Antonacci",
+              "position": "2B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 695731,
+              "name": "Braden Montgomery",
+              "position": "RF",
+              "bats": "S",
+              "order": 6
+            },
+            {
+              "id": 678577,
+              "name": "Junior Perez",
+              "position": "LF",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 691019,
+              "name": "Kyle Teel",
+              "position": "C",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 671976,
+              "name": "Tristan Peters",
+              "position": "CF",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -10192,7 +11664,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451524+00:00"
+      "last_updated": "2026-07-15T03:25:59.911940+00:00"
     },
     {
       "id": "2026-07-08-cle-min",
@@ -10806,7 +12278,152 @@
           "team": "MIN"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "CLE",
+          "team_id": 114,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:02.736636+00:00",
+          "players": [
+            {
+              "id": 680757,
+              "name": "Steven Kwan",
+              "position": "LF",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 800050,
+              "name": "Chase DeLauter",
+              "position": "RF",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 677587,
+              "name": "Brayan Rocchio",
+              "position": "SS",
+              "bats": "S",
+              "order": 3
+            },
+            {
+              "id": 656555,
+              "name": "Rhys Hoskins",
+              "position": "1B",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 683953,
+              "name": "Travis Bazzana",
+              "position": "2B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 682177,
+              "name": "Daniel Schneemann",
+              "position": "3B",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 700932,
+              "name": "Kyle Manzardo",
+              "position": "DH",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 595978,
+              "name": "Austin Hedges",
+              "position": "C",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 696135,
+              "name": "Kahlil Watson",
+              "position": "CF",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "MIN",
+          "team_id": 142,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:02.736686+00:00",
+          "players": [
+            {
+              "id": 668885,
+              "name": "Austin Martin",
+              "position": "LF",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 686797,
+              "name": "Brooks Lee",
+              "position": "3B",
+              "bats": "S",
+              "order": 2
+            },
+            {
+              "id": 665019,
+              "name": "Kody Clemens",
+              "position": "2B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 605137,
+              "name": "Josh Bell",
+              "position": "DH",
+              "bats": "S",
+              "order": 4
+            },
+            {
+              "id": 668904,
+              "name": "Royce Lewis",
+              "position": "1B",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 656577,
+              "name": "Alex Jackson",
+              "position": "C",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 807712,
+              "name": "Luke Keaschall",
+              "position": "CF",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 702176,
+              "name": "Alan Roden",
+              "position": "RF",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 668952,
+              "name": "Ryan Kreidler",
+              "position": "SS",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -11020,7 +12637,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451516+00:00"
+      "last_updated": "2026-07-15T03:25:59.911919+00:00"
     },
     {
       "id": "2026-07-08-mil-stl",
@@ -11634,7 +13251,152 @@
           "team": "STL"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "MIL",
+          "team_id": 158,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:03.564867+00:00",
+          "players": [
+            {
+              "id": 592885,
+              "name": "Christian Yelich",
+              "position": "DH",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 694192,
+              "name": "Jackson Chourio",
+              "position": "LF",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 641343,
+              "name": "Jake Bauers",
+              "position": "1B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 661388,
+              "name": "William Contreras",
+              "position": "C",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 669003,
+              "name": "Garrett Mitchell",
+              "position": "CF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 800325,
+              "name": "Luis Lara",
+              "position": "RF",
+              "bats": "S",
+              "order": 6
+            },
+            {
+              "id": 806198,
+              "name": "Cooper Pratt",
+              "position": "SS",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 686217,
+              "name": "Sal Frelick",
+              "position": "PH",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 683734,
+              "name": "Andrew Vaughn",
+              "position": "3B",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "STL",
+          "team_id": 138,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:03.564913+00:00",
+          "players": [
+            {
+              "id": 691026,
+              "name": "Masyn Winn",
+              "position": "SS",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 671056,
+              "name": "Iv\u00e1n Herrera",
+              "position": "DH",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 691023,
+              "name": "Jordan Walker",
+              "position": "RF",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 701675,
+              "name": "Nathan Church",
+              "position": "CF",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 676475,
+              "name": "Alec Burleson",
+              "position": "1B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 665877,
+              "name": "Jos\u00e9 Ferm\u00edn",
+              "position": "2B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 691458,
+              "name": "Blaze Jordan",
+              "position": "3B",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 663457,
+              "name": "Lars Nootbaar",
+              "position": "LF",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 686780,
+              "name": "Pedro Pag\u00e9s",
+              "position": "C",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -11934,7 +13696,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451535+00:00"
+      "last_updated": "2026-07-15T03:25:59.911952+00:00"
     },
     {
       "id": "2026-07-08-laa-tex",
@@ -12548,7 +14310,152 @@
           "team": "TEX"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "LAA",
+          "team_id": 108,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:04.040033+00:00",
+          "players": [
+            {
+              "id": 687263,
+              "name": "Zach Neto",
+              "position": "SS",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 545361,
+              "name": "Mike Trout",
+              "position": "DH",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 687093,
+              "name": "Vaughn Grissom",
+              "position": "1B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 666176,
+              "name": "Jo Adell",
+              "position": "RF",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 694203,
+              "name": "Denzer Guzman",
+              "position": "3B",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 672724,
+              "name": "Oswald Peraza",
+              "position": "2B",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 642350,
+              "name": "Jose Siri",
+              "position": "CF",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 681351,
+              "name": "Logan O'Hoppe",
+              "position": "C",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 666139,
+              "name": "Josh Lowe",
+              "position": "LF",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "TEX",
+          "team_id": 140,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:04.040085+00:00",
+          "players": [
+            {
+              "id": 543309,
+              "name": "Kyle Higashioka",
+              "position": "P",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 669701,
+              "name": "Josh Smith",
+              "position": "LF",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 669394,
+              "name": "Jake Burger",
+              "position": "1B",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 679822,
+              "name": "Justin Foscue",
+              "position": "2B",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 677649,
+              "name": "Ezequiel Duran",
+              "position": "3B",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 694497,
+              "name": "Evan Carter",
+              "position": "CF",
+              "bats": "L",
+              "order": 6
+            },
+            {
+              "id": 696030,
+              "name": "Alejandro Osuna",
+              "position": "RF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 553869,
+              "name": "Elias D\u00edaz",
+              "position": "C",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 695508,
+              "name": "Cam Cauley",
+              "position": "SS",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -12770,7 +14677,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451542+00:00"
+      "last_updated": "2026-07-15T03:25:59.911964+00:00"
     },
     {
       "id": "2026-07-08-ari-sd",
@@ -13384,7 +15291,152 @@
           "team": "SD"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "AZ",
+          "team_id": 109,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:05.072276+00:00",
+          "players": [
+            {
+              "id": 606466,
+              "name": "Ketel Marte",
+              "position": "2B",
+              "bats": "S",
+              "order": 1
+            },
+            {
+              "id": 545121,
+              "name": "Ildemaro Vargas",
+              "position": "SS",
+              "bats": "S",
+              "order": 2
+            },
+            {
+              "id": 682998,
+              "name": "Corbin Carroll",
+              "position": "RF",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 672515,
+              "name": "Gabriel Moreno",
+              "position": "C",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 596146,
+              "name": "Max Kepler",
+              "position": "LF",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 666971,
+              "name": "Lourdes Gurriel Jr.",
+              "position": "DH",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 571448,
+              "name": "Nolan Arenado",
+              "position": "3B",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 656976,
+              "name": "Pavin Smith",
+              "position": "1B",
+              "bats": "L",
+              "order": 8
+            },
+            {
+              "id": 694371,
+              "name": "Tommy Troy",
+              "position": "CF",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "SD",
+          "team_id": 135,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:05.072327+00:00",
+          "players": [
+            {
+              "id": 665487,
+              "name": "Fernando Tatis Jr.",
+              "position": "RF",
+              "bats": "R",
+              "order": 1
+            },
+            {
+              "id": 701538,
+              "name": "Jackson Merrill",
+              "position": "CF",
+              "bats": "L",
+              "order": 2
+            },
+            {
+              "id": 593428,
+              "name": "Xander Bogaerts",
+              "position": "SS",
+              "bats": "R",
+              "order": 3
+            },
+            {
+              "id": 657757,
+              "name": "Gavin Sheets",
+              "position": "1B",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 630105,
+              "name": "Jake Cronenworth",
+              "position": "2B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 669134,
+              "name": "Luis Campusano",
+              "position": "C",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 609280,
+              "name": "Miguel Andujar",
+              "position": "DH",
+              "bats": "R",
+              "order": 7
+            },
+            {
+              "id": 687749,
+              "name": "Jase Bowen",
+              "position": "LF",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 823550,
+              "name": "Sung-Mun Song",
+              "position": "3B",
+              "bats": "L",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -13632,7 +15684,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451558+00:00"
+      "last_updated": "2026-07-15T03:25:59.911987+00:00"
     },
     {
       "id": "2026-07-08-col-lad",
@@ -14246,7 +16298,152 @@
           "team": "LAD"
         }
       },
-      "lineups": {},
+      "lineups": {
+        "away": {
+          "team": "COL",
+          "team_id": 115,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:04.378010+00:00",
+          "players": [
+            {
+              "id": 664983,
+              "name": "Jake McCarthy",
+              "position": "DH",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 696100,
+              "name": "Hunter Goodman",
+              "position": "C",
+              "bats": "R",
+              "order": 2
+            },
+            {
+              "id": 694249,
+              "name": "Cole Carrigg",
+              "position": "CF",
+              "bats": "S",
+              "order": 3
+            },
+            {
+              "id": 681198,
+              "name": "TJ Rumfield",
+              "position": "1B",
+              "bats": "L",
+              "order": 4
+            },
+            {
+              "id": 691720,
+              "name": "Kyle Karros",
+              "position": "3B",
+              "bats": "R",
+              "order": 5
+            },
+            {
+              "id": 671289,
+              "name": "Tyler Freeman",
+              "position": "RF",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 650489,
+              "name": "Willi Castro",
+              "position": "2B",
+              "bats": "S",
+              "order": 7
+            },
+            {
+              "id": 678662,
+              "name": "Ezequiel Tovar",
+              "position": "SS",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 690924,
+              "name": "Braxton Fulford",
+              "position": "LF",
+              "bats": "R",
+              "order": 9
+            }
+          ]
+        },
+        "home": {
+          "team": "LAD",
+          "team_id": 119,
+          "status": "confirmed",
+          "status_label": "Confirmed Lineup",
+          "last_updated": "2026-07-15T03:28:04.378055+00:00",
+          "players": [
+            {
+              "id": 660271,
+              "name": "Shohei Ohtani",
+              "position": "DH",
+              "bats": "L",
+              "order": 1
+            },
+            {
+              "id": 669242,
+              "name": "Tommy Edman",
+              "position": "2B",
+              "bats": "S",
+              "order": 2
+            },
+            {
+              "id": 518692,
+              "name": "Freddie Freeman",
+              "position": "1B",
+              "bats": "L",
+              "order": 3
+            },
+            {
+              "id": 605141,
+              "name": "Mookie Betts",
+              "position": "SS",
+              "bats": "R",
+              "order": 4
+            },
+            {
+              "id": 571970,
+              "name": "Max Muncy",
+              "position": "3B",
+              "bats": "L",
+              "order": 5
+            },
+            {
+              "id": 606192,
+              "name": "Teoscar Hern\u00e1ndez",
+              "position": "LF",
+              "bats": "R",
+              "order": 6
+            },
+            {
+              "id": 663656,
+              "name": "Kyle Tucker",
+              "position": "RF",
+              "bats": "L",
+              "order": 7
+            },
+            {
+              "id": 681624,
+              "name": "Andy Pages",
+              "position": "CF",
+              "bats": "R",
+              "order": 8
+            },
+            {
+              "id": 672613,
+              "name": "Eliezer Alfonzo",
+              "position": "C",
+              "bats": "S",
+              "order": 9
+            }
+          ]
+        }
+      },
       "pitcher_vs_lineup": {},
       "bullpens": {
         "away": {
@@ -14518,7 +16715,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:38:35.451551+00:00"
+      "last_updated": "2026-07-15T03:25:59.911975+00:00"
     },
     {
       "id": "2026-07-14-away-home",

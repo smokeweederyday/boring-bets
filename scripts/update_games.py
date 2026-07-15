@@ -25,6 +25,14 @@ from mlb.bullpen import (
     build_bullpen_snapshot,
 )
 
+from mlb.lineups import (
+    build_lineup_snapshot,
+)
+
+from mlb.weather import (
+    build_weather_snapshot,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -590,6 +598,257 @@ def enrich_bullpens(
 
         game["bullpens"] = bullpens
         enriched_games.append(game)
+
+    return enriched_games
+
+
+def enrich_lineups(
+    games: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Populate away and home lineups from MLB's live game feed.
+
+    Each game feed is fetched once. Existing lineup data is
+    preserved if MLB has not posted a batting order or if the
+    request fails.
+    """
+
+    enriched_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        game_pk = game.get(
+            "mlb_game_pk"
+        )
+
+        if not game_pk:
+            enriched_games.append(
+                game
+            )
+            continue
+
+        try:
+            numeric_game_pk = int(
+                game_pk
+            )
+        except (
+            TypeError,
+            ValueError,
+        ):
+            print(
+                f"Skipped invalid MLB game ID "
+                f"{game_pk!r} for {game.get('id')}."
+            )
+
+            enriched_games.append(
+                game
+            )
+            continue
+
+        try:
+            print(
+                "Fetching lineup data: "
+                f"{game.get('id', numeric_game_pk)}"
+            )
+
+            snapshot = build_lineup_snapshot(
+                numeric_game_pk
+            )
+        except Exception as error:
+            print(
+                "Lineup refresh retained prior data "
+                f"for {game.get('id', numeric_game_pk)}: "
+                f"{error}"
+            )
+
+            enriched_games.append(
+                game
+            )
+            continue
+
+        existing_lineups = dict(
+            game.get("lineups", {})
+        )
+
+        for side in (
+            "away",
+            "home",
+        ):
+            incoming_lineup = (
+                snapshot.get(side)
+                or {}
+            )
+
+            incoming_players = (
+                incoming_lineup.get(
+                    "players",
+                    [],
+                )
+            )
+
+            existing_lineup = dict(
+                existing_lineups.get(
+                    side,
+                    {},
+                )
+            )
+
+            # Preserve an existing projected lineup when MLB's
+            # feed has not posted any hitters yet.
+            if not incoming_players:
+                if not existing_lineup:
+                    existing_lineups[
+                        side
+                    ] = incoming_lineup
+
+                continue
+
+            merged_lineup = dict(
+                existing_lineup
+            )
+
+            merged_lineup.update(
+                incoming_lineup
+            )
+
+            existing_lineups[
+                side
+            ] = merged_lineup
+
+        game["lineups"] = (
+            existing_lineups
+        )
+
+        enriched_games.append(
+            game
+        )
+
+    return enriched_games
+
+
+def enrich_weather(
+    games: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Populate game-time weather for every MLB game.
+
+    Weather is fetched once per venue, first-pitch time, and date
+    combination. Existing weather data is preserved if coordinates
+    or the external weather service are unavailable.
+    """
+
+    cache: dict[
+        tuple[int, str, str],
+        dict[str, Any],
+    ] = {}
+
+    enriched_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        venue_id = (
+            game
+            .get("venue", {})
+            .get("id")
+        )
+
+        game_time = game.get(
+            "game_time"
+        )
+
+        game_date = game.get(
+            "date"
+        )
+
+        if (
+            not venue_id
+            or not game_time
+            or not game_date
+        ):
+            enriched_games.append(
+                game
+            )
+            continue
+
+        try:
+            numeric_venue_id = int(
+                venue_id
+            )
+        except (
+            TypeError,
+            ValueError,
+        ):
+            print(
+                f"Skipped invalid venue ID "
+                f"{venue_id!r} for {game.get('id')}."
+            )
+
+            enriched_games.append(
+                game
+            )
+            continue
+
+        cache_key = (
+            numeric_venue_id,
+            str(game_time),
+            str(game_date),
+        )
+
+        if cache_key not in cache:
+            try:
+                print(
+                    "Fetching weather data: "
+                    f"{game.get('id', numeric_venue_id)}"
+                )
+
+                cache[cache_key] = (
+                    build_weather_snapshot(
+                        numeric_venue_id,
+                        str(game_time),
+                        str(game_date),
+                    )
+                )
+            except Exception as error:
+                print(
+                    "Weather refresh retained prior data "
+                    f"for {game.get('id', numeric_venue_id)}: "
+                    f"{error}"
+                )
+
+                cache[cache_key] = {}
+
+        snapshot = cache.get(
+            cache_key,
+            {},
+        )
+
+        if not snapshot:
+            enriched_games.append(
+                game
+            )
+            continue
+
+        existing_weather = dict(
+            game.get("weather", {})
+        )
+
+        merged_weather = dict(
+            existing_weather
+        )
+
+        merged_weather.update(
+            snapshot
+        )
+
+        game["weather"] = (
+            merged_weather
+        )
+
+        enriched_games.append(
+            game
+        )
 
     return enriched_games
 
@@ -1384,6 +1643,14 @@ def main() -> None:
         target_date,
     )
 
+    merged_games = enrich_lineups(
+        merged_games,
+    )
+
+    merged_games = enrich_weather(
+        merged_games,
+    )
+
     other_dates = [
         game
         for game in current.get(
@@ -1437,7 +1704,7 @@ def main() -> None:
         all_plays,
     )
 
-    current["schema_version"] = "3.4"
+    current["schema_version"] = "3.6"
 
     GAMES_FILE.write_text(
         json.dumps(
