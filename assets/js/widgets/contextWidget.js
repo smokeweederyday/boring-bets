@@ -17,42 +17,61 @@ export function renderContextWidget({
     return;
   }
 
-  const alerts = Array.isArray(context.alerts)
-    ? context.alerts
-    : [];
+  const alerts = normalizeItems(
+    context.alerts
+  );
 
-  const positives = Array.isArray(context.positives)
-    ? context.positives
-    : [];
+  const positives = normalizeItems(
+    context.positives
+  );
 
-  const information = Array.isArray(context.information)
-    ? context.information
-    : [];
+  const negatives = normalizeItems(
+    context.negatives
+  );
+
+  const information = normalizeItems(
+    context.information
+  );
 
   container.innerHTML = `
     <div class="context-header">
       <div>
-        <p class="kicker">CONTEXT</p>
-        <h2>${escapeHtml(context.label || "MIXED")}</h2>
+        <p class="kicker">CONTEXT V2</p>
+        <h2>
+          ${escapeHtml(
+            context.label || "MIXED"
+          )}
+        </h2>
       </div>
 
       <div class="context-score">
-        <strong>${escapeHtml(context.score ?? "—")}</strong>
+        <strong>
+          ${escapeHtml(
+            context.score ?? "—"
+          )}
+        </strong>
+
         <span>/100</span>
       </div>
     </div>
 
-    <div class="context-columns">
+    <div class="context-columns context-columns-v2">
       ${renderContextGroup(
         "Alerts",
         alerts,
-        "No major alerts."
+        "No urgent alerts."
       )}
 
       ${renderContextGroup(
         "Positive Conditions",
         positives,
         "No positive conditions identified."
+      )}
+
+      ${renderContextGroup(
+        "Negative Conditions",
+        negatives,
+        "No negative conditions identified."
       )}
 
       ${renderContextGroup(
@@ -91,6 +110,12 @@ export function renderContextWidget({
   `;
 }
 
+function normalizeItems(value) {
+  return Array.isArray(value)
+    ? value
+    : [];
+}
+
 function renderContextGroup(
   title,
   items,
@@ -102,11 +127,23 @@ function renderContextGroup(
           <article class="context-item context-${escapeHtml(
             item.level || "info"
           )}">
-            <strong>
-              ${escapeHtml(
-                item.title || "Context"
-              )}
-            </strong>
+            <div class="context-item-heading">
+              <strong>
+                ${escapeHtml(
+                  item.title || "Context"
+                )}
+              </strong>
+
+              ${
+                item.team
+                  ? `
+                    <span class="context-team-tag">
+                      ${escapeHtml(item.team)}
+                    </span>
+                  `
+                  : ""
+              }
+            </div>
 
             <p>
               ${escapeHtml(
@@ -124,7 +161,11 @@ function renderContextGroup(
 
   return `
     <section class="context-group">
-      <h3>${escapeHtml(title)}</h3>
+      <h3>
+        ${escapeHtml(title)}
+        <span>${items.length}</span>
+      </h3>
+
       <div class="context-list">
         ${body}
       </div>

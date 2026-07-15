@@ -17500,68 +17500,93 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T04:57:24.833983+00:00",
+      "last_updated": "2026-07-15T05:42:36.212089+00:00",
       "context": {
-        "version": "1.0",
-        "score": 52,
-        "label": "CAUTION",
+        "version": "2.0",
+        "score": 34,
+        "label": "WARNING",
         "alerts": [
           {
-            "title": "LINEUPS NOT CONFIRMED",
+            "title": "BOTH LINEUPS UNCONFIRMED",
             "summary": "Both batting orders remain projected or unavailable.",
             "level": "caution",
-            "weight": -6
+            "weight": -5,
+            "team": null,
+            "category": "lineup"
           },
           {
             "title": "ONE STARTER TBD",
             "summary": "One probable starter is still unavailable.",
             "level": "caution",
-            "weight": -5
+            "weight": -4,
+            "team": null,
+            "category": "starter"
           },
           {
             "title": "WEATHER PENDING",
             "summary": "Game-time weather has not been imported.",
             "level": "caution",
-            "weight": -3
+            "weight": -3,
+            "team": null,
+            "category": "weather"
           },
           {
             "title": "MARKET PENDING",
             "summary": "Current sportsbook prices are unavailable.",
             "level": "caution",
-            "weight": -4
+            "weight": -4,
+            "team": null,
+            "category": "market"
           }
         ],
         "positives": [
           {
+            "title": "NYM STARTER SET",
+            "summary": "Christian Scott is available.",
+            "level": "good",
+            "weight": 2,
+            "team": "NYM",
+            "category": "starter"
+          },
+          {
             "title": "NYM BULLPEN RESTED",
             "summary": "Only 0 reliever(s) were used yesterday.",
             "level": "good",
-            "weight": 5
+            "weight": 5,
+            "team": "NYM",
+            "category": "bullpen_usage"
+          },
+          {
+            "title": "NYM NO B2B ARMS",
+            "summary": "No relievers are flagged for consecutive-day usage.",
+            "level": "good",
+            "weight": 2,
+            "team": "NYM",
+            "category": "bullpen_usage"
           },
           {
             "title": "PHI BULLPEN RESTED",
             "summary": "Only 0 reliever(s) were used yesterday.",
             "level": "good",
-            "weight": 5
-          }
-        ],
-        "information": [
-          {
-            "title": "NYM B2B ARMS",
-            "summary": "0 reliever(s) have worked on consecutive days.",
-            "level": "info",
-            "weight": 0
+            "weight": 5,
+            "team": "PHI",
+            "category": "bullpen_usage"
           },
           {
-            "title": "PHI B2B ARMS",
-            "summary": "0 reliever(s) have worked on consecutive days.",
-            "level": "info",
-            "weight": 0
+            "title": "PHI NO B2B ARMS",
+            "summary": "No relievers are flagged for consecutive-day usage.",
+            "level": "good",
+            "weight": 2,
+            "team": "PHI",
+            "category": "bullpen_usage"
           }
         ],
+        "information": [],
         "sources": {
           "lineups": true,
           "starters": true,
+          "pitcher_form": true,
+          "offense": true,
           "bullpens": true,
           "weather": true,
           "market": true,
@@ -17571,7 +17596,57 @@
           "streaks": false,
           "injuries": false
         },
-        "updated_at": "2026-07-15T04:57:30.587267+00:00"
+        "updated_at": "2026-07-15T05:42:41.086681+00:00",
+        "negatives": [
+          {
+            "title": "NYM LINEUP UNCONFIRMED",
+            "summary": "The batting order remains projected or unavailable.",
+            "level": "negative",
+            "weight": -3,
+            "team": "NYM",
+            "category": "lineup"
+          },
+          {
+            "title": "PHI LINEUP UNCONFIRMED",
+            "summary": "The batting order remains projected or unavailable.",
+            "level": "negative",
+            "weight": -3,
+            "team": "PHI",
+            "category": "lineup"
+          },
+          {
+            "title": "PHI STARTER TBD",
+            "summary": "The probable starter is still unavailable.",
+            "level": "negative",
+            "weight": -4,
+            "team": "PHI",
+            "category": "starter"
+          },
+          {
+            "title": "NYM BULLPEN QUALITY",
+            "summary": "The relief unit has a 5.17 ERA over the last 30 days.",
+            "level": "negative",
+            "weight": -6,
+            "team": "NYM",
+            "category": "bullpen"
+          },
+          {
+            "title": "NYM BULLPEN TRAFFIC",
+            "summary": "The relief unit has a 1.42 WHIP over the last 30 days.",
+            "level": "negative",
+            "weight": -4,
+            "team": "NYM",
+            "category": "bullpen"
+          },
+          {
+            "title": "PHI BULLPEN QUALITY",
+            "summary": "The relief unit has a 4.77 ERA over the last 30 days.",
+            "level": "negative",
+            "weight": -6,
+            "team": "PHI",
+            "category": "bullpen"
+          }
+        ]
       }
     },
     {
