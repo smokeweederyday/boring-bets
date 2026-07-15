@@ -1,5 +1,5 @@
 {
-  "schema_version": "3.3",
+  "schema_version": "3.4",
   "default_controls": {
     "timeframe": "last_30",
     "location": "all"
@@ -2149,12 +2149,245 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 141,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.9,
+                "whip": 1.03,
+                "fip": null,
+                "innings_pitched": "60.0",
+                "games": 7,
+                "wins": 4,
+                "losses": 3,
+                "saves": 2,
+                "save_opportunities": 2,
+                "strikeouts": 67,
+                "walks": 18,
+                "hits": 44,
+                "home_runs": 8,
+                "earned_runs": 26
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.18,
+                "whip": 1.36,
+                "fip": null,
+                "innings_pitched": "241.0",
+                "games": 27,
+                "wins": 12,
+                "losses": 15,
+                "saves": 9,
+                "save_opportunities": 10,
+                "strikeouts": 240,
+                "walks": 117,
+                "hits": 210,
+                "home_runs": 36,
+                "earned_runs": 112
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.8,
+                "whip": 1.28,
+                "fip": null,
+                "innings_pitched": "404.2",
+                "games": 96,
+                "wins": 27,
+                "losses": 22,
+                "saves": 29,
+                "save_opportunities": 42,
+                "strikeouts": 398,
+                "walks": 160,
+                "hits": 357,
+                "home_runs": 46,
+                "earned_runs": 171
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "TOR",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 571578,
+                "name": "Patrick Corbin",
+                "outs": 7,
+                "innings_pitched": "2.1",
+                "pitches": 41,
+                "batters_faced": 9
+              },
+              {
+                "id": 656546,
+                "name": "Jeff Hoffman",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 8,
+                "batters_faced": 2
+              },
+              {
+                "id": 689254,
+                "name": "Mason Fluharty",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 12,
+                "batters_faced": 3
+              },
+              {
+                "id": 686973,
+                "name": "Louis Varland",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 667297,
+                "name": "Tommy Nance",
+                "outs": 5,
+                "innings_pitched": "1.2",
+                "pitches": 18,
+                "batters_faced": 7
+              },
+              {
+                "id": 671936,
+                "name": "Adam Macko",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 12,
+                "batters_faced": 5
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 137,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 6.93,
+                "whip": 1.48,
+                "fip": null,
+                "innings_pitched": "61.0",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 2,
+                "save_opportunities": 3,
+                "strikeouts": 47,
+                "walks": 20,
+                "hits": 70,
+                "home_runs": 10,
+                "earned_runs": 47
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.84,
+                "whip": 1.3,
+                "fip": null,
+                "innings_pitched": "227.0",
+                "games": 26,
+                "wins": 11,
+                "losses": 15,
+                "saves": 5,
+                "save_opportunities": 9,
+                "strikeouts": 184,
+                "walks": 77,
+                "hits": 217,
+                "home_runs": 27,
+                "earned_runs": 122
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.47,
+                "whip": 1.42,
+                "fip": null,
+                "innings_pitched": "328.0",
+                "games": 95,
+                "wins": 14,
+                "losses": 13,
+                "saves": 19,
+                "save_opportunities": 31,
+                "strikeouts": 285,
+                "walks": 159,
+                "hits": 306,
+                "home_runs": 37,
+                "earned_runs": 163
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "SFG",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 605288,
+                "name": "Adrian Houser",
+                "outs": 17,
+                "innings_pitched": "5.2",
+                "pitches": 67,
+                "batters_faced": 18
+              },
+              {
+                "id": 676254,
+                "name": "Ryan Walker",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 18,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 702352,
+                "name": "Spencer Bivens",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 3
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711471+00:00"
+      "last_updated": "2026-07-15T02:38:35.451416+00:00"
     },
     {
       "id": "2026-07-08-chc-bal",
@@ -2772,12 +3005,219 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 112,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 6.0,
+                "whip": 1.52,
+                "fip": null,
+                "innings_pitched": "54.0",
+                "games": 6,
+                "wins": 4,
+                "losses": 2,
+                "saves": 4,
+                "save_opportunities": 5,
+                "strikeouts": 48,
+                "walks": 19,
+                "hits": 63,
+                "home_runs": 10,
+                "earned_runs": 36
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.54,
+                "whip": 1.38,
+                "fip": null,
+                "innings_pitched": "232.0",
+                "games": 26,
+                "wins": 18,
+                "losses": 8,
+                "saves": 8,
+                "save_opportunities": 15,
+                "strikeouts": 194,
+                "walks": 87,
+                "hits": 232,
+                "home_runs": 45,
+                "earned_runs": 117
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.09,
+                "whip": 1.31,
+                "fip": null,
+                "innings_pitched": "365.0",
+                "games": 96,
+                "wins": 22,
+                "losses": 15,
+                "saves": 20,
+                "save_opportunities": 37,
+                "strikeouts": 330,
+                "walks": 142,
+                "hits": 335,
+                "home_runs": 60,
+                "earned_runs": 166
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "CHC",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 669020,
+                "name": "Ryan Rolison",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 27,
+                "batters_faced": 5
+              },
+              {
+                "id": 657097,
+                "name": "Jacob Webb",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 7,
+                "batters_faced": 2
+              },
+              {
+                "id": 621053,
+                "name": "Tyler Ferguson",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 8,
+                "batters_faced": 3
+              },
+              {
+                "id": 663423,
+                "name": "Trent Thornton",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 110,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.91,
+                "whip": 1.19,
+                "fip": null,
+                "innings_pitched": "53.0",
+                "games": 6,
+                "wins": 3,
+                "losses": 3,
+                "saves": 2,
+                "save_opportunities": 2,
+                "strikeouts": 35,
+                "walks": 21,
+                "hits": 42,
+                "home_runs": 7,
+                "earned_runs": 23
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.95,
+                "whip": 1.26,
+                "fip": null,
+                "innings_pitched": "241.1",
+                "games": 27,
+                "wins": 11,
+                "losses": 16,
+                "saves": 5,
+                "save_opportunities": 8,
+                "strikeouts": 222,
+                "walks": 96,
+                "hits": 209,
+                "home_runs": 31,
+                "earned_runs": 106
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.23,
+                "whip": 1.28,
+                "fip": null,
+                "innings_pitched": "348.2",
+                "games": 97,
+                "wins": 18,
+                "losses": 14,
+                "saves": 22,
+                "save_opportunities": 32,
+                "strikeouts": 325,
+                "walks": 124,
+                "hits": 322,
+                "home_runs": 41,
+                "earned_runs": 164
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "BAL",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 689296,
+                "name": "Anthony Nunez",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 37,
+                "batters_faced": 10
+              },
+              {
+                "id": 675919,
+                "name": "Nick Raquet",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 11,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711490+00:00"
+      "last_updated": "2026-07-15T02:38:35.451449+00:00"
     },
     {
       "id": "2026-07-08-ath-det",
@@ -3395,12 +3835,211 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 133,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 6.92,
+                "whip": 1.85,
+                "fip": null,
+                "innings_pitched": "52.0",
+                "games": 6,
+                "wins": 1,
+                "losses": 5,
+                "saves": 0,
+                "save_opportunities": 0,
+                "strikeouts": 53,
+                "walks": 36,
+                "hits": 60,
+                "home_runs": 16,
+                "earned_runs": 40
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 6.52,
+                "whip": 1.62,
+                "fip": null,
+                "innings_pitched": "241.2",
+                "games": 27,
+                "wins": 10,
+                "losses": 17,
+                "saves": 5,
+                "save_opportunities": 11,
+                "strikeouts": 252,
+                "walks": 108,
+                "hits": 284,
+                "home_runs": 58,
+                "earned_runs": 175
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 5.16,
+                "whip": 1.45,
+                "fip": null,
+                "innings_pitched": "384.0",
+                "games": 95,
+                "wins": 18,
+                "losses": 16,
+                "saves": 24,
+                "save_opportunities": 42,
+                "strikeouts": 385,
+                "walks": 167,
+                "hits": 390,
+                "home_runs": 57,
+                "earned_runs": 220
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "ATH",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 682052,
+                "name": "Jacob Lopez",
+                "outs": 9,
+                "innings_pitched": "3.0",
+                "pitches": 63,
+                "batters_faced": 14
+              },
+              {
+                "id": 665660,
+                "name": "Elvis Alvarado",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 23,
+                "batters_faced": 5
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 116,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 2.62,
+                "whip": 1.09,
+                "fip": null,
+                "innings_pitched": "55.0",
+                "games": 6,
+                "wins": 5,
+                "losses": 1,
+                "saves": 2,
+                "save_opportunities": 3,
+                "strikeouts": 49,
+                "walks": 13,
+                "hits": 47,
+                "home_runs": 7,
+                "earned_runs": 16
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 2.9,
+                "whip": 1.09,
+                "fip": null,
+                "innings_pitched": "233.0",
+                "games": 26,
+                "wins": 15,
+                "losses": 11,
+                "saves": 5,
+                "save_opportunities": 9,
+                "strikeouts": 224,
+                "walks": 56,
+                "hits": 197,
+                "home_runs": 33,
+                "earned_runs": 75
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.88,
+                "whip": 1.32,
+                "fip": null,
+                "innings_pitched": "350.0",
+                "games": 96,
+                "wins": 18,
+                "losses": 20,
+                "saves": 18,
+                "save_opportunities": 38,
+                "strikeouts": 329,
+                "walks": 140,
+                "hits": 322,
+                "home_runs": 41,
+                "earned_runs": 151
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "DET",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 640448,
+                "name": "Kyle Finnegan",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 10,
+                "batters_faced": 3
+              },
+              {
+                "id": 623454,
+                "name": "Drew Anderson",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 29,
+                "batters_faced": 7
+              },
+              {
+                "id": 621097,
+                "name": "Jacob Waguespack",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 23,
+                "batters_faced": 6
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711497+00:00"
+      "last_updated": "2026-07-15T02:38:35.451458+00:00"
     },
     {
       "id": "2026-07-08-atl-pit",
@@ -4018,12 +4657,244 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 144,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 5.5,
+                "whip": 1.46,
+                "fip": null,
+                "innings_pitched": "72.0",
+                "games": 8,
+                "wins": 4,
+                "losses": 4,
+                "saves": 3,
+                "save_opportunities": 5,
+                "strikeouts": 59,
+                "walks": 27,
+                "hits": 78,
+                "home_runs": 13,
+                "earned_runs": 44
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.73,
+                "whip": 1.42,
+                "fip": null,
+                "innings_pitched": "218.2",
+                "games": 25,
+                "wins": 8,
+                "losses": 17,
+                "saves": 6,
+                "save_opportunities": 10,
+                "strikeouts": 190,
+                "walks": 88,
+                "hits": 222,
+                "home_runs": 34,
+                "earned_runs": 115
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.06,
+                "whip": 1.12,
+                "fip": null,
+                "innings_pitched": "355.1",
+                "games": 95,
+                "wins": 23,
+                "losses": 10,
+                "saves": 28,
+                "save_opportunities": 39,
+                "strikeouts": 345,
+                "walks": 119,
+                "hits": 278,
+                "home_runs": 34,
+                "earned_runs": 121
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "ATL",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 671162,
+                "name": "Connor Thomas",
+                "outs": 11,
+                "innings_pitched": "3.2",
+                "pitches": 60,
+                "batters_faced": 17
+              },
+              {
+                "id": 622761,
+                "name": "Jorge Mateo",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 20,
+                "batters_faced": 6
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 800311,
+                "name": "Didier Fuentes",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 23,
+                "batters_faced": 6
+              },
+              {
+                "id": 669276,
+                "name": "Dylan Lee",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 4
+              },
+              {
+                "id": 641755,
+                "name": "Tyler Kinley",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 16,
+                "batters_faced": 3
+              },
+              {
+                "id": 628452,
+                "name": "Raisel Iglesias",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 25,
+                "batters_faced": 6
+              },
+              {
+                "id": 702566,
+                "name": "Owen Murphy",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 20,
+                "batters_faced": 5
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 134,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.72,
+                "whip": 1.31,
+                "fip": null,
+                "innings_pitched": "61.0",
+                "games": 7,
+                "wins": 4,
+                "losses": 3,
+                "saves": 0,
+                "save_opportunities": 0,
+                "strikeouts": 59,
+                "walks": 21,
+                "hits": 59,
+                "home_runs": 12,
+                "earned_runs": 32
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.82,
+                "whip": 1.41,
+                "fip": null,
+                "innings_pitched": "237.0",
+                "games": 27,
+                "wins": 13,
+                "losses": 14,
+                "saves": 4,
+                "save_opportunities": 7,
+                "strikeouts": 245,
+                "walks": 97,
+                "hits": 236,
+                "home_runs": 38,
+                "earned_runs": 127
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.48,
+                "whip": 1.41,
+                "fip": null,
+                "innings_pitched": "369.2",
+                "games": 97,
+                "wins": 21,
+                "losses": 18,
+                "saves": 19,
+                "save_opportunities": 36,
+                "strikeouts": 385,
+                "walks": 188,
+                "hits": 334,
+                "home_runs": 47,
+                "earned_runs": 184
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "PIT",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 669387,
+                "name": "Carmen Mlodzinski",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 24,
+                "batters_faced": 6
+              },
+              {
+                "id": 676702,
+                "name": "Hunter Stratton",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 6
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711504+00:00"
+      "last_updated": "2026-07-15T02:38:35.451467+00:00"
     },
     {
       "id": "2026-07-08-nyy-tb",
@@ -4639,12 +5510,261 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 147,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.14,
+                "whip": 1.19,
+                "fip": null,
+                "innings_pitched": "63.0",
+                "games": 7,
+                "wins": 2,
+                "losses": 5,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 66,
+                "walks": 19,
+                "hits": 56,
+                "home_runs": 11,
+                "earned_runs": 29
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.77,
+                "whip": 1.26,
+                "fip": null,
+                "innings_pitched": "248.1",
+                "games": 28,
+                "wins": 12,
+                "losses": 16,
+                "saves": 6,
+                "save_opportunities": 9,
+                "strikeouts": 256,
+                "walks": 84,
+                "hits": 230,
+                "home_runs": 35,
+                "earned_runs": 104
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.1,
+                "whip": 1.19,
+                "fip": null,
+                "innings_pitched": "337.0",
+                "games": 96,
+                "wins": 23,
+                "losses": 12,
+                "saves": 23,
+                "save_opportunities": 38,
+                "strikeouts": 315,
+                "walks": 119,
+                "hits": 282,
+                "home_runs": 32,
+                "earned_runs": 116
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "NYY",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 657612,
+                "name": "Tim Hill",
+                "outs": 5,
+                "innings_pitched": "1.2",
+                "pitches": 16,
+                "batters_faced": 6
+              },
+              {
+                "id": 621112,
+                "name": "Paul Blackburn",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 20,
+                "batters_faced": 5
+              },
+              {
+                "id": 687396,
+                "name": "Brent Headrick",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 11,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 670280,
+                "name": "David Bednar",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 11,
+                "batters_faced": 3
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 139,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.09,
+                "whip": 0.86,
+                "fip": null,
+                "innings_pitched": "70.0",
+                "games": 8,
+                "wins": 5,
+                "losses": 3,
+                "saves": 5,
+                "save_opportunities": 6,
+                "strikeouts": 82,
+                "walks": 9,
+                "hits": 51,
+                "home_runs": 12,
+                "earned_runs": 24
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.2,
+                "whip": 0.98,
+                "fip": null,
+                "innings_pitched": "245.0",
+                "games": 28,
+                "wins": 17,
+                "losses": 11,
+                "saves": 12,
+                "save_opportunities": 14,
+                "strikeouts": 249,
+                "walks": 46,
+                "hits": 195,
+                "home_runs": 38,
+                "earned_runs": 87
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.27,
+                "whip": 1.24,
+                "fip": null,
+                "innings_pitched": "373.1",
+                "games": 94,
+                "wins": 23,
+                "losses": 12,
+                "saves": 37,
+                "save_opportunities": 50,
+                "strikeouts": 348,
+                "walks": 135,
+                "hits": 328,
+                "home_runs": 59,
+                "earned_runs": 177
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "TB",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 687330,
+                "name": "Kevin Kelly",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 6
+              },
+              {
+                "id": 592155,
+                "name": "Cam Booser",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 7,
+                "batters_faced": 2
+              },
+              {
+                "id": 664076,
+                "name": "Garrett Cleavinger",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 17,
+                "batters_faced": 4
+              },
+              {
+                "id": 641329,
+                "name": "Bryan Baker",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 642121,
+                "name": "Cole Sulser",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 3
+              },
+              {
+                "id": 668984,
+                "name": "Casey Legumina",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 3
+              },
+              {
+                "id": 688297,
+                "name": "Chris Roycroft",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 37,
+                "batters_faced": 8
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711521+00:00"
+      "last_updated": "2026-07-15T02:38:35.451484+00:00"
     },
     {
       "id": "2026-07-08-sea-mia",
@@ -5260,12 +6380,251 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 136,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 1.35,
+                "whip": 0.79,
+                "fip": null,
+                "innings_pitched": "53.1",
+                "games": 6,
+                "wins": 3,
+                "losses": 3,
+                "saves": 1,
+                "save_opportunities": 2,
+                "strikeouts": 44,
+                "walks": 9,
+                "hits": 33,
+                "home_runs": 3,
+                "earned_runs": 8
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.63,
+                "whip": 1.11,
+                "fip": null,
+                "innings_pitched": "235.1",
+                "games": 27,
+                "wins": 13,
+                "losses": 14,
+                "saves": 8,
+                "save_opportunities": 11,
+                "strikeouts": 231,
+                "walks": 62,
+                "hits": 200,
+                "home_runs": 21,
+                "earned_runs": 95
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.56,
+                "whip": 1.31,
+                "fip": null,
+                "innings_pitched": "300.2",
+                "games": 96,
+                "wins": 16,
+                "losses": 15,
+                "saves": 22,
+                "save_opportunities": 37,
+                "strikeouts": 281,
+                "walks": 116,
+                "hits": 278,
+                "home_runs": 24,
+                "earned_runs": 119
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 5,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "SEA",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 678606,
+                "name": "Jos\u00e9 A. Ferrer",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 8,
+                "batters_faced": 3
+              },
+              {
+                "id": 660825,
+                "name": "Eduard Bazardo",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 17,
+                "batters_faced": 3
+              },
+              {
+                "id": 642100,
+                "name": "Gabe Speier",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 23,
+                "batters_faced": 6
+              },
+              {
+                "id": 662253,
+                "name": "Andr\u00e9s Mu\u00f1oz",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 10,
+                "batters_faced": 3
+              },
+              {
+                "id": 621074,
+                "name": "Michael Rucker",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 10,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 146,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.94,
+                "whip": 1.23,
+                "fip": null,
+                "innings_pitched": "62.0",
+                "games": 7,
+                "wins": 5,
+                "losses": 2,
+                "saves": 1,
+                "save_opportunities": 2,
+                "strikeouts": 54,
+                "walks": 19,
+                "hits": 57,
+                "home_runs": 8,
+                "earned_runs": 34
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.55,
+                "whip": 1.2,
+                "fip": null,
+                "innings_pitched": "238.0",
+                "games": 27,
+                "wins": 20,
+                "losses": 7,
+                "saves": 7,
+                "save_opportunities": 9,
+                "strikeouts": 222,
+                "walks": 82,
+                "hits": 203,
+                "home_runs": 28,
+                "earned_runs": 94
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.69,
+                "whip": 1.19,
+                "fip": null,
+                "innings_pitched": "356.0",
+                "games": 96,
+                "wins": 22,
+                "losses": 13,
+                "saves": 23,
+                "save_opportunities": 34,
+                "strikeouts": 368,
+                "walks": 154,
+                "hits": 270,
+                "home_runs": 31,
+                "earned_runs": 146
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 5,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "MIA",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 656848,
+                "name": "Michael Petersen",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 11,
+                "batters_faced": 3
+              },
+              {
+                "id": 667463,
+                "name": "John King",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 20,
+                "batters_faced": 5
+              },
+              {
+                "id": 676534,
+                "name": "Calvin Faucher",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 36,
+                "batters_faced": 7
+              },
+              {
+                "id": 664126,
+                "name": "Pete Fairbanks",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 17,
+                "batters_faced": 4
+              },
+              {
+                "id": 806188,
+                "name": "Cade Gibson",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 12,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711513+00:00"
+      "last_updated": "2026-07-15T02:38:35.451475+00:00"
     },
     {
       "id": "2026-07-08-hou-wsh",
@@ -5883,12 +7242,295 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 117,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 5.31,
+                "whip": 1.52,
+                "fip": null,
+                "innings_pitched": "61.0",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 2,
+                "save_opportunities": 2,
+                "strikeouts": 61,
+                "walks": 34,
+                "hits": 59,
+                "home_runs": 15,
+                "earned_runs": 36
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.46,
+                "whip": 1.31,
+                "fip": null,
+                "innings_pitched": "250.0",
+                "games": 28,
+                "wins": 16,
+                "losses": 12,
+                "saves": 12,
+                "save_opportunities": 14,
+                "strikeouts": 255,
+                "walks": 97,
+                "hits": 231,
+                "home_runs": 45,
+                "earned_runs": 124
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.3,
+                "whip": 1.34,
+                "fip": null,
+                "innings_pitched": "389.2",
+                "games": 98,
+                "wins": 16,
+                "losses": 17,
+                "saves": 28,
+                "save_opportunities": 33,
+                "strikeouts": 382,
+                "walks": 186,
+                "hits": 337,
+                "home_runs": 57,
+                "earned_runs": 186
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 6,
+          "back_to_back": 1,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "HOU",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 595345,
+                "name": "Steven Okert",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 17,
+                "batters_faced": 5
+              },
+              {
+                "id": 660853,
+                "name": "Enyel De Los Santos",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 13,
+                "batters_faced": 4
+              },
+              {
+                "id": 687911,
+                "name": "Bryan King",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 9,
+                "batters_faced": 4
+              },
+              {
+                "id": 650556,
+                "name": "Bryan Abreu",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 9,
+                "batters_faced": 3
+              },
+              {
+                "id": 695001,
+                "name": "Alimber Santa",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 19,
+                "batters_faced": 4
+              },
+              {
+                "id": 623352,
+                "name": "Josh Hader",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 13,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 805123,
+                "name": "AJ Blubaugh",
+                "outs": 5,
+                "innings_pitched": "1.2",
+                "pitches": 33,
+                "batters_faced": 8
+              },
+              {
+                "id": 663878,
+                "name": "Nate Pearson",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 13,
+                "batters_faced": 3
+              },
+              {
+                "id": 660853,
+                "name": "Enyel De Los Santos",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 4
+              }
+            ],
+            "back_to_back_pitcher_ids": [
+              660853
+            ]
+          }
+        },
+        "home": {
+          "team_id": 120,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 6.0,
+                "whip": 1.56,
+                "fip": null,
+                "innings_pitched": "63.0",
+                "games": 7,
+                "wins": 4,
+                "losses": 3,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 60,
+                "walks": 26,
+                "hits": 72,
+                "home_runs": 7,
+                "earned_runs": 42
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 5.12,
+                "whip": 1.44,
+                "fip": null,
+                "innings_pitched": "248.0",
+                "games": 28,
+                "wins": 15,
+                "losses": 13,
+                "saves": 7,
+                "save_opportunities": 16,
+                "strikeouts": 227,
+                "walks": 89,
+                "hits": 269,
+                "home_runs": 37,
+                "earned_runs": 141
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 5.07,
+                "whip": 1.48,
+                "fip": null,
+                "innings_pitched": "456.0",
+                "games": 97,
+                "wins": 24,
+                "losses": 26,
+                "saves": 27,
+                "save_opportunities": 54,
+                "strikeouts": 374,
+                "walks": 202,
+                "hits": 472,
+                "home_runs": 71,
+                "earned_runs": 257
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "WSH",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 664875,
+                "name": "Justin Lawrence",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 7,
+                "batters_faced": 1
+              },
+              {
+                "id": 640454,
+                "name": "Matt Krook",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 23,
+                "batters_faced": 5
+              },
+              {
+                "id": 683000,
+                "name": "Riley Cornelio",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 20,
+                "batters_faced": 5
+              },
+              {
+                "id": 687223,
+                "name": "Carson Palmquist",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 16,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 669371,
+                "name": "Cole Henry",
+                "outs": 5,
+                "innings_pitched": "1.2",
+                "pitches": 44,
+                "batters_faced": 9
+              },
+              {
+                "id": 690925,
+                "name": "Clayton Beeter",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 12,
+                "batters_faced": 4
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711527+00:00"
+      "last_updated": "2026-07-15T02:38:35.451492+00:00"
     },
     {
       "id": "2026-07-08-kc-nym",
@@ -6507,12 +8149,329 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 118,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.65,
+                "whip": 1.55,
+                "fip": null,
+                "innings_pitched": "62.0",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 51,
+                "walks": 25,
+                "hits": 71,
+                "home_runs": 9,
+                "earned_runs": 32
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 5.95,
+                "whip": 1.63,
+                "fip": null,
+                "innings_pitched": "237.1",
+                "games": 27,
+                "wins": 11,
+                "losses": 16,
+                "saves": 5,
+                "save_opportunities": 8,
+                "strikeouts": 170,
+                "walks": 106,
+                "hits": 280,
+                "home_runs": 38,
+                "earned_runs": 157
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 5.33,
+                "whip": 1.57,
+                "fip": null,
+                "innings_pitched": "344.1",
+                "games": 96,
+                "wins": 13,
+                "losses": 25,
+                "saves": 23,
+                "save_opportunities": 39,
+                "strikeouts": 298,
+                "walks": 180,
+                "hits": 360,
+                "home_runs": 55,
+                "earned_runs": 204
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 5,
+          "back_to_back": 1,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "KC",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 663738,
+                "name": "Daniel Lynch IV",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 18,
+                "batters_faced": 5
+              },
+              {
+                "id": 670167,
+                "name": "John Schreiber",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 24,
+                "batters_faced": 5
+              },
+              {
+                "id": 694360,
+                "name": "Beck Way",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 10,
+                "batters_faced": 2
+              },
+              {
+                "id": 621381,
+                "name": "Matt Strahm",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 24,
+                "batters_faced": 6
+              },
+              {
+                "id": 668674,
+                "name": "Lucas Erceg",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 5,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 674444,
+                "name": "Steven Cruz",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 18,
+                "batters_faced": 5
+              },
+              {
+                "id": 694360,
+                "name": "Beck Way",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 21,
+                "batters_faced": 5
+              },
+              {
+                "id": 621016,
+                "name": "Jose Cuas",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 36,
+                "batters_faced": 7
+              }
+            ],
+            "back_to_back_pitcher_ids": [
+              694360
+            ]
+          }
+        },
+        "home": {
+          "team_id": 121,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 7.97,
+                "whip": 1.89,
+                "fip": null,
+                "innings_pitched": "61.0",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 2,
+                "save_opportunities": 5,
+                "strikeouts": 65,
+                "walks": 34,
+                "hits": 81,
+                "home_runs": 16,
+                "earned_runs": 54
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 5.74,
+                "whip": 1.41,
+                "fip": null,
+                "innings_pitched": "246.0",
+                "games": 28,
+                "wins": 10,
+                "losses": 18,
+                "saves": 6,
+                "save_opportunities": 9,
+                "strikeouts": 256,
+                "walks": 97,
+                "hits": 251,
+                "home_runs": 44,
+                "earned_runs": 157
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.01,
+                "whip": 1.27,
+                "fip": null,
+                "innings_pitched": "417.1",
+                "games": 97,
+                "wins": 21,
+                "losses": 19,
+                "saves": 16,
+                "save_opportunities": 29,
+                "strikeouts": 419,
+                "walks": 155,
+                "hits": 375,
+                "home_runs": 53,
+                "earned_runs": 186
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 5,
+          "back_to_back": 1,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "NYM",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 673540,
+                "name": "Kodai Senga",
+                "outs": 9,
+                "innings_pitched": "3.0",
+                "pitches": 61,
+                "batters_faced": 17
+              },
+              {
+                "id": 681810,
+                "name": "Austin Warren",
+                "outs": 0,
+                "innings_pitched": "0.0",
+                "pitches": 26,
+                "batters_faced": 6
+              },
+              {
+                "id": 623211,
+                "name": "Huascar Brazob\u00e1n",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 37,
+                "batters_faced": 10
+              },
+              {
+                "id": 676910,
+                "name": "Matt Seelinger",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 52,
+                "batters_faced": 15
+              },
+              {
+                "id": 621345,
+                "name": "A.J. Minter",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 13,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 672335,
+                "name": "Cionel P\u00e9rez",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 16,
+                "batters_faced": 5
+              },
+              {
+                "id": 621345,
+                "name": "A.J. Minter",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 16,
+                "batters_faced": 5
+              },
+              {
+                "id": 670871,
+                "name": "Guillo Zu\u00f1iga",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 18,
+                "batters_faced": 4
+              },
+              {
+                "id": 642207,
+                "name": "Devin Williams",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 30,
+                "batters_faced": 6
+              },
+              {
+                "id": 548384,
+                "name": "Brooks Raley",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 3,
+                "batters_faced": 1
+              },
+              {
+                "id": 596133,
+                "name": "Luke Weaver",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 6
+              }
+            ],
+            "back_to_back_pitcher_ids": [
+              621345
+            ]
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711534+00:00"
+      "last_updated": "2026-07-15T02:38:35.451500+00:00"
     },
     {
       "id": "2026-07-08-phi-cin",
@@ -7128,12 +9087,268 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 143,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 6.75,
+                "whip": 1.72,
+                "fip": null,
+                "innings_pitched": "60.0",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 81,
+                "walks": 26,
+                "hits": 77,
+                "home_runs": 13,
+                "earned_runs": 45
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.87,
+                "whip": 1.41,
+                "fip": null,
+                "innings_pitched": "244.0",
+                "games": 28,
+                "wins": 16,
+                "losses": 12,
+                "saves": 7,
+                "save_opportunities": 11,
+                "strikeouts": 294,
+                "walks": 92,
+                "hits": 253,
+                "home_runs": 44,
+                "earned_runs": 132
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.44,
+                "whip": 1.35,
+                "fip": null,
+                "innings_pitched": "342.1",
+                "games": 96,
+                "wins": 20,
+                "losses": 14,
+                "saves": 29,
+                "save_opportunities": 39,
+                "strikeouts": 382,
+                "walks": 127,
+                "hits": 335,
+                "home_runs": 43,
+                "earned_runs": 169
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "PHI",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 689147,
+                "name": "Orion Kerkering",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 33,
+                "batters_faced": 5
+              },
+              {
+                "id": 680742,
+                "name": "Jonathan Bowlan",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 6,
+                "batters_faced": 1
+              },
+              {
+                "id": 661395,
+                "name": "Jhoan Duran",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 20,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 686751,
+                "name": "Seth Johnson",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 15,
+                "batters_faced": 3
+              },
+              {
+                "id": 621383,
+                "name": "Tanner Banks",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 16,
+                "batters_faced": 4
+              },
+              {
+                "id": 679775,
+                "name": "Kyle Backhus",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 20,
+                "batters_faced": 7
+              },
+              {
+                "id": 642152,
+                "name": "Lou Trivino III",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 29,
+                "batters_faced": 7
+              },
+              {
+                "id": 596117,
+                "name": "Garrett Stubbs",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 8
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 113,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.92,
+                "whip": 1.35,
+                "fip": null,
+                "innings_pitched": "62.0",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 50,
+                "walks": 35,
+                "hits": 49,
+                "home_runs": 6,
+                "earned_runs": 27
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.98,
+                "whip": 1.41,
+                "fip": null,
+                "innings_pitched": "239.2",
+                "games": 27,
+                "wins": 11,
+                "losses": 16,
+                "saves": 7,
+                "save_opportunities": 12,
+                "strikeouts": 231,
+                "walks": 114,
+                "hits": 223,
+                "home_runs": 32,
+                "earned_runs": 106
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.67,
+                "whip": 1.48,
+                "fip": null,
+                "innings_pitched": "358.1",
+                "games": 95,
+                "wins": 15,
+                "losses": 22,
+                "saves": 21,
+                "save_opportunities": 38,
+                "strikeouts": 334,
+                "walks": 214,
+                "hits": 316,
+                "home_runs": 53,
+                "earned_runs": 186
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "CIN",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 572955,
+                "name": "Pierce Johnson",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 4
+              },
+              {
+                "id": 657571,
+                "name": "Caleb Ferguson",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 15,
+                "batters_faced": 3
+              },
+              {
+                "id": 670062,
+                "name": "Julian Garcia",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 17,
+                "batters_faced": 3
+              },
+              {
+                "id": 594580,
+                "name": "Sam Moll",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 20,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711541+00:00"
+      "last_updated": "2026-07-15T02:38:35.451508+00:00"
     },
     {
       "id": "2026-07-08-bos-cws",
@@ -7749,12 +9964,235 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 111,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.17,
+                "whip": 1.07,
+                "fip": null,
+                "innings_pitched": "54.0",
+                "games": 6,
+                "wins": 5,
+                "losses": 1,
+                "saves": 2,
+                "save_opportunities": 2,
+                "strikeouts": 55,
+                "walks": 17,
+                "hits": 41,
+                "home_runs": 6,
+                "earned_runs": 19
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.29,
+                "whip": 1.15,
+                "fip": null,
+                "innings_pitched": "238.0",
+                "games": 27,
+                "wins": 15,
+                "losses": 12,
+                "saves": 6,
+                "save_opportunities": 9,
+                "strikeouts": 233,
+                "walks": 66,
+                "hits": 207,
+                "home_runs": 24,
+                "earned_runs": 87
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.21,
+                "whip": 1.19,
+                "fip": null,
+                "innings_pitched": "344.1",
+                "games": 94,
+                "wins": 11,
+                "losses": 18,
+                "saves": 22,
+                "save_opportunities": 31,
+                "strikeouts": 330,
+                "walks": 119,
+                "hits": 291,
+                "home_runs": 38,
+                "earned_runs": 123
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "BOS",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 543056,
+                "name": "Danny Coulombe",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 14,
+                "batters_faced": 4
+              },
+              {
+                "id": 686580,
+                "name": "Justin Slaten",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 10,
+                "batters_faced": 2
+              },
+              {
+                "id": 676477,
+                "name": "Garrett Whitlock",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 12,
+                "batters_faced": 3
+              },
+              {
+                "id": 670245,
+                "name": "Ryan Watson",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 15,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 145,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.99,
+                "whip": 1.58,
+                "fip": null,
+                "innings_pitched": "61.1",
+                "games": 7,
+                "wins": 2,
+                "losses": 5,
+                "saves": 2,
+                "save_opportunities": 4,
+                "strikeouts": 71,
+                "walks": 35,
+                "hits": 62,
+                "home_runs": 9,
+                "earned_runs": 34
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.95,
+                "whip": 1.42,
+                "fip": null,
+                "innings_pitched": "230.1",
+                "games": 26,
+                "wins": 13,
+                "losses": 13,
+                "saves": 6,
+                "save_opportunities": 13,
+                "strikeouts": 243,
+                "walks": 105,
+                "hits": 221,
+                "home_runs": 28,
+                "earned_runs": 101
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.93,
+                "whip": 1.33,
+                "fip": null,
+                "innings_pitched": "433.1",
+                "games": 95,
+                "wins": 24,
+                "losses": 21,
+                "saves": 26,
+                "save_opportunities": 45,
+                "strikeouts": 427,
+                "walks": 206,
+                "hits": 371,
+                "home_runs": 49,
+                "earned_runs": 189
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "CWS",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 622554,
+                "name": "Seranthony Dom\u00ednguez",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 5
+              },
+              {
+                "id": 663855,
+                "name": "Jordan Hicks",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 3
+              },
+              {
+                "id": 685126,
+                "name": "Brandon Eisert",
+                "outs": 5,
+                "innings_pitched": "1.2",
+                "pitches": 37,
+                "batters_faced": 9
+              },
+              {
+                "id": 670950,
+                "name": "Trevor Richards",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 14,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711555+00:00"
+      "last_updated": "2026-07-15T02:38:35.451524+00:00"
     },
     {
       "id": "2026-07-08-cle-min",
@@ -8370,12 +10808,219 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 114,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.16,
+                "whip": 1.5,
+                "fip": null,
+                "innings_pitched": "62.2",
+                "games": 7,
+                "wins": 3,
+                "losses": 4,
+                "saves": 0,
+                "save_opportunities": 1,
+                "strikeouts": 51,
+                "walks": 31,
+                "hits": 63,
+                "home_runs": 7,
+                "earned_runs": 29
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.87,
+                "whip": 1.32,
+                "fip": null,
+                "innings_pitched": "230.1",
+                "games": 26,
+                "wins": 10,
+                "losses": 16,
+                "saves": 5,
+                "save_opportunities": 9,
+                "strikeouts": 222,
+                "walks": 91,
+                "hits": 213,
+                "home_runs": 29,
+                "earned_runs": 99
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.74,
+                "whip": 1.32,
+                "fip": null,
+                "innings_pitched": "320.1",
+                "games": 97,
+                "wins": 18,
+                "losses": 18,
+                "saves": 32,
+                "save_opportunities": 41,
+                "strikeouts": 357,
+                "walks": 134,
+                "hits": 288,
+                "home_runs": 38,
+                "earned_runs": 133
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "CLE",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 680916,
+                "name": "Franco Aleman",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 12,
+                "batters_faced": 4
+              },
+              {
+                "id": 681870,
+                "name": "Erik Sabrowski",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 12,
+                "batters_faced": 5
+              },
+              {
+                "id": 670036,
+                "name": "Matt Festa",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 17,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 142,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 2.89,
+                "whip": 1.09,
+                "fip": null,
+                "innings_pitched": "53.0",
+                "games": 6,
+                "wins": 5,
+                "losses": 1,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 63,
+                "walks": 21,
+                "hits": 37,
+                "home_runs": 7,
+                "earned_runs": 17
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.85,
+                "whip": 1.38,
+                "fip": null,
+                "innings_pitched": "230.0",
+                "games": 26,
+                "wins": 16,
+                "losses": 10,
+                "saves": 8,
+                "save_opportunities": 10,
+                "strikeouts": 234,
+                "walks": 90,
+                "hits": 228,
+                "home_runs": 44,
+                "earned_runs": 124
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 5.19,
+                "whip": 1.53,
+                "fip": null,
+                "innings_pitched": "345.1",
+                "games": 96,
+                "wins": 20,
+                "losses": 17,
+                "saves": 27,
+                "save_opportunities": 39,
+                "strikeouts": 319,
+                "walks": 181,
+                "hits": 347,
+                "home_runs": 41,
+                "earned_runs": 199
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "MIN",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 702193,
+                "name": "Andrew Morris",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 13,
+                "batters_faced": 3
+              },
+              {
+                "id": 573124,
+                "name": "Taylor Rogers",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 17,
+                "batters_faced": 3
+              },
+              {
+                "id": 672782,
+                "name": "Yoendrys G\u00f3mez",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 3,
+                "batters_faced": 1
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711548+00:00"
+      "last_updated": "2026-07-15T02:38:35.451516+00:00"
     },
     {
       "id": "2026-07-08-mil-stl",
@@ -8991,12 +11636,305 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 158,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 2.78,
+                "whip": 1.0,
+                "fip": null,
+                "innings_pitched": "81.0",
+                "games": 9,
+                "wins": 6,
+                "losses": 3,
+                "saves": 4,
+                "save_opportunities": 4,
+                "strikeouts": 76,
+                "walks": 19,
+                "hits": 62,
+                "home_runs": 10,
+                "earned_runs": 25
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 3.47,
+                "whip": 1.07,
+                "fip": null,
+                "innings_pitched": "262.1",
+                "games": 29,
+                "wins": 18,
+                "losses": 11,
+                "saves": 11,
+                "save_opportunities": 16,
+                "strikeouts": 290,
+                "walks": 83,
+                "hits": 199,
+                "home_runs": 42,
+                "earned_runs": 101
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.58,
+                "whip": 1.27,
+                "fip": null,
+                "innings_pitched": "374.2",
+                "games": 95,
+                "wins": 27,
+                "losses": 16,
+                "saves": 30,
+                "save_opportunities": 45,
+                "strikeouts": 377,
+                "walks": 160,
+                "hits": 315,
+                "home_runs": 37,
+                "earned_runs": 149
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "MIL",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 676879,
+                "name": "Aaron Ashby",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 18,
+                "batters_faced": 5
+              },
+              {
+                "id": 682842,
+                "name": "Abner Uribe",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 19,
+                "batters_faced": 4
+              },
+              {
+                "id": 684974,
+                "name": "Craig Yoho",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 10,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 694477,
+                "name": "Chad Patrick",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 20,
+                "batters_faced": 6
+              },
+              {
+                "id": 656730,
+                "name": "Trevor Megill",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 15,
+                "batters_faced": 4
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 138,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.42,
+                "whip": 1.27,
+                "fip": null,
+                "innings_pitched": "79.0",
+                "games": 9,
+                "wins": 4,
+                "losses": 5,
+                "saves": 1,
+                "save_opportunities": 3,
+                "strikeouts": 65,
+                "walks": 30,
+                "hits": 70,
+                "home_runs": 2,
+                "earned_runs": 30
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.33,
+                "whip": 1.3,
+                "fip": null,
+                "innings_pitched": "245.0",
+                "games": 28,
+                "wins": 13,
+                "losses": 15,
+                "saves": 5,
+                "save_opportunities": 9,
+                "strikeouts": 196,
+                "walks": 86,
+                "hits": 233,
+                "home_runs": 26,
+                "earned_runs": 118
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.22,
+                "whip": 1.36,
+                "fip": null,
+                "innings_pitched": "356.1",
+                "games": 94,
+                "wins": 19,
+                "losses": 15,
+                "saves": 29,
+                "save_opportunities": 44,
+                "strikeouts": 311,
+                "walks": 161,
+                "hits": 324,
+                "home_runs": 36,
+                "earned_runs": 167
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 7,
+          "back_to_back": 3,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "STL",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 669145,
+                "name": "Bruce Zimmermann",
+                "outs": 15,
+                "innings_pitched": "5.0",
+                "pitches": 72,
+                "batters_faced": 21
+              },
+              {
+                "id": 592773,
+                "name": "Ryne Stanek",
+                "outs": 0,
+                "innings_pitched": "0.0",
+                "pitches": 6,
+                "batters_faced": 2
+              },
+              {
+                "id": 668941,
+                "name": "JoJo Romero",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 16,
+                "batters_faced": 5
+              },
+              {
+                "id": 677865,
+                "name": "Justin Bruihl",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 30,
+                "batters_faced": 8
+              },
+              {
+                "id": 694363,
+                "name": "Jared Shuster",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 52,
+                "batters_faced": 12
+              },
+              {
+                "id": 700669,
+                "name": "Gordon Graceffo",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 13,
+                "batters_faced": 3
+              },
+              {
+                "id": 663494,
+                "name": "Bryan Torres",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 18,
+                "batters_faced": 8
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 677865,
+                "name": "Justin Bruihl",
+                "outs": 4,
+                "innings_pitched": "1.1",
+                "pitches": 23,
+                "batters_faced": 6
+              },
+              {
+                "id": 681676,
+                "name": "Ryan Fernandez",
+                "outs": 0,
+                "innings_pitched": "0.0",
+                "pitches": 17,
+                "batters_faced": 3
+              },
+              {
+                "id": 592773,
+                "name": "Ryne Stanek",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 11,
+                "batters_faced": 4
+              },
+              {
+                "id": 700669,
+                "name": "Gordon Graceffo",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 25,
+                "batters_faced": 7
+              }
+            ],
+            "back_to_back_pitcher_ids": [
+              592773,
+              677865,
+              700669
+            ]
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711561+00:00"
+      "last_updated": "2026-07-15T02:38:35.451535+00:00"
     },
     {
       "id": "2026-07-08-laa-tex",
@@ -9612,12 +12550,227 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 108,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.67,
+                "whip": 1.29,
+                "fip": null,
+                "innings_pitched": "52.0",
+                "games": 6,
+                "wins": 1,
+                "losses": 5,
+                "saves": 0,
+                "save_opportunities": 1,
+                "strikeouts": 58,
+                "walks": 23,
+                "hits": 44,
+                "home_runs": 8,
+                "earned_runs": 27
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.17,
+                "whip": 1.26,
+                "fip": null,
+                "innings_pitched": "239.1",
+                "games": 27,
+                "wins": 12,
+                "losses": 15,
+                "saves": 4,
+                "save_opportunities": 8,
+                "strikeouts": 252,
+                "walks": 98,
+                "hits": 203,
+                "home_runs": 30,
+                "earned_runs": 111
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.61,
+                "whip": 1.42,
+                "fip": null,
+                "innings_pitched": "365.1",
+                "games": 97,
+                "wins": 14,
+                "losses": 22,
+                "saves": 11,
+                "save_opportunities": 28,
+                "strikeouts": 387,
+                "walks": 188,
+                "hits": 332,
+                "home_runs": 49,
+                "earned_runs": 187
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "LAA",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 642048,
+                "name": "Tayler Saucedo",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 26,
+                "batters_faced": 5
+              },
+              {
+                "id": 696147,
+                "name": "Sam Bachman",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 25,
+                "batters_faced": 8
+              },
+              {
+                "id": 608718,
+                "name": "Brent Suter",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 9,
+                "batters_faced": 2
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 140,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 6.11,
+                "whip": 1.43,
+                "fip": null,
+                "innings_pitched": "53.0",
+                "games": 6,
+                "wins": 2,
+                "losses": 4,
+                "saves": 0,
+                "save_opportunities": 0,
+                "strikeouts": 58,
+                "walks": 14,
+                "hits": 62,
+                "home_runs": 9,
+                "earned_runs": 36
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 5.05,
+                "whip": 1.32,
+                "fip": null,
+                "innings_pitched": "239.0",
+                "games": 27,
+                "wins": 14,
+                "losses": 13,
+                "saves": 12,
+                "save_opportunities": 14,
+                "strikeouts": 241,
+                "walks": 62,
+                "hits": 253,
+                "home_runs": 39,
+                "earned_runs": 134
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.0,
+                "whip": 1.29,
+                "fip": null,
+                "innings_pitched": "342.1",
+                "games": 96,
+                "wins": 24,
+                "losses": 10,
+                "saves": 28,
+                "save_opportunities": 39,
+                "strikeouts": 295,
+                "walks": 117,
+                "hits": 323,
+                "home_runs": 42,
+                "earned_runs": 152
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "TEX",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 668390,
+                "name": "Cole Winn",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 8,
+                "batters_faced": 3
+              },
+              {
+                "id": 455119,
+                "name": "Chris Martin",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 18,
+                "batters_faced": 4
+              },
+              {
+                "id": 682608,
+                "name": "Peyton Gray",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 22,
+                "batters_faced": 4
+              },
+              {
+                "id": 641302,
+                "name": "Tyler Alexander",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 22,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711568+00:00"
+      "last_updated": "2026-07-15T02:38:35.451542+00:00"
     },
     {
       "id": "2026-07-08-ari-sd",
@@ -10233,12 +13386,253 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 109,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 4.29,
+                "whip": 1.3,
+                "fip": null,
+                "innings_pitched": "63.0",
+                "games": 7,
+                "wins": 2,
+                "losses": 5,
+                "saves": 1,
+                "save_opportunities": 1,
+                "strikeouts": 51,
+                "walks": 13,
+                "hits": 69,
+                "home_runs": 8,
+                "earned_runs": 30
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.67,
+                "whip": 1.34,
+                "fip": null,
+                "innings_pitched": "235.0",
+                "games": 27,
+                "wins": 11,
+                "losses": 16,
+                "saves": 6,
+                "save_opportunities": 7,
+                "strikeouts": 164,
+                "walks": 71,
+                "hits": 244,
+                "home_runs": 34,
+                "earned_runs": 122
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.0,
+                "whip": 1.19,
+                "fip": null,
+                "innings_pitched": "319.2",
+                "games": 95,
+                "wins": 17,
+                "losses": 16,
+                "saves": 25,
+                "save_opportunities": 35,
+                "strikeouts": 279,
+                "walks": 107,
+                "hits": 275,
+                "home_runs": 34,
+                "earned_runs": 142
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "ARI",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 656464,
+                "name": "Kevin Ginkel",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 7,
+                "batters_faced": 3
+              },
+              {
+                "id": 642528,
+                "name": "Jonathan Lo\u00e1isiga",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 16,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 657044,
+                "name": "Ryan Thompson",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 28,
+                "batters_faced": 8
+              },
+              {
+                "id": 686753,
+                "name": "Drey Jameson",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 27,
+                "batters_faced": 8
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 135,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 7.15,
+                "whip": 1.57,
+                "fip": null,
+                "innings_pitched": "68.0",
+                "games": 8,
+                "wins": 3,
+                "losses": 5,
+                "saves": 2,
+                "save_opportunities": 3,
+                "strikeouts": 57,
+                "walks": 33,
+                "hits": 74,
+                "home_runs": 15,
+                "earned_runs": 54
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.76,
+                "whip": 1.49,
+                "fip": null,
+                "innings_pitched": "245.2",
+                "games": 28,
+                "wins": 13,
+                "losses": 15,
+                "saves": 6,
+                "save_opportunities": 7,
+                "strikeouts": 218,
+                "walks": 111,
+                "hits": 256,
+                "home_runs": 37,
+                "earned_runs": 130
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.68,
+                "whip": 1.27,
+                "fip": null,
+                "innings_pitched": "406.1",
+                "games": 96,
+                "wins": 22,
+                "losses": 17,
+                "saves": 29,
+                "save_opportunities": 40,
+                "strikeouts": 402,
+                "walks": 159,
+                "hits": 359,
+                "home_runs": 44,
+                "earned_runs": 166
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 4,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "SD",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 673513,
+                "name": "Yuki Matsui",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 15,
+                "batters_faced": 3
+              },
+              {
+                "id": 666745,
+                "name": "Jhony Brito",
+                "outs": 5,
+                "innings_pitched": "1.2",
+                "pitches": 17,
+                "batters_faced": 4
+              },
+              {
+                "id": 699134,
+                "name": "Bradgley Rodriguez",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 13,
+                "batters_faced": 3
+              },
+              {
+                "id": 695243,
+                "name": "Mason Miller",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 14,
+                "batters_faced": 3
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 689690,
+                "name": "Alek Jacob",
+                "outs": 9,
+                "innings_pitched": "3.0",
+                "pitches": 42,
+                "batters_faced": 11
+              },
+              {
+                "id": 676760,
+                "name": "Ron Marinaccio",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 23,
+                "batters_faced": 5
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711583+00:00"
+      "last_updated": "2026-07-15T02:38:35.451558+00:00"
     },
     {
       "id": "2026-07-08-col-lad",
@@ -10854,12 +14248,277 @@
       },
       "lineups": {},
       "pitcher_vs_lineup": {},
-      "bullpens": {},
+      "bullpens": {
+        "away": {
+          "team_id": 115,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.73,
+                "whip": 1.34,
+                "fip": null,
+                "innings_pitched": "72.1",
+                "games": 8,
+                "wins": 5,
+                "losses": 3,
+                "saves": 4,
+                "save_opportunities": 5,
+                "strikeouts": 65,
+                "walks": 24,
+                "hits": 73,
+                "home_runs": 9,
+                "earned_runs": 30
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 5.13,
+                "whip": 1.48,
+                "fip": null,
+                "innings_pitched": "247.1",
+                "games": 28,
+                "wins": 14,
+                "losses": 14,
+                "saves": 9,
+                "save_opportunities": 14,
+                "strikeouts": 189,
+                "walks": 86,
+                "hits": 279,
+                "home_runs": 38,
+                "earned_runs": 141
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 4.93,
+                "whip": 1.48,
+                "fip": null,
+                "innings_pitched": "409.0",
+                "games": 98,
+                "wins": 20,
+                "losses": 22,
+                "saves": 23,
+                "save_opportunities": 38,
+                "strikeouts": 358,
+                "walks": 169,
+                "hits": 437,
+                "home_runs": 51,
+                "earned_runs": 224
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 2,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "COL",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 675848,
+                "name": "Juan Mejia",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 24,
+                "batters_faced": 7
+              },
+              {
+                "id": 605447,
+                "name": "Jordan Romano",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 23,
+                "batters_faced": 5
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 688642,
+                "name": "Zach Agnos",
+                "outs": 9,
+                "innings_pitched": "3.0",
+                "pitches": 38,
+                "batters_faced": 10
+              },
+              {
+                "id": 622608,
+                "name": "Antonio Senzatela",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 11,
+                "batters_faced": 5
+              },
+              {
+                "id": 657514,
+                "name": "Brennan Bernardino",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 8,
+                "batters_faced": 3
+              },
+              {
+                "id": 623474,
+                "name": "Jimmy Herget",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 8,
+                "batters_faced": 4
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        },
+        "home": {
+          "team_id": 119,
+          "stats": {
+            "last_7": {
+              "all": {
+                "era": 3.95,
+                "whip": 1.3,
+                "fip": null,
+                "innings_pitched": "73.0",
+                "games": 8,
+                "wins": 5,
+                "losses": 3,
+                "saves": 3,
+                "save_opportunities": 5,
+                "strikeouts": 78,
+                "walks": 31,
+                "hits": 64,
+                "home_runs": 11,
+                "earned_runs": 32
+              },
+              "home": {},
+              "away": {}
+            },
+            "last_30": {
+              "all": {
+                "era": 4.19,
+                "whip": 1.27,
+                "fip": null,
+                "innings_pitched": "249.0",
+                "games": 28,
+                "wins": 19,
+                "losses": 9,
+                "saves": 10,
+                "save_opportunities": 13,
+                "strikeouts": 249,
+                "walks": 99,
+                "hits": 217,
+                "home_runs": 38,
+                "earned_runs": 116
+              },
+              "home": {},
+              "away": {}
+            },
+            "season": {
+              "all": {
+                "era": 3.8,
+                "whip": 1.24,
+                "fip": null,
+                "innings_pitched": "319.2",
+                "games": 97,
+                "wins": 22,
+                "losses": 14,
+                "saves": 25,
+                "save_opportunities": 36,
+                "strikeouts": 340,
+                "walks": 139,
+                "hits": 258,
+                "home_runs": 34,
+                "earned_runs": 135
+              },
+              "home": {},
+              "away": {}
+            }
+          },
+          "used_yesterday": 3,
+          "back_to_back": 0,
+          "fresh_leverage": null,
+          "notes": "",
+          "details_url": "#",
+          "team": "LAD",
+          "usage": {
+            "yesterday_date": "2026-07-07",
+            "two_days_ago_date": "2026-07-06",
+            "used_yesterday": [
+              {
+                "id": 694361,
+                "name": "Will Klein",
+                "outs": 1,
+                "innings_pitched": "0.1",
+                "pitches": 18,
+                "batters_faced": 4
+              },
+              {
+                "id": 676263,
+                "name": "Jack Dreyer",
+                "outs": 2,
+                "innings_pitched": "0.2",
+                "pitches": 2,
+                "batters_faced": 2
+              },
+              {
+                "id": 623465,
+                "name": "Evan Phillips",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 17,
+                "batters_faced": 4
+              }
+            ],
+            "used_two_days_ago": [
+              {
+                "id": 592779,
+                "name": "Brock Stewart",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 13,
+                "batters_faced": 3
+              },
+              {
+                "id": 681911,
+                "name": "Alex Vesia",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 23,
+                "batters_faced": 5
+              },
+              {
+                "id": 656945,
+                "name": "Tanner Scott",
+                "outs": 3,
+                "innings_pitched": "1.0",
+                "pitches": 24,
+                "batters_faced": 7
+              },
+              {
+                "id": 683618,
+                "name": "Edgardo Henriquez",
+                "outs": 6,
+                "innings_pitched": "2.0",
+                "pitches": 28,
+                "batters_faced": 7
+              }
+            ],
+            "back_to_back_pitcher_ids": []
+          }
+        }
+      },
       "weather": {},
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T02:07:54.711576+00:00"
+      "last_updated": "2026-07-15T02:38:35.451551+00:00"
     },
     {
       "id": "2026-07-14-away-home",

@@ -21,6 +21,10 @@ from mlb.offense import (
     build_team_offense_snapshot,
 )
 
+from mlb.bullpen import (
+    build_bullpen_snapshot,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -477,6 +481,114 @@ def enrich_team_offenses(
             )
 
         game["offense"] = offense
+        enriched_games.append(game)
+
+    return enriched_games
+
+
+def enrich_bullpens(
+    games: list[dict[str, Any]],
+    target_date: str,
+) -> list[dict[str, Any]]:
+    """
+    Populate both bullpen modules for every game.
+
+    Each team bullpen is fetched once per run. Existing bullpen
+    data is preserved if the MLB request fails.
+    """
+
+    cache: dict[int, dict[str, Any]] = {}
+    enriched_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        bullpens = dict(
+            game.get("bullpens", {})
+        )
+
+        team_pairs = (
+            (
+                "away",
+                game.get("away_team", {}),
+            ),
+            (
+                "home",
+                game.get("home_team", {}),
+            ),
+        )
+
+        for side, team in team_pairs:
+            team_id = team.get(
+                "team_id"
+            )
+
+            if not team_id:
+                continue
+
+            try:
+                numeric_team_id = int(
+                    team_id
+                )
+            except (
+                TypeError,
+                ValueError,
+            ):
+                print(
+                    f"Skipped invalid bullpen team ID "
+                    f"{team_id!r} for {game.get('id')}."
+                )
+                continue
+
+            if numeric_team_id not in cache:
+                try:
+                    print(
+                        "Fetching bullpen data: "
+                        f"{team.get('abbr', numeric_team_id)}"
+                    )
+
+                    cache[numeric_team_id] = (
+                        build_bullpen_snapshot(
+                            numeric_team_id,
+                            target_date,
+                        )
+                    )
+                except Exception as error:
+                    print(
+                        "Bullpen refresh retained prior data "
+                        f"for {team.get('abbr', numeric_team_id)}: "
+                        f"{error}"
+                    )
+
+                    cache[numeric_team_id] = {}
+
+            snapshot = cache.get(
+                numeric_team_id,
+                {},
+            )
+
+            if not snapshot:
+                continue
+
+            existing_bullpen = dict(
+                bullpens.get(side, {})
+            )
+
+            merged_bullpen = dict(
+                existing_bullpen
+            )
+
+            merged_bullpen.update(
+                snapshot
+            )
+
+            merged_bullpen["team"] = (
+                team.get("abbr")
+            )
+
+            bullpens[side] = merged_bullpen
+
+        game["bullpens"] = bullpens
         enriched_games.append(game)
 
     return enriched_games
@@ -1267,6 +1379,11 @@ def main() -> None:
         target_date,
     )
 
+    merged_games = enrich_bullpens(
+        merged_games,
+        target_date,
+    )
+
     other_dates = [
         game
         for game in current.get(
@@ -1320,7 +1437,7 @@ def main() -> None:
         all_plays,
     )
 
-    current["schema_version"] = "3.3"
+    current["schema_version"] = "3.4"
 
     GAMES_FILE.write_text(
         json.dumps(
