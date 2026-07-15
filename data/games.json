@@ -1,5 +1,5 @@
 {
-  "schema_version": "3.1",
+  "schema_version": "3.2",
   "default_controls": {
     "timeframe": "last_30",
     "location": "all"
@@ -1565,22 +1565,55 @@
           "id": 656302,
           "name": "Dylan Cease",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 30,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=656302",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 0.0,
+                "whip": 0.53,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.083,
+                "innings_pitched": "15.0",
+                "games_started": 2,
+                "strikeouts": 20,
+                "walks": 4,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 1.73,
+                "whip": 0.99,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.144,
+                "innings_pitched": "36.1",
+                "games_started": 6,
+                "strikeouts": 56,
+                "walks": 18,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 2.56,
+                "whip": 1.13,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.19,
+                "innings_pitched": "98.1",
+                "games_started": 17,
+                "strikeouts": 148,
+                "walks": 44,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
@@ -1592,22 +1625,55 @@
           "id": 657277,
           "name": "Logan Webb",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 29,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=657277",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 10.8,
+                "whip": 2.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.34,
+                "innings_pitched": "10.0",
+                "games_started": 2,
+                "strikeouts": 4,
+                "walks": 4,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.29,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.222,
+                "innings_pitched": "41.0",
+                "games_started": 6,
+                "strikeouts": 29,
+                "walks": 7,
+                "home_runs": 4
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.86,
+                "whip": 1.16,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.237,
+                "innings_pitched": "100.1",
+                "games_started": 16,
+                "strikeouts": 80,
+                "walks": 26,
+                "home_runs": 8
+              },
               "home": {},
               "away": {}
             },
@@ -1635,7 +1701,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.704879+00:00"
+      "last_updated": "2026-07-15T01:08:46.298088+00:00"
     },
     {
       "id": "2026-07-08-chc-bal",
@@ -1667,22 +1733,55 @@
           "id": 607067,
           "name": "Colin Rea",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 36,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=607067",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 4.35,
+                "whip": 1.74,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.325,
+                "innings_pitched": "10.1",
+                "games_started": 2,
+                "strikeouts": 7,
+                "walks": 5,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 5.1,
+                "whip": 1.67,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.303,
+                "innings_pitched": "30.0",
+                "games_started": 5,
+                "strikeouts": 18,
+                "walks": 14,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.75,
+                "whip": 1.45,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.273,
+                "innings_pitched": "94.2",
+                "games_started": 15,
+                "strikeouts": 70,
+                "walks": 36,
+                "home_runs": 14
+              },
               "home": {},
               "away": {}
             },
@@ -1694,22 +1793,55 @@
           "id": 665152,
           "name": "Dean Kremer",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 30,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=665152",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 4.09,
+                "whip": 1.09,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.244,
+                "innings_pitched": "11.0",
+                "games_started": 2,
+                "strikeouts": 8,
+                "walks": 2,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 4.09,
+                "whip": 1.09,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.244,
+                "innings_pitched": "11.0",
+                "games_started": 2,
+                "strikeouts": 8,
+                "walks": 2,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.09,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.22,
+                "innings_pitched": "22.0",
+                "games_started": 4,
+                "strikeouts": 24,
+                "walks": 4,
+                "home_runs": 9
+              },
               "home": {},
               "away": {}
             },
@@ -1739,7 +1871,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.704932+00:00"
+      "last_updated": "2026-07-15T01:08:46.298129+00:00"
     },
     {
       "id": "2026-07-08-ath-det",
@@ -1771,22 +1903,55 @@
           "id": 605488,
           "name": "Jeffrey Springs",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 33,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=605488",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 12.46,
+                "whip": 2.31,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.316,
+                "innings_pitched": "4.1",
+                "games_started": 1,
+                "strikeouts": 4,
+                "walks": 4,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 10.41,
+                "whip": 1.88,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.308,
+                "innings_pitched": "27.2",
+                "games_started": 6,
+                "strikeouts": 24,
+                "walks": 16,
+                "home_runs": 12
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 6.08,
+                "whip": 1.42,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.264,
+                "innings_pitched": "97.2",
+                "games_started": 19,
+                "strikeouts": 84,
+                "walks": 37,
+                "home_runs": 26
+              },
               "home": {},
               "away": {}
             },
@@ -1798,22 +1963,55 @@
           "id": 675512,
           "name": "Troy Melton",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 25,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=675512",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 0.0,
+                "whip": 0.69,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.143,
+                "innings_pitched": "11.2",
+                "games_started": 2,
+                "strikeouts": 16,
+                "walks": 2,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 1.88,
+                "whip": 0.77,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.165,
+                "innings_pitched": "28.2",
+                "games_started": 5,
+                "strikeouts": 32,
+                "walks": 5,
+                "home_runs": 6
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 1.82,
+                "whip": 0.81,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.166,
+                "innings_pitched": "49.1",
+                "games_started": 8,
+                "strikeouts": 41,
+                "walks": 11,
+                "home_runs": 7
+              },
               "home": {},
               "away": {}
             },
@@ -1843,7 +2041,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.704953+00:00"
+      "last_updated": "2026-07-15T01:08:46.298150+00:00"
     },
     {
       "id": "2026-07-08-atl-pit",
@@ -1875,22 +2073,55 @@
           "id": 656550,
           "name": "Grant Holmes",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 30,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=656550",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 0.9,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.205,
+                "innings_pitched": "10.0",
+                "games_started": 2,
+                "strikeouts": 7,
+                "walks": 2,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 2.96,
+                "whip": 1.32,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.22,
+                "innings_pitched": "24.1",
+                "games_started": 5,
+                "strikeouts": 19,
+                "walks": 12,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.61,
+                "whip": 1.32,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.23,
+                "innings_pitched": "87.1",
+                "games_started": 17,
+                "strikeouts": 76,
+                "walks": 39,
+                "home_runs": 15
+              },
               "home": {},
               "away": {}
             },
@@ -1902,22 +2133,55 @@
           "id": 683003,
           "name": "Jared Jones",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 24,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=683003",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 0.9,
+                "whip": 0.4,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.063,
+                "innings_pitched": "10.0",
+                "games_started": 2,
+                "strikeouts": 14,
+                "walks": 2,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 4.21,
+                "whip": 0.97,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.191,
+                "innings_pitched": "25.2",
+                "games_started": 6,
+                "strikeouts": 29,
+                "walks": 7,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.37,
+                "whip": 1.14,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.22,
+                "innings_pitched": "35.0",
+                "games_started": 8,
+                "strikeouts": 39,
+                "walks": 11,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
@@ -1947,7 +2211,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.704978+00:00"
+      "last_updated": "2026-07-15T01:08:46.298204+00:00"
     },
     {
       "id": "2026-07-08-nyy-tb",
@@ -1979,22 +2243,55 @@
           "id": 543037,
           "name": "Gerrit Cole",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 35,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=543037",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.97,
+                "whip": 1.15,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.261,
+                "innings_pitched": "11.1",
+                "games_started": 2,
+                "strikeouts": 13,
+                "walks": 1,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 5.23,
+                "whip": 1.39,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.279,
+                "innings_pitched": "31.0",
+                "games_started": 6,
+                "strikeouts": 33,
+                "walks": 7,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.04,
+                "whip": 1.2,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.249,
+                "innings_pitched": "49.0",
+                "games_started": 9,
+                "strikeouts": 47,
+                "walks": 11,
+                "home_runs": 8
+              },
               "home": {},
               "away": {}
             },
@@ -2006,22 +2303,55 @@
           "id": 663556,
           "name": "Shane McClanahan",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 29,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=663556",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 0.0,
+                "whip": 0.57,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.167,
+                "innings_pitched": "12.1",
+                "games_started": 2,
+                "strikeouts": 9,
+                "walks": 0,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 2.77,
+                "whip": 1.19,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.242,
+                "innings_pitched": "26.0",
+                "games_started": 5,
+                "strikeouts": 23,
+                "walks": 7,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 2.83,
+                "whip": 1.13,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.214,
+                "innings_pitched": "86.0",
+                "games_started": 17,
+                "strikeouts": 82,
+                "walks": 28,
+                "home_runs": 6
+              },
               "home": {},
               "away": {}
             },
@@ -2049,7 +2379,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705015+00:00"
+      "last_updated": "2026-07-15T01:08:46.298240+00:00"
     },
     {
       "id": "2026-07-08-sea-mia",
@@ -2081,22 +2411,55 @@
           "id": 669923,
           "name": "George Kirby",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 28,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=669923",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.0,
+                "whip": 1.33,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.333,
+                "innings_pitched": "6.0",
+                "games_started": 1,
+                "strikeouts": 7,
+                "walks": 0,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.09,
+                "whip": 1.41,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.307,
+                "innings_pitched": "32.0",
+                "games_started": 5,
+                "strikeouts": 34,
+                "walks": 6,
+                "home_runs": 4
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.76,
+                "whip": 1.32,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.282,
+                "innings_pitched": "110.0",
+                "games_started": 18,
+                "strikeouts": 98,
+                "walks": 24,
+                "home_runs": 11
+              },
               "home": {},
               "away": {}
             },
@@ -2108,22 +2471,55 @@
           "id": 663969,
           "name": "Tyler Phillips",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 28,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=663969",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 5.4,
+                "whip": 1.8,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.324,
+                "innings_pitched": "8.1",
+                "games_started": 2,
+                "strikeouts": 5,
+                "walks": 4,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 4.99,
+                "whip": 1.37,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.259,
+                "innings_pitched": "30.2",
+                "games_started": 6,
+                "strikeouts": 19,
+                "walks": 12,
+                "home_runs": 6
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.48,
+                "whip": 1.39,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.242,
+                "innings_pitched": "75.0",
+                "games_started": 9,
+                "strikeouts": 56,
+                "walks": 35,
+                "home_runs": 8
+              },
               "home": {},
               "away": {}
             },
@@ -2151,7 +2547,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.704997+00:00"
+      "last_updated": "2026-07-15T01:08:46.298223+00:00"
     },
     {
       "id": "2026-07-08-hou-wsh",
@@ -2183,22 +2579,55 @@
           "id": 681293,
           "name": "Spencer Arrighetti",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 26,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=681293",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 8.1,
+                "whip": 1.6,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.25,
+                "innings_pitched": "10.0",
+                "games_started": 2,
+                "strikeouts": 6,
+                "walks": 7,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 8.71,
+                "whip": 1.58,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.271,
+                "innings_pitched": "31.0",
+                "games_started": 6,
+                "strikeouts": 35,
+                "walks": 17,
+                "home_runs": 9
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.5,
+                "whip": 1.33,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.219,
+                "innings_pitched": "82.0",
+                "games_started": 15,
+                "strikeouts": 81,
+                "walks": 44,
+                "home_runs": 12
+              },
               "home": {},
               "away": {}
             },
@@ -2210,22 +2639,55 @@
           "id": 656492,
           "name": "Foster Griffin",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 30,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=656492",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 1.5,
+                "whip": 0.83,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.205,
+                "innings_pitched": "12.0",
+                "games_started": 2,
+                "strikeouts": 11,
+                "walks": 1,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 1.17,
+                "whip": 0.86,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.197,
+                "innings_pitched": "38.1",
+                "games_started": 6,
+                "strikeouts": 40,
+                "walks": 5,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 2.77,
+                "whip": 1.02,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.21,
+                "innings_pitched": "110.1",
+                "games_started": 19,
+                "strikeouts": 109,
+                "walks": 26,
+                "home_runs": 17
+              },
               "home": {},
               "away": {}
             },
@@ -2255,7 +2717,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705040+00:00"
+      "last_updated": "2026-07-15T01:08:46.298256+00:00"
     },
     {
       "id": "2026-07-08-kc-nym",
@@ -2287,22 +2749,55 @@
           "id": 674444,
           "name": "Steven Cruz",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 27,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=674444",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.0,
+                "whip": 1.67,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.273,
+                "innings_pitched": "3.0",
+                "games_started": 1,
+                "strikeouts": 4,
+                "walks": 2,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 2.57,
+                "whip": 1.07,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.2,
+                "innings_pitched": "14.0",
+                "games_started": 2,
+                "strikeouts": 17,
+                "walks": 5,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.88,
+                "whip": 1.34,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.224,
+                "innings_pitched": "31.1",
+                "games_started": 2,
+                "strikeouts": 40,
+                "walks": 16,
+                "home_runs": 9
+              },
               "home": {},
               "away": {}
             },
@@ -2314,22 +2809,55 @@
           "id": 681035,
           "name": "Christian Scott",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 27,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=681035",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.0,
+                "whip": 1.11,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.156,
+                "innings_pitched": "9.0",
+                "games_started": 2,
+                "strikeouts": 12,
+                "walks": 5,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 4.5,
+                "whip": 1.28,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.217,
+                "innings_pitched": "18.0",
+                "games_started": 4,
+                "strikeouts": 24,
+                "walks": 8,
+                "home_runs": 6
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.17,
+                "whip": 1.3,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.218,
+                "innings_pitched": "54.0",
+                "games_started": 12,
+                "strikeouts": 65,
+                "walks": 26,
+                "home_runs": 7
+              },
               "home": {},
               "away": {}
             },
@@ -2360,7 +2888,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705059+00:00"
+      "last_updated": "2026-07-15T01:08:46.298272+00:00"
     },
     {
       "id": "2026-07-08-phi-cin",
@@ -2392,22 +2920,55 @@
           "id": 660604,
           "name": "Alan Rangel",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 28,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=660604",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.68,
+                "whip": 1.77,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.222,
+                "innings_pitched": "7.1",
+                "games_started": 2,
+                "strikeouts": 9,
+                "walks": 7,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 4.41,
+                "whip": 1.47,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.238,
+                "innings_pitched": "16.1",
+                "games_started": 2,
+                "strikeouts": 17,
+                "walks": 9,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.19,
+                "whip": 1.4,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.24,
+                "innings_pitched": "19.1",
+                "games_started": 2,
+                "strikeouts": 22,
+                "walks": 9,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
@@ -2419,22 +2980,55 @@
           "id": 695505,
           "name": "Chase Burns",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 23,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=695505",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 4.09,
+                "whip": 1.36,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.189,
+                "innings_pitched": "11.0",
+                "games_started": 2,
+                "strikeouts": 6,
+                "walks": 8,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.62,
+                "whip": 1.45,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.252,
+                "innings_pitched": "32.1",
+                "games_started": 6,
+                "strikeouts": 37,
+                "walks": 16,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 2.54,
+                "whip": 1.11,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.206,
+                "innings_pitched": "102.2",
+                "games_started": 18,
+                "strikeouts": 118,
+                "walks": 37,
+                "home_runs": 12
+              },
               "home": {},
               "away": {}
             },
@@ -2462,7 +3056,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705077+00:00"
+      "last_updated": "2026-07-15T01:08:46.298301+00:00"
     },
     {
       "id": "2026-07-08-bos-cws",
@@ -2494,22 +3088,55 @@
           "id": 687562,
           "name": "Jake Bennett",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 25,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=687562",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 1.23,
+                "whip": 0.68,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.173,
+                "innings_pitched": "14.2",
+                "games_started": 2,
+                "strikeouts": 10,
+                "walks": 1,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 2.17,
+                "whip": 0.8,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.197,
+                "innings_pitched": "37.1",
+                "games_started": 6,
+                "strikeouts": 31,
+                "walks": 4,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 2.64,
+                "whip": 0.94,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.219,
+                "innings_pitched": "47.2",
+                "games_started": 8,
+                "strikeouts": 35,
+                "walks": 8,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
@@ -2521,22 +3148,55 @@
           "id": 663436,
           "name": "Davis Martin",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 29,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=663436",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 8.59,
+                "whip": 2.59,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.387,
+                "innings_pitched": "7.1",
+                "games_started": 2,
+                "strikeouts": 2,
+                "walks": 7,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 5.46,
+                "whip": 1.75,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.313,
+                "innings_pitched": "28.0",
+                "games_started": 6,
+                "strikeouts": 19,
+                "walks": 14,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.41,
+                "whip": 1.29,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.259,
+                "innings_pitched": "100.1",
+                "games_started": 18,
+                "strikeouts": 92,
+                "walks": 31,
+                "home_runs": 6
+              },
               "home": {},
               "away": {}
             },
@@ -2564,7 +3224,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705113+00:00"
+      "last_updated": "2026-07-15T01:08:46.298419+00:00"
     },
     {
       "id": "2026-07-08-cle-min",
@@ -2596,22 +3256,55 @@
           "id": 677944,
           "name": "Slade Cecconi",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 27,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=677944",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 8.31,
+                "whip": 1.96,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.385,
+                "innings_pitched": "8.2",
+                "games_started": 2,
+                "strikeouts": 7,
+                "walks": 2,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.73,
+                "whip": 1.37,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.266,
+                "innings_pitched": "31.1",
+                "games_started": 6,
+                "strikeouts": 23,
+                "walks": 10,
+                "home_runs": 4
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.55,
+                "whip": 1.41,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.281,
+                "innings_pitched": "99.0",
+                "games_started": 19,
+                "strikeouts": 77,
+                "walks": 31,
+                "home_runs": 13
+              },
               "home": {},
               "away": {}
             },
@@ -2623,22 +3316,55 @@
           "id": 687570,
           "name": "Connor Prielipp",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 25,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=687570",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 5.4,
+                "whip": 1.2,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.211,
+                "innings_pitched": "5.0",
+                "games_started": 1,
+                "strikeouts": 6,
+                "walks": 2,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 4.7,
+                "whip": 1.43,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.286,
+                "innings_pitched": "23.0",
+                "games_started": 4,
+                "strikeouts": 22,
+                "walks": 7,
+                "home_runs": 4
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 5.0,
+                "whip": 1.37,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.258,
+                "innings_pitched": "66.2",
+                "games_started": 13,
+                "strikeouts": 71,
+                "walks": 25,
+                "home_runs": 8
+              },
               "home": {},
               "away": {}
             },
@@ -2666,7 +3392,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705095+00:00"
+      "last_updated": "2026-07-15T01:08:46.298331+00:00"
     },
     {
       "id": "2026-07-08-mil-stl",
@@ -2698,22 +3424,55 @@
           "id": 690986,
           "name": "Kyle Harrison",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 24,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=690986",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 8.1,
+                "whip": 1.5,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.29,
+                "innings_pitched": "6.2",
+                "games_started": 2,
+                "strikeouts": 5,
+                "walks": 1,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 6.15,
+                "whip": 1.18,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.252,
+                "innings_pitched": "26.1",
+                "games_started": 6,
+                "strikeouts": 28,
+                "walks": 4,
+                "home_runs": 6
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.01,
+                "whip": 1.08,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.221,
+                "innings_pitched": "83.2",
+                "games_started": 17,
+                "strikeouts": 101,
+                "walks": 20,
+                "home_runs": 10
+              },
               "home": {},
               "away": {}
             },
@@ -2725,22 +3484,55 @@
           "id": 700241,
           "name": "Michael McGreevy",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 26,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=700241",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 2.19,
+                "whip": 0.81,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.182,
+                "innings_pitched": "12.1",
+                "games_started": 2,
+                "strikeouts": 9,
+                "walks": 2,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.07,
+                "whip": 1.16,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.255,
+                "innings_pitched": "29.1",
+                "games_started": 5,
+                "strikeouts": 17,
+                "walks": 6,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.01,
+                "whip": 1.1,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.235,
+                "innings_pitched": "101.2",
+                "games_started": 18,
+                "strikeouts": 66,
+                "walks": 23,
+                "home_runs": 13
+              },
               "home": {},
               "away": {}
             },
@@ -2768,7 +3560,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705132+00:00"
+      "last_updated": "2026-07-15T01:08:46.298439+00:00"
     },
     {
       "id": "2026-07-08-laa-tex",
@@ -2800,22 +3592,55 @@
           "id": 700712,
           "name": "Walbert Ure\u00f1a",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 22,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=700712",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 0.93,
+                "whip": 1.14,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.067,
+                "innings_pitched": "9.2",
+                "games_started": 2,
+                "strikeouts": 9,
+                "walks": 9,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.19,
+                "whip": 1.29,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.195,
+                "innings_pitched": "31.0",
+                "games_started": 6,
+                "strikeouts": 30,
+                "walks": 18,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 2.88,
+                "whip": 1.32,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.204,
+                "innings_pitched": "81.1",
+                "games_started": 15,
+                "strikeouts": 78,
+                "walks": 46,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
@@ -2827,22 +3652,55 @@
           "id": 669022,
           "name": "MacKenzie Gore",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 27,
+          "throws": "L",
+          "profile_url": "pitcher.html?id=669022",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 10.8,
+                "whip": 1.8,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.348,
+                "innings_pitched": "10.0",
+                "games_started": 2,
+                "strikeouts": 14,
+                "walks": 2,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 5.66,
+                "whip": 1.34,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.268,
+                "innings_pitched": "35.0",
+                "games_started": 6,
+                "strikeouts": 41,
+                "walks": 10,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 4.63,
+                "whip": 1.29,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.234,
+                "innings_pitched": "105.0",
+                "games_started": 20,
+                "strikeouts": 115,
+                "walks": 41,
+                "home_runs": 12
+              },
               "home": {},
               "away": {}
             },
@@ -2870,7 +3728,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705155+00:00"
+      "last_updated": "2026-07-15T01:08:46.298461+00:00"
     },
     {
       "id": "2026-07-08-ari-sd",
@@ -2902,22 +3760,55 @@
           "id": 703615,
           "name": "Jose Cabrera",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 24,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=703615",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 8.22,
+                "whip": 1.96,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.294,
+                "innings_pitched": "7.2",
+                "games_started": 2,
+                "strikeouts": 5,
+                "walks": 5,
+                "home_runs": 1
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 5.6,
+                "whip": 1.53,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.278,
+                "innings_pitched": "17.2",
+                "games_started": 4,
+                "strikeouts": 12,
+                "walks": 7,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 5.6,
+                "whip": 1.53,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.278,
+                "innings_pitched": "17.2",
+                "games_started": 4,
+                "strikeouts": 12,
+                "walks": 7,
+                "home_runs": 3
+              },
               "home": {},
               "away": {}
             },
@@ -2929,22 +3820,55 @@
           "id": 650633,
           "name": "Michael King",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 31,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=650633",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 2.25,
+                "whip": 0.92,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.167,
+                "innings_pitched": "12.0",
+                "games_started": 2,
+                "strikeouts": 9,
+                "walks": 4,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.41,
+                "whip": 1.22,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.219,
+                "innings_pitched": "34.1",
+                "games_started": 6,
+                "strikeouts": 23,
+                "walks": 14,
+                "home_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.41,
+                "whip": 1.15,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.211,
+                "innings_pitched": "108.1",
+                "games_started": 19,
+                "strikeouts": 92,
+                "walks": 43,
+                "home_runs": 10
+              },
               "home": {},
               "away": {}
             },
@@ -2972,7 +3896,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705192+00:00"
+      "last_updated": "2026-07-15T01:08:46.298534+00:00"
     },
     {
       "id": "2026-07-08-col-lad",
@@ -3004,22 +3928,55 @@
           "id": 687312,
           "name": "Gabriel Hughes",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 24,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=687312",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.0,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.188,
+                "innings_pitched": "9.0",
+                "games_started": 1,
+                "strikeouts": 8,
+                "walks": 3,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 3.0,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.188,
+                "innings_pitched": "9.0",
+                "games_started": 1,
+                "strikeouts": 8,
+                "walks": 3,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 3.0,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.188,
+                "innings_pitched": "9.0",
+                "games_started": 1,
+                "strikeouts": 8,
+                "walks": 3,
+                "home_runs": 0
+              },
               "home": {},
               "away": {}
             },
@@ -3031,22 +3988,55 @@
           "id": 808963,
           "name": "Roki Sasaki",
           "status": "probable",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "age": 24,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=808963",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 9.0,
+                "whip": 1.56,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.297,
+                "innings_pitched": "9.0",
+                "games_started": 2,
+                "strikeouts": 8,
+                "walks": 3,
+                "home_runs": 5
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 8.61,
+                "whip": 1.61,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.275,
+                "innings_pitched": "23.0",
+                "games_started": 5,
+                "strikeouts": 20,
+                "walks": 12,
+                "home_runs": 9
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
+              "all": {
+                "era": 5.33,
+                "whip": 1.36,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.247,
+                "innings_pitched": "81.0",
+                "games_started": 16,
+                "strikeouts": 80,
+                "walks": 33,
+                "home_runs": 19
+              },
               "home": {},
               "away": {}
             },
@@ -3074,7 +4064,7 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-14T23:56:41.705174+00:00"
+      "last_updated": "2026-07-15T01:08:46.298515+00:00"
     },
     {
       "id": "2026-07-14-away-home",

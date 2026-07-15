@@ -13,6 +13,10 @@ from mlb.schedule import (
     parse_schedule,
 )
 
+from mlb.pitchers import (
+    build_pitcher_snapshot,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -52,7 +56,7 @@ def load_games_file() -> dict[str, Any]:
     return load_json_file(
         GAMES_FILE,
         {
-            "schema_version": "3.1",
+            "schema_version": "3.2",
             "default_controls": {
                 "timeframe": "last_30",
                 "location": "all",
@@ -228,6 +232,109 @@ def merge_pitcher(
     )
 
     return pitcher
+
+
+def enrich_probable_pitchers(
+    games: list[dict[str, Any]],
+    target_date: str,
+) -> list[dict[str, Any]]:
+    """
+    Populate probable starters with MLB API profile and stats.
+
+    Each pitcher is fetched once per run. If one request fails,
+    the existing pitcher record is preserved and the rest of
+    the slate continues updating.
+    """
+
+    cache: dict[int, dict[str, Any]] = {}
+    enriched_games = []
+
+    for stored_game in games:
+        game = dict(stored_game)
+
+        pitchers = dict(
+            game.get("pitchers", {})
+        )
+
+        for side in ("away", "home"):
+            existing_pitcher = dict(
+                pitchers.get(side, {})
+            )
+
+            pitcher_id = existing_pitcher.get(
+                "id"
+            )
+
+            if not pitcher_id:
+                continue
+
+            try:
+                numeric_pitcher_id = int(
+                    pitcher_id
+                )
+            except (
+                TypeError,
+                ValueError,
+            ):
+                print(
+                    f"Skipped invalid pitcher ID "
+                    f"{pitcher_id!r} for {game.get('id')}."
+                )
+                continue
+
+            if numeric_pitcher_id not in cache:
+                try:
+                    print(
+                        "Fetching pitcher data: "
+                        f"{existing_pitcher.get('name', 'Starter')} "
+                        f"({numeric_pitcher_id})"
+                    )
+
+                    cache[numeric_pitcher_id] = (
+                        build_pitcher_snapshot(
+                            numeric_pitcher_id,
+                            target_date,
+                        )
+                    )
+                except Exception as error:
+                    print(
+                        "Pitcher refresh retained prior data "
+                        f"for {existing_pitcher.get('name', 'Starter')}: "
+                        f"{error}"
+                    )
+
+                    cache[numeric_pitcher_id] = {}
+
+            snapshot = cache.get(
+                numeric_pitcher_id,
+                {},
+            )
+
+            if not snapshot:
+                continue
+
+            merged_pitcher = dict(
+                existing_pitcher
+            )
+
+            merged_pitcher.update(
+                snapshot
+            )
+
+            if (
+                existing_pitcher.get("status")
+                == "confirmed"
+            ):
+                merged_pitcher["status"] = (
+                    "confirmed"
+                )
+
+            pitchers[side] = merged_pitcher
+
+        game["pitchers"] = pitchers
+        enriched_games.append(game)
+
+    return enriched_games
 
 
 def migrate_existing_games(
@@ -850,7 +957,6 @@ def merge_results_archive(
     return results
 
 
-
 def load_evaluations_archive() -> dict[str, Any]:
     return load_json_file(
         EVALUATIONS_FILE,
@@ -962,6 +1068,7 @@ def merge_evaluations_archive(
 
     return evaluations
 
+
 def main() -> None:
     target_date = (
         sys.argv[1]
@@ -1005,6 +1112,11 @@ def main() -> None:
                 schedule_game,
             )
         )
+
+    merged_games = enrich_probable_pitchers(
+        merged_games,
+        target_date,
+    )
 
     other_dates = [
         game
@@ -1059,7 +1171,7 @@ def main() -> None:
         all_plays,
     )
 
-    current["schema_version"] = "3.1"
+    current["schema_version"] = "3.2"
 
     GAMES_FILE.write_text(
         json.dumps(
@@ -1112,7 +1224,6 @@ def main() -> None:
         ) + "\n",
         encoding="utf-8",
     )
-
 
     evaluations_archive = load_evaluations_archive()
 
