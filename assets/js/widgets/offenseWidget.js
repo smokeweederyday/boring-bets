@@ -158,7 +158,7 @@ function renderRankCell(rank) {
 
   const displayRank =
     Number.isFinite(numericRank)
-      ? `#${numericRank}`
+      ? `${numericRank}`
       : "—";
 
   return `

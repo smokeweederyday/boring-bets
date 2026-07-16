@@ -15,10 +15,14 @@ from mlb.schedule import (
 
 from mlb.pitchers import (
     build_pitcher_snapshot,
+    build_league_pitcher_cache,
+    apply_league_pitcher_cache,
 )
 
 from mlb.offense import (
     build_team_offense_snapshot,
+    build_league_offense_cache,
+    apply_league_offense_cache,
 )
 
 from mlb.bullpen import (
@@ -39,6 +43,10 @@ from mlb.market import (
 
 from mlb.context import (
     build_context_snapshot,
+)
+
+from mlb.intelligence import (
+    enrich_games as enrich_intelligence,
 )
 
 
@@ -374,10 +382,10 @@ def enrich_team_offenses(
     offense data is preserved if a request fails.
     """
 
-    cache: dict[
-        tuple[int, str | None],
-        dict[str, Any],
-    ] = {}
+    cache: dict[tuple[int, str | None], dict[str, Any]] = {}
+
+    print("Fetching 30-team offense rank matrix for all filters...")
+    league_cache = build_league_offense_cache(target_date)
 
     enriched_games = []
 
@@ -453,10 +461,13 @@ def enrich_team_offenses(
                     )
 
                     cache[cache_key] = (
-                        build_team_offense_snapshot(
-                            numeric_team_id,
-                            opponent_throws,
-                            target_date,
+                        apply_league_offense_cache(
+                            build_team_offense_snapshot(
+                                numeric_team_id,
+                                opponent_throws,
+                                target_date,
+                            ),
+                            league_cache,
                         )
                     )
                 except Exception as error:
@@ -1922,6 +1933,10 @@ def main() -> None:
         target_date,
     )
 
+    print("Building league-wide pitcher rank matrix...")
+    pitcher_rank_cache = build_league_pitcher_cache(target_date)
+    merged_games = apply_league_pitcher_cache(merged_games, pitcher_rank_cache)
+
     merged_games = enrich_team_offenses(
         merged_games,
         target_date,
@@ -1947,6 +1962,9 @@ def main() -> None:
     merged_games = enrich_context(
         merged_games,
     )
+
+    print("Building MLB Intelligence Engine ranks and advanced metrics...")
+    merged_games = enrich_intelligence(merged_games)
 
     other_dates = [
         game

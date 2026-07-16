@@ -1,0 +1,45 @@
+/* MLB Intelligence Engine Phase 6: pitcher table layout */
+.pitcher-lineup-context {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin: 0.75rem 0 0.9rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgba(80, 255, 180, 0.22);
+  border-radius: 10px;
+  background: rgba(4, 18, 15, 0.72);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+.pitcher-lineup-context strong { color: var(--green, #44ff9a); }
+.pitcher-lineup-context span { color: var(--muted, #a9b6b0); }
+.pitcher-rank-table .pitcher-group-heading th { text-align: center; }
+.pitcher-rank-table .rank-column-heading,
+.pitcher-rank-table .pitcher-rank-cell {
+  width: 3.5rem;
+  min-width: 3.5rem;
+  text-align: center;
+}
+.pitcher-rank-table .pitcher-stat-cell {
+  min-width: 5.25rem;
+  text-align: center;
+}
+.pitcher-rank-table .metric-rank-number {
+  display: inline-flex;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  cursor: help;
+}
+@media (max-width: 760px) {
+  .pitcher-lineup-context {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

@@ -1,6 +1,6 @@
 import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js";
+} from "./assets/js/widgets/offenseWidget.js?v=phase7a";
 
 import {
   renderPitcherWidget
@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js";
+} from "./assets/js/sports/mlbEngine.js?v=phase7a";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";

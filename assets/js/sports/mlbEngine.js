@@ -1,6 +1,6 @@
 import { getRankHeatClass } from "../engine/colorEngine.js";
 
-const MLB_OFFENSE_METRICS = ["AVG", "wRC+", "K%", "BB%", "OBP", "OPS"];
+const MLB_OFFENSE_METRICS = ["AVG", "OBP", "SLG", "OPS", "wRC+", "BB%", "K%"];
 
 const MLB_PITCHER_METRICS = [
   { key: "era", label: "ERA", type: "number" },
@@ -31,11 +31,14 @@ export function buildMlbOffenseModule({
   const period = offense?.stats?.[timeframe] || {};
   const selectedLocationData = period?.[location];
 
+  // Never display All data under a Home or Away label. If the backend has
+  // no selected-location block, show unavailable data so failures are honest.
   const selectedLocation =
-    selectedLocationData &&
-    Object.keys(selectedLocationData).length
+    selectedLocationData && Object.keys(selectedLocationData).length
       ? selectedLocationData
-      : period?.all || {};
+      : location === "all"
+        ? period?.all || {}
+        : {};
 
   return {
     title: `${team?.abbr || offense?.team || "TEAM"} OFFENSE`,
@@ -70,23 +73,34 @@ export function buildMlbPitcherModule({
   const isAway = side === "away";
   const team = isAway ? game.away_team : game.home_team;
   const pitcher = isAway ? game.pitchers?.away : game.pitchers?.home;
+  const opposingLineup = isAway ? game.lineups?.home : game.lineups?.away;
   const safePitcher = pitcher || createUnknownPitcher();
 
-  const timeframeStats = safePitcher.stats?.[timeframe] || {};
-  const selectedAll = timeframeStats.all || {};
-  const seasonAll = safePitcher.stats?.season?.all || {};
-  const matchupLocation = isAway ? "away" : "home";
-  const selectedLocationKey = location === "all" ? matchupLocation : location;
-  const locationStats = timeframeStats?.[selectedLocationKey];
+  // Season is a stable baseline. It changes only with All/Home/Away.
+  const season = selectPitcherLocationBlock(
+    safePitcher.stats?.season,
+    location
+  );
 
-  const selectedLocation =
-    locationStats &&
-    Object.keys(locationStats).length
-      ? locationStats
-      : selectedAll;
+  // Selected responds to both timeframe and location.
+  const selected = selectPitcherLocationBlock(
+    safePitcher.stats?.[timeframe],
+    location
+  );
 
-  const vsLeft = safePitcher.stats?.vs_lhh || {};
-  const vsRight = safePitcher.stats?.vs_rhh || {};
+  const vsLeft = resolvePitcherSplitBlock(
+    safePitcher, timeframe, location, "vs_lhh"
+  );
+  const vsRight = resolvePitcherSplitBlock(
+    safePitcher, timeframe, location, "vs_rhh"
+  );
+  const lineupMix = summarizeLineupHandedness(
+    opposingLineup,
+    safePitcher.throws
+  );
+
+  const selectedContext = `${formatTimeframeShort(timeframe)} · ${formatLocationLabel(location)}`;
+  const seasonContext = `Season · ${formatLocationLabel(location)}`;
 
   return {
     name: safePitcher.name || "Starter TBD",
@@ -95,23 +109,103 @@ export function buildMlbPitcherModule({
     handLabel: safePitcher.throws ? `${safePitcher.throws}HP` : "Throws —",
     statusLabel: formatPitcherStatus(safePitcher.status),
     detailsUrl: safePitcher.profile_url || "#",
+    contextLabel: selectedContext,
+    lineupStatusLabel: lineupMix.statusLabel,
+    lineupStatusClass: lineupMix.statusClass,
+    lineupHandednessLabel: lineupMix.label,
     columns: [
-      { label: formatTimeframeShort(timeframe) },
       { label: "Season" },
-      { label: formatLocationLabel(selectedLocationKey) },
+      { label: "Selected" },
       { label: "vs LHH" },
       { label: "vs RHH" }
     ],
     metrics: MLB_PITCHER_METRICS.map(metric => ({
       label: metric.label,
       values: [
-        normalizePitcherValue(selectedAll?.[metric.key], metric.type),
-        normalizePitcherValue(seasonAll?.[metric.key], metric.type),
-        normalizePitcherValue(selectedLocation?.[metric.key], metric.type),
-        normalizePitcherValue(vsLeft?.[metric.key], metric.type),
-        normalizePitcherValue(vsRight?.[metric.key], metric.type)
+        normalizeRankedPitcherValue(season, metric.key, metric.type, seasonContext),
+        normalizeRankedPitcherValue(selected, metric.key, metric.type, selectedContext),
+        normalizeRankedPitcherValue(
+          vsLeft, metric.key, metric.type,
+          `${vsLeft?._contextFallback || selectedContext} · vs LHH`
+        ),
+        normalizeRankedPitcherValue(
+          vsRight, metric.key, metric.type,
+          `${vsRight?._contextFallback || selectedContext} · vs RHH`
+        )
       ]
     }))
+  };
+}
+
+function resolvePitcherSplitBlock(pitcher, timeframe, location, splitKey) {
+  const exact = pitcher?.stats?.[timeframe]?.[location]?.[splitKey];
+  if (exact && Object.keys(exact).length) return exact;
+
+  // The MLB feed occasionally omits recent all-location handedness rows even
+  // when it supplies the season split. Preserve a useful split instead of
+  // blanking the column, but tag it honestly for hover context.
+  if (location === "all") {
+    const seasonFallback = pitcher?.stats?.season?.all?.[splitKey]
+      || pitcher?.stats?.[splitKey];
+    if (seasonFallback && Object.keys(seasonFallback).length) {
+      return { ...seasonFallback, _contextFallback: "Season · All" };
+    }
+  }
+
+  return {};
+}
+
+function selectPitcherLocationBlock(period, location) {
+  if (!period) return {};
+  const requested = period?.[location];
+  if (requested && Object.keys(requested).length) return requested;
+  // Do not silently substitute all-location data for Home/Away. A missing
+  // location must stay missing so the page never mislabels the comparison.
+  return location === "all" ? (period?.all || {}) : {};
+}
+
+function summarizeLineupHandedness(lineup, pitcherThrows) {
+  const players = Array.isArray(lineup?.players) ? lineup.players.slice(0, 9) : [];
+  const status = lineup?.status === "confirmed" ? "confirmed" : "projected";
+  const statusLabel = status === "confirmed" ? "Confirmed lineup" : "Projected lineup";
+
+  let left = 0;
+  let right = 0;
+  let unknown = 0;
+
+  players.forEach(player => {
+    const bats = String(player?.bats || "").toUpperCase();
+    if (bats === "L") left += 1;
+    else if (bats === "R") right += 1;
+    else if (bats === "S") {
+      // Switch hitters are counted by the side they are expected to use in
+      // this matchup.
+      if (pitcherThrows === "R") left += 1;
+      else if (pitcherThrows === "L") right += 1;
+      else unknown += 1;
+    } else unknown += 1;
+  });
+
+  const pieces = [`${left} LHH`, `${right} RHH`];
+  if (unknown) pieces.push(`${unknown} unknown`);
+
+  return {
+    statusLabel,
+    statusClass: status === "confirmed" ? "lineup-status-confirmed" : "lineup-status-projected",
+    label: players.length ? pieces.join(" · ") : "LHH/RHH unavailable"
+  };
+}
+
+function normalizeRankedPitcherValue(block, key, type, contextLabel = "") {
+  const value = normalizePitcherValue(block?.[key], type);
+  const rank = block?.ranks?.[key] ?? null;
+  const poolSize = block?.rank_pool_size?.[key] ?? null;
+  return {
+    ...value,
+    rank,
+    poolSize,
+    contextLabel,
+    heatClass: getRankHeatClass(rank, poolSize || 30)
   };
 }
 
@@ -332,7 +426,7 @@ export function buildMlbLineupModule({ game, side }) {
 }
 
 export function getMlbOffenseMetricType(metric) {
-  if (["AVG", "OBP", "OPS"].includes(metric)) return "average";
+  if (["AVG", "OBP", "SLG", "OPS"].includes(metric)) return "average";
   if (["K%", "BB%"].includes(metric)) return "percent";
   return "integer";
 }

@@ -2023,3 +2023,68 @@ a.lifecycle-item:hover {
     transform: scale(0.92) !important;
   }
 }
+
+/* Pitcher table compact header and rank-by-color display */
+.pitcher-meta-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.2rem;
+}
+.pitcher-meta-line p {
+  margin: 0;
+  min-width: 0;
+}
+.pitcher-lineup-inline {
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  line-height: 1;
+  color: var(--muted, #a9b6b0);
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+  opacity: 0.82;
+}
+.pitcher-lineup-inline.lineup-status-confirmed {
+  color: var(--green, #44ff9a);
+  opacity: 1;
+}
+.pitcher-rank-table .pitcher-stat-cell {
+  min-width: 5.25rem;
+  text-align: center;
+  cursor: help;
+}
+.pitcher-rank-table .pitcher-group-heading th {
+  text-align: center;
+}
+.pitcher-rank-table .pitcher-group-heading th:first-child {
+  text-align: left;
+}
+@media (max-width: 760px) {
+  .pitcher-meta-line {
+    align-items: flex-start;
+  }
+  .pitcher-lineup-inline {
+    font-size: 0.62rem;
+    white-space: normal;
+    text-align: right;
+    max-width: 9rem;
+  }
+}
+
+/* Keep the visible number and offense rank synchronized with the heat class. */
+.data-table td.metric-elite,
+.data-table td.metric-elite .metric-value,
+.data-table td.metric-elite.rank-cell { color: #63ff9b !important; }
+.data-table td.metric-good,
+.data-table td.metric-good .metric-value,
+.data-table td.metric-good.rank-cell { color: #a2f5bf !important; }
+.data-table td.metric-average,
+.data-table td.metric-average .metric-value,
+.data-table td.metric-average.rank-cell { color: var(--text) !important; }
+.data-table td.metric-poor,
+.data-table td.metric-poor .metric-value,
+.data-table td.metric-poor.rank-cell { color: #ffadb8 !important; }
+.data-table td.metric-awful,
+.data-table td.metric-awful .metric-value,
+.data-table td.metric-awful.rank-cell { color: #ff7184 !important; }
