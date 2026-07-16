@@ -16957,30 +16957,128 @@
           }
         },
         "home": {
-          "id": null,
-          "name": "Starter TBD",
-          "status": "unknown",
-          "age": null,
-          "throws": null,
-          "profile_url": "#",
+          "id": 605400,
+          "name": "Aaron Nola",
+          "status": "probable",
+          "age": 33,
+          "throws": "R",
+          "profile_url": "pitcher.html?id=605400",
           "stats": {
             "last_7": {
-              "all": {},
+              "all": {
+                "era": 3.6,
+                "whip": 1.0,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.167,
+                "innings_pitched": "5.0",
+                "games": 1,
+                "games_started": 1,
+                "strikeouts": 8,
+                "walks": 2,
+                "home_runs": 1,
+                "hits": 3,
+                "earned_runs": 2
+              },
               "home": {},
               "away": {}
             },
             "last_30": {
-              "all": {},
+              "all": {
+                "era": 5.47,
+                "whip": 1.33,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.264,
+                "innings_pitched": "26.1",
+                "games": 5,
+                "games_started": 5,
+                "strikeouts": 31,
+                "walks": 7,
+                "home_runs": 7,
+                "hits": 28,
+                "earned_runs": 16
+              },
               "home": {},
               "away": {}
             },
             "season": {
-              "all": {},
-              "home": {},
-              "away": {}
+              "all": {
+                "era": 5.75,
+                "whip": 1.43,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.279,
+                "innings_pitched": "97.0",
+                "games": 19,
+                "games_started": 19,
+                "strikeouts": 102,
+                "walks": 31,
+                "home_runs": 20,
+                "hits": 108,
+                "earned_runs": 62
+              },
+              "home": {
+                "era": 6.81,
+                "whip": 1.7,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.319,
+                "innings_pitched": "38.1",
+                "games": 8,
+                "games_started": 8,
+                "strikeouts": 44,
+                "walks": 13,
+                "home_runs": 8,
+                "hits": 52,
+                "earned_runs": 29
+              },
+              "away": {
+                "era": 5.06,
+                "whip": 1.26,
+                "fip": null,
+                "xfip": null,
+                "avg_against": 0.25,
+                "innings_pitched": "58.2",
+                "games": 11,
+                "games_started": 11,
+                "strikeouts": 58,
+                "walks": 18,
+                "home_runs": 12,
+                "hits": 56,
+                "earned_runs": 33
+              }
             },
-            "vs_lhh": {},
-            "vs_rhh": {}
+            "vs_lhh": {
+              "era": null,
+              "whip": 1.59,
+              "fip": null,
+              "xfip": null,
+              "avg_against": 0.274,
+              "innings_pitched": "54.2",
+              "games": 19,
+              "games_started": null,
+              "strikeouts": 58,
+              "walks": 27,
+              "home_runs": 12,
+              "hits": 60,
+              "earned_runs": null
+            },
+            "vs_rhh": {
+              "era": null,
+              "whip": 1.25,
+              "fip": null,
+              "xfip": null,
+              "avg_against": 0.286,
+              "innings_pitched": "41.2",
+              "games": 19,
+              "games_started": null,
+              "strikeouts": 44,
+              "walks": 4,
+              "home_runs": 8,
+              "hits": 48,
+              "earned_runs": null
+            }
           }
         }
       },
@@ -16998,14 +17096,14 @@
       "offense": {
         "away": {
           "team_id": 121,
-          "opponent_throws": null,
+          "opponent_throws": "R",
           "stats": {
             "last_7": {
               "all": {
                 "AVG": {
                   "overall": 0.225,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.233,
                   "vs_hand_rank": null
                 },
                 "wRC+": {
@@ -17017,25 +17115,25 @@
                 "K%": {
                   "overall": 22.06896551724138,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 21.814006888633756,
                   "vs_hand_rank": null
                 },
                 "BB%": {
                   "overall": 8.96551724137931,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 8.266360505166476,
                   "vs_hand_rank": null
                 },
                 "OBP": {
                   "overall": 0.297,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.302,
                   "vs_hand_rank": null
                 },
                 "OPS": {
                   "overall": 0.669,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.682,
                   "vs_hand_rank": null
                 }
               },
@@ -17047,7 +17145,7 @@
                 "AVG": {
                   "overall": 0.245,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.233,
                   "vs_hand_rank": null
                 },
                 "wRC+": {
@@ -17059,25 +17157,25 @@
                 "K%": {
                   "overall": 21.155830753353975,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 21.814006888633756,
                   "vs_hand_rank": null
                 },
                 "BB%": {
                   "overall": 9.700722394220847,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 8.266360505166476,
                   "vs_hand_rank": null
                 },
                 "OBP": {
                   "overall": 0.324,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.302,
                   "vs_hand_rank": null
                 },
                 "OPS": {
                   "overall": 0.737,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.682,
                   "vs_hand_rank": null
                 }
               },
@@ -17089,7 +17187,7 @@
                 "AVG": {
                   "overall": 0.234,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.233,
                   "vs_hand_rank": null
                 },
                 "wRC+": {
@@ -17101,25 +17199,25 @@
                 "K%": {
                   "overall": 21.937792458023672,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 21.814006888633756,
                   "vs_hand_rank": null
                 },
                 "BB%": {
                   "overall": 8.23011285439031,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 8.266360505166476,
                   "vs_hand_rank": null
                 },
                 "OBP": {
                   "overall": 0.303,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.302,
                   "vs_hand_rank": null
                 },
                 "OPS": {
                   "overall": 0.684,
                   "overall_rank": null,
-                  "vs_hand": null,
+                  "vs_hand": 0.682,
                   "vs_hand_rank": null
                 }
               },
@@ -17500,10 +17598,10 @@
       "market": {},
       "injuries": [],
       "notes": "",
-      "last_updated": "2026-07-15T05:42:36.212089+00:00",
+      "last_updated": "2026-07-16T04:57:07.849579+00:00",
       "context": {
         "version": "2.0",
-        "score": 34,
+        "score": 38,
         "label": "WARNING",
         "alerts": [
           {
@@ -17513,14 +17611,6 @@
             "weight": -5,
             "team": null,
             "category": "lineup"
-          },
-          {
-            "title": "ONE STARTER TBD",
-            "summary": "One probable starter is still unavailable.",
-            "level": "caution",
-            "weight": -4,
-            "team": null,
-            "category": "starter"
           },
           {
             "title": "WEATHER PENDING",
@@ -17546,6 +17636,14 @@
             "level": "good",
             "weight": 2,
             "team": "NYM",
+            "category": "starter"
+          },
+          {
+            "title": "PHI STARTER SET",
+            "summary": "Aaron Nola is available.",
+            "level": "good",
+            "weight": 2,
+            "team": "PHI",
             "category": "starter"
           },
           {
@@ -17596,7 +17694,7 @@
           "streaks": false,
           "injuries": false
         },
-        "updated_at": "2026-07-15T05:42:41.086681+00:00",
+        "updated_at": "2026-07-16T04:57:14.824613+00:00",
         "negatives": [
           {
             "title": "NYM LINEUP UNCONFIRMED",
@@ -17615,12 +17713,12 @@
             "category": "lineup"
           },
           {
-            "title": "PHI STARTER TBD",
-            "summary": "The probable starter is still unavailable.",
+            "title": "PHI STARTER STRUGGLING",
+            "summary": "Aaron Nola has a 5.47 ERA over the last 30 days.",
             "level": "negative",
-            "weight": -4,
+            "weight": -6,
             "team": "PHI",
-            "category": "starter"
+            "category": "pitcher_form"
           },
           {
             "title": "NYM BULLPEN QUALITY",

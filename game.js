@@ -334,19 +334,22 @@ function renderGameNavigation() {
       );
   }
 
+  const hasMultipleGames =
+    datedSportGames.length > 1;
+
   const previousGame =
-    currentIndex > 0
+    currentIndex >= 0 && hasMultipleGames
       ? datedSportGames[
-          currentIndex - 1
+          (currentIndex - 1 + datedSportGames.length) %
+            datedSportGames.length
         ]
       : null;
 
   const nextGame =
-    currentIndex >= 0 &&
-    currentIndex <
-      datedSportGames.length - 1
+    currentIndex >= 0 && hasMultipleGames
       ? datedSportGames[
-          currentIndex + 1
+          (currentIndex + 1) %
+            datedSportGames.length
         ]
       : null;
 
@@ -1151,7 +1154,59 @@ function setGameNavigationLink(
     `game.html?id=${encodeURIComponent(
       game.id
     )}`;
+
+  element.onclick = event => {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    navigateToGame(game);
+  };
 }
+
+function navigateToGame(game) {
+  if (!game?.id) return;
+
+  state.game = game;
+  state.timeframe =
+    game.controls?.default_timeframe ||
+    "last_30";
+  state.location =
+    game.controls?.default_location ||
+    "all";
+
+  history.pushState(
+    { gameId: game.id },
+    "",
+    `game.html?id=${encodeURIComponent(game.id)}`
+  );
+
+  renderAll();
+
+  document.title =
+    `${game.away_team?.abbr || "Away"} at ` +
+    `${game.home_team?.abbr || "Home"} | Boring Bets`;
+
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+window.addEventListener("popstate", () => {
+  const gameId =
+    new URLSearchParams(window.location.search).get("id");
+  const game =
+    state.games.find(item => item.id === gameId);
+
+  if (game) {
+    state.game = game;
+    renderAll();
+  }
+});
 
 function setLink(
   id,

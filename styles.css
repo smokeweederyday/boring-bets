@@ -1816,3 +1816,210 @@ a.lifecycle-item:hover {
 .game-article h3{margin:10px 0;color:var(--white);font-size:clamp(1.05rem,2.5vw,1.45rem)}
 .game-article-summary{color:var(--teal-soft);font-weight:700}.game-article-body{color:var(--text);line-height:1.75}.game-article-body p{margin:0 0 1.15em}.game-article-body p:last-child{margin-bottom:0}
 
+
+
+/* Sprint 3: shared fixed sequence navigation */
+.card-date-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.card-date-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.card-today-link {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(7, 16, 11, 0.8);
+}
+
+@media (min-width: 1180px) {
+  .card-side-navigation {
+    position: fixed;
+    top: 50%;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 128px;
+    min-height: 74px;
+    padding: 12px;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.25;
+    background: rgba(7, 16, 11, 0.94);
+    border: 1px solid var(--border-teal);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(12px);
+    transform: translateY(-50%);
+  }
+
+  .card-side-navigation--previous {
+    left: max(14px, calc((100vw - 1100px) / 2 - 150px));
+  }
+
+  .card-side-navigation--next {
+    right: max(14px, calc((100vw - 1100px) / 2 - 150px));
+  }
+
+  .card-side-navigation:hover {
+    color: var(--green);
+    border-color: var(--green-dark);
+    box-shadow: var(--shadow-md), var(--glow-green);
+  }
+}
+
+@media (max-width: 1179px) {
+  .card-side-navigation {
+    position: fixed;
+    bottom: 18px;
+    z-index: 90;
+    width: 54px;
+    height: 54px;
+    overflow: hidden;
+    padding: 0;
+    color: transparent;
+    background: rgba(7, 16, 11, 0.96);
+    border: 1px solid var(--border-teal);
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-side-navigation::first-letter {
+    color: var(--green);
+  }
+
+  .card-side-navigation--previous { left: 14px; }
+  .card-side-navigation--next { right: 14px; }
+}
+
+/* Sprint 3 unified floating navigation arrows */
+.card-date-navigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.card-today-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  color: var(--green);
+  text-decoration: none;
+  background: rgba(7, 16, 11, 0.88);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+#previousGameLink,
+#nextGameLink,
+.card-side-navigation {
+  position: fixed !important;
+  top: 50% !important;
+  z-index: 90 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 74px !important;
+  height: 74px !important;
+  min-height: 74px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-decoration: none !important;
+  background: rgba(7, 16, 11, 0.95) !important;
+  border: 1px solid var(--green-dark) !important;
+  border-radius: 50% !important;
+  box-shadow: var(--shadow-md), 0 0 18px rgba(57, 255, 136, 0.12) !important;
+  backdrop-filter: blur(12px);
+  transform: translateY(-50%) !important;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#previousGameLink::before,
+#nextGameLink::before,
+.card-side-navigation::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-top: 5px solid var(--green);
+  border-right: 5px solid var(--green);
+  filter: drop-shadow(0 0 7px rgba(57, 255, 136, 0.55));
+}
+
+#previousGameLink::before,
+.card-side-navigation--previous::before {
+  transform: rotate(-135deg) translate(-2px, 2px);
+}
+
+#nextGameLink::before,
+.card-side-navigation--next::before {
+  transform: rotate(45deg) translate(-2px, 2px);
+}
+
+#previousGameLink,
+.card-side-navigation--previous {
+  left: max(14px, calc((100vw - 1100px) / 2 - 112px)) !important;
+}
+
+#nextGameLink,
+.card-side-navigation--next {
+  right: max(14px, calc((100vw - 1100px) / 2 - 112px)) !important;
+}
+
+#previousGameLink:hover,
+#nextGameLink:hover,
+.card-side-navigation:hover,
+#previousGameLink:focus-visible,
+#nextGameLink:focus-visible,
+.card-side-navigation:focus-visible {
+  border-color: var(--green) !important;
+  background: rgba(12, 30, 20, 0.98) !important;
+  box-shadow: var(--shadow-md), var(--glow-green) !important;
+  outline: none;
+}
+
+#previousGameLink:active,
+#nextGameLink:active,
+.card-side-navigation:active {
+  transform: translateY(-50%) scale(0.92) !important;
+}
+
+@media (max-width: 1179px) {
+  #previousGameLink,
+  #nextGameLink,
+  .card-side-navigation {
+    top: auto !important;
+    bottom: 18px !important;
+    width: 58px !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    transform: none !important;
+  }
+
+  #previousGameLink,
+  .card-side-navigation--previous {
+    left: 14px !important;
+  }
+
+  #nextGameLink,
+  .card-side-navigation--next {
+    right: 14px !important;
+  }
+
+  #previousGameLink:active,
+  #nextGameLink:active,
+  .card-side-navigation:active {
+    transform: scale(0.92) !important;
+  }
+}

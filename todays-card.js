@@ -197,26 +197,62 @@ function renderDateNavigation(
 
   navigation.innerHTML = `
     <a
+      id="previousCardDayLink"
       href="${buildDateUrl(previousDate)}"
-      class="card-date-link"
-    >
-      ← Previous
-    </a>
+      data-date="${previousDate}"
+      class="card-side-navigation card-side-navigation--previous"
+      aria-label="Previous day"
+      title="Previous day"
+    ></a>
 
     <a
       href="${buildDateUrl(today)}"
-      class="card-date-link"
-    >
-      Today
-    </a>
+      data-date="${today}"
+      class="card-date-link card-today-link"
+    >Today</a>
 
     <a
+      id="nextCardDayLink"
       href="${buildDateUrl(nextDate)}"
-      class="card-date-link"
-    >
-      Next →
-    </a>
+      data-date="${nextDate}"
+      class="card-side-navigation card-side-navigation--next"
+      aria-label="Next day"
+      title="Next day"
+    ></a>
   `;
+
+  navigation
+    .querySelectorAll("[data-date]")
+    .forEach(link => {
+      link.addEventListener(
+        "click",
+        event => {
+          if (
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          ) return;
+
+          event.preventDefault();
+          navigateToCardDate(
+            link.dataset.date
+          );
+        }
+      );
+    });
+}
+
+function navigateToCardDate(date) {
+  if (!date) return;
+
+  history.pushState(
+    { date },
+    "",
+    buildDateUrl(date)
+  );
+
+  loadCard();
 }
 
 function renderSummary(

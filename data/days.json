@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-07-15T05:42:41.118114+00:00",
+  "updated_at": "2026-07-16T04:57:14.854700+00:00",
   "days": [
     {
       "id": "2026-05-16-mlb",
@@ -113,7 +113,7 @@
       "id": "2026-07-16-mlb",
       "date": "2026-07-16",
       "sport": "MLB",
-      "state": "future",
+      "state": "today",
       "previous_day": "2026-07-15",
       "next_day": "2026-07-17",
       "game_ids": [
