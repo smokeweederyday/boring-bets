@@ -82,6 +82,8 @@ export function renderOffenseWidget({
                 )}
               </th>
               <th>Rank</th>
+              <th>${escapeHtml(module.locationContext || "Game location split")}</th>
+              <th>Rank</th>
             </tr>
           </thead>
 
@@ -134,6 +136,16 @@ function renderMetricRow(metric) {
       ${renderRankCell(
         split.rank
       )}
+
+      ${renderValueCell(
+        metric?.locationSplit?.value,
+        metric?.locationSplit?.rank,
+        metric?.type
+      )}
+
+      ${renderRankCell(
+        metric?.locationSplit?.rank
+      )}
     </tr>
   `;
 }
@@ -173,7 +185,7 @@ function renderEmptyRow() {
     <tr>
       <td
         class="metric-missing"
-        colspan="5"
+        colspan="7"
       >
         Data unavailable
       </td>

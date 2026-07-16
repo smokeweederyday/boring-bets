@@ -4,7 +4,8 @@ import {
 
 export function renderPitcherWidget({
   container,
-  module
+  module,
+  onLocationChange
 }) {
   if (!container) return;
 
@@ -21,10 +22,7 @@ export function renderPitcherWidget({
   const columns = Array.isArray(module.columns) ? module.columns : [];
 
   container.innerHTML = `
-    <a
-      class="pitcher-card-link"
-      href="${escapeAttribute(module.detailsUrl || "#")}" 
-    >
+    <div class="pitcher-card-link">
       <div class="pitcher-card-heading">
         <div>
           <span class="data-label">
@@ -44,9 +42,19 @@ export function renderPitcherWidget({
             </span>
           </div>
         </div>
-        <span class="open-data">Full data →</span>
+        <a class="open-data" href="${escapeAttribute(module.detailsUrl || "#")}">Full data →</a>
       </div>
 
+
+      <div class="pitcher-location-control" role="group" aria-label="Pitcher location split">
+        ${["all", "home", "away"].map(location => `
+          <button
+            type="button"
+            data-pitcher-location="${location}"
+            class="${module.activeLocation === location ? "active" : ""}"
+          >${location[0].toUpperCase() + location.slice(1)}</button>
+        `).join("")}
+      </div>
 
       <div class="table-scroll">
         <table class="data-table pitcher-data-table pitcher-rank-table">
@@ -65,8 +73,16 @@ export function renderPitcherWidget({
           </tbody>
         </table>
       </div>
-    </a>
+    </div>
   `;
+
+  container.querySelectorAll("[data-pitcher-location]").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      onLocationChange?.(button.dataset.pitcherLocation);
+    });
+  });
 }
 
 function renderPitcherMetricRow(metric) {

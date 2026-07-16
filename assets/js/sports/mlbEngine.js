@@ -13,10 +13,10 @@ const MLB_PITCHER_METRICS = [
 export function buildMlbOffenseModule({
   game,
   side,
-  timeframe = "last_30",
-  location = "all"
+  timeframe = "last_30"
 }) {
   const isAway = side === "away";
+  const gameLocation = isAway ? "away" : "home";
   const team = isAway ? game.away_team : game.home_team;
   const offense = isAway ? game.offense?.away : game.offense?.home;
   const opposingPitcher = isAway ? game.pitchers?.home : game.pitchers?.away;
@@ -28,36 +28,42 @@ export function buildMlbOffenseModule({
         ? "R"
         : null;
 
-  const period = offense?.stats?.[timeframe] || {};
-  const selectedLocationData = period?.[location];
-
-  // Never display All data under a Home or Away label. If the backend has
-  // no selected-location block, show unavailable data so failures are honest.
-  const selectedLocation =
-    selectedLocationData && Object.keys(selectedLocationData).length
-      ? selectedLocationData
-      : location === "all"
-        ? period?.all || {}
-        : {};
+  const timeframeKey = ["last_7", "last_30", "season"].includes(timeframe)
+    ? timeframe
+    : "last_30";
+  const period = offense?.stats?.[timeframeKey] || {};
+  const overallBlock = period?.all || {};
+  const locationBlock = period?.[gameLocation] || {};
+  const handLabel = pitcherHand ? `vs ${pitcherHand}HP` : "vs starter hand";
+  const locationLabel = `${isAway ? "Away" : "Home"} ${handLabel}`;
 
   return {
     title: `${team?.abbr || offense?.team || "TEAM"} OFFENSE`,
-    context: pitcherHand ? `vs ${pitcherHand}HP` : "Starter handedness TBD",
+    context: handLabel,
+    locationContext: locationLabel,
     opponent: opposingPitcher?.name || "Starter TBD",
+    gameLocation,
     detailsUrl: `lineup.html?game=${encodeURIComponent(game.id)}&team=${encodeURIComponent(side)}`,
     metrics: MLB_OFFENSE_METRICS.map(metric => {
-      const metricData = selectedLocation?.[metric] || {};
+      const overallMetric = overallBlock?.[metric] || {};
+      const locationMetric = locationBlock?.[metric] || {};
 
       return {
         label: metric,
         type: getMlbOffenseMetricType(metric),
         overall: {
-          value: metricData.overall ?? null,
-          rank: metricData.overall_rank ?? null
+          value: overallMetric.overall ?? null,
+          rank: overallMetric.overall_rank ?? null
         },
         split: {
-          value: metricData.vs_hand ?? null,
-          rank: metricData.vs_hand_rank ?? null
+          value: overallMetric.vs_hand ?? null,
+          rank: overallMetric.vs_hand_rank ?? null
+        },
+        locationSplit: {
+          value: locationMetric.vs_hand ?? null,
+          rank: locationMetric.vs_hand_rank ?? null,
+          timeframe: timeframeKey,
+          location: gameLocation
         }
       };
     })
@@ -110,6 +116,7 @@ export function buildMlbPitcherModule({
     statusLabel: formatPitcherStatus(safePitcher.status),
     detailsUrl: safePitcher.profile_url || "#",
     contextLabel: selectedContext,
+    activeLocation: location,
     lineupStatusLabel: lineupMix.statusLabel,
     lineupStatusClass: lineupMix.statusClass,
     lineupHandednessLabel: lineupMix.label,
@@ -197,25 +204,15 @@ function summarizeLineupHandedness(lineup, pitcherThrows) {
 }
 
 function normalizeRankedPitcherValue(block, key, type, contextLabel = "") {
-  const rawValue = block?.[key];
-  const value = normalizePitcherValue(rawValue, type);
-  const hasValue = rawValue !== null && rawValue !== undefined && rawValue !== "";
-  const rank = hasValue ? (block?.ranks?.[key] ?? null) : null;
-  const poolSize = hasValue ? (block?.rank_pool_size?.[key] ?? null) : null;
-  const unavailableReason = key === "era"
-    ? block?.era_unavailable_reason || ""
-    : "";
+  const value = normalizePitcherValue(block?.[key], type);
+  const rank = block?.ranks?.[key] ?? null;
+  const poolSize = block?.rank_pool_size?.[key] ?? null;
   return {
     ...value,
     rank,
     poolSize,
-    contextLabel: unavailableReason
-      ? `${contextLabel} · ${unavailableReason}`
-      : contextLabel,
-    // Missing values must never inherit stale red/green rank metadata.
-    heatClass: hasValue
-      ? getRankHeatClass(rank, poolSize || 30)
-      : "metric-missing"
+    contextLabel,
+    heatClass: getRankHeatClass(rank, poolSize || 30)
   };
 }
 

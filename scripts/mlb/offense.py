@@ -6,6 +6,9 @@ import json
 import sys
 import urllib.parse
 import urllib.request
+import csv
+import gzip
+import io
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import os
@@ -310,6 +313,178 @@ def fetch_all_team_game_logs(season: int) -> dict[int, list[dict[str, Any]]]:
                 result[team_id] = []
     return result
 
+
+TEAM_ABBR_TO_MLB_ID = {
+    "LAA": 108, "ARI": 109, "BAL": 110, "BOS": 111, "CHC": 112,
+    "CIN": 113, "CLE": 114, "COL": 115, "DET": 116, "HOU": 117,
+    "KC": 118, "KCR": 118, "LAD": 119, "WSH": 120, "WSN": 120,
+    "NYM": 121, "ATH": 133, "OAK": 133, "PIT": 134, "SD": 135,
+    "SDP": 135, "SEA": 136, "SF": 137, "SFG": 137, "STL": 138,
+    "TB": 139, "TBR": 139, "TEX": 140, "TOR": 141, "MIN": 142,
+    "PHI": 143, "ATL": 144, "CWS": 145, "CHW": 145, "MIA": 146,
+    "NYY": 147, "MIL": 158,
+}
+
+STATCAST_CSV_URL = "https://baseballsavant.mlb.com/statcast_search/csv"
+STATCAST_TERMINAL_EVENTS = {
+    "single", "double", "triple", "home_run",
+    "field_out", "force_out", "grounded_into_double_play",
+    "field_error", "fielders_choice", "fielders_choice_out",
+    "double_play", "triple_play", "strikeout", "strikeout_double_play",
+    "walk", "intent_walk", "hit_by_pitch", "sac_fly", "sac_bunt",
+    "catcher_interf",
+}
+STATCAST_HITS = {"single": 1, "double": 2, "triple": 3, "home_run": 4}
+STATCAST_NON_AB = {"walk", "intent_walk", "hit_by_pitch", "sac_fly", "sac_bunt", "catcher_interf"}
+
+
+def _statcast_cache_dir() -> Path:
+    root = Path(__file__).resolve().parents[2]
+    cache_dir = root / "data" / "cache" / "statcast-offense"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    return cache_dir
+
+
+def _statcast_day_cache_path(day_text: str) -> Path:
+    return _statcast_cache_dir() / f"{day_text}.json.gz"
+
+
+def _statcast_url(day_text: str) -> str:
+    params = {
+        "all": "true", "type": "details", "player_type": "pitcher",
+        "game_date_gt": day_text, "game_date_lt": day_text,
+        "hfGT": "R|PO|S|", "group_by": "name", "sort_col": "pitches",
+        "sort_order": "desc", "min_pitches": "0", "min_results": "0",
+    }
+    return f"{STATCAST_CSV_URL}?{urllib.parse.urlencode(params)}"
+
+
+def fetch_statcast_terminal_pas(day_text: str) -> list[dict[str, Any]]:
+    cache_path = _statcast_day_cache_path(day_text)
+    if cache_path.exists() and os.getenv("BORING_BETS_REBUILD_STATCAST_OFFENSE") != "1":
+        try:
+            with gzip.open(cache_path, "rt", encoding="utf-8") as handle:
+                cached = json.load(handle)
+            if isinstance(cached, list):
+                return cached
+        except (OSError, json.JSONDecodeError):
+            pass
+
+    request = urllib.request.Request(
+        _statcast_url(day_text),
+        headers={
+            "User-Agent": "Mozilla/5.0 BoringBets/1.0",
+            "Accept": "text/csv,*/*",
+            "Referer": "https://baseballsavant.mlb.com/statcast_search",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        text = response.read().decode("utf-8-sig", errors="replace")
+
+    rows: list[dict[str, Any]] = []
+    for row in csv.DictReader(io.StringIO(text)):
+        event = str(row.get("events") or "").strip()
+        if event not in STATCAST_TERMINAL_EVENTS:
+            continue
+        topbot = str(row.get("inning_topbot") or "").strip().lower()
+        team_abbr = row.get("away_team") if topbot.startswith("top") else row.get("home_team")
+        team_id = TEAM_ABBR_TO_MLB_ID.get(str(team_abbr or "").strip().upper())
+        pitcher_hand = str(row.get("p_throws") or "").strip().upper()
+        if team_id is None or pitcher_hand not in {"L", "R"}:
+            continue
+        rows.append({
+            "team_id": team_id,
+            "location": "away" if topbot.startswith("top") else "home",
+            "pitcher_hand": pitcher_hand,
+            "event": event,
+            "game_pk": row.get("game_pk"),
+            "at_bat_number": row.get("at_bat_number"),
+        })
+
+    with gzip.open(cache_path, "wt", encoding="utf-8") as handle:
+        json.dump(rows, handle, separators=(",", ":"))
+    return rows
+
+
+def fetch_statcast_range(start: date, end: date) -> list[dict[str, Any]]:
+    if end < start:
+        return []
+    days: list[str] = []
+    cursor = start
+    while cursor <= end:
+        days.append(cursor.isoformat())
+        cursor += timedelta(days=1)
+    workers = max(2, min(int(os.getenv("BORING_BETS_STATCAST_WORKERS", "8")), 12))
+    collected: list[dict[str, Any]] = []
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {executor.submit(fetch_statcast_terminal_pas, day): day for day in days}
+        for future in as_completed(futures):
+            day = futures[future]
+            try:
+                collected.extend(future.result())
+            except Exception as error:
+                raise RuntimeError(f"Statcast offense fetch failed for {day}: {error}") from error
+    return collected
+
+
+def aggregate_statcast_pas(
+    rows: list[dict[str, Any]],
+    location: str,
+    pitcher_hand: str,
+) -> dict[int, dict[str, Any]]:
+    totals: dict[int, dict[str, float]] = {
+        team_id: {
+            "pa": 0.0, "ab": 0.0, "hits": 0.0, "tb": 0.0,
+            "bb": 0.0, "hbp": 0.0, "sf": 0.0, "so": 0.0,
+        }
+        for team_id in MLB_TEAM_IDS
+    }
+    for row in rows:
+        if location != "all" and row.get("location") != location:
+            continue
+        if row.get("pitcher_hand") != pitcher_hand:
+            continue
+        team_id = row.get("team_id")
+        if team_id not in totals:
+            continue
+        event = row.get("event")
+        t = totals[team_id]
+        t["pa"] += 1
+        if event not in STATCAST_NON_AB:
+            t["ab"] += 1
+        if event in STATCAST_HITS:
+            t["hits"] += 1
+            t["tb"] += STATCAST_HITS[event]
+        if event in {"walk", "intent_walk"}:
+            t["bb"] += 1
+        if event == "hit_by_pitch":
+            t["hbp"] += 1
+        if event == "sac_fly":
+            t["sf"] += 1
+        if event in {"strikeout", "strikeout_double_play"}:
+            t["so"] += 1
+
+    result: dict[int, dict[str, Any]] = {}
+    for team_id, t in totals.items():
+        pa, ab = t["pa"], t["ab"]
+        if pa <= 0:
+            result[team_id] = {}
+            continue
+        obp_den = ab + t["bb"] + t["hbp"] + t["sf"]
+        avg = t["hits"] / ab if ab else None
+        obp = (t["hits"] + t["bb"] + t["hbp"]) / obp_den if obp_den else None
+        slg = t["tb"] / ab if ab else None
+        result[team_id] = {
+            "AVG": avg, "OBP": obp, "SLG": slg,
+            "OPS": (obp + slg) if obp is not None and slg is not None else None,
+            "wRC+": None,
+            "BB%": rate_percent(t["bb"], pa),
+            "K%": rate_percent(t["so"], pa),
+            "plate_appearances": int(pa),
+            "strikeouts": int(t["so"]), "walks": int(t["bb"]),
+        }
+    return result
+
 def fetch_league_hitting_stats(
     stat_type: str,
     season: int,
@@ -395,69 +570,80 @@ def _matrix_is_complete(cache: dict[str, Any]) -> bool:
 
 
 def build_league_offense_cache(target_date: str) -> dict[str, Any]:
-    """Build exact 30-team comparison pools for all UI filter combinations."""
+    """Build pregame, date-bounded 30-team offense comparison pools.
+
+    The selected game date is excluded. Overall location splits use MLB team
+    game logs; pitcher-handedness intersections use cached Baseball Savant
+    terminal plate appearances because MLB statSplits ignores date windows.
+    """
     cache_path = _cache_path(target_date)
     if cache_path.exists() and os.getenv("BORING_BETS_REBUILD_RANK_CACHE") != "1":
         try:
             cached = json.loads(cache_path.read_text(encoding="utf-8"))
-            if _matrix_is_complete(cached):
-                print(f"Using cached 30-team offense matrix: {cache_path.name}")
+            if _matrix_is_complete(cached) and cached.get("pregame_cutoff") is True:
+                print(f"Using cached pregame offense matrix: {cache_path.name}")
                 return cached
         except (OSError, json.JSONDecodeError):
             pass
 
     target = datetime.strptime(target_date, "%Y-%m-%d").date()
-    season = target.year
+    cutoff = target - timedelta(days=1)
+    season_start = date(target.year, 3, 1)
     windows = {
-        "last_7": ("byDateRange", target - timedelta(days=7), target),
-        "last_30": ("byDateRange", target - timedelta(days=30), target),
-        "season": ("season", None, None),
+        "last_7": (cutoff - timedelta(days=6), cutoff),
+        "last_30": (cutoff - timedelta(days=29), cutoff),
+        "season": (season_start, cutoff),
     }
-    locations = {"all": [], "home": ["h"], "away": ["a"]}
-    hands = {"overall": [], "vs_lhp": ["vl"], "vs_rhp": ["vr"]}
-    cache: dict[str, Any] = {}
-    print("Fetching all 30 team game logs for offense All/Home/Away...")
-    team_game_logs = fetch_all_team_game_logs(season)
-    total_pools = len(windows) * len(locations) * len(hands)
+    locations = ("all", "home", "away")
+    hands = {"vs_lhp": "L", "vs_rhp": "R"}
+    cache: dict[str, Any] = {
+        "as_of": target_date,
+        "cutoff_date": cutoff.isoformat(),
+        "pregame_cutoff": True,
+        "window_definition": "calendar_days_before_selected_game",
+    }
+
+    print("Fetching all 30 team game logs for pregame All/Home/Away offense...")
+    team_game_logs = fetch_all_team_game_logs(target.year)
+    print(f"Fetching cached Statcast plate appearances through {cutoff.isoformat()}...")
+    season_events = fetch_statcast_range(season_start, cutoff)
+
+    total_pools = len(windows) * len(locations) * 3
     completed = 0
-    for timeframe, (stat_type, start, end) in windows.items():
+    for timeframe, (window_start, window_end) in windows.items():
         cache[timeframe] = {}
-        for location, location_codes in locations.items():
+        window_events = season_events if timeframe == "season" else fetch_statcast_range(window_start, window_end)
+        for location in locations:
             cache[timeframe][location] = {}
-            for hand_key, hand_codes in hands.items():
+            completed += 1
+            print(f"  Rank pool {completed}/{total_pools}: {timeframe} / {location} / overall")
+            overall_rows = {
+                team_id: aggregate_team_game_log(
+                    team_game_logs.get(team_id, []),
+                    window_start.isoformat(),
+                    window_end.isoformat(),
+                    location,
+                )
+                for team_id in MLB_TEAM_IDS
+            }
+            cache[timeframe][location]["overall"] = {
+                "stats": overall_rows,
+                "ranks": rank_league_rows(overall_rows),
+                "team_pool": 30,
+                "coverage": sum(1 for row in overall_rows.values() if row),
+                "scope": "all_30_mlb_teams_exact_pregame_filters",
+            }
+            for hand_key, hand in hands.items():
                 completed += 1
                 print(f"  Rank pool {completed}/{total_pools}: {timeframe} / {location} / {hand_key}")
-                if hand_key == "overall":
-                    rows = {
-                        team_id: aggregate_team_game_log(
-                            team_game_logs.get(team_id, []),
-                            start.isoformat() if start else None,
-                            (end or target).isoformat(),
-                            location,
-                        )
-                        for team_id in MLB_TEAM_IDS
-                    }
-                else:
-                    rows = fetch_league_hitting_stats(
-                        stat_type=stat_type,
-                        season=season,
-                        start_date=start.isoformat() if start else None,
-                        end_date=end.isoformat() if end else None,
-                        sit_codes=location_codes + hand_codes,
-                    )
-
-                if len(rows) != 30:
-                    raise RuntimeError(
-                        f"Rank matrix incomplete for {timeframe}/{location}/{hand_key}: "
-                        f"expected 30 team IDs, received {len(rows)}"
-                    )
-                nonempty = sum(1 for value in rows.values() if value)
+                split_rows = aggregate_statcast_pas(window_events, location, hand)
                 cache[timeframe][location][hand_key] = {
-                    "stats": rows,
-                    "ranks": rank_league_rows(rows),
+                    "stats": split_rows,
+                    "ranks": rank_league_rows(split_rows),
                     "team_pool": 30,
-                    "coverage": nonempty,
-                    "scope": "all_30_mlb_teams",
+                    "coverage": sum(1 for row in split_rows.values() if row),
+                    "scope": "all_30_mlb_teams_exact_pregame_filters",
+                    "source": "Baseball Savant terminal plate appearances",
                 }
 
     cache_path.write_text(json.dumps(cache, indent=2), encoding="utf-8")
@@ -535,7 +721,7 @@ def build_team_offense_snapshot(
         "opponent_throws": str(opponent_throws or "").upper() or None,
         "stats": {},
         "raw_splits": {},
-        "source": "MLB Stats API team game logs + stat splits",
+        "source": "MLB team game logs + Baseball Savant date-bounded plate appearances",
         "as_of": target_date,
     }
 

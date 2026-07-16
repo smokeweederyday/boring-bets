@@ -1,6 +1,6 @@
 import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js?v=phase7a";
+} from "./assets/js/widgets/offenseWidget.js";
 
 import {
   renderPitcherWidget
@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js?v=phase7a";
+} from "./assets/js/sports/mlbEngine.js";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
@@ -47,7 +47,8 @@ const state = {
   evaluations: [],
   articles: [],
   timeframe: "last_30",
-  location: "all"
+  awayPitcherLocation: "away",
+  homePitcherLocation: "home"
 };
 
 async function loadGame() {
@@ -228,10 +229,8 @@ async function loadGame() {
       gamesData.default_controls?.timeframe ||
       "last_30";
 
-    state.location =
-      game.controls?.default_location ||
-      gamesData.default_controls?.location ||
-      "all";
+    state.awayPitcherLocation = "away";
+    state.homePitcherLocation = "home";
 
     renderAll();
 
@@ -559,26 +558,6 @@ function renderControls() {
       };
     });
 
-  document
-    .querySelectorAll(
-      "[data-location]"
-    )
-    .forEach(button => {
-      const value =
-        button.dataset.location;
-
-      button.classList.toggle(
-        "active",
-        value === state.location
-      );
-
-      button.onclick = () => {
-        state.location =
-          value;
-
-        renderAll();
-      };
-    });
 }
 
 function renderPitchers() {
@@ -592,7 +571,7 @@ function renderPitchers() {
       timeframe:
         state.timeframe,
       location:
-        state.location
+        state.awayPitcherLocation
     });
 
   renderPitcherWidget({
@@ -602,7 +581,11 @@ function renderPitchers() {
       ),
 
     module:
-      awayPitcherModule
+      awayPitcherModule,
+    onLocationChange: location => {
+      state.awayPitcherLocation = location;
+      renderPitchers();
+    }
   });
 
   const homePitcherModule =
@@ -612,7 +595,7 @@ function renderPitchers() {
       timeframe:
         state.timeframe,
       location:
-        state.location
+        state.homePitcherLocation
     });
 
   renderPitcherWidget({
@@ -622,7 +605,11 @@ function renderPitchers() {
       ),
 
     module:
-      homePitcherModule
+      homePitcherModule,
+    onLocationChange: location => {
+      state.homePitcherLocation = location;
+      renderPitchers();
+    }
   });
 }
 
@@ -635,9 +622,7 @@ function renderOffenses() {
       game,
       side: "home",
       timeframe:
-        state.timeframe,
-      location:
-        state.location
+        state.timeframe
     });
 
   renderOffenseWidget({
@@ -655,9 +640,7 @@ function renderOffenses() {
       game,
       side: "away",
       timeframe:
-        state.timeframe,
-      location:
-        state.location
+        state.timeframe
     });
 
   renderOffenseWidget({
@@ -718,8 +701,7 @@ function renderBullpens() {
       side: "away",
       timeframe:
         state.timeframe,
-      location:
-        state.location
+      location: "all"
     });
 
   renderBullpenWidget({
@@ -738,8 +720,7 @@ function renderBullpens() {
       side: "home",
       timeframe:
         state.timeframe,
-      location:
-        state.location
+      location: "all"
     });
 
   renderBullpenWidget({
@@ -1177,9 +1158,8 @@ function navigateToGame(game) {
   state.timeframe =
     game.controls?.default_timeframe ||
     "last_30";
-  state.location =
-    game.controls?.default_location ||
-    "all";
+  state.awayPitcherLocation = "away";
+  state.homePitcherLocation = "home";
 
   history.pushState(
     { gameId: game.id },
@@ -1204,6 +1184,8 @@ window.addEventListener("popstate", () => {
 
   if (game) {
     state.game = game;
+    state.awayPitcherLocation = "away";
+    state.homePitcherLocation = "home";
     renderAll();
   }
 });
