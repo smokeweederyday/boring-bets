@@ -10,3 +10,6 @@ data/cache/
 data/*progress*.json
 __pycache__/
 *.pyc
+
+# Local archived source backups
+archive/backups/
