@@ -120,6 +120,8 @@ export function buildMlbPitcherModule({
     lineupStatusLabel: lineupMix.statusLabel,
     lineupStatusClass: lineupMix.statusClass,
     lineupHandednessLabel: lineupMix.label,
+    lineupCompleteness: lineupMix.completeness,
+    lineupChanged: lineupMix.changed,
     columns: [
       { label: "Season" },
       { label: "Selected" },
@@ -173,33 +175,54 @@ function selectPitcherLocationBlock(period, location) {
 
 function summarizeLineupHandedness(lineup, pitcherThrows) {
   const players = Array.isArray(lineup?.players) ? lineup.players.slice(0, 9) : [];
-  const status = lineup?.status === "confirmed" ? "confirmed" : "projected";
-  const statusLabel = status === "confirmed" ? "Confirmed lineup" : "Projected lineup";
+  const status = ["unknown", "projected", "partial", "confirmed"].includes(lineup?.status)
+    ? lineup.status
+    : (players.length >= 9 ? "projected" : players.length ? "partial" : "unknown");
+  const statusLabels = {
+    unknown: "Lineup unknown",
+    projected: "Projected lineup",
+    partial: `Partial lineup (${players.length}/9)`,
+    confirmed: "Confirmed lineup"
+  };
 
-  let left = 0;
-  let right = 0;
-  let unknown = 0;
+  const storedMix = lineup?.matchup_handedness;
+  let left = Number(storedMix?.lhh);
+  let right = Number(storedMix?.rhh);
+  let unknown = Number(storedMix?.unknown);
+  let switchHitters = Number(storedMix?.switch_hitters);
 
-  players.forEach(player => {
-    const bats = String(player?.bats || "").toUpperCase();
-    if (bats === "L") left += 1;
-    else if (bats === "R") right += 1;
-    else if (bats === "S") {
-      // Switch hitters are counted by the side they are expected to use in
-      // this matchup.
-      if (pitcherThrows === "R") left += 1;
-      else if (pitcherThrows === "L") right += 1;
+  if (![left, right, unknown, switchHitters].every(Number.isFinite)) {
+    left = right = unknown = switchHitters = 0;
+    players.forEach(player => {
+      const bats = String(player?.bats || "").toUpperCase();
+      const matchupBats = String(player?.matchup_bats || "").toUpperCase();
+      if (bats === "S") switchHitters += 1;
+      if (matchupBats === "L" || (!matchupBats && bats === "L")) left += 1;
+      else if (matchupBats === "R" || (!matchupBats && bats === "R")) right += 1;
+      else if (bats === "S" && pitcherThrows === "R") left += 1;
+      else if (bats === "S" && pitcherThrows === "L") right += 1;
       else unknown += 1;
-    } else unknown += 1;
-  });
+    });
+  }
 
-  const pieces = [`${left} LHH`, `${right} RHH`];
-  if (unknown) pieces.push(`${unknown} unknown`);
+  const pieces = [];
+  if (players.length) {
+    pieces.push(`${left} LHH`, `${right} RHH`);
+    if (switchHitters) pieces.push(`${switchHitters} S*`);
+    if (unknown) pieces.push(`${unknown} unknown`);
+  }
+
+  const confidence = Number(lineup?.confidence);
+  const confidenceText = Number.isFinite(confidence)
+    ? ` · ${Math.round(confidence * 100)}% confidence`
+    : "";
 
   return {
-    statusLabel,
-    statusClass: status === "confirmed" ? "lineup-status-confirmed" : "lineup-status-projected",
-    label: players.length ? pieces.join(" · ") : "LHH/RHH unavailable"
+    statusLabel: `${lineup?.status_label || statusLabels[status]}${confidenceText}`,
+    statusClass: `lineup-status-${status}`,
+    label: pieces.length ? pieces.join(" · ") : "LHH/RHH unavailable",
+    completeness: lineup?.completeness || { count: players.length, expected: 9 },
+    changed: Boolean(lineup?.changed_since_last_refresh)
   };
 }
 
@@ -249,60 +272,342 @@ export function buildMlbBullpenModule({
   };
 }
 
-export function buildMlbMatchupModule({ game, side }) {
+export function buildMlbMatchupModule({
+  game,
+  side,
+  timeframe = "last_30",
+  location = "all"
+}) {
   const isAwayPitcher = side === "away";
-  const lineupMatchups =
-    game.pitcher_vs_lineup ||
-    game.pitcher_vs_projected_lineup ||
-    {};
+  const pitcher = isAwayPitcher ? game.pitchers?.away : game.pitchers?.home;
+  const opponent = isAwayPitcher ? game.home_team : game.away_team;
+  const opposingLineup = isAwayPitcher ? game.lineups?.home : game.lineups?.away;
+  const opposingOffense = isAwayPitcher ? game.offense?.home : game.offense?.away;
+  const offenseLocation = isAwayPitcher ? "home" : "away";
+  const pitcherHand = pitcher?.throws === "L" ? "L" : pitcher?.throws === "R" ? "R" : null;
+  const timeframeKey = ["last_7", "last_30", "season"].includes(timeframe) ? timeframe : "last_30";
+  const activeLocation = ["all", "home", "away"].includes(location) ? location : "all";
 
-  const matchupData = isAwayPitcher
-    ? lineupMatchups.away_pitcher
-    : lineupMatchups.home_pitcher;
+  const players = Array.isArray(opposingLineup?.players)
+    ? [...opposingLineup.players].sort((a, b) => Number(a.order || 99) - Number(b.order || 99)).slice(0, 9)
+    : [];
+  const storedMix = opposingLineup?.matchup_handedness;
+  const computedMix = computeMatchupHandednessCounts(players, pitcher?.throws);
+  const leftCount = finiteCount(storedMix?.lhh, computedMix.lhh);
+  const rightCount = finiteCount(storedMix?.rhh, computedMix.rhh);
+  const switchCount = finiteCount(storedMix?.switch_hitters, computedMix.switch_hitters);
 
-  const pitcher = isAwayPitcher
-    ? game.pitchers?.away
-    : game.pitchers?.home;
+  const pitcherPeriod = pitcher?.stats?.[timeframeKey]?.[activeLocation] || {};
+  const pitcherVsLeft = pitcherPeriod?.vs_lhh || {};
+  const pitcherVsRight = pitcherPeriod?.vs_rhh || {};
+  const offensePeriod = opposingOffense?.stats?.[timeframeKey] || {};
+  const offenseAll = offensePeriod?.all || {};
+  const offenseLocationBlock = offensePeriod?.[offenseLocation] || {};
 
-  const opponent = isAwayPitcher
-    ? game.home_team
-    : game.away_team;
+  const offenseMetric = selectOffenseMatchupMetric(offenseAll);
+  const locationMetric = selectOffenseMatchupMetric(offenseLocationBlock);
+  const leftProfile = summarizePitcherSplit(pitcherVsLeft, leftCount, "LHH");
+  const rightProfile = summarizePitcherSplit(pitcherVsRight, rightCount, "RHH");
+  const offenseProfile = summarizeOffenseSplit(offenseMetric, pitcherHand, "overall");
+  const locationProfile = summarizeOffenseSplit(offenseLocationBlock?.[offenseMetric.metric] || {}, pitcherHand, offenseLocation);
 
-  const summary = matchupData?.summary || matchupData || {};
+  const notes = buildMatchupNotes({
+    pitcherName: pitcher?.name || "The probable starter",
+    opponentName: opponent?.abbr || "The opposing lineup",
+    leftCount,
+    rightCount,
+    leftProfile,
+    rightProfile,
+    offenseProfile,
+    locationProfile,
+    pitcherHand,
+    offenseLocation
+  });
 
-  const opposingLineup = isAwayPitcher
-    ? game.lineups?.home
-    : game.lineups?.away;
-
-  const lineupStatus =
-    opposingLineup?.status ||
-    matchupData?.lineup_status ||
-    "projected";
-
-  const lineupLabel =
-    opposingLineup?.status_label ||
-    matchupData?.lineup_label ||
-    (
-      lineupStatus === "confirmed"
-        ? "Confirmed Lineup"
-        : "Projected Lineup"
-    );
+  const status = opposingLineup?.status || "unknown";
+  const completeness = opposingLineup?.completeness || { count: players.length, expected: 9 };
+  const bvpKey = isAwayPitcher ? "away_pitcher" : "home_pitcher";
+  const bvpBatters = game?.pitcher_vs_lineup?.[bvpKey]?.batters || {};
 
   return {
-    title:
-      `${matchupData?.pitcher || pitcher?.name || "Starter TBD"} ` +
-      `vs ${matchupData?.opponent || opponent?.abbr || "Opponent"}`,
-    lineupStatus,
-    lineupLabel,
-    metrics: [
-      normalizeMatchupMetric("PA", summary.pa, "integer"),
-      normalizeMatchupMetric("K", summary.k, "integer"),
-      normalizeMatchupMetric("BB", summary.bb, "integer"),
-      normalizeMatchupMetric("AVG", summary.avg, "average"),
-      normalizeMatchupMetric("OPS", summary.ops, "average"),
-      normalizeMatchupMetric("HR", summary.hr, "integer")
-    ]
+    title: `${pitcher?.name || "Starter TBD"} vs ${opponent?.abbr || "Opponent"}`,
+    contextLabel: `${formatTimeframeShort(timeframeKey)} · Pitcher ${formatLocationLabel(activeLocation)} · Offense ${capitalize(offenseLocation)}`,
+    statusLabel: opposingLineup?.status_label || capitalize(status),
+    statusClass: `lineup-status-${status}`,
+    completenessLabel: `${completeness.count ?? players.length}/${completeness.expected ?? 9}`,
+    leftCount,
+    rightCount,
+    switchCount,
+    lineup: players.map(player => {
+      const expectedSide = player?.matchup_bats || inferMatchupBatSide(player?.bats, pitcher?.throws);
+      const isSwitch = Boolean(player?.is_switch_hitter || player?.bats === "S");
+      return {
+        id: player?.id ?? null,
+        order: player?.order ?? "—",
+        name: player?.name || "Unknown hitter",
+        detailsUrl: player?.id ? `player.html?id=${encodeURIComponent(player.id)}` : "#",
+        sideLabel: isSwitch ? `S* → ${expectedSide || "?"}` : (expectedSide || player?.bats || "?"),
+        sideClass: expectedSide === "L" ? "bats-left" : expectedSide === "R" ? "bats-right" : "bats-unknown",
+        tooltip: isSwitch
+          ? `Switch hitter projected to bat ${expectedSide === "L" ? "left" : expectedSide === "R" ? "right" : "from an unknown side"} against this pitcher.`
+          : `${player?.bats || "Unknown"}-handed hitter.`,
+        bvp: normalizeBvpRow(bvpBatters?.[String(player?.id)] || {})
+      };
+    }),
+    lineupHistory: aggregateBvpLineup(players, bvpBatters),
+    pitcherVsLeft: leftProfile,
+    pitcherVsRight: rightProfile,
+    offenseHandLabel: pitcherHand ? `${opponent?.abbr || "Offense"} vs ${pitcherHand}HP` : "Offense vs starter hand",
+    locationHandLabel: pitcherHand ? `${capitalize(offenseLocation)} vs ${pitcherHand}HP` : `${capitalize(offenseLocation)} vs starter hand`,
+    offenseVsHand: offenseProfile,
+    locationVsHand: locationProfile,
+    notes
   };
+}
+
+function normalizeBvpRow(row = {}) {
+  const pa = Number(row?.plate_appearances);
+  const ops = Number(row?.ops);
+  const avg = Number(row?.avg);
+  const available = Boolean(row?.available) && Number.isFinite(pa) && pa > 0;
+  const opacity = available ? Math.max(0.22, Math.min(1, pa / 50)) : 0.22;
+  let resultClass = "bvp-missing";
+  // Color is from the pitcher's perspective: low hitter OPS is favorable.
+  if (available && Number.isFinite(ops)) {
+    if (ops <= 0.650) resultClass = "bvp-pitcher-strong";
+    else if (ops >= 0.850) resultClass = "bvp-pitcher-poor";
+    else if (ops >= 0.750) resultClass = "bvp-neutral-high";
+    else resultClass = "bvp-neutral-low";
+  }
+  return {
+    available,
+    pa: available ? pa : 0,
+    strikeouts: Number(row?.strikeouts) || 0,
+    walks: Number(row?.walks) || 0,
+    avg: Number.isFinite(avg) ? avg : null,
+    ops: Number.isFinite(ops) ? ops : null,
+    opacity,
+    resultClass,
+    hits: Number.isFinite(Number(row?.hits)) ? Number(row.hits) : null,
+    atBats: Number.isFinite(Number(row?.at_bats)) ? Number(row.at_bats) : null,
+    totalBases: Number.isFinite(Number(row?.total_bases)) ? Number(row.total_bases) : null,
+    hitByPitch: Number(row?.hit_by_pitch) || 0,
+    sacFlies: Number(row?.sac_flies) || 0,
+    obp: Number.isFinite(Number(row?.obp)) ? Number(row.obp) : null,
+    slg: Number.isFinite(Number(row?.slg)) ? Number(row.slg) : null,
+    source: row?.source || "Career BvP"
+  };
+}
+
+function aggregateBvpLineup(players, bvpBatters) {
+  const rows = (Array.isArray(players) ? players : [])
+    .map(player => normalizeBvpRow(bvpBatters?.[String(player?.id)] || {}))
+    .filter(row => row.available);
+  const totals = rows.reduce((acc, row) => {
+    acc.pa += row.pa || 0;
+    acc.k += row.strikeouts || 0;
+    acc.bb += row.walks || 0;
+    acc.h += row.hits || 0;
+    acc.ab += row.atBats || 0;
+    acc.tb += row.totalBases || 0;
+    acc.hbp += row.hitByPitch || 0;
+    acc.sf += row.sacFlies || 0;
+    return acc;
+  }, { pa: 0, k: 0, bb: 0, h: 0, ab: 0, tb: 0, hbp: 0, sf: 0 });
+  const avg = totals.ab > 0 ? totals.h / totals.ab : null;
+  const obpDen = totals.ab + totals.bb + totals.hbp + totals.sf;
+  const obp = obpDen > 0 ? (totals.h + totals.bb + totals.hbp) / obpDen : null;
+  const slg = totals.ab > 0 ? totals.tb / totals.ab : null;
+  const ops = Number.isFinite(obp) && Number.isFinite(slg) ? obp + slg : null;
+  return {
+    available: totals.pa > 0,
+    hittersWithHistory: rows.length,
+    pa: totals.pa,
+    strikeouts: totals.k,
+    walks: totals.bb,
+    avg,
+    ops
+  };
+}
+
+function finiteCount(value, fallback = 0) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : fallback;
+}
+
+function computeMatchupHandednessCounts(players, pitcherThrows) {
+  let lhh = 0;
+  let rhh = 0;
+  let unknown = 0;
+  let switchHitters = 0;
+  (Array.isArray(players) ? players : []).forEach(player => {
+    const bats = String(player?.bats || "").toUpperCase();
+    const expected = String(player?.matchup_bats || inferMatchupBatSide(bats, pitcherThrows) || "").toUpperCase();
+    if (bats === "S") switchHitters += 1;
+    if (expected === "L") lhh += 1;
+    else if (expected === "R") rhh += 1;
+    else unknown += 1;
+  });
+  return { lhh, rhh, unknown, switch_hitters: switchHitters };
+}
+
+function selectOffenseMatchupMetric(block) {
+  const preferred = ["OPS", "AVG", "OBP", "K%", "BB%"];
+  for (const metric of preferred) {
+    const data = block?.[metric];
+    if (data?.vs_hand !== null && data?.vs_hand !== undefined) {
+      return { metric, data };
+    }
+  }
+  return { metric: "OPS", data: {} };
+}
+
+function summarizePitcherSplit(block, hitterCount, label) {
+  const candidates = ["xfip", "fip", "whip", "avg_against"];
+  let key = candidates.find(metric => Number.isFinite(Number(block?.[metric])));
+  if (!key) {
+    return {
+      summary: "Unavailable",
+      detail: `${hitterCount} projected ${label}`,
+      heatClass: "metric-missing",
+      rank: null
+    };
+  }
+  const rank = Number(block?.ranks?.[key]);
+  const poolSize = Number(block?.rank_pool_size?.[key]);
+  const validRank = Number.isFinite(rank) && rank > 0 && (!Number.isFinite(poolSize) || rank <= poolSize);
+  return {
+    summary: rankSummary(validRank ? rank : null, poolSize),
+    detail: `${formatPitcherMetricLabel(key)} ${formatPitcherMetricValue(key, block[key])} · ${hitterCount} projected ${label}`,
+    heatClass: validRank ? getRankHeatClass(rank, poolSize || 30) : "metric-missing",
+    rank: validRank ? rank : null,
+    poolSize: Number.isFinite(poolSize) ? poolSize : null,
+    metric: key
+  };
+}
+
+function summarizeOffenseSplit(selection, pitcherHand, location) {
+  const metric = selection?.metric || "OPS";
+  const data = selection?.data || selection || {};
+  const value = data?.vs_hand;
+  const rank = Number(data?.vs_hand_rank);
+  const coverage = Number(data?.vs_hand_rank_coverage);
+  const hasValue = value !== null && value !== undefined && value !== "";
+  const validRank = Number.isFinite(rank) && rank >= 1 && rank <= 30;
+  return {
+    summary: validRank ? ordinal(rank) : "Unavailable",
+    detail: hasValue ? `${metric} ${formatOffenseValue(metric, value)}${pitcherHand ? ` vs ${pitcherHand}HP` : ""}` : `${capitalize(location)} split unavailable`,
+    heatClass: hasValue && validRank ? getRankHeatClass(rank, 30) : "metric-missing",
+    rank: validRank ? rank : null,
+    poolSize: Number.isFinite(coverage) ? coverage : 30,
+    metric
+  };
+}
+
+function buildMatchupNotes({ pitcherName, opponentName, leftCount, rightCount, leftProfile, rightProfile, offenseProfile, locationProfile, pitcherHand, offenseLocation }) {
+  const notes = [];
+  const dominantSide = leftCount > rightCount ? "left-handed" : rightCount > leftCount ? "right-handed" : null;
+  if (dominantSide) {
+    notes.push({
+      label: "Lineup shape",
+      text: `${opponentName} projects ${Math.max(leftCount, rightCount)} ${dominantSide} hitters against ${pitcherName}.`,
+      kind: "neutral"
+    });
+  }
+
+  const splitProfiles = [
+    { side: "left-handed hitters", count: leftCount, profile: leftProfile },
+    { side: "right-handed hitters", count: rightCount, profile: rightProfile }
+  ].filter(item => item.count > 0 && Number.isFinite(item.profile?.rank));
+  if (splitProfiles.length) {
+    const weakest = [...splitProfiles].sort((a, b) => b.profile.rank - a.profile.rank)[0];
+    const strongest = [...splitProfiles].sort((a, b) => a.profile.rank - b.profile.rank)[0];
+    notes.push({
+      label: "Largest pitcher concern",
+      text: `${pitcherName}'s weaker available split is against ${weakest.side} (${rankSummary(weakest.profile.rank, weakest.profile.poolSize).toLowerCase()}); ${weakest.count} are projected.`,
+      kind: weakest.profile.rank > Math.max(18, (weakest.profile.poolSize || 30) * 0.6) ? "concern" : "neutral"
+    });
+    if (strongest !== weakest) {
+      notes.push({
+        label: "Pitcher strength",
+        text: `${pitcherName}'s stronger available split is against ${strongest.side} (${rankSummary(strongest.profile.rank, strongest.profile.poolSize).toLowerCase()}).`,
+        kind: "strength"
+      });
+    }
+  }
+
+  if (Number.isFinite(offenseProfile?.rank)) {
+    notes.push({
+      label: "Offense vs hand",
+      text: `${opponentName} ranks ${ordinal(offenseProfile.rank)} against ${pitcherHand || "the starter's"}HP in the selected timeframe.`,
+      kind: offenseProfile.rank <= 10 ? "strength" : offenseProfile.rank >= 21 ? "concern" : "neutral"
+    });
+  }
+  if (Number.isFinite(locationProfile?.rank)) {
+    notes.push({
+      label: "Game-location split",
+      text: `${opponentName} ranks ${ordinal(locationProfile.rank)} ${offenseLocation} against ${pitcherHand || "the starter's"}HP in the selected timeframe.`,
+      kind: locationProfile.rank <= 10 ? "strength" : locationProfile.rank >= 21 ? "concern" : "neutral"
+    });
+  }
+  return notes;
+}
+
+function rankSummary(rank, poolSize) {
+  if (!Number.isFinite(Number(rank))) return "Unavailable";
+  const numericRank = Number(rank);
+  const numericPool = Number(poolSize);
+  if (Number.isFinite(numericPool) && numericPool > 30) {
+    const percentile = numericRank / numericPool;
+    if (percentile <= 0.2) return "Elite";
+    if (percentile <= 0.4) return "Strong";
+    if (percentile <= 0.6) return "Average";
+    if (percentile <= 0.8) return "Weak";
+    return "Poor";
+  }
+  if (numericRank <= 6) return "Elite";
+  if (numericRank <= 12) return "Strong";
+  if (numericRank <= 18) return "Average";
+  if (numericRank <= 24) return "Weak";
+  return "Poor";
+}
+
+function ordinal(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "—";
+  const mod100 = number % 100;
+  const suffix = mod100 >= 11 && mod100 <= 13 ? "th" : ({1:"st",2:"nd",3:"rd"}[number % 10] || "th");
+  return `${number}${suffix}`;
+}
+
+function inferMatchupBatSide(bats, pitcherThrows) {
+  if (bats === "L" || bats === "R") return bats;
+  if (bats === "S" && pitcherThrows === "R") return "L";
+  if (bats === "S" && pitcherThrows === "L") return "R";
+  return null;
+}
+
+function formatPitcherMetricLabel(key) {
+  return ({xfip:"xFIP", fip:"FIP", whip:"WHIP", avg_against:"AVG A"})[key] || key;
+}
+
+function formatPitcherMetricValue(key, value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return "—";
+  return key === "avg_against" ? numeric.toFixed(3).replace(/^0/, "") : numeric.toFixed(2);
+}
+
+function formatOffenseValue(metric, value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return "—";
+  if (["AVG", "OBP", "OPS"].includes(metric)) return numeric.toFixed(3).replace(/^0/, "");
+  if (["K%", "BB%"].includes(metric)) return `${numeric.toFixed(1)}%`;
+  return numeric.toFixed(2);
+}
+
+function capitalize(value) {
+  const text = String(value || "");
+  return text ? text[0].toUpperCase() + text.slice(1) : "";
 }
 
 export function buildMlbWeatherModule({ game }) {

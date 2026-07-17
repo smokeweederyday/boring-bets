@@ -2121,3 +2121,235 @@ a.lifecycle-item:hover {
 .offense-data-table td {
   white-space: nowrap;
 }
+
+/* Phase 8B — Matchup Intelligence */
+.matchup-intelligence-card {
+  border: 1px solid rgba(72, 255, 166, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  background: linear-gradient(180deg, rgba(5, 20, 17, 0.94), rgba(3, 12, 11, 0.96));
+}
+.matchup-intelligence-heading,
+.matchup-summary-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .75rem;
+}
+.matchup-intelligence-heading h3 { margin: .2rem 0; }
+.matchup-intelligence-heading p { margin: 0; color: var(--muted); font-size: .78rem; }
+.matchup-lineup-status { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.matchup-summary-strip {
+  margin: .85rem 0;
+  padding: .65rem .75rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,.035);
+  font-size: .76rem;
+}
+.matchup-summary-strip strong { color: var(--green, #44ff9a); }
+.matchup-lineup-order {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: .35rem;
+  margin: 0 0 .9rem;
+  padding: 0;
+  list-style: none;
+}
+.matchup-lineup-order li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0,1fr) auto;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .5rem;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 8px;
+  font-size: .72rem;
+}
+.matchup-order-number { color: var(--muted); }
+.matchup-player-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.matchup-bat-side { font-weight: 800; font-size: .65rem; }
+.matchup-bat-side.bats-left { color: #65e9ff; }
+.matchup-bat-side.bats-right { color: #ffbd78; }
+.matchup-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: .5rem;
+}
+.matchup-comparison-item {
+  padding: .65rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.matchup-comparison-item span,
+.matchup-comparison-item small { display:block; }
+.matchup-comparison-item span { color: var(--muted); font-size: .68rem; }
+.matchup-comparison-item strong { display:block; margin:.18rem 0; }
+.matchup-comparison-item small { font-size:.68rem; color:inherit; opacity:.82; }
+.matchup-notes { margin-top:.85rem; padding-top:.7rem; border-top:1px solid rgba(255,255,255,.07); }
+.matchup-notes h4 { margin:0 0 .45rem; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; }
+.matchup-notes p { margin:.38rem 0; font-size:.76rem; line-height:1.45; }
+.matchup-notes p.strength strong { color:#63ff9b; }
+.matchup-notes p.concern strong { color:#ff7184; }
+@media (max-width:760px) {
+  .matchup-lineup-order { grid-template-columns: 1fr; }
+  .matchup-comparison-grid { grid-template-columns: 1fr; }
+}
+
+/* Phase 8B: batter-vs-pitcher lineup history */
+.matchup-lineup-order .matchup-bvp-row {
+  display: grid;
+  grid-template-columns: 2rem minmax(8rem, 1fr) 4.5rem repeat(5, minmax(3.6rem, auto));
+  gap: .55rem;
+  align-items: center;
+  opacity: var(--bvp-opacity, .22);
+  transition: opacity .18s ease, background .18s ease, border-color .18s ease;
+}
+.matchup-lineup-order .matchup-bvp-row:hover { opacity: 1; }
+.matchup-bvp-stat,
+.matchup-bvp-empty {
+  font-size: .68rem;
+  text-align: right;
+  white-space: nowrap;
+  color: currentColor;
+}
+.matchup-bvp-stat b { font-variant-numeric: tabular-nums; }
+.matchup-bvp-empty { grid-column: span 5; color: var(--muted, #88958f); }
+.matchup-bvp-row.bvp-pitcher-strong { color: #63ff9b; border-color: rgba(99,255,155,.28); background: rgba(26,90,55,.13); }
+.matchup-bvp-row.bvp-pitcher-poor { color: #ff7184; border-color: rgba(255,113,132,.28); background: rgba(100,25,38,.13); }
+.matchup-bvp-row.bvp-neutral-high,
+.matchup-bvp-row.bvp-neutral-low { color: var(--text, #ecf4f0); }
+.matchup-bvp-row.bvp-missing { color: var(--muted, #88958f); }
+@media (max-width: 900px) {
+  .matchup-lineup-order .matchup-bvp-row {
+    grid-template-columns: 1.75rem minmax(7rem, 1fr) 4rem repeat(3, minmax(3.3rem, auto));
+  }
+  .matchup-bvp-stat:nth-of-type(4),
+  .matchup-bvp-stat:nth-of-type(5) { display: none; }
+}
+@media (max-width: 620px) {
+  .matchup-lineup-order .matchup-bvp-row {
+    grid-template-columns: 1.5rem minmax(6.5rem, 1fr) 3.5rem;
+    row-gap: .25rem;
+  }
+  .matchup-bvp-stat,
+  .matchup-bvp-empty { grid-column: auto; text-align: left; }
+  .matchup-bvp-stat { display: inline-block !important; }
+}
+
+/* Phase 8B: clean lineup-history intelligence */
+.matchup-lineup-history {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: .7rem 0;
+  padding: .75rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,.025);
+}
+.matchup-lineup-history > div:first-child small {
+  display: block;
+  margin-top: .2rem;
+  color: var(--muted);
+  font-size: .65rem;
+}
+.matchup-lineup-history-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(3.2rem, auto));
+  gap: .8rem;
+}
+.matchup-lineup-history-grid span { text-align: right; }
+.matchup-lineup-history-grid small,
+.matchup-lineup-history-grid strong { display: block; }
+.matchup-lineup-history-grid small { color: var(--muted); font-size: .62rem; }
+.matchup-lineup-history-grid strong { font-variant-numeric: tabular-nums; }
+.matchup-lineup-order .matchup-bvp-shell {
+  position: relative;
+  display: block;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.matchup-lineup-order .matchup-bvp-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(8rem,1fr) 5rem;
+  gap: .55rem;
+  align-items: center;
+  width: 100%;
+  padding: .65rem;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 1 !important;
+  background-color: rgba(255,255,255,calc(.015 + (var(--bvp-bg-opacity, .22) * .08)));
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.matchup-lineup-order .matchup-bvp-row:hover,
+.matchup-lineup-order .matchup-bvp-row:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+}
+.matchup-bvp-row.bvp-pitcher-strong {
+  color: #63ff9b;
+  border-color: #63ff9b;
+  background-color: rgba(31,108,66,calc(.02 + (var(--bvp-bg-opacity, .22) * .16)));
+}
+.matchup-bvp-row.bvp-pitcher-poor {
+  color: #ff7184;
+  border-color: #ff7184;
+  background-color: rgba(119,28,43,calc(.02 + (var(--bvp-bg-opacity, .22) * .16)));
+}
+.matchup-bvp-row.bvp-neutral-high,
+.matchup-bvp-row.bvp-neutral-low {
+  color: var(--text, #ecf4f0);
+  border-color: rgba(236,244,240,.45);
+  background-color: rgba(236,244,240,calc(.01 + (var(--bvp-bg-opacity, .22) * .06)));
+}
+.matchup-bvp-row.bvp-missing {
+  color: var(--muted, #88958f);
+  border-color: rgba(136,149,143,.3);
+  background-color: rgba(136,149,143,.02);
+}
+.matchup-bvp-hovercard {
+  position: absolute;
+  z-index: 50;
+  left: 50%;
+  bottom: calc(100% + .5rem);
+  transform: translate(-50%, .25rem);
+  min-width: 15rem;
+  padding: .7rem;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  background: rgba(5,13,11,.97);
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  color: inherit;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease, visibility .15s ease;
+}
+.matchup-bvp-hovercard strong,
+.matchup-bvp-hovercard span,
+.matchup-bvp-hovercard small { display: block; }
+.matchup-bvp-hovercard span { margin-top: .25rem; color: var(--text); font-size: .7rem; }
+.matchup-bvp-hovercard small { margin-top: .35rem; color: var(--muted); font-size: .63rem; }
+.matchup-bvp-row:hover .matchup-bvp-hovercard,
+.matchup-bvp-row:focus-visible .matchup-bvp-hovercard {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+@media (max-width:760px) {
+  .matchup-lineup-history { align-items: flex-start; flex-direction: column; }
+  .matchup-lineup-history-grid { width:100%; grid-template-columns:repeat(5,1fr); gap:.35rem; }
+  .matchup-lineup-history-grid span { text-align:left; }
+  .matchup-lineup-order .matchup-bvp-row { grid-template-columns:1.5rem minmax(6.5rem,1fr) 4rem; }
+  .matchup-bvp-hovercard { left:auto; right:0; transform:translateY(.25rem); min-width:min(16rem,80vw); }
+  .matchup-bvp-row:hover .matchup-bvp-hovercard,
+  .matchup-bvp-row:focus-visible .matchup-bvp-hovercard { transform:translateY(0); }
+}

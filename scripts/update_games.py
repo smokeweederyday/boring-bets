@@ -29,8 +29,10 @@ from mlb.bullpen import (
     build_bullpen_snapshot,
 )
 
+from mlb.batter_vs_pitcher import build_bvp_for_game
 from mlb.lineups import (
     build_lineup_snapshot,
+    annotate_lineup_for_pitcher,
 )
 
 from mlb.weather import (
@@ -727,13 +729,42 @@ def enrich_lineups(
                 existing_lineup
             )
 
+            previous_signature = existing_lineup.get("signature")
             merged_lineup.update(
                 incoming_lineup
             )
+            current_signature = merged_lineup.get("signature")
+            changed = bool(
+                previous_signature
+                and current_signature
+                and previous_signature != current_signature
+            )
+            merged_lineup["changed_since_last_refresh"] = changed
+            if changed:
+                merged_lineup["previous_signature"] = previous_signature
+                merged_lineup["change_count"] = int(existing_lineup.get("change_count") or 0) + 1
+            else:
+                merged_lineup["change_count"] = int(existing_lineup.get("change_count") or 0)
 
             existing_lineups[
                 side
             ] = merged_lineup
+
+        away_pitcher_throws = (
+            game.get("pitchers", {}).get("away", {}).get("throws")
+        )
+        home_pitcher_throws = (
+            game.get("pitchers", {}).get("home", {}).get("throws")
+        )
+        # Away lineup faces the home pitcher; home lineup faces the away pitcher.
+        existing_lineups["away"] = annotate_lineup_for_pitcher(
+            existing_lineups.get("away", {}),
+            home_pitcher_throws,
+        )
+        existing_lineups["home"] = annotate_lineup_for_pitcher(
+            existing_lineups.get("home", {}),
+            away_pitcher_throws,
+        )
 
         game["lineups"] = (
             existing_lineups
@@ -744,6 +775,19 @@ def enrich_lineups(
         )
 
     return enriched_games
+
+
+def enrich_batter_vs_pitcher(games: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    enriched = []
+    for stored_game in games:
+        game = dict(stored_game)
+        try:
+            print(f"Fetching batter-vs-pitcher history: {game.get('id', 'unknown')}" )
+            game["pitcher_vs_lineup"] = build_bvp_for_game(game)
+        except Exception as error:
+            print(f"BvP refresh retained prior data for {game.get('id')}: {error}")
+        enriched.append(game)
+    return enriched
 
 
 def enrich_weather(
@@ -1948,6 +1992,10 @@ def main() -> None:
     )
 
     merged_games = enrich_lineups(
+        merged_games,
+    )
+
+    merged_games = enrich_batter_vs_pitcher(
         merged_games,
     )
 

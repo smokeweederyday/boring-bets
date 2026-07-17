@@ -12,7 +12,7 @@ import {
 
 import {
   renderMatchupWidget
-} from "./assets/js/widgets/matchupWidget.js";
+} from "./assets/js/widgets/matchupWidget.js?v=phase8b-fix1";
 
 import {
   renderWeatherWidget
@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js";
+} from "./assets/js/sports/mlbEngine.js?v=phase8b-fix1";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
@@ -585,6 +585,7 @@ function renderPitchers() {
     onLocationChange: location => {
       state.awayPitcherLocation = location;
       renderPitchers();
+      renderLineupMatchups();
     }
   });
 
@@ -609,6 +610,7 @@ function renderPitchers() {
     onLocationChange: location => {
       state.homePitcherLocation = location;
       renderPitchers();
+      renderLineupMatchups();
     }
   });
 }
@@ -661,7 +663,9 @@ function renderLineupMatchups() {
   const awayPitcherMatchupModule =
     buildMlbMatchupModule({
       game,
-      side: "away"
+      side: "away",
+      timeframe: state.timeframe,
+      location: state.awayPitcherLocation
     });
 
   renderMatchupWidget({
@@ -677,7 +681,9 @@ function renderLineupMatchups() {
   const homePitcherMatchupModule =
     buildMlbMatchupModule({
       game,
-      side: "home"
+      side: "home",
+      timeframe: state.timeframe,
+      location: state.homePitcherLocation
     });
 
   renderMatchupWidget({

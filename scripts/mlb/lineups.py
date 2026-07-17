@@ -107,6 +107,73 @@ def extract_player_bats(
     return None
 
 
+def expected_batting_side(bats: str | None, pitcher_throws: str | None) -> str | None:
+    bats_code = str(bats or "").upper()
+    throws_code = str(pitcher_throws or "").upper()
+    if bats_code in ("L", "R"):
+        return bats_code
+    if bats_code == "S":
+        if throws_code == "R":
+            return "L"
+        if throws_code == "L":
+            return "R"
+    return None
+
+
+def lineup_signature(players: list[dict[str, Any]]) -> str:
+    ordered = sorted(players, key=lambda player: (player.get("order") or 99))
+    return "|".join(
+        f"{player.get('order') or 0}:{player.get('id') or player.get('name') or '?'}"
+        for player in ordered[:9]
+    )
+
+
+def classify_lineup_status(player_count: int, source_confirmed: bool = False) -> tuple[str, str, float]:
+    if player_count <= 0:
+        return "unknown", "Lineup Unknown", 0.0
+    if source_confirmed and player_count >= 9:
+        return "confirmed", "Confirmed Lineup", 1.0
+    if player_count >= 9:
+        return "projected", "Projected Lineup", 0.75
+    return "partial", f"Partial Lineup ({player_count}/9)", round(min(0.7, player_count / 9), 2)
+
+
+def annotate_lineup_for_pitcher(
+    lineup: dict[str, Any],
+    pitcher_throws: str | None,
+) -> dict[str, Any]:
+    annotated = dict(lineup or {})
+    players = []
+    left = right = unknown = switch = 0
+    for raw_player in annotated.get("players") or []:
+        player = dict(raw_player)
+        bats = normalize_bats(player.get("bats"))
+        matchup_bats = expected_batting_side(bats, pitcher_throws)
+        player["bats"] = bats
+        player["matchup_bats"] = matchup_bats
+        player["is_switch_hitter"] = bats == "S"
+        if bats == "S":
+            switch += 1
+        if matchup_bats == "L":
+            left += 1
+        elif matchup_bats == "R":
+            right += 1
+        else:
+            unknown += 1
+        players.append(player)
+
+    annotated["players"] = players
+    annotated["opposing_pitcher_throws"] = str(pitcher_throws or "").upper() or None
+    annotated["matchup_handedness"] = {
+        "lhh": left,
+        "rhh": right,
+        "unknown": unknown,
+        "switch_hitters": switch,
+        "counted": left + right,
+    }
+    annotated["signature"] = lineup_signature(players)
+    return annotated
+
 def parse_lineup_side(
     team_box: dict[str, Any],
     team: dict[str, Any],
@@ -224,8 +291,12 @@ def parse_lineup_side(
         )
     )
 
-    confirmed = (
-        len(parsed_players) >= 9
+    player_count = len(parsed_players)
+    # A battingOrder supplied by MLB's live game feed is authoritative once all
+    # nine positions are present. Partial orders are explicitly marked partial.
+    status, status_label, confidence = classify_lineup_status(
+        player_count,
+        source_confirmed=player_count >= 9,
     )
 
     return {
@@ -234,20 +305,20 @@ def parse_lineup_side(
             or team.get("name")
         ),
         "team_id": team.get("id"),
-        "status": (
-            "confirmed"
-            if confirmed
-            else "projected"
-        ),
-        "status_label": (
-            "Confirmed Lineup"
-            if confirmed
-            else "Projected Lineup"
-        ),
+        "status": status,
+        "status_label": status_label,
+        "completeness": {
+            "count": player_count,
+            "expected": 9,
+            "ratio": round(player_count / 9, 3) if player_count else 0.0,
+        },
+        "confidence": confidence,
+        "source": "MLB live game feed",
         "last_updated": datetime.now(
             timezone.utc
         ).isoformat(),
         "players": parsed_players,
+        "signature": lineup_signature(parsed_players),
     }
 
 

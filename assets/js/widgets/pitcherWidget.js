@@ -39,6 +39,7 @@ export function renderPitcherWidget({
             <span class="pitcher-lineup-inline ${escapeHtml(module.lineupStatusClass || "")}"
               title="${escapeAttribute(module.lineupStatusLabel || "Projected lineup")}">
               ${escapeHtml(module.lineupHandednessLabel || "LHH/RHH unavailable")}
+              ${module.lineupChanged ? '<strong class="lineup-change-flag">UPDATED</strong>' : ''}
             </span>
           </div>
         </div>
