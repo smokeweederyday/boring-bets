@@ -10,3 +10,21 @@ data/cache/
 data/*progress*.json
 __pycache__/
 *.pyc
+
+# macOS metadata
+.DS_Store
+
+# Local backups and migration artifacts
+*.before-*
+*.backup
+*.bak
+data/*.before-*
+
+# macOS metadata
+.DS_Store
+
+# Local backups and migration artifacts
+*.before-*
+*.backup
+*.bak
+data/*.before-*
