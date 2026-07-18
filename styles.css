@@ -2215,8 +2215,8 @@ a.lifecycle-item:hover {
 }
 .matchup-bvp-stat b { font-variant-numeric: tabular-nums; }
 .matchup-bvp-empty { grid-column: span 5; color: var(--muted, #88958f); }
-.matchup-bvp-row.bvp-pitcher-strong { color: #63ff9b; border-color: rgba(99,255,155,.28); background: rgba(26,90,55,.13); }
-.matchup-bvp-row.bvp-pitcher-poor { color: #ff7184; border-color: rgba(255,113,132,.28); background: rgba(100,25,38,.13); }
+.matchup-bvp-row.bvp-pitcher-strong { color: #ff7184; border-color: rgba(255,113,132,.28); background: rgba(100,25,38,.13); }
+.matchup-bvp-row.bvp-pitcher-poor { color: #63ff9b; border-color: rgba(99,255,155,.28); background: rgba(26,90,55,.13); }
 .matchup-bvp-row.bvp-neutral-high,
 .matchup-bvp-row.bvp-neutral-low { color: var(--text, #ecf4f0); }
 .matchup-bvp-row.bvp-missing { color: var(--muted, #88958f); }

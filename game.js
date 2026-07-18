@@ -1177,6 +1177,168 @@ function formatEvaluationHeading(evaluation) {
   ).toString().toUpperCase();
 }
 
+const GAME_NAVIGATION_ANCHOR_SELECTOR = [
+  "#awayPitcherCard",
+  "#homePitcherCard",
+  "#awayOffenseCard",
+  "#homeOffenseCard",
+  "#awayPitcherLineupCard",
+  "#homePitcherLineupCard",
+  "#awayBullpenCard",
+  "#homeBullpenCard",
+  "#pitching",
+  "#bullpens",
+  "#weather",
+  "#market",
+  "#context",
+  "#gameContext",
+  "#gameArticles",
+  "#gameOfficialPlays",
+  "#gameResults",
+  "#gameEvaluations",
+  "#gameDetails"
+].join(",");
+
+function captureGameNavigationScrollState() {
+  const viewportX =
+    Math.max(
+      0,
+      Math.min(
+        window.innerWidth - 1,
+        window.innerWidth / 2
+      )
+    );
+
+  const viewportY =
+    Math.max(
+      0,
+      Math.min(
+        window.innerHeight - 1,
+        window.innerHeight / 2
+      )
+    );
+
+  const centeredElement =
+    document.elementFromPoint(
+      viewportX,
+      viewportY
+    );
+
+  let anchor =
+    centeredElement?.closest?.(
+      GAME_NAVIGATION_ANCHOR_SELECTOR
+    ) || null;
+
+  if (!anchor) {
+    const candidates = [
+      ...document.querySelectorAll(
+        GAME_NAVIGATION_ANCHOR_SELECTOR
+      )
+    ].filter(element => {
+      const rect =
+        element.getBoundingClientRect();
+
+      return (
+        rect.height > 0 &&
+        rect.bottom >= 0 &&
+        rect.top <= window.innerHeight
+      );
+    });
+
+    anchor =
+      candidates
+        .map(element => {
+          const rect =
+            element.getBoundingClientRect();
+
+          const center =
+            rect.top + rect.height / 2;
+
+          return {
+            element,
+            distance:
+              Math.abs(center - viewportY)
+          };
+        })
+        .sort(
+          (a, b) =>
+            a.distance - b.distance
+        )[0]?.element || null;
+  }
+
+  if (!anchor?.id) {
+    return null;
+  }
+
+  const rect =
+    anchor.getBoundingClientRect();
+
+  const relativePosition =
+    rect.height > 0
+      ? Math.max(
+          0,
+          Math.min(
+            1,
+            (viewportY - rect.top) /
+              rect.height
+          )
+        )
+      : 0;
+
+  return {
+    anchorId: anchor.id,
+    relativePosition,
+    viewportY
+  };
+}
+
+function restoreGameNavigationScrollState(
+  scrollState
+) {
+  if (!scrollState?.anchorId) {
+    return;
+  }
+
+  const restore = () => {
+    const anchor =
+      document.getElementById(
+        scrollState.anchorId
+      );
+
+    if (!anchor) {
+      return;
+    }
+
+    const rect =
+      anchor.getBoundingClientRect();
+
+    const pointInsideAnchor =
+      rect.top +
+      rect.height *
+        scrollState.relativePosition;
+
+    const targetScroll =
+      window.scrollY +
+      pointInsideAnchor -
+      scrollState.viewportY;
+
+    window.scrollTo({
+      top: Math.max(0, targetScroll),
+      behavior: "auto"
+    });
+  };
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(restore);
+  });
+
+  // Recheck once widgets and logos have settled.
+  window.setTimeout(
+    restore,
+    100
+  );
+}
+
 function setGameNavigationLink(
   id,
   game,
@@ -1238,6 +1400,9 @@ function setGameNavigationLink(
 function navigateToGame(game) {
   if (!game?.id) return;
 
+  const scrollState =
+    captureGameNavigationScrollState();
+
   state.game = game;
   state.timeframe =
     game.controls?.default_timeframe ||
@@ -1248,7 +1413,10 @@ function navigateToGame(game) {
   state.homeOffenseTimeframe = "last_30";
 
   history.pushState(
-    { gameId: game.id },
+    {
+      gameId: game.id,
+      scrollState
+    },
     "",
     `game.html?id=${encodeURIComponent(game.id)}`
   );
@@ -1259,7 +1427,9 @@ function navigateToGame(game) {
     `${game.away_team?.abbr || "Away"} at ` +
     `${game.home_team?.abbr || "Home"} | Boring Bets`;
 
-  window.scrollTo({ top: 0, behavior: "auto" });
+  restoreGameNavigationScrollState(
+    scrollState
+  );
 }
 
 window.addEventListener("popstate", () => {
