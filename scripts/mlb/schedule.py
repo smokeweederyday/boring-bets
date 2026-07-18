@@ -98,6 +98,8 @@ def parse_schedule(
             games.append(
                 {
                     "mlb_game_pk": game.get("gamePk"),
+                    "game_number": game.get("gameNumber"),
+                    "doubleheader": game.get("doubleHeader"),
                     "id": create_game_id(
                         game_date,
                         away_abbr,
@@ -131,6 +133,94 @@ def parse_schedule(
                         ),
                     },
                 }
+            )
+
+    return assign_unique_game_ids(
+        games
+    )
+
+
+def assign_unique_game_ids(
+    games: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Add game-number suffixes only when a matchup repeats that day."""
+
+    grouped: dict[
+        str,
+        list[dict[str, Any]],
+    ] = {}
+
+    for game in games:
+        base_id = str(
+            game.get("id") or "unknown-game"
+        )
+        grouped.setdefault(
+            base_id,
+            [],
+        ).append(game)
+
+    for base_id, matching_games in grouped.items():
+        if len(matching_games) < 2:
+            continue
+
+        valid_numbers: list[int] = []
+
+        for game in matching_games:
+            try:
+                number = int(
+                    game.get("game_number")
+                )
+            except (
+                TypeError,
+                ValueError,
+            ):
+                valid_numbers = []
+                break
+
+            if number < 1:
+                valid_numbers = []
+                break
+
+            valid_numbers.append(number)
+
+        numbers_are_unique = (
+            len(valid_numbers)
+            == len(matching_games)
+            and len(set(valid_numbers))
+            == len(matching_games)
+        )
+
+        if numbers_are_unique:
+            numbered_games = sorted(
+                zip(
+                    valid_numbers,
+                    matching_games,
+                ),
+                key=lambda item: (
+                    item[0],
+                    item[1].get("game_time") or "",
+                    item[1].get("mlb_game_pk") or 0,
+                ),
+            )
+        else:
+            ordered_games = sorted(
+                matching_games,
+                key=lambda game: (
+                    game.get("game_time") or "",
+                    game.get("mlb_game_pk") or 0,
+                ),
+            )
+
+            numbered_games = list(
+                enumerate(
+                    ordered_games,
+                    start=1,
+                )
+            )
+
+        for number, game in numbered_games:
+            game["id"] = (
+                f"{base_id}-g{number}"
             )
 
     return games

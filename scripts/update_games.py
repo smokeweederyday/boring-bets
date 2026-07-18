@@ -1390,6 +1390,50 @@ def enrich_context(
 
     return enriched_games
 
+def repair_duplicate_game_ids(
+    games: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Repair historical same-date matchup ID collisions."""
+
+    grouped: dict[
+        str,
+        list[dict[str, Any]],
+    ] = {}
+
+    for game in games:
+        game_id = game.get("id")
+
+        if not game_id:
+            continue
+
+        grouped.setdefault(
+            str(game_id),
+            [],
+        ).append(game)
+
+    for base_id, matching_games in grouped.items():
+        if len(matching_games) < 2:
+            continue
+
+        ordered_games = sorted(
+            matching_games,
+            key=lambda game: (
+                game.get("game_time") or "",
+                game.get("mlb_game_pk") or 0,
+            ),
+        )
+
+        for number, game in enumerate(
+            ordered_games,
+            start=1,
+        ):
+            game["id"] = (
+                f"{base_id}-g{number}"
+            )
+
+    return games
+
+
 def migrate_existing_games(
     games: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
@@ -1419,7 +1463,9 @@ def migrate_existing_games(
 
         migrated.append(game)
 
-    return migrated
+    return repair_duplicate_game_ids(
+        migrated
+    )
 
 
 def determine_day_state(
