@@ -415,9 +415,17 @@ function renderGameNavigation() {
     `View full ${sport} slate`
   );
 
+  const today =
+    formatDateKey(
+      new Date()
+    );
+
   setLink(
     "gameCenterNavLink",
-    slateUrl,
+    buildSlateUrl(
+      today,
+      sport
+    ),
     `${sport} Game Center`
   );
 
@@ -516,6 +524,21 @@ function renderGameHeader() {
   setText(
     "gameHomeTeam",
     game.home_team?.abbr
+  );
+
+  const startTime =
+    formatGameStartTime(
+      game.game_time
+    );
+
+  const venueName =
+    game.venue?.name
+      ? ` · ${game.venue.name}`
+      : "";
+
+  setText(
+    "gameStartTime",
+    `${startTime}${venueName}`
   );
 }
 
@@ -1378,6 +1401,32 @@ function formatDateKey(date) {
 
   return (
     `${year}-${month}-${day}`
+  );
+}
+
+function formatGameStartTime(value) {
+  if (!value) {
+    return "Time TBD";
+  }
+
+  const date =
+    new Date(value);
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return "Time TBD";
+  }
+
+  return date.toLocaleTimeString(
+    [],
+    {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short"
+    }
   );
 }
 

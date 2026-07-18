@@ -2353,3 +2353,21 @@ a.lifecycle-item:hover {
   .matchup-bvp-row:hover .matchup-bvp-hovercard,
   .matchup-bvp-row:focus-visible .matchup-bvp-hovercard { transform:translateY(0); }
 }
+
+
+/* Phase 8F: game start times */
+.game-card-time {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.game-start-time {
+  min-width: 8rem;
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

@@ -398,6 +398,19 @@ function buildPublishedPlayCard(
       </strong>
     </p>
 
+    <p class="game-card-time">
+      ${cardEscape(
+        formatGameTime(
+          game?.game_time
+        )
+      )}
+      ${game?.venue?.name
+        ? ` · ${cardEscape(
+            game.venue.name
+          )}`
+        : ""}
+    </p>
+
     <p>
       ${cardEscape(play.odds)}
       ·
@@ -484,7 +497,7 @@ function buildGameCard(game) {
       </strong>
     </p>
 
-    <p>
+    <p class="game-card-time">
       ${cardEscape(
         formatGameTime(
           game.game_time
