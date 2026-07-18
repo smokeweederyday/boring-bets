@@ -6,7 +6,7 @@ import json
 import sys
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -55,10 +55,46 @@ def main() -> int:
     start_date = args.start or f"{args.season}-03-25"
     end_date = args.end or f"{args.season}-10-01"
 
-    raw = fetch_schedule_range(start_date, end_date)
-    schedule_games = parse_schedule(raw)
+    first_date = date.fromisoformat(start_date)
+    final_date = date.fromisoformat(end_date)
+
+    schedule_games: list[dict[str, Any]] = []
+    chunk_start = first_date
+
+    while chunk_start <= final_date:
+        chunk_end = min(
+            chunk_start + timedelta(days=13),
+            final_date,
+        )
+
+        chunk_start_text = chunk_start.isoformat()
+        chunk_end_text = chunk_end.isoformat()
+
+        print(
+            f"Fetching MLB schedule "
+            f"{chunk_start_text} through {chunk_end_text}...",
+            flush=True,
+        )
+
+        raw = fetch_schedule_range(
+            chunk_start_text,
+            chunk_end_text,
+        )
+
+        chunk_games = parse_schedule(raw)
+        schedule_games.extend(chunk_games)
+
+        print(
+            f"  Received {len(chunk_games)} games.",
+            flush=True,
+        )
+
+        chunk_start = chunk_end + timedelta(days=1)
+
     if not schedule_games:
-        raise SystemExit("No MLB regular-season games were returned.")
+        raise SystemExit(
+            "No MLB regular-season games were returned."
+        )
 
     current = load_games_file()
     migrated = migrate_existing_games(current.get("games", []))
