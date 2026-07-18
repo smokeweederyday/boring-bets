@@ -33,9 +33,24 @@ async function loadLineup() {
       );
     }
 
+    const gameDate =
+      String(gameId).slice(0, 10);
+
+    if (
+      !/^\d{4}-\d{2}-\d{2}$/.test(
+        gameDate
+      )
+    ) {
+      throw new Error(
+        "Unable to determine the matchup date."
+      );
+    }
+
     const response =
       await fetch(
-        `data/games.json?v=${Date.now()}`
+        `data/games/${encodeURIComponent(
+          gameDate
+        )}.json?v=${Date.now()}`
       );
 
     if (!response.ok) {

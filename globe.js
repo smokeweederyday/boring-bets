@@ -31,7 +31,7 @@ init();
 async function init(){
   const [venueResponse, gameResponse] = await Promise.all([
     fetch('data/venues.json', {cache:'no-store'}),
-    fetch('data/games.json', {cache:'no-store'})
+    fetch('data/games-index.json', {cache:'no-store'})
   ]);
   const venueData = await venueResponse.json();
   const gameData = await gameResponse.json();

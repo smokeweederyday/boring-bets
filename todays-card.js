@@ -25,7 +25,9 @@ async function loadCard() {
     const [gamesResponse, playsResponse] =
       await Promise.all([
         fetch(
-          `data/games.json?v=${Date.now()}`
+          `data/games/${encodeURIComponent(
+            selectedDate
+          )}.json?v=${Date.now()}`
         ),
         fetch(
           `data/todays-card.json?v=${Date.now()}`

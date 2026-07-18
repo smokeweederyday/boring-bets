@@ -2323,7 +2323,8 @@ def main() -> None:
     GAMES_FILE.write_text(
         json.dumps(
             current,
-            indent=2,
+            ensure_ascii=False,
+            separators=(",", ":"),
         ) + "\n",
         encoding="utf-8",
     )

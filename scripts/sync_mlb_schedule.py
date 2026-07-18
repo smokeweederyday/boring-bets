@@ -100,18 +100,113 @@ def main() -> int:
     migrated = migrate_existing_games(current.get("games", []))
     existing = {game.get("id"): game for game in migrated if game.get("id")}
 
+    existing_by_pk: dict[
+        int,
+        list[dict[str, Any]],
+    ] = {}
+
+    for game in migrated:
+        try:
+            game_pk = int(
+                game.get("mlb_game_pk")
+            )
+        except (
+            TypeError,
+            ValueError,
+        ):
+            continue
+
+        existing_by_pk.setdefault(
+            game_pk,
+            [],
+        ).append(game)
+
     merged_by_id = dict(existing)
     added = 0
     updated = 0
+
     for schedule_game in schedule_games:
         game_id = schedule_game["id"]
-        if game_id in merged_by_id:
-            updated += 1
-        else:
-            added += 1
-        merged_by_id[game_id] = merge_schedule_game(
-            merged_by_id.get(game_id), schedule_game
+
+        candidates: list[dict[str, Any]] = []
+
+        direct_match = merged_by_id.get(
+            game_id
         )
+
+        if direct_match is not None:
+            candidates.append(
+                direct_match
+            )
+
+        try:
+            schedule_pk = int(
+                schedule_game.get(
+                    "mlb_game_pk"
+                )
+            )
+        except (
+            TypeError,
+            ValueError,
+        ):
+            schedule_pk = None
+
+        if schedule_pk is not None:
+            for candidate in existing_by_pk.get(
+                schedule_pk,
+                [],
+            ):
+                if candidate not in candidates:
+                    candidates.append(
+                        candidate
+                    )
+
+        existing_game = (
+            max(
+                candidates,
+                key=lambda game: len(
+                    json.dumps(
+                        game,
+                        sort_keys=True,
+                    )
+                ),
+            )
+            if candidates
+            else None
+        )
+
+        for candidate in candidates:
+            previous_id = candidate.get(
+                "id"
+            )
+
+            if (
+                previous_id
+                and previous_id != game_id
+            ):
+                merged_by_id.pop(
+                    previous_id,
+                    None,
+                )
+
+        if existing_game is None:
+            added += 1
+        else:
+            updated += 1
+
+        merged_game = merge_schedule_game(
+            existing_game,
+            schedule_game,
+        )
+
+        merged_by_id[game_id] = (
+            merged_game
+        )
+
+        if schedule_pk is not None:
+            existing_by_pk[
+                schedule_pk
+            ] = [merged_game]
 
     games = list(merged_by_id.values())
     games.sort(key=lambda game: (
@@ -130,7 +225,14 @@ def main() -> int:
     }
     current["games"] = games
 
-    GAMES_FILE.write_text(json.dumps(current, indent=2) + "\n", encoding="utf-8")
+    GAMES_FILE.write_text(
+        json.dumps(
+            current,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ) + "\n",
+        encoding="utf-8",
+    )
     days_index = build_days_index(
         games
     )

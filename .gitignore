@@ -13,3 +13,5 @@ __pycache__/
 
 # Local archived source backups
 archive/backups/
+# Rebuilt locally from public MLB date files
+data/games.json

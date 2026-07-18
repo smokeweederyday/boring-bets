@@ -110,7 +110,14 @@ def write_games(current: dict[str, Any]) -> None:
         game.get("date") or "", game.get("game_time") or "", game.get("id") or ""
     ))
     current["schema_version"] = "3.8"
-    GAMES_FILE.write_text(json.dumps(current, indent=2) + "\n", encoding="utf-8")
+    GAMES_FILE.write_text(
+        json.dumps(
+            current,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ) + "\n",
+        encoding="utf-8",
+    )
 
 
 def enrich_one_date(current: dict[str, Any], target_date: str) -> tuple[dict[str, Any], int]:

@@ -71,7 +71,7 @@ async function loadGame() {
       params.get("play");
 
     const [
-      gamesResponse,
+      gamesIndexResponse,
       daysResponse,
       cardResponse,
       playsResponse,
@@ -80,7 +80,7 @@ async function loadGame() {
       articlesResponse
     ] = await Promise.all([
       fetch(
-        `data/games.json?v=${Date.now()}`
+        `data/games-index.json?v=${Date.now()}`
       ),
       fetch(
         `data/days.json?v=${Date.now()}`
@@ -102,14 +102,14 @@ async function loadGame() {
       )
     ]);
 
-    if (!gamesResponse.ok) {
+    if (!gamesIndexResponse.ok) {
       throw new Error(
         "Unable to load game data."
       );
     }
 
-    const gamesData =
-      await gamesResponse.json();
+    const gamesIndexData =
+      await gamesIndexResponse.json();
 
     const daysData =
       daysResponse.ok
@@ -136,9 +136,9 @@ async function loadGame() {
         ? await articlesResponse.json()
         : { articles: [] };
 
-    const games =
-      Array.isArray(gamesData.games)
-        ? gamesData.games
+    const indexedGames =
+      Array.isArray(gamesIndexData.games)
+        ? gamesIndexData.games
         : [];
 
     const cardData =
@@ -168,8 +168,49 @@ async function loadGame() {
 
     if (!gameId) {
       gameId =
-        games[0]?.id;
+        indexedGames[0]?.id;
     }
+
+    const indexedGame =
+      indexedGames.find(
+        item => item.id === gameId
+      );
+
+    const gameDate =
+      selectedPlay?.date ||
+      indexedGame?.date ||
+      String(gameId || "").slice(0, 10);
+
+    if (
+      !/^\d{4}-\d{2}-\d{2}$/.test(
+        gameDate
+      )
+    ) {
+      throw new Error(
+        "Unable to determine the matchup date."
+      );
+    }
+
+    const dateGamesResponse =
+      await fetch(
+        `data/games/${encodeURIComponent(
+          gameDate
+        )}.json?v=${Date.now()}`
+      );
+
+    if (!dateGamesResponse.ok) {
+      throw new Error(
+        "Unable to load matchup data."
+      );
+    }
+
+    const gamesData =
+      await dateGamesResponse.json();
+
+    const games =
+      Array.isArray(gamesData.games)
+        ? gamesData.games
+        : [];
 
     let game =
       games.find(

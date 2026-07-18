@@ -108,7 +108,11 @@ def main() -> None:
 
     if updated:
         GAMES_PATH.write_text(
-            json.dumps(raw, indent=2) + "\n",
+            json.dumps(
+                raw,
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ) + "\n",
             encoding="utf-8",
         )
 

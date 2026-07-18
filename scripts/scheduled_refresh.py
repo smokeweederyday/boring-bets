@@ -180,6 +180,13 @@ def build_plan(args: argparse.Namespace) -> list[tuple[str, list[str], bool]]:
     season = args.season or first_date.year
     plan: list[tuple[str, list[str], bool]] = []
 
+    if (SCRIPTS / "assemble_mlb_games.py").exists():
+        plan.append((
+            "Assemble local MLB working data",
+            command_for("assemble_mlb_games.py"),
+            True,
+        ))
+
     if args.sync_season:
         plan.append((
             "Sync full MLB schedule",
@@ -208,6 +215,13 @@ def build_plan(args: argparse.Namespace) -> list[tuple[str, list[str], bool]]:
             "Rebuild globe venue data",
             command_for("build_globe_data.py"),
             False,
+        ))
+
+    if (SCRIPTS / "build_public_mlb_data.py").exists():
+        plan.append((
+            "Build public MLB date files",
+            command_for("build_public_mlb_data.py"),
+            True,
         ))
 
     if not args.skip_verification:

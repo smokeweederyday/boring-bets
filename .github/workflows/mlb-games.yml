@@ -56,7 +56,8 @@ jobs:
         run: |
           git config user.name "boring-bets-intelligence-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/games.json data/days.json data/plays.json data/results.json data/evaluations.json
+          git add -A data/games
+          git add data/games-meta.json data/games-index.json data/days.json data/plays.json data/results.json data/evaluations.json
           git diff --cached --quiet || git commit -m "Auto-refresh today's MLB intelligence"
           git push
 
@@ -97,7 +98,8 @@ jobs:
         run: |
           git config user.name "boring-bets-intelligence-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/games.json data/days.json data/plays.json data/results.json data/evaluations.json
+          git add -A data/games
+          git add data/games-meta.json data/games-index.json data/days.json data/plays.json data/results.json data/evaluations.json
           git diff --cached --quiet || git commit -m "Auto-refresh future MLB intelligence"
           git push
 
@@ -136,6 +138,7 @@ jobs:
         run: |
           git config user.name "boring-bets-intelligence-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/games.json data/days.json data/plays.json data/results.json data/evaluations.json
+          git add -A data/games
+          git add data/games-meta.json data/games-index.json data/days.json data/plays.json data/results.json data/evaluations.json
           git diff --cached --quiet || git commit -m "Manually refresh MLB intelligence"
           git push

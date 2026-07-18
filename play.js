@@ -20,15 +20,10 @@ async function loadPlay() {
       );
     }
 
-    const [cardResponse, gamesResponse] =
-      await Promise.all([
-        fetch(
-          `data/todays-card.json?v=${Date.now()}`
-        ),
-        fetch(
-          `data/games.json?v=${Date.now()}`
-        )
-      ]);
+    const cardResponse =
+      await fetch(
+        `data/todays-card.json?v=${Date.now()}`
+      );
 
     if (!cardResponse.ok) {
       throw new Error(
@@ -38,11 +33,6 @@ async function loadPlay() {
 
     const cardData =
       await cardResponse.json();
-
-    const gamesData =
-      gamesResponse.ok
-        ? await gamesResponse.json()
-        : { games: [] };
 
     const play =
       (cardData.plays || []).find(
@@ -58,6 +48,22 @@ async function loadPlay() {
     const gameId =
       play.game_id ||
       createGameId(play);
+
+    const gameDate =
+      play.date ||
+      String(gameId).slice(0, 10);
+
+    const gamesResponse =
+      await fetch(
+        `data/games/${encodeURIComponent(
+          gameDate
+        )}.json?v=${Date.now()}`
+      );
+
+    const gamesData =
+      gamesResponse.ok
+        ? await gamesResponse.json()
+        : { games: [] };
 
     const game =
       (gamesData.games || []).find(
