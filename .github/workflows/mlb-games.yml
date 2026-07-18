@@ -36,6 +36,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Restore matchup-history cache
+        uses: actions/cache@v4
+        with:
+          path: data/cache/matchup-history
+          key: matchup-history-${{ runner.os }}-${{ hashFiles('scripts/mlb/matchup_history.py') }}-${{ github.run_id }}
+          restore-keys: |
+            matchup-history-${{ runner.os }}-${{ hashFiles('scripts/mlb/matchup_history.py') }}-
+            matchup-history-${{ runner.os }}-
+
       - name: Refresh today's MLB slate
         run: |
           python3 -u scripts/scheduled_refresh.py \
@@ -65,10 +74,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Restore matchup-history cache
+        uses: actions/cache@v4
+        with:
+          path: data/cache/matchup-history
+          key: matchup-history-${{ runner.os }}-${{ hashFiles('scripts/mlb/matchup_history.py') }}-${{ github.run_id }}
+          restore-keys: |
+            matchup-history-${{ runner.os }}-${{ hashFiles('scripts/mlb/matchup_history.py') }}-
+            matchup-history-${{ runner.os }}-
+
       - name: Refresh rolling MLB window
         run: |
           python3 -u scripts/scheduled_refresh.py \
             --days-ahead 7 \
+            --sync-season \
+            --season 2026 \
             --skip-globe \
             --skip-verification \
             --continue-on-error
@@ -94,6 +114,15 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+
+      - name: Restore matchup-history cache
+        uses: actions/cache@v4
+        with:
+          path: data/cache/matchup-history
+          key: matchup-history-${{ runner.os }}-${{ hashFiles('scripts/mlb/matchup_history.py') }}-${{ github.run_id }}
+          restore-keys: |
+            matchup-history-${{ runner.os }}-${{ hashFiles('scripts/mlb/matchup_history.py') }}-
+            matchup-history-${{ runner.os }}-
 
       - name: Refresh requested MLB window
         run: |

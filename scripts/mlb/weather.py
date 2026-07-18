@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timezone
+from pathlib import Path
 from typing import Any
 import json
 import sys
 import urllib.parse
 import urllib.request
 
+
+ROOT = Path(__file__).resolve().parents[2]
+VENUES_FILE = ROOT / "data" / "venues.json"
 
 MLB_API_BASE = "https://statsapi.mlb.com/api/v1"
 
@@ -63,6 +67,62 @@ def get_json(
         return json.loads(
             response.read()
         )
+
+
+def load_local_venue_coordinates(
+    venue_id: int,
+) -> tuple[float | None, float | None]:
+    if not VENUES_FILE.exists():
+        return None, None
+
+    try:
+        raw = json.loads(
+            VENUES_FILE.read_text(
+                encoding="utf-8"
+            )
+        )
+    except (
+        json.JSONDecodeError,
+        OSError,
+    ):
+        return None, None
+
+    venues = (
+        raw.get("venues", [])
+        if isinstance(raw, dict)
+        else raw
+    )
+
+    if not isinstance(venues, list):
+        return None, None
+
+    for venue in venues:
+        if not isinstance(venue, dict):
+            continue
+
+        try:
+            stored_id = int(
+                venue.get("id")
+            )
+        except (
+            TypeError,
+            ValueError,
+        ):
+            continue
+
+        if stored_id != int(venue_id):
+            continue
+
+        return (
+            to_float(
+                venue.get("latitude")
+            ),
+            to_float(
+                venue.get("longitude")
+            ),
+        )
+
+    return None, None
 
 
 def fetch_venue(
@@ -224,6 +284,24 @@ def resolve_venue_coordinates(
             longitude,
             None,
             "mlb_venue",
+        )
+
+    (
+        local_latitude,
+        local_longitude,
+    ) = load_local_venue_coordinates(
+        venue_id
+    )
+
+    if (
+        local_latitude is not None
+        and local_longitude is not None
+    ):
+        return (
+            local_latitude,
+            local_longitude,
+            None,
+            "local_venues_database",
         )
 
     fallback = (
