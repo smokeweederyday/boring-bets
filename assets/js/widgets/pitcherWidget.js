@@ -99,10 +99,31 @@ function renderPitcherStatCell(value) {
   const heatClass = escapeHtml(value.heatClass || "metric-missing");
   const rank = Number(value.rank);
   const poolSize = Number(value.poolSize);
-  const hasRank = Number.isFinite(rank);
+
+  const hasRank =
+    value.rank !== null &&
+    value.rank !== undefined &&
+    Number.isFinite(rank) &&
+    rank > 0;
+
+  const hasVisibleValue =
+    value.display !== null &&
+    value.display !== undefined &&
+    value.display !== "" &&
+    value.display !== "—";
+
+  const unrankedTooltip = [
+    value.unrankedReason,
+    value.sampleLabel ? `Sample: ${value.sampleLabel}` : "",
+    value.minimumLabel ? `Required: ${value.minimumLabel}` : "",
+    value.contextLabel
+  ].filter(Boolean).join(" · ");
+
   const tooltip = hasRank
     ? buildRankTooltip(rank, poolSize, value.contextLabel)
-    : (value.contextLabel || "No qualifying league rank for this selection");
+    : hasVisibleValue && unrankedTooltip
+      ? unrankedTooltip
+      : (value.contextLabel || "No qualifying league rank for this selection");
 
   return `
     <td

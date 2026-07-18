@@ -15,7 +15,8 @@ import {
  */
 export function renderOffenseWidget({
   container,
-  module
+  module,
+  onTimeframeChange
 }) {
   if (!container) return;
 
@@ -35,6 +36,24 @@ export function renderOffenseWidget({
       : [];
 
   container.innerHTML = `
+    <div
+      class="segmented-control offense-timeframe-control"
+      role="group"
+      aria-label="Offense timeframe"
+    >
+      ${[
+        ["last_7", "7 Days"],
+        ["last_30", "30 Days"],
+        ["season", "Season"]
+      ].map(([timeframe, label]) => `
+        <button
+          type="button"
+          data-offense-timeframe="${timeframe}"
+          class="${module.activeTimeframe === timeframe ? "active" : ""}"
+        >${label}</button>
+      `).join("")}
+    </div>
+
     <a
       class="module-link"
       href="${escapeAttribute(
@@ -100,6 +119,19 @@ export function renderOffenseWidget({
       </div>
     </a>
   `;
+
+  container
+    .querySelectorAll("[data-offense-timeframe]")
+    .forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        onTimeframeChange?.(
+          button.dataset.offenseTimeframe
+        );
+      });
+    });
 }
 
 function renderMetricRow(metric) {

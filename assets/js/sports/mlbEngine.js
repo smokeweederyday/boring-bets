@@ -7,7 +7,10 @@ const MLB_PITCHER_METRICS = [
   { key: "whip", label: "WHIP", type: "number" },
   { key: "fip", label: "FIP", type: "number" },
   { key: "xfip", label: "xFIP", type: "number" },
-  { key: "avg_against", label: "AVG A", type: "average" }
+  { key: "avg_against", label: "AVG A", type: "average" },
+  { key: "k_rate", label: "K%", type: "percent" },
+  { key: "bb_rate", label: "BB%", type: "percent" },
+  { key: "go_ao", label: "GO/AO", type: "number" }
 ];
 
 export function buildMlbOffenseModule({
@@ -43,6 +46,7 @@ export function buildMlbOffenseModule({
     locationContext: locationLabel,
     opponent: opposingPitcher?.name || "Starter TBD",
     gameLocation,
+    activeTimeframe: timeframeKey,
     detailsUrl: `lineup.html?game=${encodeURIComponent(game.id)}&team=${encodeURIComponent(side)}`,
     metrics: MLB_OFFENSE_METRICS.map(metric => {
       const overallMetric = overallBlock?.[metric] || {};
@@ -73,7 +77,7 @@ export function buildMlbOffenseModule({
 export function buildMlbPitcherModule({
   game,
   side,
-  timeframe = "last_30",
+  timeframe = "season",
   location = "all"
 }) {
   const isAway = side === "away";
@@ -88,12 +92,6 @@ export function buildMlbPitcherModule({
     location
   );
 
-  // Selected responds to both timeframe and location.
-  const selected = selectPitcherLocationBlock(
-    safePitcher.stats?.[timeframe],
-    location
-  );
-
   const vsLeft = resolvePitcherSplitBlock(
     safePitcher, timeframe, location, "vs_lhh"
   );
@@ -105,7 +103,6 @@ export function buildMlbPitcherModule({
     safePitcher.throws
   );
 
-  const selectedContext = `${formatTimeframeShort(timeframe)} · ${formatLocationLabel(location)}`;
   const seasonContext = `Season · ${formatLocationLabel(location)}`;
 
   return {
@@ -115,7 +112,7 @@ export function buildMlbPitcherModule({
     handLabel: safePitcher.throws ? `${safePitcher.throws}HP` : "Throws —",
     statusLabel: formatPitcherStatus(safePitcher.status),
     detailsUrl: safePitcher.profile_url || "#",
-    contextLabel: selectedContext,
+    contextLabel: seasonContext,
     activeLocation: location,
     lineupStatusLabel: lineupMix.statusLabel,
     lineupStatusClass: lineupMix.statusClass,
@@ -124,22 +121,32 @@ export function buildMlbPitcherModule({
     lineupChanged: lineupMix.changed,
     columns: [
       { label: "Season" },
-      { label: "Selected" },
       { label: "vs LHH" },
       { label: "vs RHH" }
     ],
     metrics: MLB_PITCHER_METRICS.map(metric => ({
       label: metric.label,
       values: [
-        normalizeRankedPitcherValue(season, metric.key, metric.type, seasonContext),
-        normalizeRankedPitcherValue(selected, metric.key, metric.type, selectedContext),
         normalizeRankedPitcherValue(
-          vsLeft, metric.key, metric.type,
-          `${vsLeft?._contextFallback || selectedContext} · vs LHH`
+          season,
+          metric.key,
+          metric.type,
+          seasonContext,
+          metric.ranked !== false
         ),
         normalizeRankedPitcherValue(
-          vsRight, metric.key, metric.type,
-          `${vsRight?._contextFallback || selectedContext} · vs RHH`
+          vsLeft,
+          metric.key,
+          metric.type,
+          `${vsLeft?._contextFallback || seasonContext} · vs LHH`,
+          metric.ranked !== false
+        ),
+        normalizeRankedPitcherValue(
+          vsRight,
+          metric.key,
+          metric.type,
+          `${vsRight?._contextFallback || seasonContext} · vs RHH`,
+          metric.ranked !== false
         )
       ]
     }))
@@ -226,16 +233,114 @@ function summarizeLineupHandedness(lineup, pitcherThrows) {
   };
 }
 
-function normalizeRankedPitcherValue(block, key, type, contextLabel = "") {
+function formatPitcherSample(block) {
+  const outs = Number(block?.outs);
+
+  if (Number.isFinite(outs) && outs >= 0) {
+    return `${Math.floor(outs / 3)}.${Math.round(outs % 3)} IP`;
+  }
+
+  const innings = block?.innings_pitched;
+
+  if (
+    innings !== null &&
+    innings !== undefined &&
+    innings !== ""
+  ) {
+    return `${innings} IP`;
+  }
+
+  const battersFaced = Number(block?.batters_faced);
+
+  if (Number.isFinite(battersFaced) && battersFaced >= 0) {
+    return `${battersFaced} batters faced`;
+  }
+
+  return "";
+}
+
+function pitcherQualificationMinimum(contextLabel = "") {
+  const normalized = String(contextLabel).toLowerCase();
+
+  if (normalized.includes("season")) {
+    return "10.0 IP";
+  }
+
+  if (normalized.includes("30")) {
+    return "3.0 IP";
+  }
+
+  if (normalized.includes("7")) {
+    return "1.0 IP";
+  }
+
+  return "";
+}
+
+function normalizeRankedPitcherValue(
+  block,
+  key,
+  type,
+  contextLabel = "",
+  ranked = true
+) {
   const value = normalizePitcherValue(block?.[key], type);
-  const rank = block?.ranks?.[key] ?? null;
-  const poolSize = block?.rank_pool_size?.[key] ?? null;
+  const hasValue =
+    value.value !== null &&
+    value.value !== undefined &&
+    value.value !== "";
+
+  const rawRank = ranked
+    ? block?.ranks?.[key] ?? null
+    : null;
+
+  const rawPoolSize = ranked
+    ? block?.rank_pool_size?.[key] ?? null
+    : null;
+
+  const numericRank = Number(rawRank);
+  const numericPoolSize = Number(rawPoolSize);
+
+  const hasRank =
+    rawRank !== null &&
+    rawRank !== undefined &&
+    Number.isFinite(numericRank) &&
+    numericRank > 0;
+
+  const hasPoolSize =
+    rawPoolSize !== null &&
+    rawPoolSize !== undefined &&
+    Number.isFinite(numericPoolSize) &&
+    numericPoolSize > 0;
+
   return {
     ...value,
-    rank,
-    poolSize,
-    contextLabel,
-    heatClass: getRankHeatClass(rank, poolSize || 30)
+    rank: hasRank ? numericRank : null,
+    poolSize: hasPoolSize ? numericPoolSize : null,
+    contextLabel: ranked
+      ? contextLabel
+      : `${contextLabel} · Informational only`,
+    unrankedReason:
+      ranked && hasValue && !hasRank
+        ? "Not ranked — insufficient sample"
+        : "",
+    sampleLabel:
+      ranked && hasValue && !hasRank
+        ? formatPitcherSample(block)
+        : "",
+    minimumLabel:
+      ranked && hasValue && !hasRank
+        ? pitcherQualificationMinimum(contextLabel)
+        : "",
+    heatClass: ranked
+      ? hasRank
+        ? getRankHeatClass(numericRank, numericPoolSize || 30)
+        : hasValue
+          ? "metric-average"
+          : "metric-missing"
+      : hasValue
+        ? "metric-average"
+        : "metric-missing"
   };
 }
 

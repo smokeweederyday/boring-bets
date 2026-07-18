@@ -145,10 +145,53 @@ def parse_pitching_stat_block(
     return {}
 
 
+def add_pitcher_rate_metrics(
+    stats: dict[str, Any],
+) -> dict[str, Any]:
+    """Add pitcher rates only when MLB supplies valid denominators."""
+
+    batters_faced = stats.get("batters_faced")
+    strikeouts = stats.get("strikeouts")
+    walks = stats.get("walks")
+
+    if isinstance(batters_faced, (int, float)) and batters_faced > 0:
+        stats["k_rate"] = (
+            round((float(strikeouts) / batters_faced) * 100, 1)
+            if isinstance(strikeouts, (int, float))
+            else None
+        )
+
+        stats["bb_rate"] = (
+            round((float(walks) / batters_faced) * 100, 1)
+            if isinstance(walks, (int, float))
+            else None
+        )
+    else:
+        stats["k_rate"] = None
+        stats["bb_rate"] = None
+
+    ground_outs = stats.get("ground_outs")
+    air_outs = stats.get("air_outs")
+
+    if (
+        isinstance(ground_outs, (int, float))
+        and isinstance(air_outs, (int, float))
+        and air_outs > 0
+    ):
+        stats["go_ao"] = round(
+            float(ground_outs) / float(air_outs),
+            2,
+        )
+    else:
+        stats["go_ao"] = None
+
+    return stats
+
+
 def normalize_pitching_stat(
     stat: dict[str, Any],
 ) -> dict[str, Any]:
-    return {
+    stats = {
         "era": to_float(
             stat.get("era")
         ),
@@ -170,6 +213,9 @@ def normalize_pitching_stat(
         "games_started": to_int(
             stat.get("gamesStarted")
         ),
+        "batters_faced": to_int(
+            stat.get("battersFaced")
+        ),
         "strikeouts": to_int(
             stat.get("strikeOuts")
         ),
@@ -179,8 +225,12 @@ def normalize_pitching_stat(
         "home_runs": to_int(
             stat.get("homeRuns")
         ),
+        "ground_outs": to_int(
+            stat.get("groundOuts")
+        ),
         "air_outs": to_int(
-            stat.get("airOuts") or stat.get("flyOuts")
+            stat.get("airOuts")
+            or stat.get("flyOuts")
         ),
         "hits": to_int(
             stat.get("hits")
@@ -188,11 +238,18 @@ def normalize_pitching_stat(
         "earned_runs": to_int(
             stat.get("earnedRuns")
         ),
-        "split_ops": to_float(stat.get("ops")),
-        "split_obp": to_float(stat.get("obp")),
-        "split_slg": to_float(stat.get("slg")),
+        "split_ops": to_float(
+            stat.get("ops")
+        ),
+        "split_obp": to_float(
+            stat.get("obp")
+        ),
+        "split_slg": to_float(
+            stat.get("slg")
+        ),
     }
 
+    return add_pitcher_rate_metrics(stats)
 
 def fetch_safe_split(
     pitcher_id: int,
@@ -521,7 +578,19 @@ def aggregate_pitcher_statcast_splits(
         if row.get("batter_side") != batter_side:
             continue
         pid=int(row["pitcher_id"])
-        t=totals.setdefault(pid,{"pa":0,"ab":0,"hits":0,"bb":0,"hbp":0,"hr":0,"so":0,"outs":0,"fb":0})
+        t=totals.setdefault(pid,{
+            "pa":0,
+            "ab":0,
+            "hits":0,
+            "bb":0,
+            "hbp":0,
+            "hr":0,
+            "so":0,
+            "outs":0,
+            "fb":0,
+            "ground_outs":0,
+            "air_outs":0,
+        })
         event=row.get("event")
         t["pa"] += 1
         if event not in {"walk","intent_walk","hit_by_pitch","sac_fly","sac_bunt","catcher_interf"}:
@@ -531,8 +600,19 @@ def aggregate_pitcher_statcast_splits(
         if event == "hit_by_pitch": t["hbp"] += 1
         if event == "home_run": t["hr"] += 1
         if event in {"strikeout","strikeout_double_play"}: t["so"] += 1
-        t["outs"] += STATCAST_OUTS.get(event,0)
-        if row.get("bb_type") == "fly_ball": t["fb"] += 1
+        play_outs = STATCAST_OUTS.get(event, 0)
+        t["outs"] += play_outs
+
+        bb_type = row.get("bb_type")
+
+        if bb_type == "fly_ball":
+            t["fb"] += 1
+
+        if play_outs:
+            if bb_type == "ground_ball":
+                t["ground_outs"] += play_outs
+            elif bb_type in {"fly_ball", "line_drive", "popup"}:
+                t["air_outs"] += play_outs
 
     result=[]
     for pid,t in totals.items():
@@ -547,9 +627,23 @@ def aggregate_pitcher_statcast_splits(
         stat={
             "era": None, "whip": round(whip,2), "fip": round(fip,2),
             "xfip": round(xfip,2), "avg_against": round(avg,3) if avg is not None else None,
-            "innings_pitched": f"{outs//3}.{outs%3}", "strikeouts": int(t["so"]),
-            "walks": int(t["bb"]), "home_runs": int(t["hr"]), "hits": int(t["hits"]),
-            "earned_runs": None, "fip_source": "statcast_terminal_pa",
+            "innings_pitched": f"{outs//3}.{outs%3}",
+            "batters_faced": int(t["pa"]),
+            "strikeouts": int(t["so"]),
+            "walks": int(t["bb"]),
+            "k_rate": round((t["so"] / t["pa"]) * 100, 1) if t["pa"] else None,
+            "bb_rate": round((t["bb"] / t["pa"]) * 100, 1) if t["pa"] else None,
+            "ground_outs": int(t["ground_outs"]),
+            "air_outs": int(t["air_outs"]),
+            "go_ao": (
+                round(t["ground_outs"] / t["air_outs"], 2)
+                if t["air_outs"]
+                else None
+            ),
+            "home_runs": int(t["hr"]),
+            "hits": int(t["hits"]),
+            "earned_runs": None,
+            "fip_source": "statcast_terminal_pa",
             "xfip_source": "statcast_terminal_pa_league_hr_fb",
             "era_unavailable_reason": "MLB does not provide earned runs by batter handedness.",
         }
@@ -585,6 +679,9 @@ PITCHER_RANK_METRICS = {
     "fip": False,
     "xfip": False,
     "avg_against": False,
+    "k_rate": True,
+    "bb_rate": False,
+    "go_ao": True,
 }
 
 MIN_OUTS_BY_TIMEFRAME = {
@@ -642,7 +739,17 @@ def _competition_ranks(rows: list[dict[str, Any]], metric: str) -> dict[int, int
         if isinstance(value, (int, float)):
             by_pitcher[int(row["pitcher_id"])] = float(value)
 
-    valid = sorted(by_pitcher.items(), key=lambda item: item[1])
+    higher_is_better = PITCHER_RANK_METRICS.get(
+        metric,
+        False,
+    )
+
+    valid = sorted(
+        by_pitcher.items(),
+        key=lambda item: item[1],
+        reverse=higher_is_better,
+    )
+
     result: dict[int, int] = {}
     prior_value = None
     prior_rank = 0

@@ -1,10 +1,10 @@
 import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js?v=phase8b-fix2";
+} from "./assets/js/widgets/offenseWidget.js?v=phase8c-controls1";
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=phase8b-fix2";
+} from "./assets/js/widgets/pitcherWidget.js?v=phase8e-unranked-tooltip1";
 
 import {
   renderBullpenWidget
@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js?v=phase8b-fix1";
+} from "./assets/js/sports/mlbEngine.js?v=phase8e-unranked-tooltip1";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
@@ -47,8 +47,10 @@ const state = {
   evaluations: [],
   articles: [],
   timeframe: "last_30",
-  awayPitcherLocation: "away",
-  homePitcherLocation: "home"
+  awayPitcherLocation: "all",
+  homePitcherLocation: "all",
+  awayOffenseTimeframe: "last_30",
+  homeOffenseTimeframe: "last_30"
 };
 
 async function loadGame() {
@@ -270,8 +272,10 @@ async function loadGame() {
       gamesData.default_controls?.timeframe ||
       "last_30";
 
-    state.awayPitcherLocation = "away";
-    state.homePitcherLocation = "home";
+    state.awayPitcherLocation = "all";
+    state.homePitcherLocation = "all";
+    state.awayOffenseTimeframe = "last_30";
+    state.homeOffenseTimeframe = "last_30";
 
     renderAll();
 
@@ -610,7 +614,7 @@ function renderPitchers() {
       game,
       side: "away",
       timeframe:
-        state.timeframe,
+        "season",
       location:
         state.awayPitcherLocation
     });
@@ -635,7 +639,7 @@ function renderPitchers() {
       game,
       side: "home",
       timeframe:
-        state.timeframe,
+        "season",
       location:
         state.homePitcherLocation
     });
@@ -665,7 +669,7 @@ function renderOffenses() {
       game,
       side: "home",
       timeframe:
-        state.timeframe
+        state.homeOffenseTimeframe
     });
 
   renderOffenseWidget({
@@ -675,7 +679,12 @@ function renderOffenses() {
       ),
 
     module:
-      homeOffenseModule
+      homeOffenseModule,
+
+    onTimeframeChange: timeframe => {
+      state.homeOffenseTimeframe = timeframe;
+      renderOffenses();
+    }
   });
 
   const awayOffenseModule =
@@ -683,7 +692,7 @@ function renderOffenses() {
       game,
       side: "away",
       timeframe:
-        state.timeframe
+        state.awayOffenseTimeframe
     });
 
   renderOffenseWidget({
@@ -693,7 +702,12 @@ function renderOffenses() {
       ),
 
     module:
-      awayOffenseModule
+      awayOffenseModule,
+
+    onTimeframeChange: timeframe => {
+      state.awayOffenseTimeframe = timeframe;
+      renderOffenses();
+    }
   });
 }
 
@@ -1205,8 +1219,10 @@ function navigateToGame(game) {
   state.timeframe =
     game.controls?.default_timeframe ||
     "last_30";
-  state.awayPitcherLocation = "away";
-  state.homePitcherLocation = "home";
+  state.awayPitcherLocation = "all";
+  state.homePitcherLocation = "all";
+  state.awayOffenseTimeframe = "last_30";
+  state.homeOffenseTimeframe = "last_30";
 
   history.pushState(
     { gameId: game.id },
@@ -1231,8 +1247,10 @@ window.addEventListener("popstate", () => {
 
   if (game) {
     state.game = game;
-    state.awayPitcherLocation = "away";
-    state.homePitcherLocation = "home";
+    state.awayPitcherLocation = "all";
+    state.homePitcherLocation = "all";
+    state.awayOffenseTimeframe = "last_30";
+    state.homeOffenseTimeframe = "last_30";
     renderAll();
   }
 });
