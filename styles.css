@@ -2295,14 +2295,14 @@ a.lifecycle-item:hover {
   outline: none;
 }
 .matchup-bvp-row.bvp-pitcher-strong {
-  color: #63ff9b;
-  border-color: #63ff9b;
-  background-color: rgba(31,108,66,calc(.02 + (var(--bvp-bg-opacity, .22) * .16)));
-}
-.matchup-bvp-row.bvp-pitcher-poor {
   color: #ff7184;
   border-color: #ff7184;
   background-color: rgba(119,28,43,calc(.02 + (var(--bvp-bg-opacity, .22) * .16)));
+}
+.matchup-bvp-row.bvp-pitcher-poor {
+  color: #63ff9b;
+  border-color: #63ff9b;
+  background-color: rgba(31,108,66,calc(.02 + (var(--bvp-bg-opacity, .22) * .16)));
 }
 .matchup-bvp-row.bvp-neutral-high,
 .matchup-bvp-row.bvp-neutral-low {
@@ -2370,4 +2370,147 @@ a.lifecycle-item:hover {
   line-height: 1.35;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+
+/* Phase 8I: hitter-perspective BvP tiers */
+
+/* OPS .650 or lower: poor history for the hitter */
+.matchup-bvp-row.bvp-pitcher-strong {
+  color: #ff7184;
+  border-color: rgba(255, 113, 132, .72);
+  background-color: rgba(
+    119,
+    28,
+    43,
+    calc(.03 + (var(--bvp-bg-opacity, .22) * .18))
+  );
+}
+
+/* OPS above .650 and below .850: positive/middle green */
+.matchup-bvp-row.bvp-neutral-low,
+.matchup-bvp-row.bvp-neutral-high {
+  color: #8de5b2;
+  border-color: rgba(141, 229, 178, .48);
+  background-color: rgba(
+    39,
+    112,
+    72,
+    calc(.02 + (var(--bvp-bg-opacity, .22) * .13))
+  );
+}
+
+/* OPS .850 or higher: strongest green */
+.matchup-bvp-row.bvp-pitcher-poor {
+  color: #39ff88;
+  border-color: #39ff88;
+  box-shadow:
+    inset 0 0 0 1px rgba(57, 255, 136, .18),
+    0 0 10px rgba(57, 255, 136, .08);
+  background-color: rgba(
+    20,
+    132,
+    69,
+    calc(.05 + (var(--bvp-bg-opacity, .22) * .24))
+  );
+}
+
+
+/* Phase 8J: BvP sample-size intensity */
+
+/*
+Plate appearances control --bvp-bg-opacity:
+few PA = dim
+many PA = radiant
+*/
+
+/* OPS .650 or lower: red */
+.matchup-bvp-row.bvp-pitcher-strong {
+  color: #fff5f6;
+  border-color: rgba(
+    255,
+    90,
+    112,
+    var(--bvp-bg-opacity, .22)
+  );
+  background-color: rgba(
+    125,
+    22,
+    40,
+    var(--bvp-bg-opacity, .22)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(
+      255,
+      113,
+      132,
+      var(--bvp-bg-opacity, .22)
+    ),
+    0 0 12px rgba(
+      255,
+      70,
+      96,
+      var(--bvp-bg-opacity, .22)
+    );
+}
+
+/* OPS above .650 and below .850: regular green */
+.matchup-bvp-row.bvp-neutral-low,
+.matchup-bvp-row.bvp-neutral-high {
+  color: #f4fff8;
+  border-color: rgba(
+    112,
+    226,
+    157,
+    var(--bvp-bg-opacity, .22)
+  );
+  background-color: rgba(
+    28,
+    105,
+    63,
+    var(--bvp-bg-opacity, .22)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(
+      112,
+      226,
+      157,
+      var(--bvp-bg-opacity, .22)
+    ),
+    0 0 10px rgba(
+      72,
+      210,
+      130,
+      var(--bvp-bg-opacity, .22)
+    );
+}
+
+/* OPS .850 or higher: super green */
+.matchup-bvp-row.bvp-pitcher-poor {
+  color: #ffffff;
+  border-color: rgba(
+    57,
+    255,
+    136,
+    var(--bvp-bg-opacity, .22)
+  );
+  background-color: rgba(
+    18,
+    145,
+    72,
+    var(--bvp-bg-opacity, .22)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(
+      115,
+      255,
+      169,
+      var(--bvp-bg-opacity, .22)
+    ),
+    0 0 16px rgba(
+      57,
+      255,
+      136,
+      var(--bvp-bg-opacity, .22)
+    );
 }

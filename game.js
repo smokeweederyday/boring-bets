@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js?v=phase8e-unranked-tooltip1";
+} from "./assets/js/sports/mlbEngine.js?v=phase8j-bvp-intensity2";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
