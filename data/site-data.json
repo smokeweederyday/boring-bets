@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-18T04:10:33.190670+00:00",
+    "updated_at": "2026-07-18T06:31:35.318233+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -95,10 +95,10 @@
     {
       "team": "DET",
       "division": "",
-      "w": 44,
+      "w": 45,
       "l": 52,
-      "wcgb": 4.0,
-      "run_diff": 24,
+      "wcgb": 3.5,
+      "run_diff": 25,
       "tier": "Bubble",
       "need": "Right-handed bat / deadline direction",
       "betting_note": "Skubal rumors create scratch and F5 volatility"
@@ -129,9 +129,9 @@
       "team": "SEA",
       "division": "",
       "w": 48,
-      "l": 49,
-      "wcgb": 0.5,
-      "run_diff": 16,
+      "l": 50,
+      "wcgb": 1.0,
+      "run_diff": 9,
       "tier": "Aggressive Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -151,9 +151,9 @@
       "team": "ATH",
       "division": "",
       "w": 41,
-      "l": 55,
-      "wcgb": 7.0,
-      "run_diff": -106,
+      "l": 56,
+      "wcgb": 7.5,
+      "run_diff": -125,
       "tier": "Bubble",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -162,9 +162,9 @@
       "team": "LAA",
       "division": "",
       "w": 38,
-      "l": 59,
-      "wcgb": 10.5,
-      "run_diff": -55,
+      "l": 60,
+      "wcgb": 11.0,
+      "run_diff": -56,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -205,10 +205,10 @@
     {
       "team": "WSH",
       "division": "",
-      "w": 48,
+      "w": 49,
       "l": 49,
-      "wcgb": 3.5,
-      "run_diff": 7,
+      "wcgb": 3.0,
+      "run_diff": 26,
       "tier": "Bubble",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -249,10 +249,10 @@
     {
       "team": "STL",
       "division": "",
-      "w": 50,
+      "w": 51,
       "l": 45,
-      "wcgb": 0.5,
-      "run_diff": 6,
+      "wcgb": 0.0,
+      "run_diff": 7,
       "tier": "Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -294,9 +294,9 @@
       "team": "ARI",
       "division": "",
       "w": 49,
-      "l": 47,
-      "wcgb": 2.0,
-      "run_diff": -13,
+      "l": 48,
+      "wcgb": 2.5,
+      "run_diff": -14,
       "tier": "Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -315,10 +315,10 @@
     {
       "team": "SF",
       "division": "",
-      "w": 41,
+      "w": 42,
       "l": 55,
-      "wcgb": 10.0,
-      "run_diff": -64,
+      "wcgb": 9.5,
+      "run_diff": -57,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -377,6 +377,15 @@
       "from": "See description",
       "to": "See description",
       "players": "Washington Nationals traded CF Robert Hassell III to Pittsburgh Pirates for cash.",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-18",
+      "from": "See description",
+      "to": "See description",
+      "players": "Kansas City Royals traded RF Rudy Martin Jr.",
       "return": "See official source",
       "betting_impact": "Editorial review required.",
       "source": "https://www.mlb.com/transactions"
