@@ -1,0 +1,673 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "league": "triple-a",
+  "date": "2026-07-19",
+  "updated_at": "2026-07-19T11:46:57Z",
+  "source": {
+    "provider": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=11&season=2026&hydrate=team%2Cvenue%2CprobablePitcher%2Clinescore&startDate=2026-07-19&endDate=2026-07-19"
+  },
+  "events": [
+    {
+      "id": "triple-a-815652",
+      "game_pk": 815652,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2823,
+        "name": "NBT Bank Stadium"
+      },
+      "away": {
+        "id": 422,
+        "abbreviation": "BUF",
+        "name": "Buffalo Bisons",
+        "score": null,
+        "record": {
+          "wins": 45,
+          "losses": 50,
+          "pct": ".474"
+        }
+      },
+      "home": {
+        "id": 552,
+        "abbreviation": "SYR",
+        "name": "Syracuse Mets",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 47,
+          "pct": ".500"
+        }
+      },
+      "away_detail": "Chad Dallas",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-815652&sport=baseball&league=triple-a&gamePk=815652",
+      "live_url": "live.html?id=triple-a-815652&sport=baseball&league=triple-a&gamePk=815652"
+    },
+    {
+      "id": "triple-a-816783",
+      "game_pk": 816783,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 3970,
+        "name": "Huntington Park"
+      },
+      "away": {
+        "id": 484,
+        "abbreviation": "IND",
+        "name": "Indianapolis Indians",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 51,
+          "pct": ".463"
+        }
+      },
+      "home": {
+        "id": 445,
+        "abbreviation": "COL",
+        "name": "Columbus Clippers",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 44,
+          "pct": ".532"
+        }
+      },
+      "away_detail": "Antwone Kelly",
+      "home_detail": "Yorman Gómez",
+      "game_url": "game.html?id=triple-a-816783&sport=baseball&league=triple-a&gamePk=816783",
+      "live_url": "live.html?id=triple-a-816783&sport=baseball&league=triple-a&gamePk=816783"
+    },
+    {
+      "id": "triple-a-815804",
+      "game_pk": 815804,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:35:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2797,
+        "name": "PNC Field"
+      },
+      "away": {
+        "id": 533,
+        "abbreviation": "WOR",
+        "name": "Worcester Red Sox",
+        "score": null,
+        "record": {
+          "wins": 45,
+          "losses": 45,
+          "pct": ".500"
+        }
+      },
+      "home": {
+        "id": 531,
+        "abbreviation": "SWB",
+        "name": "Scranton/Wilkes-Barre RailRiders",
+        "score": null,
+        "record": {
+          "wins": 49,
+          "losses": 43,
+          "pct": ".533"
+        }
+      },
+      "away_detail": "Osvaldo Berrios",
+      "home_detail": "Alexander Cornielle",
+      "game_url": "game.html?id=triple-a-815804&sport=baseball&league=triple-a&gamePk=815804",
+      "live_url": "live.html?id=triple-a-815804&sport=baseball&league=triple-a&gamePk=815804"
+    },
+    {
+      "id": "triple-a-816182",
+      "game_pk": 816182,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T18:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2542,
+        "name": "AutoZone Park"
+      },
+      "away": {
+        "id": 451,
+        "abbreviation": "IOW",
+        "name": "Iowa Cubs",
+        "score": null,
+        "record": {
+          "wins": 40,
+          "losses": 52,
+          "pct": ".435"
+        }
+      },
+      "home": {
+        "id": 235,
+        "abbreviation": "MEM",
+        "name": "Memphis Redbirds",
+        "score": null,
+        "record": {
+          "wins": 55,
+          "losses": 40,
+          "pct": ".579"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-816182&sport=baseball&league=triple-a&gamePk=816182",
+      "live_url": "live.html?id=triple-a-816182&sport=baseball&league=triple-a&gamePk=816182"
+    },
+    {
+      "id": "triple-a-815725",
+      "game_pk": 815725,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T19:07:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 5472,
+        "name": "CHS Field"
+      },
+      "away": {
+        "id": 416,
+        "abbreviation": "LOU",
+        "name": "Louisville Bats",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 46,
+          "pct": ".505"
+        }
+      },
+      "home": {
+        "id": 1960,
+        "abbreviation": "STP",
+        "name": "St. Paul Saints",
+        "score": null,
+        "record": {
+          "wins": 53,
+          "losses": 41,
+          "pct": ".564"
+        }
+      },
+      "away_detail": "Jose Acuna",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-815725&sport=baseball&league=triple-a&gamePk=815725",
+      "live_url": "live.html?id=triple-a-815725&sport=baseball&league=triple-a&gamePk=815725"
+    },
+    {
+      "id": "triple-a-815582",
+      "game_pk": 815582,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T20:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2767,
+        "name": "Fifth Third Field"
+      },
+      "away": {
+        "id": 431,
+        "abbreviation": "GWN",
+        "name": "Gwinnett Stripers",
+        "score": null,
+        "record": {
+          "wins": 48,
+          "losses": 45,
+          "pct": ".516"
+        }
+      },
+      "home": {
+        "id": 512,
+        "abbreviation": "TOL",
+        "name": "Toledo Mud Hens",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 50,
+          "pct": ".468"
+        }
+      },
+      "away_detail": "Hurston Waldrep",
+      "home_detail": "Sawyer Gipson-Long",
+      "game_url": "game.html?id=triple-a-815582&sport=baseball&league=triple-a&gamePk=815582",
+      "live_url": "live.html?id=triple-a-815582&sport=baseball&league=triple-a&gamePk=815582"
+    },
+    {
+      "id": "triple-a-814754",
+      "game_pk": 814754,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T20:35:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2745,
+        "name": "Cheney Stadium"
+      },
+      "away": {
+        "id": 238,
+        "abbreviation": "OKC",
+        "name": "Oklahoma City Comets",
+        "score": null,
+        "record": {
+          "wins": 51,
+          "losses": 42,
+          "pct": ".548"
+        }
+      },
+      "home": {
+        "id": 529,
+        "abbreviation": "TAC",
+        "name": "Tacoma Rainiers",
+        "score": null,
+        "record": {
+          "wins": 42,
+          "losses": 53,
+          "pct": ".442"
+        }
+      },
+      "away_detail": "Cole Irvin",
+      "home_detail": "Nick Hull",
+      "game_url": "game.html?id=triple-a-814754&sport=baseball&league=triple-a&gamePk=814754",
+      "live_url": "live.html?id=triple-a-814754&sport=baseball&league=triple-a&gamePk=814754"
+    },
+    {
+      "id": "triple-a-815875",
+      "game_pk": 815875,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T21:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2773,
+        "name": "ESL Ballpark"
+      },
+      "away": {
+        "id": 564,
+        "abbreviation": "JAX",
+        "name": "Jacksonville Jumbo Shrimp",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 43,
+          "pct": ".538"
+        }
+      },
+      "home": {
+        "id": 534,
+        "abbreviation": "ROC",
+        "name": "Rochester Red Wings",
+        "score": null,
+        "record": {
+          "wins": 55,
+          "losses": 38,
+          "pct": ".591"
+        }
+      },
+      "away_detail": "Patrick Monteverde",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-815875&sport=baseball&league=triple-a&gamePk=815875",
+      "live_url": "live.html?id=triple-a-815875&sport=baseball&league=triple-a&gamePk=815875"
+    },
+    {
+      "id": "triple-a-816702",
+      "game_pk": 816702,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T21:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2541,
+        "name": "Durham Bulls Athletic Park"
+      },
+      "away": {
+        "id": 494,
+        "abbreviation": "CLT",
+        "name": "Charlotte Knights",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 45,
+          "pct": ".526"
+        }
+      },
+      "home": {
+        "id": 234,
+        "abbreviation": "DUR",
+        "name": "Durham Bulls",
+        "score": null,
+        "record": {
+          "wins": 42,
+          "losses": 51,
+          "pct": ".452"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Michael Forret",
+      "game_url": "game.html?id=triple-a-816702&sport=baseball&league=triple-a&gamePk=816702",
+      "live_url": "live.html?id=triple-a-816702&sport=baseball&league=triple-a&gamePk=816702"
+    },
+    {
+      "id": "triple-a-815952",
+      "game_pk": 815952,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T22:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4271,
+        "name": "Werner Park"
+      },
+      "away": {
+        "id": 1410,
+        "abbreviation": "LHV",
+        "name": "Lehigh Valley IronPigs",
+        "score": null,
+        "record": {
+          "wins": 45,
+          "losses": 50,
+          "pct": ".474"
+        }
+      },
+      "home": {
+        "id": 541,
+        "abbreviation": "OMA",
+        "name": "Omaha Storm Chasers",
+        "score": null,
+        "record": {
+          "wins": 42,
+          "losses": 52,
+          "pct": ".447"
+        }
+      },
+      "away_detail": "Drake Fellows",
+      "home_detail": "Mitch Spence",
+      "game_url": "game.html?id=triple-a-815952&sport=baseball&league=triple-a&gamePk=815952",
+      "live_url": "live.html?id=triple-a-815952&sport=baseball&league=triple-a&gamePk=815952"
+    },
+    {
+      "id": "triple-a-815058",
+      "game_pk": 815058,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T23:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2528,
+        "name": "Dell Diamond"
+      },
+      "away": {
+        "id": 400,
+        "abbreviation": "LV",
+        "name": "Las Vegas Aviators",
+        "score": null,
+        "record": {
+          "wins": 57,
+          "losses": 36,
+          "pct": ".613"
+        }
+      },
+      "home": {
+        "id": 102,
+        "abbreviation": "RR",
+        "name": "Round Rock Express",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 54,
+          "pct": ".432"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-815058&sport=baseball&league=triple-a&gamePk=815058",
+      "live_url": "live.html?id=triple-a-815058&sport=baseball&league=triple-a&gamePk=815058"
+    },
+    {
+      "id": "triple-a-816102",
+      "game_pk": 816102,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T23:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4715,
+        "name": "First Horizon Park"
+      },
+      "away": {
+        "id": 568,
+        "abbreviation": "NOR",
+        "name": "Norfolk Tides",
+        "score": null,
+        "record": {
+          "wins": 35,
+          "losses": 58,
+          "pct": ".376"
+        }
+      },
+      "home": {
+        "id": 556,
+        "abbreviation": "NAS",
+        "name": "Nashville Sounds",
+        "score": null,
+        "record": {
+          "wins": 53,
+          "losses": 42,
+          "pct": ".558"
+        }
+      },
+      "away_detail": "Trey Gibson",
+      "home_detail": "Coleman Crow",
+      "game_url": "game.html?id=triple-a-816102&sport=baseball&league=triple-a&gamePk=816102",
+      "live_url": "live.html?id=triple-a-816102&sport=baseball&league=triple-a&gamePk=816102"
+    },
+    {
+      "id": "triple-a-814903",
+      "game_pk": 814903,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6135,
+        "name": "The Ballpark at America First Square"
+      },
+      "away": {
+        "id": 2310,
+        "abbreviation": "RNO",
+        "name": "Reno Aces",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 51,
+          "pct": ".463"
+        }
+      },
+      "home": {
+        "id": 561,
+        "abbreviation": "SL",
+        "name": "Salt Lake Bees",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 47,
+          "pct": ".500"
+        }
+      },
+      "away_detail": "Tommy Henry",
+      "home_detail": "George Klassen",
+      "game_url": "game.html?id=triple-a-814903&sport=baseball&league=triple-a&gamePk=814903",
+      "live_url": "live.html?id=triple-a-814903&sport=baseball&league=triple-a&gamePk=814903"
+    },
+    {
+      "id": "triple-a-815358",
+      "game_pk": 815358,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4669,
+        "name": "Southwest University Park"
+      },
+      "away": {
+        "id": 5434,
+        "abbreviation": "SUG",
+        "name": "Sugar Land Space Cowboys",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 47,
+          "pct": ".500"
+        }
+      },
+      "home": {
+        "id": 4904,
+        "abbreviation": "ELP",
+        "name": "El Paso Chihuahuas",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 53,
+          "pct": ".436"
+        }
+      },
+      "away_detail": "Ethan Pecko",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-815358&sport=baseball&league=triple-a&gamePk=815358",
+      "live_url": "live.html?id=triple-a-815358&sport=baseball&league=triple-a&gamePk=815358"
+    },
+    {
+      "id": "triple-a-815428",
+      "game_pk": 815428,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "triple-a",
+      "sport_id": 11,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2683,
+        "name": "Isotopes Park"
+      },
+      "away": {
+        "id": 105,
+        "abbreviation": "SAC",
+        "name": "Sacramento River Cats",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 42,
+          "pct": ".543"
+        }
+      },
+      "home": {
+        "id": 342,
+        "abbreviation": "ABQ",
+        "name": "Albuquerque Isotopes",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 48,
+          "pct": ".495"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=triple-a-815428&sport=baseball&league=triple-a&gamePk=815428",
+      "live_url": "live.html?id=triple-a-815428&sport=baseball&league=triple-a&gamePk=815428"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "season": 2026,
+  "updated_at": "2026-07-19T12:22:28Z",
+  "refresh_date": null,
+  "leagues": [
+    {
+      "id": "triple-a",
+      "label": "Triple-A",
+      "sport_id": 11,
+      "event_count": 2324,
+      "date_count": 156,
+      "first_date": "2026-03-27",
+      "last_date": "2026-09-26",
+      "path": "data/schedules/baseball/2026/triple-a.json"
+    },
+    {
+      "id": "double-a",
+      "label": "Double-A",
+      "sport_id": 12,
+      "event_count": 2176,
+      "date_count": 146,
+      "first_date": "2026-04-02",
+      "last_date": "2026-09-23",
+      "path": "data/schedules/baseball/2026/double-a.json"
+    },
+    {
+      "id": "high-a",
+      "label": "High-A",
+      "sport_id": 13,
+      "event_count": 2066,
+      "date_count": 142,
+      "first_date": "2026-04-02",
+      "last_date": "2026-09-16",
+      "path": "data/schedules/baseball/2026/high-a.json"
+    },
+    {
+      "id": "single-a",
+      "label": "Single-A",
+      "sport_id": 14,
+      "event_count": 2054,
+      "date_count": 139,
+      "first_date": "2026-04-02",
+      "last_date": "2026-09-16",
+      "path": "data/schedules/baseball/2026/single-a.json"
+    },
+    {
+      "id": "rookie",
+      "label": "Rookie",
+      "sport_id": 16,
+      "event_count": 2432,
+      "date_count": 104,
+      "first_date": "2026-05-02",
+      "last_date": "2026-08-28",
+      "path": "data/schedules/baseball/2026/rookie.json"
+    }
+  ]
+}

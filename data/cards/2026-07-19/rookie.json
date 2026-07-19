@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "league": "rookie",
+  "date": "2026-07-19",
+  "updated_at": "2026-07-19T11:46:59Z",
+  "source": {
+    "provider": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=16&season=2026&hydrate=team%2Cvenue%2CprobablePitcher%2Clinescore&startDate=2026-07-19&endDate=2026-07-19"
+  },
+  "events": [
+    {
+      "id": "rookie-849569",
+      "game_pk": 849569,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T14:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "A",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "DSL All-Star Game",
+      "venue": {
+        "id": 401,
+        "name": "TBD"
+      },
+      "away": {
+        "id": 2191,
+        "abbreviation": "NL",
+        "name": "DSL NL All-Stars",
+        "score": null,
+        "record": {
+          "wins": 0,
+          "losses": 0,
+          "pct": ".000"
+        }
+      },
+      "home": {
+        "id": 2190,
+        "abbreviation": "AL",
+        "name": "DSL AL All-Stars",
+        "score": null,
+        "record": {
+          "wins": 0,
+          "losses": 0,
+          "pct": ".000"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=rookie-849569&sport=baseball&league=rookie&gamePk=849569",
+      "live_url": "live.html?id=rookie-849569&sport=baseball&league=rookie&gamePk=849569"
+    }
+  ]
+}

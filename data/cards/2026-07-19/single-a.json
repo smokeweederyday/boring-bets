@@ -1,0 +1,673 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "league": "single-a",
+  "date": "2026-07-19",
+  "updated_at": "2026-07-19T11:46:59Z",
+  "source": {
+    "provider": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=14&season=2026&hydrate=team%2Cvenue%2CprobablePitcher%2Clinescore&startDate=2026-07-19&endDate=2026-07-19"
+  },
+  "events": [
+    {
+      "id": "single-a-820253",
+      "game_pk": 820253,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T16:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2523,
+        "name": "George M. Steinbrenner Field"
+      },
+      "away": {
+        "id": 3390,
+        "abbreviation": "BRD",
+        "name": "Bradenton Marauders",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 46,
+          "pct": ".471"
+        }
+      },
+      "home": {
+        "id": 587,
+        "abbreviation": "TAM",
+        "name": "Tampa Tarpons",
+        "score": null,
+        "record": {
+          "wins": 52,
+          "losses": 37,
+          "pct": ".584"
+        }
+      },
+      "away_detail": "Irwin Ramirez",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-820253&sport=baseball&league=single-a&gamePk=820253",
+      "live_url": "live.html?id=single-a-820253&sport=baseball&league=single-a&gamePk=820253"
+    },
+    {
+      "id": "single-a-820654",
+      "game_pk": 820654,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T16:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2536,
+        "name": "TD Ballpark"
+      },
+      "away": {
+        "id": 566,
+        "abbreviation": "CLR",
+        "name": "Clearwater Threshers",
+        "score": null,
+        "record": {
+          "wins": 52,
+          "losses": 37,
+          "pct": ".584"
+        }
+      },
+      "home": {
+        "id": 424,
+        "abbreviation": "DUN",
+        "name": "Dunedin Blue Jays",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 47,
+          "pct": ".466"
+        }
+      },
+      "away_detail": "Cole Gilley",
+      "home_detail": "Denis Samudio",
+      "game_url": "game.html?id=single-a-820654&sport=baseball&league=single-a&gamePk=820654",
+      "live_url": "live.html?id=single-a-820654&sport=baseball&league=single-a&gamePk=820654"
+    },
+    {
+      "id": "single-a-820584",
+      "game_pk": 820584,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T16:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2862,
+        "name": "Lee Health Sports Complex"
+      },
+      "away": {
+        "id": 570,
+        "abbreviation": "LAK",
+        "name": "Lakeland Flying Tigers",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 47,
+          "pct": ".466"
+        }
+      },
+      "home": {
+        "id": 509,
+        "abbreviation": "FTM",
+        "name": "Fort Myers Mighty Mussels",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 39,
+          "pct": ".547"
+        }
+      },
+      "away_detail": "Caleb Leys",
+      "home_detail": "Merit Jones",
+      "game_url": "game.html?id=single-a-820584&sport=baseball&league=single-a&gamePk=820584",
+      "live_url": "live.html?id=single-a-820584&sport=baseball&league=single-a&gamePk=820584"
+    },
+    {
+      "id": "single-a-820386",
+      "game_pk": 820386,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T16:30:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2520,
+        "name": "Roger Dean Chevrolet Stadium"
+      },
+      "away": {
+        "id": 507,
+        "abbreviation": "SLU",
+        "name": "St. Lucie Mets",
+        "score": null,
+        "record": {
+          "wins": 40,
+          "losses": 47,
+          "pct": ".460"
+        }
+      },
+      "home": {
+        "id": 279,
+        "abbreviation": "PMB",
+        "name": "Palm Beach Cardinals",
+        "score": null,
+        "record": {
+          "wins": 46,
+          "losses": 42,
+          "pct": ".523"
+        }
+      },
+      "away_detail": "Ethan Lanthier",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-820386&sport=baseball&league=single-a&gamePk=820386",
+      "live_url": "live.html?id=single-a-820386&sport=baseball&league=single-a&gamePk=820386"
+    },
+    {
+      "id": "single-a-820719",
+      "game_pk": 820719,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2787,
+        "name": "Jackie Robinson Ballpark"
+      },
+      "away": {
+        "id": 479,
+        "abbreviation": "JUP",
+        "name": "Jupiter Hammerheads",
+        "score": null,
+        "record": {
+          "wins": 45,
+          "losses": 44,
+          "pct": ".506"
+        }
+      },
+      "home": {
+        "id": 450,
+        "abbreviation": "DBT",
+        "name": "Daytona Tortugas",
+        "score": null,
+        "record": {
+          "wins": 34,
+          "losses": 53,
+          "pct": ".391"
+        }
+      },
+      "away_detail": "Jonas Uzcategui",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-820719&sport=baseball&league=single-a&gamePk=820719",
+      "live_url": "live.html?id=single-a-820719&sport=baseball&league=single-a&gamePk=820719"
+    },
+    {
+      "id": "single-a-827045",
+      "game_pk": 827045,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:30:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2764,
+        "name": "Atrium Health Ballpark"
+      },
+      "away": {
+        "id": 521,
+        "abbreviation": "MB",
+        "name": "Myrtle Beach Pelicans",
+        "score": null,
+        "record": {
+          "wins": 36,
+          "losses": 51,
+          "pct": ".414"
+        }
+      },
+      "home": {
+        "id": 487,
+        "abbreviation": "KAN",
+        "name": "Kannapolis Cannon Ballers",
+        "score": null,
+        "record": {
+          "wins": 46,
+          "losses": 43,
+          "pct": ".517"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-827045&sport=baseball&league=single-a&gamePk=827045",
+      "live_url": "live.html?id=single-a-827045&sport=baseball&league=single-a&gamePk=827045"
+    },
+    {
+      "id": "single-a-827183",
+      "game_pk": 827183,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:35:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 5520,
+        "name": "Virginia Credit Union Stadium"
+      },
+      "away": {
+        "id": 481,
+        "abbreviation": "HC",
+        "name": "Hill City Howlers",
+        "score": null,
+        "record": {
+          "wins": 38,
+          "losses": 51,
+          "pct": ".427"
+        }
+      },
+      "home": {
+        "id": 436,
+        "abbreviation": "FBG",
+        "name": "Fredericksburg Nationals",
+        "score": null,
+        "record": {
+          "wins": 57,
+          "losses": 32,
+          "pct": ".640"
+        }
+      },
+      "away_detail": "Erigaldi Perez",
+      "home_detail": "Marlon De La Cruz",
+      "game_url": "game.html?id=single-a-827183&sport=baseball&league=single-a&gamePk=827183",
+      "live_url": "live.html?id=single-a-827183&sport=baseball&league=single-a&gamePk=827183"
+    },
+    {
+      "id": "single-a-827116",
+      "game_pk": 827116,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T18:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2796,
+        "name": "L.P. Frans Stadium"
+      },
+      "away": {
+        "id": 249,
+        "abbreviation": "WIL",
+        "name": "Wilson Warbirds",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 41,
+          "pct": ".534"
+        }
+      },
+      "home": {
+        "id": 448,
+        "abbreviation": "HIC",
+        "name": "Hickory Crawdads",
+        "score": null,
+        "record": {
+          "wins": 51,
+          "losses": 36,
+          "pct": ".586"
+        }
+      },
+      "away_detail": "Diustin Mayorquin",
+      "home_detail": "Daniel Keaney",
+      "game_url": "game.html?id=single-a-827116&sport=baseball&league=single-a&gamePk=827116",
+      "live_url": "live.html?id=single-a-827116&sport=baseball&league=single-a&gamePk=827116"
+    },
+    {
+      "id": "single-a-826853",
+      "game_pk": 826853,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T20:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2840,
+        "name": "Carilion Clinic Field"
+      },
+      "away": {
+        "id": 548,
+        "abbreviation": "DEL",
+        "name": "Delmarva Shorebirds",
+        "score": null,
+        "record": {
+          "wins": 32,
+          "losses": 57,
+          "pct": ".360"
+        }
+      },
+      "home": {
+        "id": 414,
+        "abbreviation": "SAL",
+        "name": "Salem RidgeYaks",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 51,
+          "pct": ".420"
+        }
+      },
+      "away_detail": "Dalton Neuschwander",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-826853&sport=baseball&league=single-a&gamePk=826853",
+      "live_url": "live.html?id=single-a-826853&sport=baseball&league=single-a&gamePk=826853"
+    },
+    {
+      "id": "single-a-827243",
+      "game_pk": 827243,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T21:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 5400,
+        "name": "SEGRA Stadium"
+      },
+      "away": {
+        "id": 478,
+        "abbreviation": "AUG",
+        "name": "Augusta GreenJackets",
+        "score": null,
+        "record": {
+          "wins": 48,
+          "losses": 41,
+          "pct": ".539"
+        }
+      },
+      "home": {
+        "id": 3712,
+        "abbreviation": "FAY",
+        "name": "Fayetteville Woodpeckers",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 43,
+          "pct": ".506"
+        }
+      },
+      "away_detail": "Carter Holton",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-827243&sport=baseball&league=single-a&gamePk=827243",
+      "live_url": "live.html?id=single-a-827243&sport=baseball&league=single-a&gamePk=827243"
+    },
+    {
+      "id": "single-a-827457",
+      "game_pk": 827457,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T21:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2540,
+        "name": "Joseph P. Riley, Jr. Ballpark"
+      },
+      "away": {
+        "id": 3705,
+        "abbreviation": "COL",
+        "name": "Columbia Fireflies",
+        "score": null,
+        "record": {
+          "wins": 45,
+          "losses": 44,
+          "pct": ".506"
+        }
+      },
+      "home": {
+        "id": 233,
+        "abbreviation": "CHS",
+        "name": "Charleston RiverDogs",
+        "score": null,
+        "record": {
+          "wins": 49,
+          "losses": 40,
+          "pct": ".551"
+        }
+      },
+      "away_detail": "Michael Lombardi",
+      "home_detail": "Aidan Haugh",
+      "game_url": "game.html?id=single-a-827457&sport=baseball&league=single-a&gamePk=827457",
+      "live_url": "live.html?id=single-a-827457&sport=baseball&league=single-a&gamePk=827457"
+    },
+    {
+      "id": "single-a-820980",
+      "game_pk": 820980,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2731,
+        "name": "Banner Island Ballpark"
+      },
+      "away": {
+        "id": 476,
+        "abbreviation": "SJ",
+        "name": "San Jose Giants",
+        "score": null,
+        "record": {
+          "wins": 54,
+          "losses": 35,
+          "pct": ".607"
+        }
+      },
+      "home": {
+        "id": 524,
+        "abbreviation": "STK",
+        "name": "Stockton Ports",
+        "score": null,
+        "record": {
+          "wins": 39,
+          "losses": 50,
+          "pct": ".438"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Josiah Romeo",
+      "game_url": "game.html?id=single-a-820980&sport=baseball&league=single-a&gamePk=820980",
+      "live_url": "live.html?id=single-a-820980&sport=baseball&league=single-a&gamePk=820980"
+    },
+    {
+      "id": "single-a-821112",
+      "game_pk": 821112,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2854,
+        "name": "Morongo Field"
+      },
+      "away": {
+        "id": 401,
+        "abbreviation": "IE",
+        "name": "Inland Empire 66ers",
+        "score": null,
+        "record": {
+          "wins": 39,
+          "losses": 50,
+          "pct": ".438"
+        }
+      },
+      "home": {
+        "id": 526,
+        "abbreviation": "RC",
+        "name": "Rancho Cucamonga Quakes",
+        "score": null,
+        "record": {
+          "wins": 46,
+          "losses": 43,
+          "pct": ".517"
+        }
+      },
+      "away_detail": "Aiden Butler",
+      "home_detail": "Alton Davis II",
+      "game_url": "game.html?id=single-a-821112&sport=baseball&league=single-a&gamePk=821112",
+      "live_url": "live.html?id=single-a-821112&sport=baseball&league=single-a&gamePk=821112"
+    },
+    {
+      "id": "single-a-821182",
+      "game_pk": 821182,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 7253,
+        "name": "ONT Field"
+      },
+      "away": {
+        "id": 103,
+        "abbreviation": "LE",
+        "name": "Lake Elsinore Storm",
+        "score": null,
+        "record": {
+          "wins": 46,
+          "losses": 43,
+          "pct": ".517"
+        }
+      },
+      "home": {
+        "id": 6482,
+        "abbreviation": "ONT",
+        "name": "Ontario Tower Buzzers",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 42,
+          "pct": ".528"
+        }
+      },
+      "away_detail": "Luis Maracara",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=single-a-821182&sport=baseball&league=single-a&gamePk=821182",
+      "live_url": "live.html?id=single-a-821182&sport=baseball&league=single-a&gamePk=821182"
+    },
+    {
+      "id": "single-a-820912",
+      "game_pk": 820912,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T00:59:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "single-a",
+      "sport_id": 14,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2835,
+        "name": "Valley Strong Ballpark"
+      },
+      "away": {
+        "id": 259,
+        "abbreviation": "FRE",
+        "name": "Fresno Grizzlies",
+        "score": null,
+        "record": {
+          "wins": 48,
+          "losses": 41,
+          "pct": ".539"
+        }
+      },
+      "home": {
+        "id": 516,
+        "abbreviation": "VIS",
+        "name": "Visalia Rawhide",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 52,
+          "pct": ".416"
+        }
+      },
+      "away_detail": "Riley Kelly",
+      "home_detail": "Dean Livingston",
+      "game_url": "game.html?id=single-a-820912&sport=baseball&league=single-a&gamePk=820912",
+      "live_url": "live.html?id=single-a-820912&sport=baseball&league=single-a&gamePk=820912"
+    }
+  ]
+}

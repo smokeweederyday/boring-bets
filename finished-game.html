@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finished Game Breakdown | Boring Bets</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/finished-game.css">
+</head>
+<body class="finished-game-body">
+  <header class="finished-game-site-header">
+    <a class="finished-game-brand" href="todays-card.html">BORING BETS</a>
+    <span>DATA OVER HYPE</span>
+  </header>
+
+  <main class="finished-game-shell">
+    <nav class="finished-game-nav" aria-label="Finished game navigation">
+      <a id="backToCard" href="todays-card.html">‹ Back to card</a>
+      <span id="finishedGameLeague">BASEBALL</span>
+    </nav>
+
+    <p id="finishedGameStatus" class="finished-game-loading">Loading finished-game breakdown…</p>
+
+    <article id="finishedGameContent" class="finished-game-content" hidden>
+      <header class="finished-game-hero">
+        <div class="finished-game-kicker">
+          <span id="finishedGameDate">—</span>
+          <strong id="finishedGameState">FINAL</strong>
+        </div>
+
+        <div class="finished-scoreboard">
+          <section class="finished-team finished-team-away">
+            <div id="awayLogo" class="finished-team-logo" aria-hidden="true"></div>
+            <div>
+              <strong id="awayAbbr">AWAY</strong>
+              <span id="awayName">Away team</span>
+            </div>
+            <b id="awayScore">—</b>
+          </section>
+
+          <div class="finished-score-center">
+            <span>FINAL</span>
+            <small id="finishedInnings">—</small>
+          </div>
+
+          <section class="finished-team finished-team-home">
+            <b id="homeScore">—</b>
+            <div>
+              <strong id="homeAbbr">HOME</strong>
+              <span id="homeName">Home team</span>
+            </div>
+            <div id="homeLogo" class="finished-team-logo" aria-hidden="true"></div>
+          </section>
+        </div>
+
+        <div class="finished-game-meta">
+          <span id="finishedVenue">Venue unavailable</span>
+          <span id="finishedStartTime">Time unavailable</span>
+        </div>
+      </header>
+
+      <section class="finished-game-module" id="lineScoreModule">
+        <div class="finished-module-heading">
+          <span>OFFICIAL RESULT</span>
+          <h2>Line score</h2>
+        </div>
+        <div id="lineScoreTable" class="finished-table-wrap"></div>
+      </section>
+
+      <section class="finished-game-module" id="decisionsModule">
+        <div class="finished-module-heading">
+          <span>PITCHING DECISIONS</span>
+          <h2>Winner, loser and save</h2>
+        </div>
+        <div id="decisionsGrid" class="finished-decisions-grid"></div>
+      </section>
+
+      <section class="finished-game-module">
+        <div class="finished-module-heading">
+          <span>BORING BETS</span>
+          <h2>Plays, results and evaluation</h2>
+        </div>
+        <div class="finished-lifecycle-grid">
+          <div>
+            <h3>Official plays</h3>
+            <div id="finishedPlays" class="finished-stack"></div>
+          </div>
+          <div>
+            <h3>Results</h3>
+            <div id="finishedResults" class="finished-stack"></div>
+          </div>
+          <div>
+            <h3>Postgame evaluation</h3>
+            <div id="finishedEvaluations" class="finished-stack"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="finished-game-actions">
+        <a id="archivedResearchLink" href="#">Open archived pregame research</a>
+        <a id="finishedLiveLink" href="#">Open finished Game Center</a>
+      </section>
+    </article>
+  </main>
+
+  <script src="finished-game.js" defer></script>
+</body>
+</html>

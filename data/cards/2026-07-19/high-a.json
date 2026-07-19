@@ -1,0 +1,717 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "league": "high-a",
+  "date": "2026-07-19",
+  "updated_at": "2026-07-19T11:46:58Z",
+  "source": {
+    "provider": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=13&season=2026&hydrate=team%2Cvenue%2CprobablePitcher%2Clinescore&startDate=2026-07-19&endDate=2026-07-19"
+  },
+  "events": [
+    {
+      "id": "high-a-822334",
+      "game_pk": 822334,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T16:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "Y",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2795,
+        "name": "Maimonides Park"
+      },
+      "away": {
+        "id": 537,
+        "abbreviation": "HV",
+        "name": "Hudson Valley Renegades",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 45,
+          "pct": ".477"
+        }
+      },
+      "home": {
+        "id": 453,
+        "abbreviation": "BRK",
+        "name": "Brooklyn Cyclones",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 49,
+          "pct": ".430"
+        }
+      },
+      "away_detail": "Allen Facundo",
+      "home_detail": "Frank Camarillo",
+      "game_url": "game.html?id=high-a-822334&sport=baseball&league=high-a&gamePk=822334",
+      "live_url": "live.html?id=high-a-822334&sport=baseball&league=high-a&gamePk=822334"
+    },
+    {
+      "id": "high-a-819860",
+      "game_pk": 819860,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2759,
+        "name": "Classic Auto Group Park"
+      },
+      "away": {
+        "id": 459,
+        "abbreviation": "DAY",
+        "name": "Dayton Dragons",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 40,
+          "pct": ".540"
+        }
+      },
+      "home": {
+        "id": 437,
+        "abbreviation": "LC",
+        "name": "Lake County Captains",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 35,
+          "pct": ".588"
+        }
+      },
+      "away_detail": "Ty Floyd",
+      "home_detail": "Jackson Humphries",
+      "game_url": "game.html?id=high-a-819860&sport=baseball&league=high-a&gamePk=819860",
+      "live_url": "live.html?id=high-a-819860&sport=baseball&league=high-a&gamePk=819860"
+    },
+    {
+      "id": "high-a-821881",
+      "game_pk": 821881,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2851,
+        "name": "AdventHealth Stadium"
+      },
+      "away": {
+        "id": 573,
+        "abbreviation": "ASH",
+        "name": "Asheville Tourists",
+        "score": null,
+        "record": {
+          "wins": 31,
+          "losses": 57,
+          "pct": ".352"
+        }
+      },
+      "home": {
+        "id": 432,
+        "abbreviation": "ROM",
+        "name": "Rome Emperors",
+        "score": null,
+        "record": {
+          "wins": 43,
+          "losses": 43,
+          "pct": ".500"
+        }
+      },
+      "away_detail": "Dylan Howard",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=high-a-821881&sport=baseball&league=high-a&gamePk=821881",
+      "live_url": "live.html?id=high-a-821881&sport=baseball&league=high-a&gamePk=821881"
+    },
+    {
+      "id": "high-a-819792",
+      "game_pk": 819792,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2822,
+        "name": "Jackson Field"
+      },
+      "away": {
+        "id": 584,
+        "abbreviation": "FW",
+        "name": "Fort Wayne TinCaps",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 51,
+          "pct": ".420"
+        }
+      },
+      "home": {
+        "id": 499,
+        "abbreviation": "LAN",
+        "name": "Lansing Lugnuts",
+        "score": null,
+        "record": {
+          "wins": 35,
+          "losses": 51,
+          "pct": ".407"
+        }
+      },
+      "away_detail": "Abraham Parra",
+      "home_detail": "Ben Hansen",
+      "game_url": "game.html?id=high-a-819792&sport=baseball&league=high-a&gamePk=819792",
+      "live_url": "live.html?id=high-a-819792&sport=baseball&league=high-a&gamePk=819792"
+    },
+    {
+      "id": "high-a-819923",
+      "game_pk": 819923,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 3189,
+        "name": "Dow Diamond"
+      },
+      "away": {
+        "id": 582,
+        "abbreviation": "WM",
+        "name": "West Michigan Whitecaps",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 50,
+          "pct": ".425"
+        }
+      },
+      "home": {
+        "id": 456,
+        "abbreviation": "GL",
+        "name": "Great Lakes Loons",
+        "score": null,
+        "record": {
+          "wins": 52,
+          "losses": 34,
+          "pct": ".605"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Jakob Wright",
+      "game_url": "game.html?id=high-a-819923&sport=baseball&league=high-a&gamePk=819923",
+      "live_url": "live.html?id=high-a-819923&sport=baseball&league=high-a&gamePk=819923"
+    },
+    {
+      "id": "high-a-821818",
+      "game_pk": 821818,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2793,
+        "name": "Frawley Stadium"
+      },
+      "away": {
+        "id": 427,
+        "abbreviation": "JS",
+        "name": "Jersey Shore BlueClaws",
+        "score": null,
+        "record": {
+          "wins": 31,
+          "losses": 56,
+          "pct": ".356"
+        }
+      },
+      "home": {
+        "id": 426,
+        "abbreviation": "WIL",
+        "name": "Wilmington Blue Rocks",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 44,
+          "pct": ".500"
+        }
+      },
+      "away_detail": "Reese Dutton",
+      "home_detail": "Yoel Tejeda Jr.",
+      "game_url": "game.html?id=high-a-821818&sport=baseball&league=high-a&gamePk=821818",
+      "live_url": "live.html?id=high-a-821818&sport=baseball&league=high-a&gamePk=821818"
+    },
+    {
+      "id": "high-a-819595",
+      "game_pk": 819595,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T18:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2850,
+        "name": "Four Winds Field"
+      },
+      "away": {
+        "id": 443,
+        "abbreviation": "PEO",
+        "name": "Peoria Chiefs",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 47,
+          "pct": ".466"
+        }
+      },
+      "home": {
+        "id": 550,
+        "abbreviation": "SB",
+        "name": "South Bend Cubs",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 35,
+          "pct": ".588"
+        }
+      },
+      "away_detail": "Tanner Franklin",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=high-a-819595&sport=baseball&league=high-a&gamePk=819595",
+      "live_url": "live.html?id=high-a-819595&sport=baseball&league=high-a&gamePk=819595"
+    },
+    {
+      "id": "high-a-820122",
+      "game_pk": 820122,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T18:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2857,
+        "name": "Veterans Memorial Stadium"
+      },
+      "away": {
+        "id": 554,
+        "abbreviation": "BEL",
+        "name": "Beloit Sky Carp",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 47,
+          "pct": ".466"
+        }
+      },
+      "home": {
+        "id": 492,
+        "abbreviation": "CR",
+        "name": "Cedar Rapids Kernels",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 50,
+          "pct": ".425"
+        }
+      },
+      "away_detail": "Julio Mendez",
+      "home_detail": "Michael Ross",
+      "game_url": "game.html?id=high-a-820122&sport=baseball&league=high-a&gamePk=820122",
+      "live_url": "live.html?id=high-a-820122&sport=baseball&league=high-a&gamePk=820122"
+    },
+    {
+      "id": "high-a-822409",
+      "game_pk": 822409,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T18:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 3569,
+        "name": "Bowling Green Ballpark"
+      },
+      "away": {
+        "id": 580,
+        "abbreviation": "WS",
+        "name": "Winston-Salem Dash",
+        "score": null,
+        "record": {
+          "wins": 50,
+          "losses": 39,
+          "pct": ".562"
+        }
+      },
+      "home": {
+        "id": 2498,
+        "abbreviation": "BG",
+        "name": "Bowling Green Hot Rods",
+        "score": null,
+        "record": {
+          "wins": 62,
+          "losses": 26,
+          "pct": ".705"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=high-a-822409&sport=baseball&league=high-a&gamePk=822409",
+      "live_url": "live.html?id=high-a-822409&sport=baseball&league=high-a&gamePk=822409"
+    },
+    {
+      "id": "high-a-819458",
+      "game_pk": 819458,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T18:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2771,
+        "name": "Neuroscience Group Field"
+      },
+      "away": {
+        "id": 565,
+        "abbreviation": "QC",
+        "name": "Quad Cities River Bandits",
+        "score": null,
+        "record": {
+          "wins": 43,
+          "losses": 42,
+          "pct": ".506"
+        }
+      },
+      "home": {
+        "id": 572,
+        "abbreviation": "WIS",
+        "name": "Wisconsin Timber Rattlers",
+        "score": null,
+        "record": {
+          "wins": 48,
+          "losses": 36,
+          "pct": ".571"
+        }
+      },
+      "away_detail": "Kendry Chourio",
+      "home_detail": "Starter TBD",
+      "game_url": "game.html?id=high-a-819458&sport=baseball&league=high-a&gamePk=819458",
+      "live_url": "live.html?id=high-a-819458&sport=baseball&league=high-a&gamePk=819458"
+    },
+    {
+      "id": "high-a-822149",
+      "game_pk": 822149,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T19:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 3429,
+        "name": "Fluor Field at the West End"
+      },
+      "away": {
+        "id": 493,
+        "abbreviation": "FRE",
+        "name": "Frederick Keys",
+        "score": null,
+        "record": {
+          "wins": 53,
+          "losses": 33,
+          "pct": ".616"
+        }
+      },
+      "home": {
+        "id": 428,
+        "abbreviation": "GVL",
+        "name": "Greenville Drive",
+        "score": null,
+        "record": {
+          "wins": 36,
+          "losses": 50,
+          "pct": ".419"
+        }
+      },
+      "away_detail": "JT Quinn",
+      "home_detail": "Jojo Ingrassia",
+      "game_url": "game.html?id=high-a-822149&sport=baseball&league=high-a&gamePk=822149",
+      "live_url": "live.html?id=high-a-822149&sport=baseball&league=high-a&gamePk=822149"
+    },
+    {
+      "id": "high-a-819204",
+      "game_pk": 819204,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T20:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2730,
+        "name": "Avista Stadium"
+      },
+      "away": {
+        "id": 403,
+        "abbreviation": "EVE",
+        "name": "Everett AquaSox",
+        "score": null,
+        "record": {
+          "wins": 47,
+          "losses": 42,
+          "pct": ".528"
+        }
+      },
+      "home": {
+        "id": 486,
+        "abbreviation": "SPO",
+        "name": "Spokane Indians",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 45,
+          "pct": ".494"
+        }
+      },
+      "away_detail": "Evan Truitt",
+      "home_detail": "Yujanyer Herrera",
+      "game_url": "game.html?id=high-a-819204&sport=baseball&league=high-a&gamePk=819204",
+      "live_url": "live.html?id=high-a-819204&sport=baseball&league=high-a&gamePk=819204"
+    },
+    {
+      "id": "high-a-822073",
+      "game_pk": 822073,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T20:35:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6134,
+        "name": "Fifth Third Park"
+      },
+      "away": {
+        "id": 477,
+        "abbreviation": "GBO",
+        "name": "Greensboro Grasshoppers",
+        "score": null,
+        "record": {
+          "wins": 56,
+          "losses": 33,
+          "pct": ".629"
+        }
+      },
+      "home": {
+        "id": 6324,
+        "abbreviation": "HCS",
+        "name": "Hub City Spartanburgers",
+        "score": null,
+        "record": {
+          "wins": 40,
+          "losses": 49,
+          "pct": ".449"
+        }
+      },
+      "away_detail": "Hung-Leng Chang",
+      "home_detail": "Kamdyn Perry",
+      "game_url": "game.html?id=high-a-822073&sport=baseball&league=high-a&gamePk=822073",
+      "live_url": "live.html?id=high-a-822073&sport=baseball&league=high-a&gamePk=822073"
+    },
+    {
+      "id": "high-a-822337",
+      "game_pk": 822337,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T22:00:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 2,
+      "double_header": "Y",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2795,
+        "name": "Maimonides Park"
+      },
+      "away": {
+        "id": 537,
+        "abbreviation": "HV",
+        "name": "Hudson Valley Renegades",
+        "score": null,
+        "record": {
+          "wins": 41,
+          "losses": 45,
+          "pct": ".477"
+        }
+      },
+      "home": {
+        "id": 453,
+        "abbreviation": "BRK",
+        "name": "Brooklyn Cyclones",
+        "score": null,
+        "record": {
+          "wins": 37,
+          "losses": 49,
+          "pct": ".430"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Jose Chirinos",
+      "game_url": "game.html?id=high-a-822337&sport=baseball&league=high-a&gamePk=822337",
+      "live_url": "live.html?id=high-a-822337&sport=baseball&league=high-a&gamePk=822337"
+    },
+    {
+      "id": "high-a-819391",
+      "game_pk": 819391,
+      "date": "2026-07-19",
+      "start_time": "2026-07-19T23:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4109,
+        "name": "PK Park"
+      },
+      "away": {
+        "id": 419,
+        "abbreviation": "HIL",
+        "name": "Hillsboro Hops",
+        "score": null,
+        "record": {
+          "wins": 39,
+          "losses": 50,
+          "pct": ".438"
+        }
+      },
+      "home": {
+        "id": 461,
+        "abbreviation": "EUG",
+        "name": "Eugene Emeralds",
+        "score": null,
+        "record": {
+          "wins": 54,
+          "losses": 35,
+          "pct": ".607"
+        }
+      },
+      "away_detail": "David Hagaman",
+      "home_detail": "Niko Mazza",
+      "game_url": "game.html?id=high-a-819391&sport=baseball&league=high-a&gamePk=819391",
+      "live_url": "live.html?id=high-a-819391&sport=baseball&league=high-a&gamePk=819391"
+    },
+    {
+      "id": "high-a-819130",
+      "game_pk": 819130,
+      "date": "2026-07-19",
+      "start_time": "2026-07-20T02:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "league": "high-a",
+      "sport_id": 13,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2826,
+        "name": "Gesa Stadium"
+      },
+      "away": {
+        "id": 435,
+        "abbreviation": "VAN",
+        "name": "Vancouver Canadians",
+        "score": null,
+        "record": {
+          "wins": 39,
+          "losses": 50,
+          "pct": ".438"
+        }
+      },
+      "home": {
+        "id": 460,
+        "abbreviation": "TRI",
+        "name": "Tri-City Dust Devils",
+        "score": null,
+        "record": {
+          "wins": 44,
+          "losses": 45,
+          "pct": ".494"
+        }
+      },
+      "away_detail": "Landen Maroudis",
+      "home_detail": "Chase Shores",
+      "game_url": "game.html?id=high-a-819130&sport=baseball&league=high-a&gamePk=819130",
+      "live_url": "live.html?id=high-a-819130&sport=baseball&league=high-a&gamePk=819130"
+    }
+  ]
+}

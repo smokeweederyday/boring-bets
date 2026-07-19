@@ -1,907 +1,1006 @@
+const CARD_FALLBACK_CONFIG = {"schema_version":"1.1","sports":[{"id":"baseball","label":"Baseball","mark":"BB","default_league":"mlb","leagues":[{"id":"mlb","label":"MLB","feed":"active"},{"id":"triple-a","label":"Triple-A","feed":"active"},{"id":"double-a","label":"Double-A","feed":"active"},{"id":"high-a","label":"High-A","feed":"active"},{"id":"single-a","label":"Single-A","feed":"active"},{"id":"rookie","label":"Rookie","feed":"active"},{"id":"kbo","label":"KBO","feed":"planned"},{"id":"npb","label":"NPB","feed":"planned"},{"id":"ncaa-baseball","label":"NCAA","feed":"planned"},{"id":"international-baseball","label":"International","feed":"planned"}]},{"id":"basketball","label":"Basketball","mark":"BK","default_league":"nba","leagues":[{"id":"nba","label":"NBA","feed":"planned"},{"id":"wnba","label":"WNBA","feed":"planned"},{"id":"nba-g-league","label":"G League","feed":"planned"},{"id":"ncaam","label":"NCAA Men","feed":"planned"},{"id":"ncaaw","label":"NCAA Women","feed":"planned"},{"id":"euroleague","label":"EuroLeague","feed":"planned"},{"id":"fiba","label":"FIBA / International","feed":"planned"}]},{"id":"football","label":"Football","mark":"FB","default_league":"nfl","leagues":[{"id":"nfl","label":"NFL","feed":"planned"},{"id":"ncaaf","label":"NCAA Football","feed":"planned"},{"id":"cfl","label":"CFL","feed":"planned"},{"id":"ufl","label":"UFL","feed":"planned"}]},{"id":"hockey","label":"Hockey","mark":"HK","default_league":"nhl","leagues":[{"id":"nhl","label":"NHL","feed":"planned"},{"id":"ahl","label":"AHL","feed":"planned"},{"id":"echl","label":"ECHL","feed":"planned"},{"id":"ohl","label":"OHL","feed":"planned"},{"id":"whl","label":"WHL","feed":"planned"},{"id":"qmjhl","label":"QMJHL","feed":"planned"},{"id":"ncaa-hockey","label":"NCAA","feed":"planned"},{"id":"ushl","label":"USHL","feed":"planned"},{"id":"pwhl","label":"PWHL","feed":"planned"},{"id":"shl","label":"SHL","feed":"planned"},{"id":"liiga","label":"Liiga","feed":"planned"},{"id":"del","label":"DEL","feed":"planned"},{"id":"national-league","label":"Swiss NL","feed":"planned"},{"id":"khl","label":"KHL","feed":"planned"},{"id":"international-hockey","label":"International","feed":"planned"}]},{"id":"soccer","label":"Soccer","mark":"SC","default_league":"mls","leagues":[{"id":"mls","label":"MLS","feed":"planned"},{"id":"epl","label":"Premier League","feed":"planned"},{"id":"champions-league","label":"Champions League","feed":"planned"},{"id":"europa-league","label":"Europa League","feed":"planned"},{"id":"la-liga","label":"La Liga","feed":"planned"},{"id":"serie-a","label":"Serie A","feed":"planned"},{"id":"bundesliga","label":"Bundesliga","feed":"planned"},{"id":"ligue-1","label":"Ligue 1","feed":"planned"},{"id":"liga-mx","label":"Liga MX","feed":"planned"},{"id":"nwsl","label":"NWSL","feed":"planned"},{"id":"international-soccer","label":"International","feed":"planned"}]},{"id":"tennis","label":"Tennis","mark":"TN","default_league":"atp","leagues":[{"id":"atp","label":"ATP","feed":"planned"},{"id":"wta","label":"WTA","feed":"planned"},{"id":"atp-challenger","label":"ATP Challenger","feed":"planned"},{"id":"wta-125","label":"WTA 125","feed":"planned"},{"id":"itf-men","label":"ITF Men","feed":"planned"},{"id":"itf-women","label":"ITF Women","feed":"planned"},{"id":"tennis-doubles","label":"Doubles","feed":"planned"},{"id":"team-tennis","label":"Team / International","feed":"planned"}]},{"id":"combat","label":"Combat","mark":"CF","default_league":"ufc","leagues":[{"id":"ufc","label":"UFC","feed":"planned"},{"id":"pfl","label":"PFL","feed":"planned"},{"id":"one","label":"ONE Championship","feed":"planned"},{"id":"rizin","label":"RIZIN","feed":"planned"},{"id":"regional-mma","label":"Regional MMA","feed":"planned"},{"id":"boxing","label":"Boxing","feed":"planned"}]},{"id":"golf","label":"Golf","mark":"GF","default_league":"pga-tour","leagues":[{"id":"pga-tour","label":"PGA Tour","feed":"planned"},{"id":"lpga","label":"LPGA","feed":"planned"},{"id":"dp-world-tour","label":"DP World Tour","feed":"planned"},{"id":"liv-golf","label":"LIV Golf","feed":"planned"},{"id":"korn-ferry","label":"Korn Ferry Tour","feed":"planned"}]}],"notes":"MLB and affiliated Minor League Baseball schedule feeds are active."};
+
+const BASEBALL_LOGO_BASE = "https://www.mlbstatic.com/team-logos";
+const MLB_CAP_LOGO_BASE = "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
+const MINOR_LEAGUE_IDS = new Set(["triple-a", "double-a", "high-a", "single-a", "rookie"]);
+
+
+const cardState = {
+  config: CARD_FALLBACK_CONFIG,
+  date: "",
+  selectedSportIds: new Set(["baseball"]),
+  openLeaguesBySport: new Map(),
+  statusFilter: "all",
+  plays: [],
+  playsByEventId: new Map(),
+  leagueCache: new Map(),
+  renderGeneration: 0
+};
+
 const cardEscape = (value = "") =>
-  String(value).replace(
-    /[&<>"']/g,
-    character =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      })[character]
-  );
+  String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character]);
 
-const MLB_LOGO_BASE =
-  "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
+window.addEventListener("DOMContentLoaded", () => {
+  initialiseTodaysCard({ preserveCache: false });
+});
 
-async function loadCard() {
-  const status =
-    document.getElementById("cardStatus");
+window.addEventListener("popstate", () => initialiseTodaysCard({ preserveCache: false }));
 
+// Capture image failures so every baseball card either advances to the next
+// official logo source or falls back to a clean team abbreviation mark.
+document.addEventListener("error", event => {
+  const image = event.target;
+  if (!(image instanceof HTMLImageElement) || !image.matches("img[data-baseball-team-logo]")) return;
+  advanceBaseballTeamLogo(image);
+}, true);
+
+async function initialiseTodaysCard(options = {}) {
+  const generation = ++cardState.renderGeneration;
   try {
-    const selectedDate =
-      getSelectedDate();
+    cardState.date = getSelectedDate();
+    cardState.statusFilter = getRequestedFilter();
 
-    const [gamesResponse, playsResponse] =
-      await Promise.all([
-        fetch(
-          `data/games/${encodeURIComponent(
-            selectedDate
-          )}.json?v=${Date.now()}`
-        ),
-        fetch(
-          `data/todays-card.json?v=${Date.now()}`
-        )
-      ]);
+    if (!options.preserveCache) {
+      let config = cardState.config || CARD_FALLBACK_CONFIG;
+      let playsData = null;
 
-    if (!gamesResponse.ok) {
-      throw new Error(
-        "Unable to load the MLB schedule."
-      );
+      try {
+        config = await fetchJson("data/sports-card-config.json");
+      } catch (error) {
+        console.warn("Using embedded sports-card configuration.", error);
+      }
+
+      try {
+        playsData = await fetchOptionalJson("data/todays-card.json");
+      } catch (error) {
+        console.warn("Official plays feed is unavailable.", error);
+      }
+
+      cardState.config = config || CARD_FALLBACK_CONFIG;
+      cardState.plays = (playsData?.plays || []).filter(play => play.date === cardState.date);
+      cardState.playsByEventId = groupPlaysByEventId(cardState.plays);
     }
 
-    const gamesData =
-      await gamesResponse.json();
-
-    const playsData =
-      playsResponse.ok
-        ? await playsResponse.json()
-        : { plays: [] };
-
-    const games =
-      (gamesData.games || [])
-        .filter(
-          game => game.date === selectedDate
-        )
-        .sort(sortGames);
-
-    const plays =
-      (playsData.plays || [])
-        .filter(
-          play => play.date === selectedDate
-        );
-
-    const playsByGameId =
-      groupPlaysByGameId(plays);
-
-    renderDateHeader(
-      selectedDate,
-      gamesData,
-      playsData
-    );
-
-    renderDateNavigation(
-      selectedDate
-    );
-
-    function renderSummary(
-  games,
-  plays
-) {
-  setText(
-    "totalGames",
-    games.length
-  );
-
-  setText(
-    "totalPlays",
-    plays.length
-  );
-
-  setText(
-    "totalUnits",
-    plays
-      .reduce(
-        (sum, play) =>
-          sum + Number(play.units || 0),
-        0
-      )
-      .toFixed(2)
-  );
-}
-
-    renderSlate(
-      games,
-      playsByGameId
-    );
-
-    if (!games.length && !plays.length) {
-      status.textContent =
-        "No games or plays are available for this date.";
-
-      return;
-    }
-
-    status?.remove();
+    resolveSelectedSports();
+    renderDateHeader();
+    renderDateNavigation();
+    bindStatusFilters();
+    renderSportSwitcher();
+    renderSportWorkspace();
+    await loadAllOpenLeagues(generation);
+    if (generation !== cardState.renderGeneration) return;
+    updateSummary();
   } catch (error) {
     console.error(error);
+    const status = document.getElementById("cardStatus");
+    if (status) status.textContent = error?.message || "Unable to load Today’s Card.";
+  }
+}
 
-    if (status) {
-      status.textContent =
-        error.message ||
-        "Unable to load the card.";
+function resolveSelectedSports() {
+  const sports = cardState.config?.sports || [];
+  const validIds = new Set(sports.map(sport => sport.id));
+  const params = new URLSearchParams(window.location.search);
+  const requested = params.get("sports") || params.get("sport") || readStoredSports();
+  const requestedIds = String(requested || "baseball")
+    .split(",")
+    .map(value => value.trim())
+    .filter(value => validIds.has(value));
+
+  cardState.selectedSportIds = new Set(requestedIds.length ? requestedIds : [sports[0]?.id || "baseball"]);
+
+  cardState.selectedSportIds.forEach(sportId => ensureOpenLeagues(sportId));
+
+  // Preserve support for the old ?league=mlb URL when only one sport is selected.
+  const legacyLeague = params.get("league");
+  if (legacyLeague && cardState.selectedSportIds.size === 1) {
+    const [sportId] = cardState.selectedSportIds;
+    if (getLeague(sportId, legacyLeague)) {
+      cardState.openLeaguesBySport.set(sportId, new Set([legacyLeague]));
     }
   }
 }
 
-function renderDateHeader(
-  selectedDate,
-  gamesData,
-  playsData
-) {
-  setText(
-    "cardDate",
-    `Card date // ${formatCardDate(
-      selectedDate
-    )}`
-  );
-
-  const updatedAt =
-    playsData.updated_at ||
-    gamesData.updated_at ||
-    getLatestGameUpdate(
-      gamesData.games || []
-    );
-
-  setText(
-    "cardUpdated",
-    `Updated // ${formatCardDate(
-      updatedAt,
-      true
-    )}`
-  );
+function readStoredSports() {
+  const stored = localStorage.getItem("bb-card-sports");
+  if (stored) return stored;
+  return localStorage.getItem("bb-card-sport") || "baseball";
 }
 
-function renderDateNavigation(
-  selectedDate
-) {
-  const cardDate =
-    document.getElementById("cardDate");
+function ensureOpenLeagues(sportId) {
+  if (cardState.openLeaguesBySport.has(sportId)) return cardState.openLeaguesBySport.get(sportId);
 
-  if (!cardDate) return;
+  const sport = getSport(sportId);
+  const stored = localStorage.getItem(`bb-card-open-leagues-${sportId}`);
+  let ids = [];
 
-  let navigation =
-    document.getElementById(
-      "cardDateNavigation"
-    );
-
-  if (!navigation) {
-    navigation =
-      document.createElement("nav");
-
-    navigation.id =
-      "cardDateNavigation";
-
-    navigation.className =
-      "card-date-navigation";
-
-    navigation.setAttribute(
-      "aria-label",
-      "Card date navigation"
-    );
-
-    cardDate.insertAdjacentElement(
-      "afterend",
-      navigation
-    );
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) ids = parsed;
+    } catch {
+      ids = stored.split(",");
+    }
   }
 
-  const previousDate =
-    shiftDate(selectedDate, -1);
+  ids = ids.filter(id => getLeague(sportId, id));
+  if (!ids.length) ids = [sport?.default_league || sport?.leagues?.[0]?.id].filter(Boolean);
 
-  const nextDate =
-    shiftDate(selectedDate, 1);
+  const open = new Set(ids);
+  cardState.openLeaguesBySport.set(sportId, open);
+  return open;
+}
 
-  const today =
-    getLocalDateString(
-      new Date()
-    );
+function saveSelection() {
+  localStorage.setItem("bb-card-sports", [...cardState.selectedSportIds].join(","));
+  cardState.openLeaguesBySport.forEach((leagues, sportId) => {
+    localStorage.setItem(`bb-card-open-leagues-${sportId}`, JSON.stringify([...leagues]));
+  });
+}
+
+function renderDateHeader() {
+  setText("cardDate", formatCardDate(cardState.date));
+  setText("cardUpdated", `Board refreshed ${new Intl.DateTimeFormat(undefined, {
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(new Date())}`);
+}
+
+function renderDateNavigation() {
+  const navigation = document.getElementById("cardDateNavigation");
+  if (!navigation) return;
+
+  const previous = shiftDate(cardState.date, -1);
+  const next = shiftDate(cardState.date, 1);
+  const today = getLocalDateString(new Date());
 
   navigation.innerHTML = `
-    <a
-      id="previousCardDayLink"
-      href="${buildDateUrl(previousDate)}"
-      data-date="${previousDate}"
-      class="card-side-navigation card-side-navigation--previous"
-      aria-label="Previous day"
-      title="Previous day"
-    ></a>
-
-    <a
-      href="${buildDateUrl(today)}"
-      data-date="${today}"
-      class="card-date-link card-today-link"
-    >Today</a>
-
-    <a
-      id="nextCardDayLink"
-      href="${buildDateUrl(nextDate)}"
-      data-date="${nextDate}"
-      class="card-side-navigation card-side-navigation--next"
-      aria-label="Next day"
-      title="Next day"
-    ></a>
+    <button type="button" class="multisport-date-button multisport-date-previous" data-card-date="${previous}" aria-label="Previous day">‹</button>
+    <button type="button" class="multisport-date-today" data-card-date="${today}">Today</button>
+    <button type="button" class="multisport-date-button multisport-date-next" data-card-date="${next}" aria-label="Next day">›</button>
   `;
 
-  navigation
-    .querySelectorAll("[data-date]")
-    .forEach(link => {
-      link.addEventListener(
-        "click",
-        event => {
-          if (
-            event.metaKey ||
-            event.ctrlKey ||
-            event.shiftKey ||
-            event.altKey
-          ) return;
+  navigation.querySelectorAll("[data-card-date]").forEach(button => {
+    button.addEventListener("click", () => navigateToCardDate(button.dataset.cardDate));
+  });
 
-          event.preventDefault();
-          navigateToCardDate(
-            link.dataset.date
-          );
-        }
-      );
-    });
+  const sidePrevious = document.getElementById("sidePreviousDate");
+  const sideNext = document.getElementById("sideNextDate");
+  if (sidePrevious) {
+    sidePrevious.dataset.cardDate = previous;
+    sidePrevious.title = `Previous day: ${formatCardDate(previous)}`;
+    sidePrevious.onclick = () => navigateToCardDate(previous);
+  }
+  if (sideNext) {
+    sideNext.dataset.cardDate = next;
+    sideNext.title = `Next day: ${formatCardDate(next)}`;
+    sideNext.onclick = () => navigateToCardDate(next);
+  }
 }
 
-function navigateToCardDate(date) {
-  if (!date) return;
-
-  history.pushState(
-    { date },
-    "",
-    buildDateUrl(date)
-  );
-
-  loadCard();
+function bindStatusFilters() {
+  document.querySelectorAll("[data-status-filter]").forEach(button => {
+    const filter = button.dataset.statusFilter;
+    button.classList.toggle("is-active", filter === cardState.statusFilter);
+    button.onclick = () => {
+      cardState.statusFilter = filter;
+      document.querySelectorAll("[data-status-filter]").forEach(item => {
+        item.classList.toggle("is-active", item === button);
+      });
+      syncUrl();
+      rerenderLoadedLeagueCards();
+    };
+  });
 }
 
-function renderSummary(
-  games,
-  plays
-) {
-  setText(
-    "totalPlays",
-    plays.length
-  );
+function renderSportSwitcher() {
+  const switcher = document.getElementById("sportSwitcher");
+  if (!switcher) return;
 
-  setText(
-    "totalUnits",
-    plays
-      .reduce(
-        (sum, play) =>
-          sum + Number(play.units || 0),
-        0
-      )
-      .toFixed(2)
-  );
+  switcher.innerHTML = (cardState.config?.sports || []).map(sport => {
+    const selected = cardState.selectedSportIds.has(sport.id);
+    const preview = sport.leagues.slice(0, 3).map(league => league.label).join(" · ");
+    return `
+      <button
+        type="button"
+        class="sport-switcher-button${selected ? " is-active" : ""}"
+        aria-pressed="${selected}"
+        data-sport-id="${cardEscape(sport.id)}"
+      >
+        <span class="sport-switcher-mark">${cardEscape(sport.mark)}</span>
+        <span class="sport-switcher-copy">
+          <strong>${cardEscape(sport.label)}</strong>
+          <small>${cardEscape(preview)}</small>
+          <small data-sport-count="${cardEscape(sport.id)}">— events</small>
+        </span>
+      </button>
+    `;
+  }).join("");
 
-  setText(
-    "totalSports",
-    new Set(
-      games.map(
-        game => game.sport || "MLB"
-      )
-    ).size
-  );
+  switcher.querySelectorAll("[data-sport-id]").forEach(button => {
+    button.addEventListener("click", () => toggleSport(button.dataset.sportId));
+  });
+
+  updateSportCounts();
 }
 
-function renderSlate(
-  games,
-  playsByGameId
-) {
-  const container =
-    document.getElementById(
-      "playsContainer"
-    );
+async function toggleSport(sportId) {
+  if (!getSport(sportId)) return;
 
-  if (!container) return;
+  if (cardState.selectedSportIds.has(sportId)) {
+    // Never leave the board empty; the last selected sport stays active.
+    if (cardState.selectedSportIds.size === 1) return;
+    cardState.selectedSportIds.delete(sportId);
+  } else {
+    cardState.selectedSportIds.add(sportId);
+    ensureOpenLeagues(sportId);
+  }
 
-  container.innerHTML = "";
+  saveSelection();
+  syncUrl();
+  renderSportSwitcher();
+  renderSportWorkspace();
+  await loadAllOpenLeagues();
+  updateSummary();
+}
 
-  if (!games.length) {
-    const message =
-      document.createElement("p");
+function renderSportWorkspace() {
+  const workspace = document.getElementById("sportWorkspace");
+  if (!workspace) return;
 
-    message.className =
-      "card-message";
+  const selectedSports = (cardState.config?.sports || []).filter(sport => cardState.selectedSportIds.has(sport.id));
+  workspace.classList.toggle("has-many-sports", selectedSports.length > 1);
 
-    message.textContent =
-      "No imported games are available for this date.";
-
-    container.appendChild(message);
-
+  if (!selectedSports.length) {
+    workspace.innerHTML = `<div class="sport-board-empty">Select at least one sport.</div>`;
     return;
   }
 
-  const heading =
-    document.createElement("h2");
-
-  heading.className =
-    "sport-group-title";
-
-  heading.textContent =
-    "MLB";
-
-  container.appendChild(heading);
-
-  games.forEach(game => {
-    const attachedPlays =
-      playsByGameId.get(game.id) || [];
-
-    if (attachedPlays.length) {
-      attachedPlays.forEach(play => {
-        container.appendChild(
-          buildPublishedPlayCard(
-            play,
-            game
-          )
-        );
-      });
-
-      return;
-    }
-
-    container.appendChild(
-      buildGameCard(game)
-    );
-  });
-}
-
-function buildPublishedPlayCard(
-  play,
-  game
-) {
-  const card =
-    createInteractiveCard(
-      `play.html?id=${encodeURIComponent(
-        play.id
-      )}`
-    );
-
-  card.className =
-    "play-card published-play-card";
-
-  card.innerHTML = `
-    ${renderMatchupLogos(game, play)}
-
-    <div class="play-top">
-      <span class="sport">
-        ${cardEscape(
-          play.sport || "MLB"
-        )}
-      </span>
-
-      <span
-        class="stars"
-        aria-label="${Number(
-          play.rating || 0
-        )} star rating"
-      >
-        ${"★".repeat(
-          Number(play.rating || 0)
-        )}
-      </span>
-    </div>
-
-    <h2>
-      ${cardEscape(play.play)}
-    </h2>
-
-    <p>
-      <strong>
-        ${cardEscape(
-          play.game ||
-          formatGameLabel(game)
-        )}
-      </strong>
-    </p>
-
-    <p class="game-card-time">
-      ${cardEscape(
-        formatGameTime(
-          game?.game_time
-        )
-      )}
-      ${game?.venue?.name
-        ? ` · ${cardEscape(
-            game.venue.name
-          )}`
-        : ""}
-    </p>
-
-    <p>
-      ${cardEscape(play.odds)}
-      ·
-      ${Number(
-        play.units || 0
-      ).toFixed(2)}
-      units
-    </p>
-
-    <p>
-      ${cardEscape(
-        excerpt(
-          play.analysis,
-          190
-        )
-      )}
-    </p>
-
-    <small>
-      ${cardEscape(
-        play.handicapper
-      )}
-    </small>
-
-    ${renderResultBadge(play)}
-
-    <span class="card-cta">
-      FULL ANALYSIS →
-    </span>
-  `;
-
-  return card;
-}
-
-function buildGameCard(game) {
-  const card =
-    createInteractiveCard(
-      `game.html?id=${encodeURIComponent(
-        game.id
-      )}`
-    );
-
-  card.className =
-    "play-card schedule-game-card";
-
-  const awayPitcher =
-    game.pitchers?.away?.name ||
-    "Starter TBD";
-
-  const homePitcher =
-    game.pitchers?.home?.name ||
-    "Starter TBD";
-
-  card.innerHTML = `
-    ${renderMatchupLogos(game)}
-
-    <div class="play-top">
-      <span class="sport">
-        MLB
-      </span>
-
-      <span class="game-state">
-        ${cardEscape(
-          formatGameStatus(game.status)
-        )}
-      </span>
-    </div>
-
-    <h2>
-      ${cardEscape(
-        formatGameLabel(game)
-      )}
-    </h2>
-
-    <p>
-      <strong>
-        ${cardEscape(
-          awayPitcher
-        )}
-        vs
-        ${cardEscape(
-          homePitcher
-        )}
-      </strong>
-    </p>
-
-    <p class="game-card-time">
-      ${cardEscape(
-        formatGameTime(
-          game.game_time
-        )
-      )}
-      ${game.venue?.name
-        ? ` · ${cardEscape(
-            game.venue.name
-          )}`
-        : ""}
-    </p>
-
-    <p>
-      No published Boring Bets play yet.
-    </p>
-
-    <span class="card-cta">
-      EXPLORE MATCHUP →
-    </span>
-  `;
-
-  return card;
-}
-
-function renderMatchupLogos(
-  game,
-  play = {}
-) {
-  const awayTeam =
-    game?.away_team?.abbr ||
-    play.away_team ||
-    "AWAY";
-
-  const homeTeam =
-    game?.home_team?.abbr ||
-    play.home_team ||
-    "HOME";
-
-  const awayTeamId =
-    game?.away_team?.team_id ||
-    play.away_team_id;
-
-  const homeTeamId =
-    game?.home_team?.team_id ||
-    play.home_team_id;
-
-  return `
-    <div class="matchup-logos">
-      <div class="team-logo away-logo">
-        ${renderTeamLogo(
-          awayTeamId,
-          awayTeam
-        )}
-
-        <span>
-          ${cardEscape(awayTeam)}
-        </span>
-      </div>
-
-      <div class="matchup-at">
-        @
-      </div>
-
-      <div class="team-logo home-logo">
-        ${renderTeamLogo(
-          homeTeamId,
-          homeTeam
-        )}
-
-        <span>
-          ${cardEscape(homeTeam)}
-        </span>
-      </div>
-    </div>
-  `;
-}
-
-function renderTeamLogo(
-  teamId,
-  team
-) {
-  if (!teamId) {
+  workspace.innerHTML = selectedSports.map(sport => {
+    const open = ensureOpenLeagues(sport.id);
     return `
-      <span class="missing-team-logo">
-        ${cardEscape(team)}
-      </span>
+      <div class="sport-board-block" data-sport-workspace="${cardEscape(sport.id)}">
+        <div class="league-accordion">
+          ${sport.leagues.map(league => renderLeagueShell(sport.id, league, open.has(league.id))).join("")}
+        </div>
+      </div>
     `;
-  }
+  }).join("");
 
-  return `
-    <img
-      src="${MLB_LOGO_BASE}/${Number(
-        teamId
-      )}.svg"
-      alt="${cardEscape(team)} logo"
-    >
-  `;
-}
+  workspace.querySelectorAll("details[data-sport-id][data-league-id]").forEach(details => {
+    details.addEventListener("toggle", async () => {
+      const sportId = details.dataset.sportId;
+      const leagueId = details.dataset.leagueId;
+      const open = ensureOpenLeagues(sportId);
 
-function renderResultBadge(play) {
-  const result =
-    String(
-      play.result || ""
-    ).toLowerCase();
-
-  if (!result) {
-    return "";
-  }
-
-  const label =
-    result === "win"
-      ? "WIN"
-      : result === "loss"
-        ? "LOSS"
-        : result === "push"
-          ? "PUSH"
-          : result.toUpperCase();
-
-  return `
-    <span class="play-result play-result-${cardEscape(
-      result
-    )}">
-      ${cardEscape(label)}
-    </span>
-  `;
-}
-
-function createInteractiveCard(
-  destination
-) {
-  const card =
-    document.createElement("article");
-
-  card.tabIndex = 0;
-
-  card.setAttribute(
-    "role",
-    "link"
-  );
-
-  const open = () => {
-    window.location.href =
-      destination;
-  };
-
-  card.addEventListener(
-    "click",
-    open
-  );
-
-  card.addEventListener(
-    "keydown",
-    event => {
-      if (
-        event.key === "Enter" ||
-        event.key === " "
-      ) {
-        event.preventDefault();
-        open();
+      if (details.open) {
+        open.add(leagueId);
+        saveSelection();
+        await loadLeagueIntoPanel(sportId, leagueId);
+      } else {
+        open.delete(leagueId);
+        // Keep at least the sport's default league remembered for its next activation.
+        if (!open.size) {
+          const fallback = getSport(sportId)?.default_league;
+          if (fallback && fallback !== leagueId) open.add(fallback);
+        }
+        saveSelection();
       }
-    }
-  );
-
-  return card;
-}
-
-function groupPlaysByGameId(plays) {
-  const grouped =
-    new Map();
-
-  plays.forEach(play => {
-    const gameId =
-      play.game_id ||
-      createGameId(play);
-
-    if (!grouped.has(gameId)) {
-      grouped.set(gameId, []);
-    }
-
-    grouped
-      .get(gameId)
-      .push(play);
+    });
   });
-
-  return grouped;
 }
 
-function createGameId(play) {
-  return [
-    play.date,
-    String(
-      play.away_team || ""
-    ).toLowerCase(),
-    String(
-      play.home_team || ""
-    ).toLowerCase()
-  ].join("-");
+function renderLeagueShell(sportId, league, isOpen) {
+  const planned = league.feed !== "active";
+  return `
+    <details class="league-dropdown" data-sport-id="${cardEscape(sportId)}" data-league-id="${cardEscape(league.id)}"${isOpen ? " open" : ""}>
+      <summary>
+        <span class="league-dropdown-main">
+          <strong>${cardEscape(league.label)}</strong>
+          <small>${planned ? "Feed connection planned" : "Connected schedule"}</small>
+        </span>
+        <span class="league-dropdown-status">
+          <b data-count-sport="${cardEscape(sportId)}" data-league-count="${cardEscape(league.id)}">—</b>
+          <span>events</span>
+          <i aria-hidden="true"></i>
+        </span>
+      </summary>
+      <div class="league-event-panel" data-sport-id="${cardEscape(sportId)}" data-league-panel="${cardEscape(league.id)}">
+        <div class="league-loading-state">${planned ? "Open league to check for a connected feed." : "Loading events…"}</div>
+      </div>
+    </details>
+  `;
+}
+
+async function loadAllOpenLeagues(generation = cardState.renderGeneration) {
+  const tasks = [];
+  const requestedDate = cardState.date;
+  cardState.selectedSportIds.forEach(sportId => {
+    ensureOpenLeagues(sportId).forEach(leagueId => {
+      if (getLeague(sportId, leagueId)) {
+        tasks.push(loadLeagueIntoPanel(sportId, leagueId, requestedDate, generation));
+      }
+    });
+  });
+  await Promise.all(tasks);
+}
+
+async function loadLeagueIntoPanel(
+  sportId,
+  leagueId,
+  requestedDate = cardState.date,
+  generation = cardState.renderGeneration
+) {
+  const panel = document.querySelector(`[data-sport-id="${cssEscape(sportId)}"][data-league-panel="${cssEscape(leagueId)}"]`);
+  if (!panel) return;
+
+  panel.innerHTML = `<div class="league-loading-state">Loading ${cardEscape(getLeague(sportId, leagueId)?.label || leagueId)}…</div>`;
+
+  try {
+    const result = await loadLeagueEvents(sportId, leagueId, requestedDate);
+
+    // A slower request for the previous card date must never overwrite the
+    // board after the user has clicked a date arrow.
+    if (generation !== cardState.renderGeneration || requestedDate !== cardState.date) return;
+
+    cardState.leagueCache.set(leagueCacheKey(sportId, leagueId, requestedDate), result);
+    renderLeagueResult(panel, sportId, leagueId, result);
+    updateLeagueCount(sportId, leagueId, result.events.length, result.available);
+    updateSportCounts();
+    updateSummary();
+  } catch (error) {
+    if (generation !== cardState.renderGeneration || requestedDate !== cardState.date) return;
+    console.error(error);
+    panel.innerHTML = `<div class="league-loading-state is-error">${cardEscape(error.message || "Unable to load this league.")}</div>`;
+  }
+}
+
+async function loadLeagueEvents(sportId, leagueId, date) {
+  const cacheKey = leagueCacheKey(sportId, leagueId, date);
+  if (cardState.leagueCache.has(cacheKey)) return cardState.leagueCache.get(cacheKey);
+
+  if (sportId === "baseball" && leagueId === "mlb") return loadMlbEvents(date);
+  if (sportId === "baseball" && MINOR_LEAGUE_IDS.has(leagueId)) {
+    return loadMinorLeagueEvents(leagueId, date);
+  }
+
+  const path = `data/cards/${encodeURIComponent(date)}/${encodeURIComponent(leagueId)}.json`;
+  const response = await fetch(path, { cache: "no-store" });
+
+  if (response.status === 404) return { available: false, events: [], source: path };
+  if (!response.ok) throw new Error(`Unable to load ${leagueId.toUpperCase()} events.`);
+
+  const data = await response.json();
+  if (!documentMatchesCardDate(data, date)) {
+    return { available: true, events: [], source: path, dateMismatch: true };
+  }
+  const rawEvents = data.events || data.games || data.matches || data.fights || [];
+  const selected = selectEventsForCardDate(rawEvents, date, { assumeDailyShard: true });
+  return {
+    available: true,
+    events: selected.map(event => normalizeGenericEvent(event, sportId, leagueId, date)).sort(sortEvents),
+    source: path,
+    updatedAt: data.updated_at || data.updatedAt || null
+  };
+}
+
+async function loadMinorLeagueEvents(leagueId, date) {
+  const season = String(date).slice(0, 4);
+  const dailyPath = `data/cards/${encodeURIComponent(date)}/${encodeURIComponent(leagueId)}.json`;
+  const dailyResponse = await fetch(dailyPath, { cache: "no-store" });
+
+  if (dailyResponse.ok) {
+    const data = await dailyResponse.json();
+    if (!documentMatchesCardDate(data, date)) {
+      return { available: true, events: [], source: dailyPath, dateMismatch: true, seasonLoaded: season };
+    }
+    const rawEvents = data.events || data.games || [];
+    const selected = selectEventsForCardDate(rawEvents, date, { assumeDailyShard: true });
+    return {
+      available: true,
+      events: selected.map(event => normalizeGenericEvent(event, "baseball", leagueId, date)).sort(sortEvents),
+      source: dailyPath,
+      updatedAt: data.updated_at || data.updatedAt || null,
+      seasonLoaded: season
+    };
+  }
+
+  const seasonPath = `data/schedules/baseball/${encodeURIComponent(season)}/${encodeURIComponent(leagueId)}.json`;
+  const seasonResponse = await fetch(seasonPath, { cache: "no-store" });
+  if (seasonResponse.status === 404) {
+    return {
+      available: false,
+      events: [],
+      source: seasonPath,
+      message: `Run the minor-league schedule builder for ${season}.`
+    };
+  }
+  if (!seasonResponse.ok) throw new Error(`Unable to load ${leagueId.toUpperCase()} season schedule.`);
+
+  const data = await seasonResponse.json();
+  const rawEvents = data.events || data.games || [];
+  const selected = rawEvents.filter(event => eventDateKey(event) === date);
+  return {
+    available: true,
+    events: selected.map(event => normalizeGenericEvent(event, "baseball", leagueId, date)).sort(sortEvents),
+    source: seasonPath,
+    updatedAt: data.updated_at || data.updatedAt || null,
+    seasonLoaded: season,
+    seasonEventCount: rawEvents.length
+  };
+}
+
+function readExplicitDate(value) {
+  const text = String(value || "");
+  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : "";
+}
+
+function eventDateKey(event) {
+  const explicitFields = [
+    event?.card_date,
+    event?.schedule_date,
+    event?.date,
+    event?.game_date
+  ];
+  for (const value of explicitFields) {
+    const explicit = readExplicitDate(value);
+    if (explicit) return explicit;
+  }
+
+  const stableId = String(event?.id || event?.game_id || "");
+  const idDate = stableId.match(/^(\d{4}-\d{2}-\d{2})(?:-|$)/);
+  if (idDate) return idDate[1];
+
+  const value = event?.start_time || event?.game_time || event?.date_time || event?.gameDate;
+  if (!value) return "";
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return readExplicitDate(String(value).slice(0, 10));
+  return getLocalDateString(parsed);
+}
+
+function documentMatchesCardDate(data, cardDate) {
+  const declared = [data?.card_date, data?.schedule_date, data?.date]
+    .map(readExplicitDate)
+    .find(Boolean);
+  return !declared || declared === cardDate;
+}
+
+function selectEventsForCardDate(events, cardDate, options = {}) {
+  const assumeDailyShard = Boolean(options.assumeDailyShard);
+  return (events || []).filter(event => {
+    const eventDate = eventDateKey(event);
+    if (eventDate) return eventDate === cardDate;
+    return assumeDailyShard;
+  });
+}
+
+async function loadMlbEvents(date) {
+  const dailyPath = `data/live-games/${encodeURIComponent(date)}.json`;
+  const response = await fetch(dailyPath, { cache: "no-store" });
+
+  if (response.ok) {
+    const data = await response.json();
+    if (!documentMatchesCardDate(data, date)) {
+      return { available: true, events: [], source: dailyPath, dateMismatch: true };
+    }
+    const selected = selectEventsForCardDate(data.games || [], date, { assumeDailyShard: true });
+    return {
+      available: true,
+      events: selected.map(game => normalizeMlbEvent(game, date)).sort(sortEvents),
+      source: dailyPath,
+      updatedAt: data.updated_at || null
+    };
+  }
+
+  return {
+    available: false,
+    events: [],
+    source: dailyPath,
+    message: `Daily MLB card file not found: ${dailyPath}`
+  };
+}
+
+function normalizeMlbEvent(game, cardDate = cardState.date) {
+  const startTime = game.game_time || game.start_time || game.gameDate;
+  const eventDate = eventDateKey(game) || cardDate;
+  const rawStatus = readStatusText(game.status);
+  const awayScore = readTeamScore(game, "away");
+  const homeScore = readTeamScore(game, "home");
+  const finalScoreAvailable = hasFinalScore(awayScore, homeScore);
+  const status = resolveEventStatus(rawStatus, startTime, eventDate, cardDate, finalScoreAvailable);
+  const gameUrl = `game.html?id=${encodeURIComponent(game.id)}`;
+  const liveUrl = `live.html?id=${encodeURIComponent(game.id)}`;
+
+  return {
+    id: game.id,
+    sportId: "baseball",
+    leagueId: "mlb",
+    eventDate,
+    status,
+    rawStatus,
+    startTime,
+    venue: game.venue?.name || "",
+    away: {
+      id: game.away_team?.team_id,
+      abbreviation: game.away_team?.abbr || "AWAY",
+      name: game.away_team?.name || game.away_team?.abbr || "Away",
+      score: awayScore
+    },
+    home: {
+      id: game.home_team?.team_id,
+      abbreviation: game.home_team?.abbr || "HOME",
+      name: game.home_team?.name || game.home_team?.abbr || "Home",
+      score: homeScore
+    },
+    awayDetail: game.pitchers?.away?.name || "Starter TBD",
+    homeDetail: game.pitchers?.home?.name || "Starter TBD",
+    gameUrl,
+    liveUrl,
+    breakdownUrl: buildFinishedGameUrl({
+      id: game.id,
+      eventDate,
+      sportId: "baseball",
+      leagueId: "mlb",
+      gamePk: game.mlb_game_pk || game.game_pk
+    }),
+    finalScoreAvailable,
+    plays: cardState.playsByEventId.get(game.id) || [],
+    original: game
+  };
+}
+
+function normalizeGenericEvent(event, sportId, leagueId, cardDate = cardState.date) {
+  const participants = event.participants || event.competitors || [];
+  const awayRaw = event.away || event.away_team || participants[0] || {};
+  const homeRaw = event.home || event.home_team || participants[1] || {};
+  const away = normalizeParticipant(awayRaw, "A");
+  const home = normalizeParticipant(homeRaw, "B");
+  if (away.score === null) away.score = readGenericEventScore(event, "away");
+  if (home.score === null) home.score = readGenericEventScore(event, "home");
+  const id = event.id || `${leagueId}-${event.start_time || event.game_time || Date.now()}`;
+  const startTime = event.start_time || event.game_time || event.date_time || event.gameDate;
+  const eventDate = eventDateKey(event) || cardDate;
+  const rawStatus = readStatusText(event.status || event.abstract_status);
+  const finalScoreAvailable = hasFinalScore(away.score, home.score);
+  const status = resolveEventStatus(rawStatus, startTime, eventDate, cardDate, finalScoreAvailable);
+  const gameUrl = event.game_url || event.research_url || `game.html?id=${encodeURIComponent(id)}`;
+  const liveUrl = event.live_url || `live.html?id=${encodeURIComponent(id)}`;
+
+  return {
+    id,
+    sportId,
+    leagueId,
+    eventDate,
+    status,
+    rawStatus,
+    startTime,
+    venue: event.venue?.name || event.venue || event.location || "",
+    away,
+    home,
+    awayDetail: event.away_detail || event.awayDetail || "",
+    homeDetail: event.home_detail || event.homeDetail || "",
+    gameUrl,
+    liveUrl,
+    breakdownUrl: event.breakdown_url || buildFinishedGameUrl({
+      id,
+      eventDate,
+      sportId,
+      leagueId,
+      gamePk: event.game_pk || event.gamePk
+    }),
+    finalScoreAvailable,
+    plays: cardState.playsByEventId.get(id) || [],
+    original: event
+  };
+}
+
+function normalizeParticipant(participant, fallback) {
+  if (typeof participant === "string") return { id: null, abbreviation: participant, name: participant, score: null };
+  return {
+    id: participant.id || participant.team_id || null,
+    abbreviation: participant.abbr || participant.abbreviation || participant.short_name || fallback,
+    name: participant.name || participant.full_name || participant.abbr || fallback,
+    score: participant.score ?? null
+  };
+}
+
+function renderLeagueResult(panel, sportId, leagueId, result) {
+  const league = getLeague(sportId, leagueId);
+  const filtered = filterEvents(result.events || []);
+
+  if (!result.available) {
+    panel.innerHTML = `
+      <div class="league-feed-placeholder">
+        <span>FEED PENDING</span>
+        <strong>${cardEscape(league?.label || leagueId)} is ready for connection.</strong>
+        <p>When its feed is added, today’s games, matches or fights will populate here beside every other selected sport.</p>
+      </div>`;
+    return;
+  }
+
+  if (!result.events.length) {
+    panel.innerHTML = `<div class="league-feed-placeholder is-empty"><span>NO EVENTS</span><strong>No ${cardEscape(league?.label || leagueId)} events are scheduled for this date.</strong></div>`;
+    return;
+  }
+
+  if (!filtered.length) {
+    panel.innerHTML = `<div class="league-feed-placeholder is-empty"><span>FILTERED</span><strong>No events match the active filter.</strong></div>`;
+    return;
+  }
+
+  const seasonNote = sportId === "baseball" && MINOR_LEAGUE_IDS.has(leagueId) && result.seasonEventCount
+    ? `<p class="minor-league-season-note">${cardEscape(String(result.seasonLoaded || cardState.date.slice(0, 4)))} season loaded · ${cardEscape(String(result.seasonEventCount))} scheduled games in archive · showing ${cardEscape(String(filtered.length))} on this date</p>`
+    : "";
+  panel.innerHTML = `${seasonNote}<div class="compact-event-grid">${filtered.map(event => renderCompactEventCard(event, league)).join("")}</div>`;
+}
+
+function renderCompactEventCard(event, league) {
+  const statusLabel = formatStatus(event);
+  const live = event.status === "live";
+  const final = event.status === "final";
+  const pastCard = isPastCardDate(event.eventDate || cardState.date);
+  const completed = final || (pastCard && event.status !== "postponed");
+  const primaryUrl = completed ? event.breakdownUrl : event.gameUrl;
+  const plays = event.plays || [];
+  const scoreSyncWarning = pastCard && !event.finalScoreAvailable && event.status !== "postponed"
+    ? `<p class="compact-event-venue">Final score sync required</p>`
+    : "";
+
+  return `
+    <article class="compact-event-card${live ? " is-live" : ""}${completed ? " is-final" : ""}${plays.length ? " has-play" : ""}" data-event-id="${cardEscape(event.id)}" data-event-date="${cardEscape(event.eventDate || cardState.date)}">
+      <div class="compact-event-topline"><span>${cardEscape(league?.label || event.leagueId.toUpperCase())}</span><b class="compact-event-status">${cardEscape(statusLabel)}</b></div>
+      <a class="compact-event-matchup" href="${cardEscape(primaryUrl)}" aria-label="${completed ? "Open finished-game breakdown for" : "Open research for"} ${cardEscape(event.away.name)} at ${cardEscape(event.home.name)}">
+        ${renderCompactParticipant(event.away, event.sportId, completed || live)}
+        <div class="compact-event-divider"><span>@</span><small>${cardEscape(completed ? "Final" : formatEventTime(event.startTime))}</small></div>
+        ${renderCompactParticipant(event.home, event.sportId, completed || live)}
+      </a>
+      ${(event.awayDetail || event.homeDetail) ? `<div class="compact-event-details"><span title="${cardEscape(event.awayDetail)}">${cardEscape(event.awayDetail || "—")}</span><i>vs</i><span title="${cardEscape(event.homeDetail)}">${cardEscape(event.homeDetail || "—")}</span></div>` : ""}
+      ${event.venue ? `<p class="compact-event-venue">${cardEscape(event.venue)}</p>` : ""}
+      ${scoreSyncWarning}
+      ${renderPlayChips(plays)}
+      <div class="compact-event-actions">${completed
+        ? `<a href="${cardEscape(event.breakdownUrl)}">Game breakdown</a><a href="${cardEscape(event.gameUrl)}" class="compact-live-link">Archived research</a>`
+        : `<a href="${cardEscape(event.gameUrl)}">Research</a><a href="${cardEscape(event.liveUrl)}" class="compact-live-link">${live ? "Live now" : "Live center"}</a>`}
+      </div>
+    </article>`;
+}
+
+function renderCompactParticipant(participant, sportId, showScore) {
+  return `<div class="compact-participant">${renderParticipantLogo(participant, sportId)}<span><strong>${cardEscape(participant.abbreviation)}</strong><small>${cardEscape(participant.name)}</small></span>${showScore && participant.score !== null ? `<b class="compact-participant-score">${cardEscape(participant.score)}</b>` : ""}</div>`;
+}
+
+function renderParticipantLogo(participant, sportId) {
+  const teamId = Number(participant.id);
+  if (sportId === "baseball" && Number.isFinite(teamId) && teamId > 0) {
+    const abbreviation = String(participant.abbreviation || "BB").slice(0, 3).toUpperCase();
+    const suppliedLogo = participant.logoUrl || participant.logo_url || "";
+    const primaryLogo = suppliedLogo || `${BASEBALL_LOGO_BASE}/${teamId}.svg`;
+    return `<img
+      src="${cardEscape(primaryLogo)}"
+      alt="${cardEscape(abbreviation)} logo"
+      loading="lazy"
+      decoding="async"
+      data-baseball-team-logo
+      data-team-id="${teamId}"
+      data-team-abbreviation="${cardEscape(abbreviation)}"
+      data-logo-stage="${suppliedLogo ? "supplied" : "primary"}"
+    >`;
+  }
+  return renderGenericParticipantLogo(participant.abbreviation);
+}
+
+function advanceBaseballTeamLogo(image) {
+  const teamId = Number(image.dataset.teamId);
+  const stage = image.dataset.logoStage || "primary";
+
+  if (Number.isFinite(teamId) && stage === "supplied") {
+    image.dataset.logoStage = "primary";
+    image.src = `${BASEBALL_LOGO_BASE}/${teamId}.svg`;
+    return;
+  }
+
+  if (Number.isFinite(teamId) && stage === "primary") {
+    image.dataset.logoStage = "cap";
+    image.src = `${MLB_CAP_LOGO_BASE}/${teamId}.svg`;
+    return;
+  }
+
+  const fallback = document.createElement("span");
+  fallback.className = "compact-generic-logo";
+  fallback.setAttribute("aria-label", `${image.dataset.teamAbbreviation || "Team"} logo unavailable`);
+  fallback.textContent = String(image.dataset.teamAbbreviation || "BB").slice(0, 2);
+  image.replaceWith(fallback);
+}
+
+function renderGenericParticipantLogo(abbreviation) {
+  return `<span class="compact-generic-logo">${cardEscape(String(abbreviation || "BB").slice(0, 2))}</span>`;
+}
+
+function renderPlayChips(plays) {
+  if (!plays.length) return `<div class="compact-no-play">No published play</div>`;
+  return `<div class="compact-play-list">${plays.slice(0, 2).map(play => `<a href="play.html?id=${encodeURIComponent(play.id)}" title="${cardEscape(play.play)}"><span>${play.is_best_bet ? "BEST" : "PLAY"}</span><strong>${cardEscape(play.play)}</strong><small>${cardEscape(play.odds || "")}${play.units !== undefined ? ` · ${Number(play.units).toFixed(2)}u` : ""}</small></a>`).join("")}${plays.length > 2 ? `<span class="compact-more-plays">+${plays.length - 2} more</span>` : ""}</div>`;
+}
+
+function filterEvents(events) {
+  switch (cardState.statusFilter) {
+    case "live": return events.filter(event => event.status === "live");
+    case "upcoming": return events.filter(event => event.status === "upcoming");
+    case "final": return events.filter(event => event.status === "final");
+    case "plays": return events.filter(event => (event.plays || []).length > 0);
+    default: return events;
+  }
+}
+
+function rerenderLoadedLeagueCards() {
+  document.querySelectorAll("[data-sport-id][data-league-panel]").forEach(panel => {
+    const sportId = panel.dataset.sportId;
+    const leagueId = panel.dataset.leaguePanel;
+    const result = cardState.leagueCache.get(leagueCacheKey(sportId, leagueId, cardState.date));
+    if (result) renderLeagueResult(panel, sportId, leagueId, result);
+  });
+}
+
+function updateSummary() {
+  const selected = cardState.selectedSportIds;
+  const loadedResults = [...cardState.leagueCache.entries()]
+    .filter(([key]) => {
+      const [sportId, , date] = key.split("|");
+      return selected.has(sportId) && date === cardState.date;
+    })
+    .map(([, result]) => result)
+    .filter(result => result.available);
+
+  const events = loadedResults.flatMap(result => result.events || []);
+  const uniqueEvents = [...new Map(events.map(event => [`${event.sportId}|${event.leagueId}|${event.id}`, event])).values()];
+  setText("totalGames", uniqueEvents.length);
+  setText("totalLive", uniqueEvents.filter(event => event.status === "live").length);
+  setText("totalPlays", cardState.plays.length);
+  setText("activeLeagues", loadedResults.filter(result => (result.events || []).length).length);
+}
+
+function updateSportCounts() {
+  (cardState.config?.sports || []).forEach(sport => {
+    const count = [...cardState.leagueCache.entries()]
+      .filter(([key]) => key.startsWith(`${sport.id}|`) && key.endsWith(`|${cardState.date}`))
+      .reduce((sum, [, result]) => sum + (result.events?.length || 0), 0);
+    const target = document.querySelector(`[data-sport-count="${cssEscape(sport.id)}"]`);
+    if (target) target.textContent = `${count || "—"} events`;
+  });
+}
+
+function updateLeagueCount(sportId, leagueId, count, available) {
+  const target = document.querySelector(`[data-count-sport="${cssEscape(sportId)}"][data-league-count="${cssEscape(leagueId)}"]`);
+  if (target) target.textContent = available ? String(count) : "—";
+}
+
+function groupPlaysByEventId(plays) {
+  const map = new Map();
+  plays.forEach(play => {
+    const id = play.game_id || [play.date, play.away_team, play.home_team].filter(Boolean).join("-").toLowerCase();
+    if (!map.has(id)) map.set(id, []);
+    map.get(id).push(play);
+  });
+  return map;
+}
+
+function readTeamScore(game, side) {
+  return game?.score?.[side]
+    ?? game?.scores?.[side]
+    ?? game?.linescore?.totals?.[side]?.runs
+    ?? game?.linescore?.teams?.[side]?.runs
+    ?? game?.live_state?.score?.[side]
+    ?? null;
+}
+
+function readGenericEventScore(event, side) {
+  return event?.score?.[side]
+    ?? event?.scores?.[side]
+    ?? event?.linescore?.totals?.[side]?.runs
+    ?? event?.linescore?.teams?.[side]?.runs
+    ?? null;
+}
+
+function readStatusText(status) {
+  if (status && typeof status === "object") {
+    return status.detailedState || status.abstractGameState || status.status || status.code || "Scheduled";
+  }
+  return String(status || "Scheduled");
+}
+
+function normalizeStatus(status) {
+  const value = readStatusText(status).trim().toLowerCase();
+
+  // Check pregame phrases before live phrases: "Not Started" must never be
+  // classified as live just because it contains the word "started".
+  if ([
+    "scheduled",
+    "not started",
+    "pre-game",
+    "pregame",
+    "preview",
+    "warmup",
+    "delayed start",
+    "tbd"
+  ].some(token => value === token || value.includes(token))) return "upcoming";
+
+  if ([
+    "final",
+    "completed",
+    "complete",
+    "game over",
+    "completed early"
+  ].some(token => value === token || value.includes(token))) return "final";
+
+  if ([
+    "live",
+    "in progress",
+    "in_progress",
+    "game started",
+    "manager challenge",
+    "review"
+  ].some(token => value === token || value.includes(token))) return "live";
+
+  return "upcoming";
+}
+
+function resolveEventStatus(rawStatus, startTime, eventDate, cardDate, finalScoreAvailable = false) {
+  const normalized = normalizeStatus(rawStatus);
+  const rawValue = readStatusText(rawStatus).trim().toLowerCase();
+  const now = new Date();
+  const today = getLocalDateString(now);
+  const start = startTime ? new Date(startTime) : null;
+  const hasValidStart = start && !Number.isNaN(start.getTime());
+
+  if (["postponed", "cancelled", "canceled", "suspended"].some(token => rawValue.includes(token))) {
+    return "postponed";
+  }
+
+  // Future cards are always pregame, even when a stale season archive carries
+  // an old FINAL or LIVE label.
+  if (cardDate > today) return "upcoming";
+
+  // A game whose scheduled first pitch is still in the future cannot be live
+  // or final. This is the critical same-day stale-status guard.
+  if (hasValidStart && start.getTime() > now.getTime()) return "upcoming";
+
+  // A mismatched record is filtered before normalization, but keep this final
+  // guard here so a malformed feed cannot label another date as completed.
+  if (eventDate && cardDate && eventDate !== cardDate) return "upcoming";
+
+  // On past cards a verified away/home score is stronger evidence than a stale
+  // schedule label. This lets archived cards consistently display FINAL and the
+  // score after the result-sync command has updated the local shard.
+  if (cardDate < today && finalScoreAvailable) return "final";
+
+  return normalized;
+}
+
+function formatStatus(event) {
+  if (event.status === "live") return "LIVE";
+  if (event.status === "final") return "FINAL";
+  if (event.status === "postponed") return "POSTPONED";
+  if (isPastCardDate(event.eventDate || cardState.date)) return "FINAL · SCORE PENDING";
+  return formatEventTime(event.startTime);
+}
+
+function hasFinalScore(awayScore, homeScore) {
+  return awayScore !== null && awayScore !== undefined && awayScore !== "" &&
+    homeScore !== null && homeScore !== undefined && homeScore !== "";
+}
+
+function isPastCardDate(dateString) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(dateString || "")) &&
+    String(dateString) < getLocalDateString(new Date());
+}
+
+function buildFinishedGameUrl({ id, eventDate, sportId, leagueId, gamePk }) {
+  const params = new URLSearchParams();
+  params.set("id", String(id || ""));
+  params.set("date", String(eventDate || cardState.date));
+  params.set("sport", String(sportId || ""));
+  params.set("league", String(leagueId || ""));
+  if (gamePk !== null && gamePk !== undefined && gamePk !== "") {
+    params.set("gamePk", String(gamePk));
+  }
+  return `finished-game.html?${params.toString()}`;
+}
+
+function formatEventTime(value) {
+  if (!value) return "TBD";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(date);
+}
+
+function formatCardDate(dateString) {
+  const date = new Date(`${dateString}T12:00:00`);
+  return new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(date);
 }
 
 function getSelectedDate() {
-  const requested =
-    new URLSearchParams(
-      window.location.search
-    ).get("date");
-
-  if (
-    requested &&
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      requested
-    )
-  ) {
-    return requested;
-  }
-
-  return getLocalDateString(
-    new Date()
-  );
+  const requested = new URLSearchParams(window.location.search).get("date");
+  if (requested && /^\d{4}-\d{2}-\d{2}$/.test(requested)) return requested;
+  return getLocalDateString(new Date());
 }
 
-function buildDateUrl(date) {
-  return (
-    `todays-card.html?date=` +
-    encodeURIComponent(date)
-  );
+function getRequestedFilter() {
+  const requested = new URLSearchParams(window.location.search).get("filter");
+  return ["all", "live", "upcoming", "final", "plays"].includes(requested) ? requested : "all";
 }
 
-function shiftDate(
-  dateString,
-  numberOfDays
-) {
-  const date =
-    new Date(
-      `${dateString}T12:00:00`
-    );
+function navigateToCardDate(date) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(date || ""))) return;
+  cardState.date = date;
+  cardState.leagueCache.clear();
+  history.pushState({}, "", buildCardUrl());
+  initialiseTodaysCard({ preserveCache: false });
+}
 
-  date.setDate(
-    date.getDate() + numberOfDays
-  );
+function syncUrl() {
+  history.replaceState({}, "", buildCardUrl());
+}
 
+function buildCardUrl() {
+  const params = new URLSearchParams();
+  params.set("date", cardState.date);
+  params.set("sports", [...cardState.selectedSportIds].join(","));
+  if (cardState.statusFilter !== "all") params.set("filter", cardState.statusFilter);
+  return `todays-card.html?${params.toString()}`;
+}
+
+function shiftDate(dateString, days) {
+  const date = new Date(`${dateString}T12:00:00`);
+  date.setDate(date.getDate() + days);
   return getLocalDateString(date);
 }
 
 function getLocalDateString(date) {
-  const year =
-    date.getFullYear();
-
-  const month =
-    String(
-      date.getMonth() + 1
-    ).padStart(2, "0");
-
-  const day =
-    String(
-      date.getDate()
-    ).padStart(2, "0");
-
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
-function getLatestGameUpdate(games) {
-  const updates =
-    games
-      .map(
-        game => game.last_updated
-      )
-      .filter(Boolean)
-      .sort();
-
-  return (
-    updates.at(-1) ||
-    new Date().toISOString()
-  );
+function getSport(id) {
+  return cardState.config?.sports?.find(sport => sport.id === id) || null;
 }
 
-function sortGames(a, b) {
-  return String(
-    a.game_time || ""
-  ).localeCompare(
-    String(
-      b.game_time || ""
-    )
-  );
+function getLeague(sportId, leagueId) {
+  return getSport(sportId)?.leagues?.find(league => league.id === leagueId) || null;
 }
 
-function formatGameLabel(game) {
-  return (
-    `${game.away_team?.abbr || "Away"} ` +
-    `at ` +
-    `${game.home_team?.abbr || "Home"}`
-  );
+function leagueCacheKey(sportId, leagueId, date) {
+  return `${sportId}|${leagueId}|${date}`;
 }
 
-function formatGameStatus(status) {
-  if (status === "live") {
-    return "LIVE";
-  }
-
-  if (status === "final") {
-    return "FINAL";
-  }
-
-  if (status === "postponed") {
-    return "POSTPONED";
-  }
-
-  if (status === "cancelled") {
-    return "CANCELLED";
-  }
-
-  return "SCHEDULED";
+function sortEvents(a, b) {
+  return new Date(a.startTime || 0) - new Date(b.startTime || 0);
 }
 
-function formatGameTime(value) {
-  if (!value) {
-    return "Time TBD";
-  }
-
-  const date =
-    new Date(value);
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-    return "Time TBD";
-  }
-
-  return date.toLocaleTimeString(
-    [],
-    {
-      hour: "numeric",
-      minute: "2-digit",
-      timeZoneName: "short"
-    }
-  );
+async function fetchJson(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Unable to load ${path}.`);
+  return response.json();
 }
 
-function excerpt(
-  value,
-  max
-) {
-  const text =
-    String(value || "");
-
-  return text.length > max
-    ? `${text
-        .slice(0, max)
-        .trim()}…`
-    : text;
-}
-
-function formatCardDate(
-  value,
-  includeTime = false
-) {
-  if (!value) {
-    return "—";
-  }
-
-  const date =
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      String(value)
-    )
-      ? new Date(
-          `${value}T12:00:00`
-        )
-      : new Date(value);
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-    return String(value);
-  }
-
-  return date.toLocaleString(
-    [],
-    includeTime
-      ? {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-          hour: "numeric",
-          minute: "2-digit"
-        }
-      : {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        }
-  );
+async function fetchOptionalJson(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) return null;
+  return response.json();
 }
 
 function setText(id, value) {
-  const element =
-    document.getElementById(id);
-
-  if (element) {
-    element.textContent =
-      value ?? "—";
-  }
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
 }
 
-loadCard();
+function cssEscape(value) {
+  if (window.CSS?.escape) return window.CSS.escape(String(value));
+  return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
+}

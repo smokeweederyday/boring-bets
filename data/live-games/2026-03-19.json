@@ -1,0 +1,1716 @@
+{
+  "schema_version": "1.1",
+  "date": "2026-03-19",
+  "games": [
+    {
+      "id": "2026-03-19-wsh-stl",
+      "mlb_game_pk": 831452,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T17:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2520,
+        "name": "Roger Dean Chevrolet Stadium"
+      },
+      "away_team": {
+        "team_id": 120,
+        "abbr": "WSH",
+        "name": "Washington Nationals"
+      },
+      "home_team": {
+        "team_id": 138,
+        "abbr": "STL",
+        "name": "St. Louis Cardinals"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 1,
+        "home": 5
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 1,
+            "hits": 7,
+            "errors": 0
+          },
+          "home": {
+            "runs": 5,
+            "hits": 10,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 687273,
+          "name": "Quinn Mathews"
+        },
+        "loser": {
+          "id": 641793,
+          "name": "Zack Littell"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-tb-phi",
+      "mlb_game_pk": 831551,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T17:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2700,
+        "name": "BayCare Ballpark"
+      },
+      "away_team": {
+        "team_id": 139,
+        "abbr": "TB",
+        "name": "Tampa Bay Rays"
+      },
+      "home_team": {
+        "team_id": 143,
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 2,
+        "home": 8
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 2
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 2,
+            "errors": 2
+          },
+          "home": {
+            "runs": 8,
+            "hits": 11,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 641835,
+          "name": "Tim Mayza"
+        },
+        "loser": {
+          "id": 656876,
+          "name": "Drew Rasmussen"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-bal-nyy",
+      "mlb_game_pk": 832062,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T17:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2523,
+        "name": "George M. Steinbrenner Field"
+      },
+      "away_team": {
+        "team_id": 110,
+        "abbr": "BAL",
+        "name": "Baltimore Orioles"
+      },
+      "home_team": {
+        "team_id": 147,
+        "abbr": "NYY",
+        "name": "New York Yankees"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 4,
+        "home": 5
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 2
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 10,
+            "errors": 0
+          },
+          "home": {
+            "runs": 5,
+            "hits": 8,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 674370,
+          "name": "Osvaldo Bido"
+        },
+        "loser": {
+          "id": 686811,
+          "name": "Carter Rustad"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-nyy-tor",
+      "mlb_game_pk": 831605,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T17:07:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2536,
+        "name": "TD Ballpark"
+      },
+      "away_team": {
+        "team_id": 147,
+        "abbr": "NYY",
+        "name": "New York Yankees"
+      },
+      "home_team": {
+        "team_id": 141,
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 0,
+        "home": 11
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 4
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 4
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 0,
+            "hits": 3,
+            "errors": 0
+          },
+          "home": {
+            "runs": 11,
+            "hits": 14,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 664074,
+          "name": "Cody Ponce"
+        },
+        "loser": {
+          "id": 677960,
+          "name": "Ryan Weathers"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-nym-hou",
+      "mlb_game_pk": 831500,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T22:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 5000,
+        "name": "CACTI Park of the Palm Beaches"
+      },
+      "away_team": {
+        "team_id": 121,
+        "abbr": "NYM",
+        "name": "New York Mets"
+      },
+      "home_team": {
+        "team_id": 117,
+        "abbr": "HOU",
+        "name": "Houston Astros"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 6,
+        "home": 2
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 3,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 7,
+            "errors": 1
+          },
+          "home": {
+            "runs": 2,
+            "hits": 8,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 673540,
+          "name": "Kodai Senga"
+        },
+        "loser": {
+          "id": 663567,
+          "name": "Peter Lambert"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-pit-bal",
+      "mlb_game_pk": 831501,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T22:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2508,
+        "name": "Ed Smith Stadium"
+      },
+      "away_team": {
+        "team_id": 134,
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates"
+      },
+      "home_team": {
+        "team_id": 110,
+        "abbr": "BAL",
+        "name": "Baltimore Orioles"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 2,
+        "home": 5
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 9,
+            "errors": 0
+          },
+          "home": {
+            "runs": 5,
+            "hits": 7,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 669432,
+          "name": "Trevor Rogers"
+        },
+        "loser": {
+          "id": 676742,
+          "name": "Cam Sanders"
+        },
+        "save": {
+          "id": 663804,
+          "name": "Jackson Kowar"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-min-bos",
+      "mlb_game_pk": 831606,
+      "date": "2026-03-19",
+      "game_time": "2026-03-19T22:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 4309,
+        "name": "JetBlue Park"
+      },
+      "away_team": {
+        "team_id": 142,
+        "abbr": "MIN",
+        "name": "Minnesota Twins"
+      },
+      "home_team": {
+        "team_id": 111,
+        "abbr": "BOS",
+        "name": "Boston Red Sox"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 2,
+        "home": 4
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 6,
+            "errors": 1
+          },
+          "home": {
+            "runs": 4,
+            "hits": 9,
+            "errors": 4
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 678394,
+          "name": "Brayan Bello"
+        },
+        "loser": {
+          "id": 690953,
+          "name": "Mick Abel"
+        },
+        "save": {
+          "id": 594027,
+          "name": "Tyron Guerrero"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-laa-kc",
+      "mlb_game_pk": 831822,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2603,
+        "name": "Surprise Stadium"
+      },
+      "away_team": {
+        "team_id": 108,
+        "abbr": "LAA",
+        "name": "Los Angeles Angels"
+      },
+      "home_team": {
+        "team_id": 118,
+        "abbr": "KC",
+        "name": "Kansas City Royals"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 4,
+        "home": 3
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 7,
+            "errors": 1
+          },
+          "home": {
+            "runs": 3,
+            "hits": 5,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 700712,
+          "name": "Walbert Ureña"
+        },
+        "loser": {
+          "id": 680970,
+          "name": "Andrew Pérez"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-kc-cle",
+      "mlb_game_pk": 831846,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 3834,
+        "name": "Goodyear Ballpark"
+      },
+      "away_team": {
+        "team_id": 118,
+        "abbr": "KC",
+        "name": "Kansas City Royals"
+      },
+      "home_team": {
+        "team_id": 114,
+        "abbr": "CLE",
+        "name": "Cleveland Guardians"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 5,
+        "home": 6
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 5,
+            "hits": 10,
+            "errors": 0
+          },
+          "home": {
+            "runs": 6,
+            "hits": 8,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 682120,
+          "name": "Tim Herrin"
+        },
+        "loser": {
+          "id": 672487,
+          "name": "Helcris Olivárez"
+        },
+        "save": {
+          "id": 801555,
+          "name": "Izaak Martinez"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-az-cws",
+      "mlb_game_pk": 831962,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:05:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 3809,
+        "name": "Camelback Ranch"
+      },
+      "away_team": {
+        "team_id": 109,
+        "abbr": "AZ",
+        "name": "Arizona Diamondbacks"
+      },
+      "home_team": {
+        "team_id": 145,
+        "abbr": "CWS",
+        "name": "Chicago White Sox"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 2,
+        "home": 4
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 6,
+            "errors": 1
+          },
+          "home": {
+            "runs": 4,
+            "hits": 6,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 621366,
+          "name": "Ryan Borucki"
+        },
+        "loser": {
+          "id": 805299,
+          "name": "Brandyn Garcia"
+        },
+        "save": {
+          "id": 684384,
+          "name": "Chase Plymell"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-tex-mil",
+      "mlb_game_pk": 831722,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:10:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2518,
+        "name": "American Family Fields of Phoenix"
+      },
+      "away_team": {
+        "team_id": 140,
+        "abbr": "TEX",
+        "name": "Texas Rangers"
+      },
+      "home_team": {
+        "team_id": 158,
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 4,
+        "home": 11
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 7
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 8,
+            "errors": 1
+          },
+          "home": {
+            "runs": 11,
+            "hits": 9,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 605540,
+          "name": "Brandon Woodruff"
+        },
+        "loser": {
+          "id": 656641,
+          "name": "Jacob Latz"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-sea-ath",
+      "mlb_game_pk": 831755,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:10:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2507,
+        "name": "Hohokam Stadium"
+      },
+      "away_team": {
+        "team_id": 136,
+        "abbr": "SEA",
+        "name": "Seattle Mariners"
+      },
+      "home_team": {
+        "team_id": 133,
+        "abbr": "ATH",
+        "name": "Athletics"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 6,
+        "home": 4
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 6,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 10,
+            "errors": 1
+          },
+          "home": {
+            "runs": 4,
+            "hits": 6,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 641540,
+          "name": "Dane Dunning"
+        },
+        "loser": {
+          "id": 669372,
+          "name": "J.T. Ginn"
+        },
+        "save": {
+          "id": 813609,
+          "name": "Reese Lumpkin"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-sf-col",
+      "mlb_game_pk": 831756,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:10:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 4249,
+        "name": "Salt River Fields at Talking Stick"
+      },
+      "away_team": {
+        "team_id": 137,
+        "abbr": "SF",
+        "name": "San Francisco Giants"
+      },
+      "home_team": {
+        "team_id": 115,
+        "abbr": "COL",
+        "name": "Colorado Rockies"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 14,
+        "home": 11
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 4
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 4,
+            "home": 4
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 14,
+            "hits": 19,
+            "errors": 3
+          },
+          "home": {
+            "runs": 11,
+            "hits": 10,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 664141,
+          "name": "JT Brubaker"
+        },
+        "loser": {
+          "id": 623474,
+          "name": "Jimmy Herget"
+        },
+        "save": {
+          "id": 678738,
+          "name": "Juan Sanchez"
+        }
+      }
+    },
+    {
+      "id": "2026-03-19-cws-sd",
+      "mlb_game_pk": 831907,
+      "date": "2026-03-19",
+      "game_time": "2026-03-20T01:10:00Z",
+      "sport": "MLB",
+      "status": "Final",
+      "venue": {
+        "id": 2530,
+        "name": "Peoria Stadium"
+      },
+      "away_team": {
+        "team_id": 145,
+        "abbr": "CWS",
+        "name": "Chicago White Sox"
+      },
+      "home_team": {
+        "team_id": 135,
+        "abbr": "SD",
+        "name": "San Diego Padres"
+      },
+      "pitchers": {},
+      "lineups": {},
+      "pitcher_vs_lineup": {},
+      "bullpens": {},
+      "weather": {},
+      "market": {},
+      "controls": {
+        "default_timeframe": "last_30",
+        "default_location": "all"
+      },
+      "abstract_status": "Final",
+      "score": {
+        "away": 6,
+        "home": 13
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 3,
+            "home": 3
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 7
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 11,
+            "errors": 1
+          },
+          "home": {
+            "runs": 13,
+            "hits": 14,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 593974,
+          "name": "Wandy Peralta"
+        },
+        "loser": {
+          "id": 688328,
+          "name": "Eric Adler"
+        }
+      }
+    }
+  ],
+  "updated_at": "2026-07-19T12:21:40.157557Z",
+  "result_sync": {
+    "source": "MLB Stats API schedule",
+    "synced_at": "2026-07-19T12:21:40.157566Z",
+    "official_game_count": 14
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "schema_version": "1.1",
+  "sports": [
+    {
+      "id": "baseball",
+      "label": "Baseball",
+      "mark": "BB",
+      "default_league": "mlb",
+      "leagues": [
+        {
+          "id": "mlb",
+          "label": "MLB",
+          "feed": "active"
+        },
+        {
+          "id": "triple-a",
+          "label": "Triple-A",
+          "feed": "active"
+        },
+        {
+          "id": "double-a",
+          "label": "Double-A",
+          "feed": "active"
+        },
+        {
+          "id": "high-a",
+          "label": "High-A",
+          "feed": "active"
+        },
+        {
+          "id": "single-a",
+          "label": "Single-A",
+          "feed": "active"
+        },
+        {
+          "id": "rookie",
+          "label": "Rookie",
+          "feed": "active"
+        },
+        {
+          "id": "kbo",
+          "label": "KBO",
+          "feed": "planned"
+        },
+        {
+          "id": "npb",
+          "label": "NPB",
+          "feed": "planned"
+        },
+        {
+          "id": "ncaa-baseball",
+          "label": "NCAA",
+          "feed": "planned"
+        },
+        {
+          "id": "international-baseball",
+          "label": "International",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "basketball",
+      "label": "Basketball",
+      "mark": "BK",
+      "default_league": "nba",
+      "leagues": [
+        {
+          "id": "nba",
+          "label": "NBA",
+          "feed": "planned"
+        },
+        {
+          "id": "wnba",
+          "label": "WNBA",
+          "feed": "planned"
+        },
+        {
+          "id": "nba-g-league",
+          "label": "G League",
+          "feed": "planned"
+        },
+        {
+          "id": "ncaam",
+          "label": "NCAA Men",
+          "feed": "planned"
+        },
+        {
+          "id": "ncaaw",
+          "label": "NCAA Women",
+          "feed": "planned"
+        },
+        {
+          "id": "euroleague",
+          "label": "EuroLeague",
+          "feed": "planned"
+        },
+        {
+          "id": "fiba",
+          "label": "FIBA / International",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "football",
+      "label": "Football",
+      "mark": "FB",
+      "default_league": "nfl",
+      "leagues": [
+        {
+          "id": "nfl",
+          "label": "NFL",
+          "feed": "planned"
+        },
+        {
+          "id": "ncaaf",
+          "label": "NCAA Football",
+          "feed": "planned"
+        },
+        {
+          "id": "cfl",
+          "label": "CFL",
+          "feed": "planned"
+        },
+        {
+          "id": "ufl",
+          "label": "UFL",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "hockey",
+      "label": "Hockey",
+      "mark": "HK",
+      "default_league": "nhl",
+      "leagues": [
+        {
+          "id": "nhl",
+          "label": "NHL",
+          "feed": "planned"
+        },
+        {
+          "id": "ahl",
+          "label": "AHL",
+          "feed": "planned"
+        },
+        {
+          "id": "echl",
+          "label": "ECHL",
+          "feed": "planned"
+        },
+        {
+          "id": "ohl",
+          "label": "OHL",
+          "feed": "planned"
+        },
+        {
+          "id": "whl",
+          "label": "WHL",
+          "feed": "planned"
+        },
+        {
+          "id": "qmjhl",
+          "label": "QMJHL",
+          "feed": "planned"
+        },
+        {
+          "id": "ncaa-hockey",
+          "label": "NCAA",
+          "feed": "planned"
+        },
+        {
+          "id": "ushl",
+          "label": "USHL",
+          "feed": "planned"
+        },
+        {
+          "id": "pwhl",
+          "label": "PWHL",
+          "feed": "planned"
+        },
+        {
+          "id": "shl",
+          "label": "SHL",
+          "feed": "planned"
+        },
+        {
+          "id": "liiga",
+          "label": "Liiga",
+          "feed": "planned"
+        },
+        {
+          "id": "del",
+          "label": "DEL",
+          "feed": "planned"
+        },
+        {
+          "id": "national-league",
+          "label": "Swiss NL",
+          "feed": "planned"
+        },
+        {
+          "id": "khl",
+          "label": "KHL",
+          "feed": "planned"
+        },
+        {
+          "id": "international-hockey",
+          "label": "International",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "soccer",
+      "label": "Soccer",
+      "mark": "SC",
+      "default_league": "mls",
+      "leagues": [
+        {
+          "id": "mls",
+          "label": "MLS",
+          "feed": "planned"
+        },
+        {
+          "id": "epl",
+          "label": "Premier League",
+          "feed": "planned"
+        },
+        {
+          "id": "champions-league",
+          "label": "Champions League",
+          "feed": "planned"
+        },
+        {
+          "id": "europa-league",
+          "label": "Europa League",
+          "feed": "planned"
+        },
+        {
+          "id": "la-liga",
+          "label": "La Liga",
+          "feed": "planned"
+        },
+        {
+          "id": "serie-a",
+          "label": "Serie A",
+          "feed": "planned"
+        },
+        {
+          "id": "bundesliga",
+          "label": "Bundesliga",
+          "feed": "planned"
+        },
+        {
+          "id": "ligue-1",
+          "label": "Ligue 1",
+          "feed": "planned"
+        },
+        {
+          "id": "liga-mx",
+          "label": "Liga MX",
+          "feed": "planned"
+        },
+        {
+          "id": "nwsl",
+          "label": "NWSL",
+          "feed": "planned"
+        },
+        {
+          "id": "international-soccer",
+          "label": "International",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "tennis",
+      "label": "Tennis",
+      "mark": "TN",
+      "default_league": "atp",
+      "leagues": [
+        {
+          "id": "atp",
+          "label": "ATP",
+          "feed": "planned"
+        },
+        {
+          "id": "wta",
+          "label": "WTA",
+          "feed": "planned"
+        },
+        {
+          "id": "atp-challenger",
+          "label": "ATP Challenger",
+          "feed": "planned"
+        },
+        {
+          "id": "wta-125",
+          "label": "WTA 125",
+          "feed": "planned"
+        },
+        {
+          "id": "itf-men",
+          "label": "ITF Men",
+          "feed": "planned"
+        },
+        {
+          "id": "itf-women",
+          "label": "ITF Women",
+          "feed": "planned"
+        },
+        {
+          "id": "tennis-doubles",
+          "label": "Doubles",
+          "feed": "planned"
+        },
+        {
+          "id": "team-tennis",
+          "label": "Team / International",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "combat",
+      "label": "Combat",
+      "mark": "CF",
+      "default_league": "ufc",
+      "leagues": [
+        {
+          "id": "ufc",
+          "label": "UFC",
+          "feed": "planned"
+        },
+        {
+          "id": "pfl",
+          "label": "PFL",
+          "feed": "planned"
+        },
+        {
+          "id": "one",
+          "label": "ONE Championship",
+          "feed": "planned"
+        },
+        {
+          "id": "rizin",
+          "label": "RIZIN",
+          "feed": "planned"
+        },
+        {
+          "id": "regional-mma",
+          "label": "Regional MMA",
+          "feed": "planned"
+        },
+        {
+          "id": "boxing",
+          "label": "Boxing",
+          "feed": "planned"
+        }
+      ]
+    },
+    {
+      "id": "golf",
+      "label": "Golf",
+      "mark": "GF",
+      "default_league": "pga-tour",
+      "leagues": [
+        {
+          "id": "pga-tour",
+          "label": "PGA Tour",
+          "feed": "planned"
+        },
+        {
+          "id": "lpga",
+          "label": "LPGA",
+          "feed": "planned"
+        },
+        {
+          "id": "dp-world-tour",
+          "label": "DP World Tour",
+          "feed": "planned"
+        },
+        {
+          "id": "liv-golf",
+          "label": "LIV Golf",
+          "feed": "planned"
+        },
+        {
+          "id": "korn-ferry",
+          "label": "Korn Ferry Tour",
+          "feed": "planned"
+        }
+      ]
+    }
+  ],
+  "notes": "MLB and affiliated Minor League Baseball schedule feeds are active."
+}

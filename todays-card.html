@@ -2,112 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-  <meta
-    name="description"
-    content="Boring Bets MLB Game Center with every matchup, published plays, probable pitchers, and research links."
-  >
-
-  <title>MLB Game Center | Boring Bets</title>
-
-  <link
-    rel="stylesheet"
-    href="assets/css/variables.css"
-  >
-  <link
-    rel="stylesheet"
-    href="styles.css"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Boring Bets Today's Card — every sport, league, game, match, fight and published play in one fast research board.">
+  <title>Today’s Card | Boring Bets</title>
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/todays-card-multisport.css">
 </head>
-
-<body class="card-page">
+<body class="card-page multisport-card-page">
+  <button type="button" id="sidePreviousDate" class="side-date-arrow side-date-arrow-left" aria-label="Previous day">‹</button>
+  <button type="button" id="sideNextDate" class="side-date-arrow side-date-arrow-right" aria-label="Next day">›</button>
   <header class="site-header">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">BB</span>
-      BORING BETS
-    </a>
-
-    <nav
-      class="main-nav"
-      aria-label="Primary navigation"
-    >
+    <a class="brand" href="index.html"><span class="brand-mark">BB</span>BORING BETS</a>
+    <nav class="main-nav" aria-label="Primary navigation">
       <a href="index.html">Home</a>
-
-      <a
-        href="todays-card.html"
-        aria-current="page"
-      >
-        MLB Game Center
-      </a>
-
-      <a href="live.html">Live</a>
+      <a href="todays-card.html" aria-current="page">Today’s Card</a>
+      <a href="globe.html">Globe</a>
       <a href="index.html#results">Results</a>
       <a href="index.html#articles">Analysis</a>
       <a href="trade-deadline.html">Tools</a>
-      <a href="index.html#discord">Discord</a>
     </nav>
   </header>
 
-  <main class="card-main">
-    <section class="card-hero">
+  <main class="multisport-card-main">
+    <section class="multisport-card-hero">
       <div>
-        <p class="eyebrow">
-          FULL MLB SLATE // DATA + PLAYS
-        </p>
-
-        <h1>MLB Game Center</h1>
+        <p class="eyebrow">ALL SPORTS // ONE DECISION BOARD</p>
+        <h1>Today’s Card</h1>
+        <p class="multisport-card-intro">Select any combination of sports. Every selected slate stays on the board together.</p>
       </div>
-
-      <div class="card-meta">
-        <span id="cardDate">
-          Loading date…
-        </span>
-
-        <span id="cardUpdated">
-          Loading update time…
-        </span>
+      <div class="multisport-card-meta">
+        <span id="cardDate">Loading date…</span>
+        <nav id="cardDateNavigation" class="multisport-date-navigation" aria-label="Card date navigation">
+          <button type="button" class="multisport-date-button multisport-date-previous" aria-label="Previous day">‹</button>
+          <button type="button" class="multisport-date-today">Today</button>
+          <button type="button" class="multisport-date-button multisport-date-next" aria-label="Next day">›</button>
+        </nav>
+        <span id="cardUpdated">Waiting for feeds…</span>
       </div>
     </section>
 
-    <section class="card-summary">
-      <div>
-        <span>Games</span>
-        <strong id="totalGames">—</strong>
+    <section class="multisport-summary" aria-label="Card summary">
+      <div><span>Events loaded</span><strong id="totalGames">—</strong></div>
+      <div><span>Live now</span><strong id="totalLive">—</strong></div>
+      <div><span>Official plays</span><strong id="totalPlays">—</strong></div>
+      <div><span>Active leagues</span><strong id="activeLeagues">—</strong></div>
+    </section>
+
+    <section class="sport-switcher-shell" aria-labelledby="sportSwitcherTitle">
+      <div class="sport-switcher-heading">
+        <div>
+          <p class="kicker">SPORTS</p>
+          <h2 id="sportSwitcherTitle">Build today’s board</h2>
+          <p class="sport-switcher-instruction">Click sports on or off. Selected sports populate together below.</p>
+        </div>
+        <div class="card-view-filters" role="group" aria-label="Event status filters">
+          <button type="button" class="card-filter is-active" data-status-filter="all">All</button>
+          <button type="button" class="card-filter" data-status-filter="live">Live</button>
+          <button type="button" class="card-filter" data-status-filter="upcoming">Upcoming</button>
+          <button type="button" class="card-filter" data-status-filter="final">Final</button>
+          <button type="button" class="card-filter" data-status-filter="plays">My plays</button>
+        </div>
       </div>
 
-      <div>
-        <span>Official Plays</span>
-        <strong id="totalPlays">—</strong>
-      </div>
-
-      <div>
-        <span>Total Units</span>
-        <strong id="totalUnits">—</strong>
+      <div id="sportSwitcher" class="sport-switcher" role="group" aria-label="Sports">
+        <button type="button" class="sport-switcher-button is-active" aria-pressed="true" data-sport-id="baseball"><span class="sport-switcher-mark">BB</span><span class="sport-switcher-copy"><strong>Baseball</strong><small>MLB</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="basketball"><span class="sport-switcher-mark">BK</span><span class="sport-switcher-copy"><strong>Basketball</strong><small>NBA · WNBA</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="football"><span class="sport-switcher-mark">FB</span><span class="sport-switcher-copy"><strong>Football</strong><small>NFL · NCAA</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="hockey"><span class="sport-switcher-mark">HK</span><span class="sport-switcher-copy"><strong>Hockey</strong><small>NHL · AHL · ECHL</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="soccer"><span class="sport-switcher-mark">SC</span><span class="sport-switcher-copy"><strong>Soccer</strong><small>All competitions</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="tennis"><span class="sport-switcher-mark">TN</span><span class="sport-switcher-copy"><strong>Tennis</strong><small>ATP · WTA · ITF</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="combat"><span class="sport-switcher-mark">CF</span><span class="sport-switcher-copy"><strong>Combat</strong><small>UFC · MMA · Boxing</small></span></button>
+        <button type="button" class="sport-switcher-button" aria-pressed="false" data-sport-id="golf"><span class="sport-switcher-mark">GF</span><span class="sport-switcher-copy"><strong>Golf</strong><small>PGA · LPGA</small></span></button>
       </div>
     </section>
 
-    <section class="game-center-slate">
-      <div
-        id="cardStatus"
-        class="card-message"
-      >
-        Loading MLB Game Center…
+    <!-- Static MLB fallback: JavaScript replaces this with every selected sport. -->
+    <section id="sportWorkspace" class="sport-workspace sport-workspace-multiselect" aria-live="polite">
+      <div class="sport-board-block" data-sport-workspace="baseball">
+        <div class="league-accordion">
+          <details class="league-dropdown" data-sport-id="baseball" data-league-id="mlb" open>
+            <summary><span class="league-dropdown-main"><strong>MLB</strong><small>Connected schedule</small></span><span class="league-dropdown-status"><b>—</b><span>events</span><i aria-hidden="true"></i></span></summary>
+            <div class="league-event-panel" data-sport-id="baseball" data-league-panel="mlb"><div id="cardStatus" class="league-loading-state">Loading MLB games…</div></div>
+          </details>
+        </div>
       </div>
-
-      <div id="playsContainer"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <strong>BORING BETS</strong>
-    <span>
-      Data over hype. • Prices can move.
-    </span>
-  </footer>
-
+  <footer class="site-footer"><strong>BORING BETS</strong><span>Data over hype. • The page should do the work.</span></footer>
   <script src="todays-card.js"></script>
 </body>
 </html>
