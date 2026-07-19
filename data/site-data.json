@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-19T01:07:09.277695+00:00",
+    "updated_at": "2026-07-19T04:53:26.971364+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -73,10 +73,10 @@
     {
       "team": "CLE",
       "division": "",
-      "w": 51,
+      "w": 52,
       "l": 47,
-      "wcgb": 1.5,
-      "run_diff": -8,
+      "wcgb": 2.0,
+      "run_diff": -6,
       "tier": "Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -95,10 +95,10 @@
     {
       "team": "DET",
       "division": "",
-      "w": 45,
+      "w": 46,
       "l": 52,
-      "wcgb": 4.0,
-      "run_diff": 25,
+      "wcgb": 3.5,
+      "run_diff": 32,
       "tier": "Bubble",
       "need": "Right-handed bat / deadline direction",
       "betting_note": "Skubal rumors create scratch and F5 volatility"
@@ -128,10 +128,10 @@
     {
       "team": "SEA",
       "division": "",
-      "w": 48,
+      "w": 49,
       "l": 50,
-      "wcgb": 1.5,
-      "run_diff": 9,
+      "wcgb": 1.0,
+      "run_diff": 10,
       "tier": "Aggressive Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -150,10 +150,10 @@
     {
       "team": "ATH",
       "division": "",
-      "w": 41,
+      "w": 42,
       "l": 56,
-      "wcgb": 8.0,
-      "run_diff": -125,
+      "wcgb": 7.5,
+      "run_diff": -111,
       "tier": "Bubble",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -162,9 +162,9 @@
       "team": "LAA",
       "division": "",
       "w": 38,
-      "l": 60,
-      "wcgb": 11.5,
-      "run_diff": -56,
+      "l": 61,
+      "wcgb": 12.0,
+      "run_diff": -63,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -206,9 +206,9 @@
       "team": "WSH",
       "division": "",
       "w": 49,
-      "l": 49,
-      "wcgb": 2.5,
-      "run_diff": 26,
+      "l": 50,
+      "wcgb": 3.0,
+      "run_diff": 12,
       "tier": "Bubble",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -261,9 +261,9 @@
       "team": "PIT",
       "division": "",
       "w": 51,
-      "l": 47,
-      "wcgb": 0.5,
-      "run_diff": 50,
+      "l": 48,
+      "wcgb": 1.0,
+      "run_diff": 48,
       "tier": "Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -316,9 +316,9 @@
       "team": "SF",
       "division": "",
       "w": 42,
-      "l": 55,
-      "wcgb": 9.0,
-      "run_diff": -57,
+      "l": 56,
+      "wcgb": 9.5,
+      "run_diff": -58,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
