@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-19T22:30:15.149575+00:00",
+    "updated_at": "2026-07-19T23:34:44.671801+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -96,9 +96,9 @@
       "team": "DET",
       "division": "",
       "w": 46,
-      "l": 52,
-      "wcgb": 4.0,
-      "run_diff": 32,
+      "l": 53,
+      "wcgb": 4.5,
+      "run_diff": 31,
       "tier": "Bubble",
       "need": "Right-handed bat / deadline direction",
       "betting_note": "Skubal rumors create scratch and F5 volatility"
@@ -128,10 +128,10 @@
     {
       "team": "SEA",
       "division": "",
-      "w": 49,
+      "w": 50,
       "l": 50,
-      "wcgb": 1.5,
-      "run_diff": 10,
+      "wcgb": 1.0,
+      "run_diff": 13,
       "tier": "Aggressive Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -151,9 +151,9 @@
       "team": "ATH",
       "division": "",
       "w": 42,
-      "l": 56,
-      "wcgb": 8.0,
-      "run_diff": -111,
+      "l": 57,
+      "wcgb": 8.5,
+      "run_diff": -114,
       "tier": "Bubble",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -161,10 +161,10 @@
     {
       "team": "LAA",
       "division": "",
-      "w": 38,
+      "w": 39,
       "l": 61,
-      "wcgb": 12.5,
-      "run_diff": -63,
+      "wcgb": 12.0,
+      "run_diff": -62,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -205,10 +205,10 @@
     {
       "team": "WSH",
       "division": "",
-      "w": 49,
+      "w": 50,
       "l": 50,
-      "wcgb": 3.0,
-      "run_diff": 12,
+      "wcgb": 2.5,
+      "run_diff": 15,
       "tier": "Bubble",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -316,9 +316,9 @@
       "team": "SF",
       "division": "",
       "w": 42,
-      "l": 56,
-      "wcgb": 9.5,
-      "run_diff": -58,
+      "l": 57,
+      "wcgb": 10.0,
+      "run_diff": -61,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
