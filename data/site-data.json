@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-19T17:37:14.859150+00:00",
+    "updated_at": "2026-07-19T19:21:12.336365+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -52,9 +52,9 @@
       "team": "TOR",
       "division": "",
       "w": 46,
-      "l": 52,
-      "wcgb": 3.5,
-      "run_diff": -42,
+      "l": 53,
+      "wcgb": 4.0,
+      "run_diff": -45,
       "tier": "Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -62,10 +62,10 @@
     {
       "team": "CWS",
       "division": "",
-      "w": 51,
+      "w": 52,
       "l": 46,
       "wcgb": 0.0,
-      "run_diff": 42,
+      "run_diff": 45,
       "tier": "Aggressive Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
