@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-19T21:29:13.157193+00:00",
+    "updated_at": "2026-07-19T22:30:15.149575+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -271,10 +271,10 @@
     {
       "team": "CIN",
       "division": "",
-      "w": 44,
+      "w": 45,
       "l": 53,
-      "wcgb": 7.0,
-      "run_diff": -62,
+      "wcgb": 6.5,
+      "run_diff": -59,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -327,9 +327,9 @@
       "team": "COL",
       "division": "",
       "w": 40,
-      "l": 60,
-      "wcgb": 12.5,
-      "run_diff": -87,
+      "l": 61,
+      "wcgb": 13.0,
+      "run_diff": -90,
       "tier": "Rebuilder",
       "need": "Roster space and prospects",
       "betting_note": "Downgrade depth after veteran trades"
