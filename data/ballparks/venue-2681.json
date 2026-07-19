@@ -2,8 +2,8 @@
   "id": 2681,
   "name": "Citizens Bank Park",
   "city": "Philadelphia",
-  "version": "V0.1",
-  "status": "editable_placeholder_geometry",
+  "version": "V0.2",
+  "status": "dimension_mapped",
   "geometry": {
     "left_start": 163,
     "right_start": 865,
@@ -20,5 +20,114 @@
     "altitude_ft": 490,
     "roof": null,
     "surface": null
+  },
+  "field_geometry": {
+    "schema_version": "2.0",
+    "coordinate_contract": {
+      "origin": "rear point of home plate",
+      "units": "feet",
+      "x_axis": "negative toward left field; positive toward right field",
+      "y_axis": "positive from home plate through center field",
+      "field_bearing_reference": "center-field centerline"
+    },
+    "dimensions_ft": {
+      "left_line": 329,
+      "left_center": 374,
+      "center": 401,
+      "right_center": 369,
+      "right_line": 330
+    },
+    "wall_points_feet": [
+      {
+        "label": "LF",
+        "angle_deg": -45,
+        "distance_ft": 329,
+        "x_ft": -232.638,
+        "y_ft": 232.638,
+        "wall_height_ft": 10.5
+      },
+      {
+        "label": "LCF",
+        "angle_deg": -28,
+        "distance_ft": 374,
+        "x_ft": -175.582,
+        "y_ft": 330.222,
+        "wall_height_ft": 10.5
+      },
+      {
+        "label": "MONTY 1",
+        "angle_deg": -18,
+        "distance_ft": 387,
+        "x_ft": -119.59,
+        "y_ft": 368.059,
+        "wall_height_ft": 12.7
+      },
+      {
+        "label": "MONTY 2",
+        "angle_deg": -11,
+        "distance_ft": 381,
+        "x_ft": -72.698,
+        "y_ft": 374.0,
+        "wall_height_ft": 12.7
+      },
+      {
+        "label": "MONTY 3",
+        "angle_deg": -5,
+        "distance_ft": 409,
+        "x_ft": -35.647,
+        "y_ft": 407.444,
+        "wall_height_ft": 19
+      },
+      {
+        "label": "CF",
+        "angle_deg": 0,
+        "distance_ft": 401,
+        "x_ft": 0.0,
+        "y_ft": 401.0,
+        "wall_height_ft": 6
+      },
+      {
+        "label": "RCF",
+        "angle_deg": 26,
+        "distance_ft": 369,
+        "x_ft": 161.759,
+        "y_ft": 331.655,
+        "wall_height_ft": 13.25
+      },
+      {
+        "label": "RF",
+        "angle_deg": 45,
+        "distance_ft": 330,
+        "x_ft": 233.345,
+        "y_ft": 233.345,
+        "wall_height_ft": 13.25
+      }
+    ],
+    "infield": {
+      "basepath_ft": 90,
+      "mound_distance_ft": 60.5,
+      "base_coordinates_ft": {
+        "home": [
+          0,
+          0
+        ],
+        "first": [
+          63.64,
+          63.64
+        ],
+        "second": [
+          0,
+          127.28
+        ],
+        "third": [
+          -63.64,
+          63.64
+        ]
+      }
+    },
+    "verification_status": "verified",
+    "source_label": "Philadelphia Phillies official ballpark guide",
+    "verified_on": "2026-07-19",
+    "notes": "Headline distances and published wall heights mapped; detailed wall curve remains editable."
   }
 }

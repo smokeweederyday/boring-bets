@@ -1,14 +1,28 @@
-BORING BETS LIVE GAME CENTER — PHASE 1
+BORING BETS — LIVE DASHBOARD PHASE 3
 
-1. Open this folder.
-2. Copy every file and folder into the root of your existing boring-bets project.
-3. Choose Merge/Replace when macOS asks. Only the five existing HTML navigation files are replaced; the Live Game Center files are new.
-4. From the boring-bets project folder run:
+1. Unzip this package.
+2. Copy everything inside BORING-BETS-LIVE-DASHBOARD-PHASE3 into the root of the current boring-bets project.
+3. Choose Merge/Replace when Finder asks.
+4. From the boring-bets folder run:
 
-   python3 -u scripts/check_live_game_center.py
+   python3 -u scripts/check_live_dashboard_phase3.py
 
-5. Start the local server and open:
+5. Start the local server:
+
+   python3 -m http.server 8000
+
+6. Open:
 
    http://localhost:8000/live.html
 
-The first page opens in an explicitly labeled demo-live mode using the real game, lineup, pitcher, bullpen and venue structures already in the project.
+TEST
+- FIELD VIEW still loads and maps the selected park.
+- PLATE VIEW shows the detailed batter in front and pitcher on the mound behind him.
+- The strike-zone heat-map box is smaller.
+- The old large bottom score bug is gone.
+- LIVE GAME STATE appears below Lineups/Pitcher/Fielders and above BB AI.
+- LIVE GAME STATE collapses when clicked.
+- The page scrolls below the dashboard into FULL GAME DOSSIER.
+
+IMPORTANT
+The plate heat maps remain clearly labeled STRUCTURE DEMO until real Statcast pitch-history matrices are ingested. Missing weather, market, offense or provider blocks are labeled as pending rather than invented.

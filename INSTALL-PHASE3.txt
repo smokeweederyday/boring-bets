@@ -1,0 +1,17 @@
+BORING BETS LIVE DASHBOARD — PHASE 3
+
+1. Copy everything inside this folder into the root of your boring-bets project.
+2. Choose Merge/Replace when Finder asks.
+3. Run:
+
+   python3 -u scripts/check_live_dashboard_phase3.py
+
+4. Start the local server:
+
+   python3 -m http.server 8000
+
+5. Open:
+
+   http://localhost:8000/live.html
+
+Test Field View, Plate View, the collapsible LIVE GAME STATE bar, and scrolling into the FULL GAME DOSSIER.

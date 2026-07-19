@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "status": "coordinate_contract_ready",
+  "note": "The Live HUD renderer is active. Real player matrices are not populated until the Statcast pitch-history build is connected.",
+  "pitch_coordinate_contract": {
+    "source_fields": ["plate_x", "plate_z", "sz_top", "sz_bot"],
+    "units": "feet",
+    "viewpoint": "catcher/umpire looking toward pitcher",
+    "horizontal_axis": "negative plate_x appears catcher-left; positive plate_x appears catcher-right",
+    "vertical_axis": "plate_z in feet above ground",
+    "normalization": "Each pitch is normalized to the individual batter strike-zone bounds before entering the 5x5 display grid. Raw values remain stored."
+  },
+  "matrix_contract": {
+    "grid": "5x5",
+    "row_order": "high to low",
+    "column_order": "catcher-left to catcher-right",
+    "sample_fields": ["pitches", "plate_appearances", "confidence"],
+    "batter_layers": ["damage", "swing", "contact", "whiff", "chase", "expected_value"],
+    "pitcher_layers": ["usage", "location", "whiff", "csw", "ground_ball", "damage_allowed", "command"],
+    "live_layers": ["current_game_location", "current_game_command", "velocity_change", "release_point_change"],
+    "combined_output": "-1.0 pitcher advantage to +1.0 batter advantage"
+  },
+  "required_dimensions": [
+    "player_id",
+    "opponent_hand",
+    "pitch_type",
+    "timeframe",
+    "count_state",
+    "home_away",
+    "as_of"
+  ]
+}

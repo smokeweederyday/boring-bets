@@ -2,8 +2,8 @@
   "id": 5340,
   "name": "Estadio Alfredo Harp Helu",
   "city": "Mexico City",
-  "version": "V0.1",
-  "status": "editable_placeholder_geometry",
+  "version": "V0.2",
+  "status": "coordinate_ready_calibration_pending",
   "geometry": {
     "left_start": 128,
     "right_start": 848,
@@ -20,5 +20,90 @@
     "altitude_ft": null,
     "roof": null,
     "surface": null
+  },
+  "field_geometry": {
+    "schema_version": "2.0",
+    "coordinate_contract": {
+      "origin": "rear point of home plate",
+      "units": "feet",
+      "x_axis": "negative toward left field; positive toward right field",
+      "y_axis": "positive from home plate through center field",
+      "field_bearing_reference": "center-field centerline"
+    },
+    "dimensions_ft": {
+      "left_line": 325,
+      "left_center": 375,
+      "center": 400,
+      "right_center": 375,
+      "right_line": 325
+    },
+    "wall_points_feet": [
+      {
+        "label": "LF",
+        "angle_deg": -45,
+        "distance_ft": 325,
+        "x_ft": -229.81,
+        "y_ft": 229.81,
+        "wall_height_ft": null
+      },
+      {
+        "label": "LCF",
+        "angle_deg": -25,
+        "distance_ft": 375,
+        "x_ft": -158.482,
+        "y_ft": 339.865,
+        "wall_height_ft": null
+      },
+      {
+        "label": "CF",
+        "angle_deg": 0,
+        "distance_ft": 400,
+        "x_ft": 0.0,
+        "y_ft": 400.0,
+        "wall_height_ft": null
+      },
+      {
+        "label": "RCF",
+        "angle_deg": 25,
+        "distance_ft": 375,
+        "x_ft": 158.482,
+        "y_ft": 339.865,
+        "wall_height_ft": null
+      },
+      {
+        "label": "RF",
+        "angle_deg": 45,
+        "distance_ft": 325,
+        "x_ft": 229.81,
+        "y_ft": 229.81,
+        "wall_height_ft": null
+      }
+    ],
+    "infield": {
+      "basepath_ft": 90,
+      "mound_distance_ft": 60.5,
+      "base_coordinates_ft": {
+        "home": [
+          0,
+          0
+        ],
+        "first": [
+          63.64,
+          63.64
+        ],
+        "second": [
+          0,
+          127.28
+        ],
+        "third": [
+          -63.64,
+          63.64
+        ]
+      }
+    },
+    "verification_status": "working_profile",
+    "source_label": "published headline dimension profile; exact wall calibration pending",
+    "verified_on": null,
+    "notes": "Use as a dimension-aware working map, not a surveyed wall polygon."
   }
 }

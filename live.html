@@ -1,242 +1,428 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Boring Bets Live Game Center — a live MLB intelligence workstation.">
-  <title>Live Game Center | Boring Bets</title>
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="live.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Boring Bets Live Game Center — a live MLB intelligence workstation." name="description"/>
+<title>Live Game Center | Boring Bets</title>
+<link href="assets/css/variables.css" rel="stylesheet"/>
+<link href="live.css" rel="stylesheet"/>
 </head>
 <body class="live-page">
-  <header class="live-site-header">
-    <a class="live-brand" href="index.html"><span>BB</span> BORING BETS</a>
-    <nav class="live-nav" aria-label="Primary navigation">
-      <a href="todays-card.html">Card</a>
-      <a href="game.html">Research</a>
-      <a href="globe.html">Globe</a>
-      <a href="live.html" aria-current="page">Live</a>
-    </nav>
-    <div class="feed-health"><i></i><span id="feedHealthText">DEMO FEED READY</span></div>
-  </header>
+<header class="live-site-header">
+<a class="live-brand" href="index.html"><span>BB</span> BORING BETS</a>
+<nav aria-label="Primary navigation" class="live-nav">
+<a href="todays-card.html">Card</a>
+<a href="game.html">Research</a>
+<a href="globe.html">Globe</a>
+<a aria-current="page" href="live.html">Live</a>
+</nav>
+<div class="feed-health"><i></i><span id="feedHealthText">DEMO FEED READY</span></div>
+</header>
+<main class="live-workstation" id="liveWorkstation">
+<aside class="game-rail panel-shell" id="gameRail">
+<div class="panel-heading compact-heading">
+<div>
+<span class="panel-kicker">CARD</span>
+<strong id="railDateLabel">Games</strong>
+</div>
+<button aria-label="Collapse game rail" class="icon-button" id="toggleGameRail" type="button">‹</button>
+</div>
+<div class="date-switcher">
+<button aria-label="Previous date" id="previousDate" type="button">←</button>
+<span id="selectedDate">—</span>
+<button aria-label="Next date" id="nextDate" type="button">→</button>
+</div>
+<div aria-live="polite" class="game-list" id="gameList"></div>
+</aside>
+<aside class="event-rail panel-shell" id="eventRail">
+<div class="panel-heading compact-heading">
+<div>
+<span class="panel-kicker">LIVE EVENTS</span>
+<strong>Game Log</strong>
+</div>
+<button aria-label="Collapse event log" class="icon-button" id="toggleEventRail" type="button">‹</button>
+</div>
+<div class="event-controls">
+<button class="control-chip active" id="allEventsButton" type="button">All</button>
+<button class="control-chip" id="alertsOnlyButton" type="button">Alerts</button>
+<button class="control-chip" id="pauseFeedButton" type="button">Pause</button>
+</div>
+<div class="event-stream" id="eventStream"></div>
+</aside>
+<section class="game-stage-column">
+<section class="team-marquee panel-shell" id="teamMarquee">
+<div class="marquee-team away-team">
+<img alt="" id="awayLogo"/>
+<div><span id="awayRecord">AWAY</span><strong id="awayName">—</strong></div>
+<b id="awayScore">0</b>
+</div>
+<div class="marquee-center">
+<div class="live-state-row"><span class="live-pill" id="livePill">DEMO LIVE</span><span id="inningLabel">▲ 6TH</span></div>
+<span id="venueLabel">Loading ballpark…</span>
+<small id="gameClock">Feed initializing</small>
+</div>
+<div class="marquee-team home-team">
+<b id="homeScore">0</b>
+<div><span id="homeRecord">HOME</span><strong id="homeName">—</strong></div>
+<img alt="" id="homeLogo"/>
+</div>
+</section>
+<section class="ballpark-console panel-shell" id="ballparkConsole">
+<div class="hud-toolbar">
+<div class="hud-title-block">
+<span class="panel-kicker">BALLPARK HUD</span>
+<strong id="parkGeometryLabel">PARK GEOMETRY</strong>
+<small id="geometryStatus">COORDINATE SYSTEM LOADING</small>
+</div>
+<div aria-label="Ballpark view" class="hud-view-controls" role="group">
+<button class="active" id="fieldViewButton" type="button">FIELD VIEW</button>
+<button id="plateViewButton" type="button">PLATE VIEW</button>
+<button aria-pressed="false" id="autoViewButton" type="button">AUTO</button>
+</div>
+<div class="hud-statuses">
+<span><i class="green-dot"></i> FEED <b id="feedLatency">42ms</b></span>
+<span>WIND <b id="windSummary">7 MPH ↗</b></span>
+<span>ROOF <b id="roofSummary">OPEN</b></span>
+</div>
+</div>
+<div class="ballpark-stage field-mode" id="ballparkStage">
+<div class="park-glow park-glow-left"></div>
+<div class="park-glow park-glow-right"></div>
+<section aria-label="Top-down ballpark view" class="hud-view field-hud-view active" id="fieldHudView">
+<svg aria-label="Dimension-mapped interactive baseball field" class="ballpark-svg" id="ballparkSvg" role="img" viewbox="0 0 1000 690">
+<defs>
+<lineargradient id="grassGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#123b27"></stop>
+<stop offset="100%" stop-color="#071b11"></stop>
+</lineargradient>
+<lineargradient id="dirtGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#9d7048"></stop>
+<stop offset="100%" stop-color="#49321f"></stop>
+</lineargradient>
+<filter id="fieldGlow"><fegaussianblur result="blur" stddeviation="7"></fegaussianblur><femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+</defs>
+<path class="outfield-shape" d="M 205 555 Q 150 215 500 90 Q 850 215 795 555 L 500 630 Z" id="outfieldShape"></path>
+<path class="warning-track" d="M 213 548 Q 165 230 500 107 Q 835 230 787 548" id="warningTrack"></path>
+<path class="foul-line" d="M500 630 L205 555" id="foulLineLeft"></path>
+<path class="foul-line" d="M500 630 L795 555" id="foulLineRight"></path>
+<path class="infield-shape" d="M500 461 L580 541 L500 621 L420 541 Z" id="infieldShape"></path>
+<circle class="mound" cx="500" cy="554" id="moundShape" r="22"></circle>
+<path class="baseline" d="M500 621 L580 541 L500 461 L420 541 Z" id="baselineShape"></path>
+<g class="bases" id="baseGeometry">
+<rect height="26" id="homePlateShape" transform="rotate(45 500 621)" width="26" x="487" y="608"></rect>
+<rect height="26" id="firstBaseShape" transform="rotate(45 580 541)" width="26" x="567" y="528"></rect>
+<rect height="26" id="secondBaseShape" transform="rotate(45 500 461)" width="26" x="487" y="448"></rect>
+<rect height="26" id="thirdBaseShape" transform="rotate(45 420 541)" width="26" x="407" y="528"></rect>
+</g>
+<g class="dimension-labels" id="dimensionLabels"></g>
+<g class="field-axes" id="fieldAxes">
+<path d="M500 630 V108"></path>
+<path d="M205 555 L795 555"></path>
+<text x="510" y="138">CENTERLINE / +Y</text>
+<text x="215" y="576">LEFT FIELD / −X</text>
+<text x="676" y="576">RIGHT FIELD / +X</text>
+</g>
+<path class="pitch-trail" d="M500 554 Q505 584 500 621" id="pitchTrail"></path>
+<path class="hit-trail" d="M500 621 Q610 400 730 235" id="hitTrail"></path>
+<circle class="ball-marker" cx="730" cy="235" id="ballMarker" r="7"></circle>
+<g class="wind-arrow" id="windArrow" transform="translate(792 115) rotate(38)"><path d="M0 18 H82 M64 0 L82 18 L64 36"></path></g>
+</svg>
+<button aria-label="Open outfield intelligence" class="field-region outfield-region" id="outfieldRegion" type="button"><span>OUTFIELD</span><small>Walls, wind, range and landing coordinates</small></button>
+<button aria-label="Open infield intelligence" class="field-region infield-region" id="infieldRegion" type="button"><span>INFIELD</span><small>Positioning, range and run prevention</small></button>
+<div class="field-players" id="fieldPlayers"></div>
+<article class="matchup-focus pitcher-focus" id="pitcherFocus">
+<span>PITCHER</span>
+<button id="pitcherLink" type="button"><strong id="pitcherName">—</strong><small id="pitcherPulse">84 P · 12 WHIFFS · +1.8 MPH</small></button>
+</article>
+<article class="matchup-focus batter-focus" id="batterFocus">
+<span>AT BAT</span>
+<button id="batterLink" type="button"><strong id="batterName">—</strong><small id="batterPulse">2–3 · 104.8 EV · HR</small></button>
+</article>
+<div aria-label="Base runners" class="base-state">
+<i id="baseSecond"></i><i id="baseThird"></i><i id="baseFirst"></i>
+</div>
+<div class="field-intelligence-stack" id="fieldIntelligenceStack">
+<div class="intelligence-alert positive"><span>POSITIVE CONDITION</span><strong>Starter velocity holding above baseline</strong></div>
+<div class="intelligence-alert warning"><span>FATIGUE WATCH</span><strong>31 pitches this inning</strong></div>
+</div>
+<div class="coordinate-readout">
+<span>FIELD COORDINATES</span>
+<strong>HOME PLATE = 0,0 FT</strong>
+<small id="fieldCoordinateReadout">Hover mapping is staged for batted-ball ingestion</small>
+</div>
+</section>
+<section aria-label="Umpire perspective and matchup heat maps" class="hud-view plate-hud-view" hidden="" id="plateHudView">
+<div class="plate-atmosphere"></div>
+<div class="plate-matchup-header">
+<div><span>PITCHER</span><strong id="platePitcherName">—</strong><small id="platePitcherHand">RHP</small></div>
+<div class="plate-versus"><span id="plateCountLabel">COUNT 2–1</span><b>VS</b><small id="heatmapStatus">STRUCTURE DEMO</small></div>
+<div><span>BATTER</span><strong id="plateBatterName">—</strong><small id="plateBatterHand">LHB</small></div>
+</div>
+<div class="heatmap-toolbar">
+<div aria-label="Heat map layer" class="heatmap-layer-controls" role="group">
+<button class="active" data-heat-layer="combined" type="button">MATCHUP</button>
+<button data-heat-layer="batter" type="button">BATTER</button>
+<button data-heat-layer="pitcher" type="button">PITCHER</button>
+<button data-heat-layer="live" type="button">LIVE</button>
+</div>
+<div class="heatmap-metric-label"><span id="heatmapMetricName">COMBINED MATCHUP EDGE</span><small>5×5 prototype surface · plate_x / plate_z ready</small></div>
+</div>
+<div class="plate-perspective broadcast-plate-scene">
+<svg aria-label="Umpire view with batter in the foreground and pitcher on the mound" class="plate-scene-svg" role="img" viewbox="0 0 1000 520">
+<defs>
+<lineargradient id="plateSky" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#14291d"></stop><stop offset="58%" stop-color="#07110b"></stop><stop offset="100%" stop-color="#020503"></stop></lineargradient>
+<lineargradient id="plateGrass" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#17482c"></stop><stop offset="100%" stop-color="#07190f"></stop></lineargradient>
+<lineargradient id="uniformShade" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#dcebe1"></stop><stop offset="45%" stop-color="#6f8879"></stop><stop offset="100%" stop-color="#1b2d22"></stop></lineargradient>
+<filter id="figureGlow"><fegaussianblur result="b" stddeviation="4"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+</defs>
+<rect fill="url(#plateSky)" height="520" width="1000"></rect>
+<path d="M0 165 Q500 65 1000 165 L1000 275 Q500 185 0 275Z" fill="#101b15" stroke="rgba(255,255,255,.06)"></path>
+<g fill="#718579" opacity=".32">
+<circle cx="115" cy="200" r="3"></circle><circle cx="160" cy="192" r="3"></circle><circle cx="210" cy="183" r="3"></circle><circle cx="270" cy="174" r="3"></circle><circle cx="330" cy="166" r="3"></circle><circle cx="395" cy="160" r="3"></circle><circle cx="460" cy="157" r="3"></circle><circle cx="530" cy="157" r="3"></circle><circle cx="600" cy="162" r="3"></circle><circle cx="675" cy="170" r="3"></circle><circle cx="745" cy="181" r="3"></circle><circle cx="815" cy="192" r="3"></circle><circle cx="880" cy="205" r="3"></circle>
+</g>
+<path d="M75 520 L355 235 Q500 185 645 235 L925 520Z" fill="url(#plateGrass)"></path>
+<path d="M355 520 L447 248 Q500 222 553 248 L645 520Z" fill="#6e4a30" opacity=".56"></path>
+<ellipse cx="500" cy="254" fill="#8f6848" opacity=".8" rx="65" ry="19"></ellipse>
+<path d="M477 250 H523" stroke="#e9e4d8" stroke-linecap="round" stroke-width="5"></path>
+<path d="M384 520 L500 432 L616 520" fill="#8f6848" opacity=".72"></path>
+<path d="M478 489 L500 475 L522 489 L515 513 H485Z" fill="#ece9dd" opacity=".95"></path>
+<g aria-hidden="true" class="pitcher-figure" filter="url(#figureGlow)">
+<ellipse cx="500" cy="248" fill="#020503" opacity=".55" rx="25" ry="7"></ellipse>
+<circle cx="500" cy="157" fill="#273b2e" r="14" stroke="#789582" stroke-width="2"></circle>
+<path d="M482 171 Q500 163 518 171 L527 214 Q500 231 473 214Z" fill="#233a2b" stroke="#6b8b75" stroke-width="2"></path>
+<path d="M482 181 Q455 198 463 218" fill="none" stroke="#6f8d78" stroke-linecap="round" stroke-width="9"></path>
+<path d="M518 181 Q545 196 536 215" fill="none" stroke="#6f8d78" stroke-linecap="round" stroke-width="9"></path>
+<path d="M484 215 L473 245" stroke="#657f6c" stroke-linecap="round" stroke-width="11"></path>
+<path d="M516 215 L530 246" stroke="#657f6c" stroke-linecap="round" stroke-width="11"></path>
+<circle cx="538" cy="205" fill="#f0f3eb" r="5"></circle>
+<text fill="#7e9988" font-family="ui-monospace,monospace" font-size="10" letter-spacing="2" text-anchor="middle" x="500" y="276">MOUND · 60.5 FT</text>
+</g>
+<g aria-hidden="true" class="catcher-figure" opacity=".6">
+<path d="M458 474 Q500 442 542 474 L553 520 H447Z" fill="#101a14" stroke="#5e7767" stroke-width="2"></path>
+<circle cx="500" cy="450" fill="#111a15" r="18" stroke="#738a7a" stroke-width="2"></circle>
+<path d="M487 443 H513 M487 450 H513 M491 457 H509" stroke="#708778" stroke-width="2"></path>
+</g>
+<g aria-hidden="true" class="batter-figure" filter="url(#figureGlow)" id="batterSilhouette">
+<ellipse cx="326" cy="498" fill="#000" opacity=".45" rx="72" ry="14"></ellipse>
+<path d="M296 322 Q319 301 347 314 L365 391 Q333 416 297 391Z" fill="url(#uniformShade)" stroke="#a4b8aa" stroke-width="3"></path>
+<path d="M306 302 Q328 277 351 300 L354 318 H303Z" fill="#273c2e" stroke="#9eb0a4" stroke-width="3"></path>
+<path d="M304 296 Q331 276 357 296" fill="none" stroke="#bcc9c0" stroke-linecap="round" stroke-width="7"></path>
+<circle cx="329" cy="308" fill="#b7a48d" r="19" stroke="#d5c5af" stroke-width="2"></circle>
+<path d="M290 345 Q251 366 259 407" fill="none" stroke="#a79a87" stroke-linecap="round" stroke-width="15"></path>
+<path d="M353 344 Q390 355 401 386" fill="none" stroke="#a79a87" stroke-linecap="round" stroke-width="15"></path>
+<circle cx="258" cy="407" fill="#d9d4c8" r="9"></circle>
+<circle cx="401" cy="386" fill="#d9d4c8" r="9"></circle>
+<path d="M310 395 L278 481" stroke="#405849" stroke-linecap="round" stroke-width="20"></path>
+<path d="M347 395 L374 483" stroke="#405849" stroke-linecap="round" stroke-width="20"></path>
+<path d="M267 486 H301" stroke="#a6b6ab" stroke-linecap="round" stroke-width="12"></path>
+<path d="M363 487 H397" stroke="#a6b6ab" stroke-linecap="round" stroke-width="12"></path>
+<path d="M256 407 L390 235" stroke="#c9b477" stroke-linecap="round" stroke-width="9"></path>
+<path d="M256 407 L390 235" opacity=".72" stroke="#f3dc99" stroke-linecap="round" stroke-width="3"></path>
+<path d="M303 341 Q329 352 358 339" fill="none" opacity=".65" stroke="#d9e5dd" stroke-width="3"></path>
+<text fill="#07100a" font-family="ui-monospace,monospace" font-size="27" font-weight="900" text-anchor="middle" x="329" y="370">27</text>
+</g>
+</svg>
+<div class="strike-zone-console compact-zone">
+<div aria-label="Combined batter and pitcher matchup heat map" class="strike-zone-grid" id="strikeZoneGrid"></div>
+<div aria-hidden="true" class="official-zone"><i></i><i></i></div>
+<div class="pitch-location-layer" id="pitchLocationLayer"></div>
+<span class="zone-axis zone-axis-top">sz_top</span>
+<span class="zone-axis zone-axis-bottom">sz_bot</span>
+<span class="zone-axis zone-axis-left">−plate_x</span>
+<span class="zone-axis zone-axis-right">+plate_x</span>
+</div>
+</div>
+<div class="matchup-edge-panels">
+<article class="edge-card batter-edge"><span>BATTER ADVANTAGE</span><strong id="batterAdvantageZone">—</strong><small id="batterAdvantageDetail">Waiting for heat-map data</small></article>
+<article class="edge-card pitch-call"><span>LIKELY NEXT PITCH</span><strong id="likelyPitch">FOUR-SEAM 34%</strong><small id="likelyPitchDetail">Count and arsenal prototype</small></article>
+<article class="edge-card pitcher-edge"><span>PITCHER ADVANTAGE</span><strong id="pitcherAdvantageZone">—</strong><small id="pitcherAdvantageDetail">Waiting for heat-map data</small></article>
+</div>
+<div class="plate-history-strip" id="plateHistoryStrip"></div>
+<div class="prototype-disclosure"><b>HEAT-MAP INGESTION NOT CONNECTED YET.</b> The renderer, coordinate contract and live matchup-combination layer are active; cells are clearly marked prototype data until Statcast pitch history is built.</div>
+</section>
+</div>
+</section>
 
-  <main class="live-workstation" id="liveWorkstation">
-    <aside class="game-rail panel-shell" id="gameRail">
-      <div class="panel-heading compact-heading">
-        <div>
-          <span class="panel-kicker">CARD</span>
-          <strong id="railDateLabel">Games</strong>
-        </div>
-        <button class="icon-button" id="toggleGameRail" type="button" aria-label="Collapse game rail">‹</button>
+</section>
+<aside class="intelligence-rail panel-shell" id="intelligenceRail">
+<div class="right-panel-tabs" role="tablist">
+<button class="active" data-right-tab="lineups" type="button">Lineups</button>
+<button data-right-tab="pitcher" type="button">Pitcher</button>
+<button data-right-tab="fielders" type="button">Fielders</button>
+</div>
+<section class="right-tab-panel active" data-right-panel="lineups">
+<div class="lineup-switcher">
+<button class="active" id="awayLineupButton" type="button">Away</button>
+<button id="homeLineupButton" type="button">Home</button>
+</div>
+<div class="lineup-meta"><span id="lineupStatusLabel">LINEUP</span><small id="lineupFreshness">—</small></div>
+<div class="live-lineup" id="liveLineup"></div>
+<section class="mini-section due-up-section">
+<div class="mini-section-heading"><span>DUE UP</span><small>Next three</small></div>
+<div class="due-up-list" id="dueUpList"></div>
+</section>
+</section>
+<section class="right-tab-panel" data-right-panel="pitcher">
+<div class="pitcher-panel-heading">
+<div><span class="panel-kicker">CURRENT OUTING</span><strong id="pitcherPanelName">—</strong></div>
+<span class="pulse-badge positive" id="pitcherStatusBadge">DOMINATING</span>
+</div>
+<div class="pitcher-stat-grid" id="pitcherStatGrid"></div>
+<section class="mini-section">
+<div class="mini-section-heading"><span>ARSENAL</span><small>Live vs baseline</small></div>
+<div class="arsenal-list" id="arsenalList"></div>
+</section>
+<section class="mini-section">
+<div class="mini-section-heading"><span>REMOVAL RISK</span><small id="removalRiskLabel">36%</small></div>
+<div class="risk-meter"><i id="removalRiskMeter"></i></div>
+<div class="risk-notes" id="riskNotes"></div>
+</section>
+</section>
+<section class="right-tab-panel" data-right-panel="fielders">
+<div class="mini-section-heading"><span>DEFENSIVE ALIGNMENT</span><small>Click to locate</small></div>
+<div class="fielder-grid" id="fielderGrid"></div>
+<section class="mini-section">
+<div class="mini-section-heading"><span>FIELDING CONDITIONS</span><small>Live</small></div>
+<div class="condition-grid">
+<div><span>Surface</span><strong id="surfaceCondition">Dry</strong></div>
+<div><span>Visibility</span><strong id="visibilityCondition">Clear</strong></div>
+<div><span>Wind</span><strong id="fieldWindCondition">7 MPH RF</strong></div>
+<div><span>Sun</span><strong id="sunCondition">Low 3B side</strong></div>
+</div>
+</section>
+</section>
+<section class="right-game-state" id="gameStateDock">
+<button aria-expanded="true" class="state-dock-heading" id="toggleGameStateDock" type="button">
+<span><small>LIVE GAME STATE</small><strong id="bugInning">▲ 6TH</strong></span>
+<span class="state-dock-summary"><b id="bugOuts">1 OUT</b><i id="stateDockChevron">⌃</i></span>
+</button>
+<div class="state-dock-body" id="gameStateDockBody">
+<div class="state-score-row">
+<div class="state-team away"><img alt="" id="bugAwayLogo"/><span id="bugAwayAbbr">AWY</span><b id="bugAwayScore">0</b></div>
+<div class="state-center">
+<div class="bug-bases"><i id="bugBaseSecond"></i><i id="bugBaseThird"></i><i id="bugBaseFirst"></i></div>
+<small>ON BASE</small>
+</div>
+<div class="state-team home"><b id="bugHomeScore">0</b><span id="bugHomeAbbr">HME</span><img alt="" id="bugHomeLogo"/></div>
+</div>
+<div class="state-count-row">
+<div class="count-value"><span>COUNT</span><strong id="countValue">2–1</strong><small>PITCH <b id="pitchCount">84</b></small></div>
+<div class="count-lights"><span>B <i id="ballLights"></i></span><span>S <i id="strikeLights"></i></span><span>O <i id="outLights"></i></span></div>
+<div aria-label="Latest pitch location" class="mini-plate-animation"><div class="mini-zone"><i id="miniPitchDot"></i></div><small>PLATE</small></div>
+</div>
+<div class="state-matchup-row"><div><span>BATTER</span><strong id="bugBatter">—</strong></div><div><span>PITCHER</span><strong id="bugPitcher">—</strong></div></div>
+<div class="state-last-pitch"><span>LAST PITCH</span><strong id="lastPitch">96.4 MPH FOUR-SEAM · BALL</strong></div>
+<div class="state-advanced-grid">
+<div><span>RUN EXP</span><strong id="runExpectancy">1.42</strong></div>
+<div><span>WIN PROB</span><strong id="winProbability">54% / 46%</strong></div>
+<div><span>LIVE ML</span><strong id="liveMoneyline">—</strong></div>
+<div><span>TOTAL</span><strong id="liveTotal">—</strong></div>
+<div><span>LEVERAGE</span><strong id="leverageIndex">2.14 HIGH</strong></div>
+<div><span>NEXT</span><strong id="dueUp">—</strong></div>
+</div>
+<div class="state-line-score" id="lineScore"></div>
+</div>
+</section><button class="chat-launch" id="chatLaunch" type="button"><span>BB AI</span><strong>Open live intelligence chat</strong><b>›</b></button>
+</aside>
+</main>
+<section class="live-game-scroll" id="liveGameScroll">
+  <div class="lower-dashboard-grid">
+    <article class="lower-module flow-module" id="flowGameModule">
+      <header class="lower-module-heading">
+        <div><span>FLOW OF GAME</span><strong>Win probability and control</strong></div>
+        <small id="flowModelStatus">MODEL PREVIEW</small>
+      </header>
+      <div class="flow-chart-wrap">
+        <svg aria-label="Flow of game win probability chart" class="flow-chart" id="flowChart" role="img" viewBox="0 0 620 250">
+          <defs>
+            <linearGradient id="flowAreaGradient" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#48ff93" stop-opacity=".30"></stop>
+              <stop offset="100%" stop-color="#48ff93" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+          <g class="flow-grid-lines">
+            <path d="M42 25 H598 M42 75 H598 M42 125 H598 M42 175 H598 M42 225 H598"></path>
+            <path d="M42 25 V225 M104 25 V225 M166 25 V225 M228 25 V225 M290 25 V225 M352 25 V225 M414 25 V225 M476 25 V225 M538 25 V225 M598 25 V225"></path>
+          </g>
+          <path class="flow-midline" d="M42 125 H598"></path>
+          <path class="flow-area" id="flowAreaPath" d=""></path>
+          <path class="flow-line" id="flowLinePath" d=""></path>
+          <circle class="flow-marker" cx="42" cy="125" id="flowCurrentMarker" r="6"></circle>
+          <g class="flow-axis-labels"><text x="8" y="30">AWAY</text><text x="11" y="130">50%</text><text x="8" y="226">HOME</text><text x="42" y="244">1</text><text x="104" y="244">2</text><text x="166" y="244">3</text><text x="228" y="244">4</text><text x="290" y="244">5</text><text x="352" y="244">6</text><text x="414" y="244">7</text><text x="476" y="244">8</text><text x="538" y="244">9</text></g>
+        </svg>
+        <div class="flow-current-readout"><span>CURRENT CONTROL</span><strong id="flowControlLabel">EVEN GAME</strong><small id="flowControlDetail">50% away · 50% home</small></div>
       </div>
-      <div class="date-switcher">
-        <button id="previousDate" type="button" aria-label="Previous date">←</button>
-        <span id="selectedDate">—</span>
-        <button id="nextDate" type="button" aria-label="Next date">→</button>
+      <section class="deserve-meter-block">
+        <div class="deserve-heading"><span>DESERVE-TO-WIN-O-METER</span><small>Contact quality + scoring pressure</small></div>
+        <div class="deserve-team-labels"><strong id="deserveAwayLabel">AWAY 50%</strong><strong id="deserveHomeLabel">HOME 50%</strong></div>
+        <div class="deserve-meter"><i id="deserveAwayFill"></i><b id="deserveMarker"></b></div>
+        <p id="deserveExplanation">Awaiting live batted-ball and expected-run inputs.</p>
+      </section>
+    </article>
+
+    <article class="lower-module box-score-module" id="fullBoxScoreModule">
+      <header class="lower-module-heading">
+        <div><span>BOX SCORE</span><strong id="fullBoxScoreTitle">All nine innings</strong></div>
+        <small id="boxScoreStatus">LIVE STATE</small>
+      </header>
+      <div class="full-box-score-wrap" id="fullBoxScore"></div>
+      <div class="box-score-foot" id="boxScoreFoot"></div>
+    </article>
+
+    <article class="lower-module odds-module" id="oddsModule">
+      <header class="lower-module-heading">
+        <div><span>ODDS CENTER</span><strong>Pregame, live and movement</strong></div>
+        <small id="oddsFeedStatus">DEMO MARKET</small>
+      </header>
+      <div class="odds-scoreboard">
+        <div><span id="oddsAwayAbbr">AWY</span><strong id="oddsAwayMoneyline">—</strong><small>LIVE ML</small></div>
+        <div class="odds-center-total"><span>LIVE TOTAL</span><strong id="oddsLiveTotal">—</strong><small id="oddsLiveTotalPrice">—</small></div>
+        <div><span id="oddsHomeAbbr">HME</span><strong id="oddsHomeMoneyline">—</strong><small>LIVE ML</small></div>
       </div>
-      <div class="game-list" id="gameList" aria-live="polite"></div>
-    </aside>
-
-    <aside class="event-rail panel-shell" id="eventRail">
-      <div class="panel-heading compact-heading">
-        <div>
-          <span class="panel-kicker">LIVE EVENTS</span>
-          <strong>Game Log</strong>
-        </div>
-        <button class="icon-button" id="toggleEventRail" type="button" aria-label="Collapse event log">‹</button>
-      </div>
-      <div class="event-controls">
-        <button class="control-chip active" id="allEventsButton" type="button">All</button>
-        <button class="control-chip" id="alertsOnlyButton" type="button">Alerts</button>
-        <button class="control-chip" id="pauseFeedButton" type="button">Pause</button>
-      </div>
-      <div class="event-stream" id="eventStream"></div>
-    </aside>
-
-    <section class="game-stage-column">
-      <section class="team-marquee panel-shell" id="teamMarquee">
-        <div class="marquee-team away-team">
-          <img id="awayLogo" alt="">
-          <div><span id="awayRecord">AWAY</span><strong id="awayName">—</strong></div>
-          <b id="awayScore">0</b>
-        </div>
-        <div class="marquee-center">
-          <div class="live-state-row"><span class="live-pill" id="livePill">DEMO LIVE</span><span id="inningLabel">▲ 6TH</span></div>
-          <span id="venueLabel">Loading ballpark…</span>
-          <small id="gameClock">Feed initializing</small>
-        </div>
-        <div class="marquee-team home-team">
-          <b id="homeScore">0</b>
-          <div><span id="homeRecord">HOME</span><strong id="homeName">—</strong></div>
-          <img id="homeLogo" alt="">
-        </div>
+      <div class="odds-grid" id="oddsGrid"></div>
+      <section class="odds-movement">
+        <div class="odds-movement-heading"><span>MARKET MOVEMENT</span><small id="marketMoveSummary">No verified market feed attached</small></div>
+        <div class="movement-track"><i id="movementOpenMarker"></i><i id="movementCurrentMarker"></i></div>
+        <div class="movement-labels"><span id="movementOpenLabel">OPEN 8.0</span><span id="movementCurrentLabel">LIVE 7.5</span></div>
       </section>
+    </article>
+  </div>
 
-      <section class="ballpark-console panel-shell" id="ballparkConsole">
-        <div class="hud-toolbar">
-          <div><span class="panel-kicker">BALLPARK HUD</span><strong id="parkGeometryLabel">PARK GEOMETRY</strong></div>
-          <div class="hud-statuses">
-            <span><i class="green-dot"></i> FEED <b id="feedLatency">42ms</b></span>
-            <span>WIND <b id="windSummary">7 MPH ↗</b></span>
-            <span>ROOF <b id="roofSummary">OPEN</b></span>
-          </div>
-        </div>
+  <article class="lower-module bullpen-module" id="lowerBullpensModule">
+    <header class="lower-module-heading">
+      <div><span>BULLPEN COMMAND CENTER</span><strong>Availability, workload and recent form</strong></div>
+      <small>GAME DECISION LAYER</small>
+    </header>
+    <div class="lower-bullpen-grid" id="lowerBullpens"></div>
+  </article>
 
-        <div class="ballpark-stage" id="ballparkStage">
-          <div class="park-glow park-glow-left"></div>
-          <div class="park-glow park-glow-right"></div>
-          <svg id="ballparkSvg" class="ballpark-svg" viewBox="0 0 1000 690" role="img" aria-label="Interactive baseball field">
-            <defs>
-              <linearGradient id="grassGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#123b27"/>
-                <stop offset="100%" stop-color="#071b11"/>
-              </linearGradient>
-              <linearGradient id="dirtGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#9d7048"/>
-                <stop offset="100%" stop-color="#49321f"/>
-              </linearGradient>
-              <filter id="fieldGlow"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-            <path id="outfieldShape" class="outfield-shape" d="M 145 555 Q 118 220 500 72 Q 882 220 855 555 L 720 555 Q 680 360 500 275 Q 320 360 280 555 Z"/>
-            <path id="warningTrack" class="warning-track" d="M 137 554 Q 100 207 500 54 Q 900 207 863 554"/>
-            <path id="infieldShape" class="infield-shape" d="M500 338 L660 492 L500 646 L340 492 Z"/>
-            <circle class="mound" cx="500" cy="490" r="28"/>
-            <path class="baseline" d="M500 625 L350 492 L500 350 L650 492 Z"/>
-            <g class="bases">
-              <rect x="485" y="615" width="30" height="30" transform="rotate(45 500 630)"/>
-              <rect x="635" y="477" width="30" height="30" transform="rotate(45 650 492)"/>
-              <rect x="485" y="335" width="30" height="30" transform="rotate(45 500 350)"/>
-              <rect x="335" y="477" width="30" height="30" transform="rotate(45 350 492)"/>
-            </g>
-            <path id="pitchTrail" class="pitch-trail" d="M500 490 Q505 552 500 615"/>
-            <path id="hitTrail" class="hit-trail" d="M500 615 Q610 400 730 235"/>
-            <circle id="ballMarker" class="ball-marker" cx="730" cy="235" r="7"/>
-            <g id="windArrow" class="wind-arrow" transform="translate(792 115) rotate(38)"><path d="M0 18 H82 M64 0 L82 18 L64 36"/></g>
-          </svg>
-
-          <button class="field-region outfield-region" id="outfieldRegion" type="button" aria-label="Open outfield intelligence"><span>OUTFIELD</span><small>Click for range, walls, wind and positioning</small></button>
-          <button class="field-region infield-region" id="infieldRegion" type="button" aria-label="Open infield intelligence"><span>INFIELD</span><small>Click for shifts, range and run prevention</small></button>
-
-          <div class="field-players" id="fieldPlayers"></div>
-
-          <article class="matchup-focus pitcher-focus" id="pitcherFocus">
-            <span>PITCHER</span>
-            <button id="pitcherLink" type="button"><strong id="pitcherName">—</strong><small id="pitcherPulse">84 P · 12 WHIFFS · +1.8 MPH</small></button>
-          </article>
-          <article class="matchup-focus batter-focus" id="batterFocus">
-            <span>AT BAT</span>
-            <button id="batterLink" type="button"><strong id="batterName">—</strong><small id="batterPulse">2–3 · 104.8 EV · HR</small></button>
-          </article>
-
-          <div class="base-state" aria-label="Base runners">
-            <i id="baseSecond"></i><i id="baseThird"></i><i id="baseFirst"></i>
-          </div>
-
-          <div class="field-intelligence-stack" id="fieldIntelligenceStack">
-            <div class="intelligence-alert positive"><span>POSITIVE CONDITION</span><strong>Starter velocity holding above baseline</strong></div>
-            <div class="intelligence-alert warning"><span>FATIGUE WATCH</span><strong>31 pitches this inning</strong></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="score-bug panel-shell" id="scoreBug">
-        <div class="score-primary">
-          <div class="score-team away"><img id="bugAwayLogo" alt=""><span id="bugAwayAbbr">AWY</span><b id="bugAwayScore">0</b></div>
-          <div class="score-state">
-            <strong id="bugInning">▲ 6TH</strong>
-            <span id="bugOuts">1 OUT</span>
-            <div class="bug-bases"><i id="bugBaseSecond"></i><i id="bugBaseThird"></i><i id="bugBaseFirst"></i></div>
-          </div>
-          <div class="score-team home"><b id="bugHomeScore">0</b><span id="bugHomeAbbr">HME</span><img id="bugHomeLogo" alt=""></div>
-          <div class="count-cluster"><span>COUNT</span><strong id="countValue">2–1</strong><small>PITCH <b id="pitchCount">84</b></small></div>
-        </div>
-        <div class="score-secondary">
-          <div><span>BATTER</span><strong id="bugBatter">—</strong></div>
-          <div><span>PITCHER</span><strong id="bugPitcher">—</strong></div>
-          <div><span>LAST PITCH</span><strong id="lastPitch">96.4 MPH FOUR-SEAM · BALL</strong></div>
-          <div><span>RUN EXPECTANCY</span><strong id="runExpectancy">1.42</strong></div>
-          <div><span>WIN PROB</span><strong id="winProbability">54% / 46%</strong></div>
-        </div>
-        <div class="score-tertiary">
-          <div class="line-score" id="lineScore"></div>
-          <div class="market-strip"><span>LIVE ML <b id="liveMoneyline">—</b></span><span>TOTAL <b id="liveTotal">—</b></span><span>LEVERAGE <b id="leverageIndex">2.14 HIGH</b></span><span>NEXT <b id="dueUp">—</b></span></div>
-        </div>
-      </section>
-    </section>
-
-    <aside class="intelligence-rail panel-shell" id="intelligenceRail">
-      <div class="right-panel-tabs" role="tablist">
-        <button class="active" data-right-tab="lineups" type="button">Lineups</button>
-        <button data-right-tab="pitcher" type="button">Pitcher</button>
-        <button data-right-tab="fielders" type="button">Fielders</button>
-      </div>
-
-      <section class="right-tab-panel active" data-right-panel="lineups">
-        <div class="lineup-switcher">
-          <button class="active" id="awayLineupButton" type="button">Away</button>
-          <button id="homeLineupButton" type="button">Home</button>
-        </div>
-        <div class="lineup-meta"><span id="lineupStatusLabel">LINEUP</span><small id="lineupFreshness">—</small></div>
-        <div class="live-lineup" id="liveLineup"></div>
-        <section class="mini-section due-up-section">
-          <div class="mini-section-heading"><span>DUE UP</span><small>Next three</small></div>
-          <div class="due-up-list" id="dueUpList"></div>
-        </section>
-      </section>
-
-      <section class="right-tab-panel" data-right-panel="pitcher">
-        <div class="pitcher-panel-heading">
-          <div><span class="panel-kicker">CURRENT OUTING</span><strong id="pitcherPanelName">—</strong></div>
-          <span class="pulse-badge positive" id="pitcherStatusBadge">DOMINATING</span>
-        </div>
-        <div class="pitcher-stat-grid" id="pitcherStatGrid"></div>
-        <section class="mini-section">
-          <div class="mini-section-heading"><span>ARSENAL</span><small>Live vs baseline</small></div>
-          <div class="arsenal-list" id="arsenalList"></div>
-        </section>
-        <section class="mini-section">
-          <div class="mini-section-heading"><span>REMOVAL RISK</span><small id="removalRiskLabel">36%</small></div>
-          <div class="risk-meter"><i id="removalRiskMeter"></i></div>
-          <div class="risk-notes" id="riskNotes"></div>
-        </section>
-      </section>
-
-      <section class="right-tab-panel" data-right-panel="fielders">
-        <div class="mini-section-heading"><span>DEFENSIVE ALIGNMENT</span><small>Click to locate</small></div>
-        <div class="fielder-grid" id="fielderGrid"></div>
-        <section class="mini-section">
-          <div class="mini-section-heading"><span>FIELDING CONDITIONS</span><small>Live</small></div>
-          <div class="condition-grid">
-            <div><span>Surface</span><strong id="surfaceCondition">Dry</strong></div>
-            <div><span>Visibility</span><strong id="visibilityCondition">Clear</strong></div>
-            <div><span>Wind</span><strong id="fieldWindCondition">7 MPH RF</strong></div>
-            <div><span>Sun</span><strong id="sunCondition">Low 3B side</strong></div>
-          </div>
-        </section>
-      </section>
-
-      <button class="chat-launch" id="chatLaunch" type="button"><span>BB AI</span><strong>Open live intelligence chat</strong><b>›</b></button>
-    </aside>
-  </main>
-
-  <aside class="chat-drawer" id="chatDrawer" aria-hidden="true">
-    <div class="chat-heading"><div><span class="panel-kicker">LIVE INTELLIGENCE</span><strong>Boring Bets AI</strong></div><button id="closeChat" type="button">×</button></div>
-    <div class="chat-body">
-      <div class="chat-message system">I am watching pitch quality, fatigue, bullpen state, weather, defensive changes and market movement for this game.</div>
-      <div class="chat-message alert"><span>NEW CONDITION</span> The starter has lost 1.4 MPH over the last 11 pitches while three left-handed batters are due.</div>
-      <div class="chat-message system muted">Chat is a visual shell in this phase. The live intelligence engine will connect here later.</div>
-    </div>
-    <form class="chat-input" id="chatForm"><input id="chatInput" type="text" placeholder="Ask about the live game…"><button type="submit">Send</button></form>
-  </aside>
-
-  <aside class="detail-drawer" id="detailDrawer" aria-hidden="true">
-    <button class="drawer-close" id="closeDetailDrawer" type="button">×</button>
-    <span class="panel-kicker" id="detailKicker">FIELD INTELLIGENCE</span>
-    <h2 id="detailTitle">Outfield</h2>
-    <div id="detailBody"></div>
-  </aside>
-
-  <div class="live-toast" id="liveToast" role="status" aria-live="polite"></div>
-  <script src="live.js"></script>
+  <article class="lower-module complete-log-module" id="completeEventLogModule">
+    <header class="lower-module-heading complete-log-heading">
+      <div><span>COMPLETE EVENT LOG</span><strong>Every pitch, play and intelligence event</strong></div>
+      <div class="complete-log-controls"><button class="active" id="lowerLogAll" type="button">ALL</button><button id="lowerLogAlerts" type="button">ALERTS</button><small id="completeLogCount">0 EVENTS</small></div>
+    </header>
+    <div class="complete-event-log" id="completeEventLog"></div>
+  </article>
+</section>
+<aside aria-hidden="true" class="chat-drawer" id="chatDrawer">
+<div class="chat-heading"><div><span class="panel-kicker">LIVE INTELLIGENCE</span><strong>Boring Bets AI</strong></div><button id="closeChat" type="button">×</button></div>
+<div class="chat-body">
+<div class="chat-message system">I am watching pitch quality, fatigue, bullpen state, weather, defensive changes and market movement for this game.</div>
+<div class="chat-message alert"><span>NEW CONDITION</span> The starter has lost 1.4 MPH over the last 11 pitches while three left-handed batters are due.</div>
+<div class="chat-message system muted">Chat is a visual shell in this phase. The live intelligence engine will connect here later.</div>
+</div>
+<form class="chat-input" id="chatForm"><input id="chatInput" placeholder="Ask about the live game…" type="text"/><button type="submit">Send</button></form>
+</aside>
+<aside aria-hidden="true" class="detail-drawer" id="detailDrawer">
+<button class="drawer-close" id="closeDetailDrawer" type="button">×</button>
+<span class="panel-kicker" id="detailKicker">FIELD INTELLIGENCE</span>
+<h2 id="detailTitle">Outfield</h2>
+<div id="detailBody"></div>
+</aside>
+<div aria-live="polite" class="live-toast" id="liveToast" role="status"></div>
+<script src="assets/js/live/heatMapEngine.js"></script>
+<script src="live.js"></script>
 </body>
 </html>

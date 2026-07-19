@@ -1,0 +1,8 @@
+LIVE DASHBOARD PHASE 4
+
+1. Copy this folder's contents into the root of boring-bets.
+2. Choose Merge/Replace when prompted.
+3. Run: python3 -u scripts/check_live_dashboard_phase4.py
+4. Start: python3 -m http.server 8000
+5. Open: http://localhost:8000/live.html
+6. Scroll immediately below the fixed dashboard and verify Flow, Box Score, Odds, Bullpens and Complete Event Log.
