@@ -1377,3 +1377,242 @@ function cssEscape(value) {
   if (window.CSS?.escape) return window.CSS.escape(String(value));
   return String(value).replace(/[^a-zA-Z0-9_-]/g, "\\$&");
 }
+
+
+/* TODAY_CARD_SUMMARY_SCALE
+   The four headline totals share one relative scale:
+   0 = red, half of the current maximum = gray,
+   current maximum = green.
+*/
+const TODAY_CARD_SCALED_SUMMARIES = [
+  "Events Loaded",
+  "Live Now",
+  "Official Plays",
+  "Active Leagues"
+];
+
+function parseTodayCardCount(value) {
+  const match = String(value || "")
+    .replaceAll(",", "")
+    .match(/-?\d+(?:\.\d+)?/);
+
+  return match
+    ? Number(match[0])
+    : null;
+}
+
+function mixTodayCardRgb(from, to, amount) {
+  const safeAmount = Math.max(
+    0,
+    Math.min(1, amount)
+  );
+
+  return from.map(
+    (channel, index) =>
+      Math.round(
+        channel +
+        (
+          to[index] - channel
+        ) * safeAmount
+      )
+  );
+}
+
+function findTodayCardSummaryValues() {
+  const main =
+    document.querySelector(".card-main");
+
+  if (!main) return [];
+
+  const matches = [];
+
+  main
+    .querySelectorAll(
+      "span, small, p, dt, label"
+    )
+    .forEach(label => {
+      const labelText = String(
+        label.textContent || ""
+      )
+        .replace(/\s+/g, " ")
+        .trim();
+
+      const summaryLabel =
+        TODAY_CARD_SCALED_SUMMARIES.find(
+          expected =>
+            labelText.toLowerCase() ===
+            expected.toLowerCase()
+        );
+
+      if (!summaryLabel) return;
+
+      const container =
+        label.closest(
+          "div, article, section, li"
+        );
+
+      const valueElement =
+        container?.querySelector(
+          [
+            "strong",
+            "output",
+            "[data-summary-value]",
+            ".count",
+            ".value",
+            ".number"
+          ].join(",")
+        );
+
+      if (!valueElement) return;
+
+      const value =
+        parseTodayCardCount(
+          valueElement.textContent
+        );
+
+      if (
+        value === null ||
+        !Number.isFinite(value)
+      ) {
+        return;
+      }
+
+      matches.push({
+        label: summaryLabel,
+        value,
+        element: valueElement
+      });
+    });
+
+  return matches.filter(
+    (item, index, items) =>
+      items.findIndex(
+        candidate =>
+          candidate.element ===
+          item.element
+      ) === index
+  );
+}
+
+function applyTodayCardSummaryScale() {
+  const summaries =
+    findTodayCardSummaryValues();
+
+  if (!summaries.length) return;
+
+  const highest = Math.max(
+    ...summaries.map(
+      summary => summary.value
+    ),
+    0
+  );
+
+  const midpoint =
+    highest / 2;
+
+  const red = [255, 105, 124];
+  const gray = [181, 190, 196];
+  const green = [99, 255, 155];
+
+  summaries.forEach(summary => {
+    let rgb = gray;
+
+    if (highest > 0) {
+      if (summary.value <= midpoint) {
+        const progress =
+          midpoint > 0
+            ? summary.value / midpoint
+            : 0;
+
+        rgb = mixTodayCardRgb(
+          red,
+          gray,
+          progress
+        );
+      } else {
+        const upperRange =
+          highest - midpoint;
+
+        const progress =
+          upperRange > 0
+            ? (
+                summary.value -
+                midpoint
+              ) / upperRange
+            : 1;
+
+        rgb = mixTodayCardRgb(
+          gray,
+          green,
+          progress
+        );
+      }
+    }
+
+    summary.element.classList.add(
+      "today-card-scaled-summary"
+    );
+
+    summary.element.style.setProperty(
+      "--summary-r",
+      String(rgb[0])
+    );
+
+    summary.element.style.setProperty(
+      "--summary-g",
+      String(rgb[1])
+    );
+
+    summary.element.style.setProperty(
+      "--summary-b",
+      String(rgb[2])
+    );
+
+    summary.element.title =
+      `${summary.label}: ${summary.value}. ` +
+      `Current scale maximum: ${highest}; ` +
+      `midpoint: ${midpoint}.`;
+  });
+}
+
+function installTodayCardSummaryScale() {
+  let scheduled = false;
+
+  const scheduleUpdate = () => {
+    if (scheduled) return;
+
+    scheduled = true;
+
+    requestAnimationFrame(() => {
+      scheduled = false;
+      applyTodayCardSummaryScale();
+    });
+  };
+
+  scheduleUpdate();
+
+  const main =
+    document.querySelector(".card-main");
+
+  if (!main) return;
+
+  new MutationObserver(
+    scheduleUpdate
+  ).observe(main, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+}
+
+if (
+  document.readyState === "loading"
+) {
+  document.addEventListener(
+    "DOMContentLoaded",
+    installTodayCardSummaryScale,
+    { once: true }
+  );
+} else {
+  installTodayCardSummaryScale();
+}

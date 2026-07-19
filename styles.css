@@ -3647,3 +3647,155 @@ button.selected
     0 0 9px rgba(255, 71, 96, 0.62),
     0 0 24px rgba(255, 71, 96, 0.25);
 }
+
+
+/* TODAY_CARD_GREY_UI
+   Gray is the neutral control and system color.
+   Green/red are reserved for evaluated values.
+*/
+.card-page {
+  --card-neutral-gray: #aeb8be;
+  --card-neutral-gray-soft: #c8d0d4;
+  --card-neutral-gray-dark: #69757c;
+  --card-neutral-gray-bg: rgba(174, 184, 190, 0.08);
+  --card-neutral-gray-active: rgba(174, 184, 190, 0.16);
+  --card-neutral-gray-border: rgba(174, 184, 190, 0.31);
+}
+
+/* Sport selection boxes */
+.card-page .sport-switcher-button {
+  color: var(--card-neutral-gray) !important;
+  background:
+    var(--card-neutral-gray-bg) !important;
+  border-color:
+    var(--card-neutral-gray-border) !important;
+  box-shadow: none !important;
+}
+
+.card-page .sport-switcher-mark {
+  color:
+    var(--card-neutral-gray-soft) !important;
+  background:
+    rgba(174, 184, 190, 0.10) !important;
+  border-color:
+    var(--card-neutral-gray-border) !important;
+  box-shadow: none !important;
+}
+
+.card-page .sport-switcher-copy strong {
+  color: #d6dcdf !important;
+}
+
+.card-page .sport-switcher-copy small {
+  color: #89959c !important;
+}
+
+.card-page .sport-switcher-button:hover,
+.card-page .sport-switcher-button:focus-visible {
+  color: #eef1f2 !important;
+  background:
+    var(--card-neutral-gray-active) !important;
+  border-color:
+    var(--card-neutral-gray) !important;
+  box-shadow:
+    0 0 14px
+    rgba(174, 184, 190, 0.10) !important;
+}
+
+.card-page .sport-switcher-button.is-active,
+.card-page .sport-switcher-button[aria-pressed="true"] {
+  color: #ffffff !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(174, 184, 190, 0.20),
+      rgba(105, 117, 124, 0.14)
+    ) !important;
+  border-color:
+    var(--card-neutral-gray) !important;
+  box-shadow:
+    0 0 16px
+    rgba(174, 184, 190, 0.12) !important;
+}
+
+.card-page .sport-switcher-button.is-active
+  .sport-switcher-mark,
+.card-page .sport-switcher-button[aria-pressed="true"]
+  .sport-switcher-mark {
+  color: #ffffff !important;
+  background:
+    var(--card-neutral-gray-dark) !important;
+  border-color:
+    var(--card-neutral-gray) !important;
+  box-shadow: none !important;
+}
+
+/* All / Scheduled / Live / Final filter buttons */
+.card-page [data-status-filter] {
+  color: var(--card-neutral-gray) !important;
+  background:
+    var(--card-neutral-gray-bg) !important;
+  border-color:
+    var(--card-neutral-gray-border) !important;
+  box-shadow: none !important;
+}
+
+.card-page [data-status-filter]:hover,
+.card-page [data-status-filter]:focus-visible,
+.card-page [data-status-filter].is-active {
+  color: #ffffff !important;
+  background:
+    var(--card-neutral-gray-active) !important;
+  border-color:
+    var(--card-neutral-gray) !important;
+  box-shadow: none !important;
+}
+
+/* Generic sport and league event totals stay neutral gray. */
+.card-page [data-sport-count],
+.card-page [data-league-count],
+.card-page [data-event-count],
+.card-page .league-dropdown-status,
+.card-page .league-dropdown-status b,
+.card-page .league-dropdown-status span {
+  color: var(--card-neutral-gray) !important;
+  text-shadow: none !important;
+}
+
+.card-page .league-dropdown-status i {
+  color: var(--card-neutral-gray) !important;
+  border-color:
+    var(--card-neutral-gray-border) !important;
+}
+
+/* The four headline totals receive their calculated scale. */
+.card-page .today-card-scaled-summary {
+  color:
+    rgb(
+      var(--summary-r),
+      var(--summary-g),
+      var(--summary-b)
+    ) !important;
+
+  text-shadow:
+    0 0 13px
+    rgba(
+      var(--summary-r),
+      var(--summary-g),
+      var(--summary-b),
+      0.22
+    ) !important;
+
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease;
+}
+
+/*
+ * Intentionally unchanged:
+ * - side navigation arrows remain green
+ * - previous/today/next date controls remain green
+ * - favorable game data remains green
+ * - unfavorable game data remains red
+ * - authentic team-color bleed remains valid
+ */

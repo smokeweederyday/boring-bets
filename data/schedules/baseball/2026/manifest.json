@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "sport": "baseball",
   "season": 2026,
-  "updated_at": "2026-07-19T12:22:28Z",
+  "updated_at": "2026-07-19T22:58:46Z",
   "refresh_date": null,
   "leagues": [
     {
@@ -39,7 +39,7 @@
       "id": "single-a",
       "label": "Single-A",
       "sport_id": 14,
-      "event_count": 2054,
+      "event_count": 2055,
       "date_count": 139,
       "first_date": "2026-04-02",
       "last_date": "2026-09-16",
