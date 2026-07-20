@@ -4089,3 +4089,46 @@ button.selected
     text-align: left;
   }
 }
+
+
+/* LINEUP PLAYER PROFILE LINKS */
+
+.lineup-player-profile-link {
+  display: inline;
+  font: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    filter 150ms ease,
+    text-shadow 150ms ease;
+}
+
+.lineup-player-profile-link:hover,
+.lineup-player-profile-link:focus-visible {
+  filter: brightness(1.22);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.lineup-player-profile-link.player-signal-strong-positive {
+  color: #79ffac !important;
+}
+
+.lineup-player-profile-link.player-signal-positive {
+  color: #b3f5c9 !important;
+}
+
+.lineup-player-profile-link.player-signal-neutral {
+  color: rgba(235, 243, 239, 0.88) !important;
+}
+
+.lineup-player-profile-link.player-signal-negative {
+  color: #ffadb8 !important;
+}
+
+.lineup-player-profile-link.player-signal-strong-negative {
+  color: #ff7185 !important;
+}
