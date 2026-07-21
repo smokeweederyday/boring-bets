@@ -32,7 +32,23 @@ OFFENSE_METRICS = (
     "K%",
 )
 
-OFFENSE_CACHE_SCHEMA = 3
+OFFENSE_CACHE_SCHEMA = 4
+
+# Recent Statcast day files are refreshed because
+# Baseball Savant can return empty or partial data
+# while games are still being processed.
+STATCAST_RECENT_CACHE_DAYS = 14
+
+# A rank based on only one or two clubs is not a
+# meaningful league comparison. The raw value remains
+# available, but the rank and timeframe signal are
+# suppressed until this many teams qualify.
+MIN_OFFENSE_RANK_COVERAGE = 10
+
+_STATCAST_DAY_MEMORY_CACHE: dict[
+    str,
+    list[dict[str, Any]],
+] = {}
 
 
 # OFFENSE_ISO_WRC_V2
@@ -505,7 +521,7 @@ def fetch_all_team_game_logs(season: int) -> dict[int, list[dict[str, Any]]]:
 
 
 TEAM_ABBR_TO_MLB_ID = {
-    "LAA": 108, "ARI": 109, "BAL": 110, "BOS": 111, "CHC": 112,
+    "LAA": 108, "ARI": 109, "AZ": 109, "BAL": 110, "BOS": 111, "CHC": 112,
     "CIN": 113, "CLE": 114, "COL": 115, "DET": 116, "HOU": 117,
     "KC": 118, "KCR": 118, "LAD": 119, "WSH": 120, "WSN": 120,
     "NYM": 121, "ATH": 133, "OAK": 133, "PIT": 134, "SD": 135,
@@ -550,15 +566,72 @@ def _statcast_url(day_text: str) -> str:
 
 
 def fetch_statcast_terminal_pas(day_text: str) -> list[dict[str, Any]]:
-    cache_path = _statcast_day_cache_path(day_text)
-    if cache_path.exists() and os.getenv("BORING_BETS_REBUILD_STATCAST_OFFENSE") != "1":
+    force_rebuild = (
+        os.getenv(
+            "BORING_BETS_REBUILD_STATCAST_OFFENSE"
+        )
+        == "1"
+    )
+
+    if day_text in _STATCAST_DAY_MEMORY_CACHE:
+        return _STATCAST_DAY_MEMORY_CACHE[
+            day_text
+        ]
+
+    cache_path = _statcast_day_cache_path(
+        day_text
+    )
+
+    cached_rows: list[dict[str, Any]] | None = (
+        None
+    )
+
+    if cache_path.exists():
         try:
-            with gzip.open(cache_path, "rt", encoding="utf-8") as handle:
-                cached = json.load(handle)
-            if isinstance(cached, list):
-                return cached
-        except (OSError, json.JSONDecodeError):
-            pass
+            with gzip.open(
+                cache_path,
+                "rt",
+                encoding="utf-8",
+            ) as handle:
+                loaded = json.load(handle)
+
+            if isinstance(loaded, list):
+                cached_rows = loaded
+
+        except (
+            OSError,
+            json.JSONDecodeError,
+        ):
+            cached_rows = None
+
+    recent_day = False
+
+    try:
+        parsed_day = date.fromisoformat(
+            day_text
+        )
+
+        recent_day = (
+            parsed_day
+            >= date.today()
+            - timedelta(
+                days=STATCAST_RECENT_CACHE_DAYS
+            )
+        )
+
+    except ValueError:
+        recent_day = False
+
+    if (
+        cached_rows is not None
+        and not force_rebuild
+        and not recent_day
+    ):
+        _STATCAST_DAY_MEMORY_CACHE[
+            day_text
+        ] = cached_rows
+
+        return cached_rows
 
     request = urllib.request.Request(
         _statcast_url(day_text),
@@ -591,8 +664,44 @@ def fetch_statcast_terminal_pas(day_text: str) -> list[dict[str, Any]]:
             "at_bat_number": row.get("at_bat_number"),
         })
 
-    with gzip.open(cache_path, "wt", encoding="utf-8") as handle:
-        json.dump(rows, handle, separators=(",", ":"))
+    # Do not replace a more complete recent cache
+    # with a temporarily empty or truncated response.
+    if cached_rows:
+        cached_teams = {
+            row.get("team_id")
+            for row in cached_rows
+            if isinstance(row, dict)
+            and row.get("team_id") is not None
+        }
+
+        fetched_teams = {
+            row.get("team_id")
+            for row in rows
+            if isinstance(row, dict)
+            and row.get("team_id") is not None
+        }
+
+        if (
+            len(fetched_teams)
+            < len(cached_teams)
+        ):
+            rows = cached_rows
+
+    with gzip.open(
+        cache_path,
+        "wt",
+        encoding="utf-8",
+    ) as handle:
+        json.dump(
+            rows,
+            handle,
+            separators=(",", ":"),
+        )
+
+    _STATCAST_DAY_MEMORY_CACHE[
+        day_text
+    ] = rows
+
     return rows
 
 
@@ -1365,32 +1474,58 @@ def apply_league_offense_cache(
                 metric,
                 row,
             ) in block.items():
+                overall_metric_coverage = (
+                    overall_coverage.get(
+                        metric
+                    )
+                )
+
+                split_metric_coverage = (
+                    split_coverage.get(
+                        metric
+                    )
+                )
+
                 row["overall_rank"] = (
                     overall_ranks.get(
                         metric
                     )
+                    if (
+                        isinstance(
+                            overall_metric_coverage,
+                            int,
+                        )
+                        and overall_metric_coverage
+                        >= MIN_OFFENSE_RANK_COVERAGE
+                    )
+                    else None
                 )
 
                 row[
                     "overall_rank_coverage"
                 ] = (
-                    overall_coverage.get(
-                        metric
-                    )
+                    overall_metric_coverage
                 )
 
                 row["vs_hand_rank"] = (
                     split_ranks.get(
                         metric
                     )
+                    if (
+                        isinstance(
+                            split_metric_coverage,
+                            int,
+                        )
+                        and split_metric_coverage
+                        >= MIN_OFFENSE_RANK_COVERAGE
+                    )
+                    else None
                 )
 
                 row[
                     "vs_hand_rank_coverage"
                 ] = (
-                    split_coverage.get(
-                        metric
-                    )
+                    split_metric_coverage
                 )
 
             stats_root[
