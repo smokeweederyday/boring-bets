@@ -1,10 +1,10 @@
 import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js?v=phase11d-large-pitcher-name1";
+} from "./assets/js/widgets/offenseWidget.js?v=phase11t-offense-metric-expansion1";
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=phase11r-start-click-toggle1";
+} from "./assets/js/widgets/pitcherWidget.js?v=phase11t-offense-metric-expansion1";
 
 import {
   renderBullpenWidget
@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js?v=phase11r-start-click-toggle1";
+} from "./assets/js/sports/mlbEngine.js?v=phase11t-offense-metric-expansion1";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";

@@ -4600,3 +4600,124 @@ button.scrub-preview
     0 0 0 2px rgba(7, 12, 10, 0.96),
     0 0 12px currentColor !important;
 }
+
+/* OFFENSE TIMEFRAME QUALITY HEAT
+   strong red → light red → grey →
+   light green → strong green
+*/
+
+.offense-timeframe-control
+button.offense-control-signal {
+  border:
+    1px solid transparent !important;
+
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    filter 150ms ease,
+    transform 150ms ease;
+}
+
+
+/* Strong positive */
+
+.offense-timeframe-control
+button.offense-signal-strong-positive {
+  color: #79ffac !important;
+
+  background:
+    rgba(57, 255, 136, 0.20) !important;
+
+  border-color:
+    rgba(57, 255, 136, 0.56) !important;
+}
+
+
+/* Positive */
+
+.offense-timeframe-control
+button.offense-signal-positive {
+  color: #b3f5c9 !important;
+
+  background:
+    rgba(57, 255, 136, 0.09) !important;
+
+  border-color:
+    rgba(57, 255, 136, 0.30) !important;
+}
+
+
+/* Neutral */
+
+.offense-timeframe-control
+button.offense-signal-neutral {
+  color:
+    rgba(224, 231, 227, 0.82) !important;
+
+  background:
+    rgba(145, 157, 151, 0.10) !important;
+
+  border-color:
+    rgba(160, 172, 166, 0.28) !important;
+}
+
+
+/* Negative */
+
+.offense-timeframe-control
+button.offense-signal-negative {
+  color: #ffadb8 !important;
+
+  background:
+    rgba(255, 97, 117, 0.09) !important;
+
+  border-color:
+    rgba(255, 97, 117, 0.30) !important;
+}
+
+
+/* Strong negative */
+
+.offense-timeframe-control
+button.offense-signal-strong-negative {
+  color: #ff7185 !important;
+
+  background:
+    rgba(255, 97, 117, 0.20) !important;
+
+  border-color:
+    rgba(255, 97, 117, 0.58) !important;
+}
+
+
+/* Active keeps its actual grade. */
+
+.offense-timeframe-control
+button.offense-control-signal.active {
+  color: inherit;
+  font-weight: 900;
+  filter: brightness(1.20);
+  transform: translateY(-1px);
+
+  outline:
+    1px solid currentColor;
+
+  outline-offset: -1px;
+
+  box-shadow:
+    0 0 10px currentColor !important;
+}
+
+.offense-timeframe-control
+button.offense-control-signal:hover,
+.offense-timeframe-control
+button.offense-control-signal:focus-visible {
+  filter: brightness(1.16);
+
+  outline:
+    1px solid currentColor;
+
+  outline-offset: -1px;
+}

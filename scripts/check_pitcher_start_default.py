@@ -56,12 +56,12 @@ requirements = (
     ),
     (
         "game page uses current cache version",
-        r'game\.js\?v=phase11e-last7-default1',
+        r'game\.js\?v=phase11t-offense-metric-expansion1',
         GAME_HTML,
     ),
     (
         "engine import uses current cache version",
-        r'mlbEngine\.js\?v=phase11e-last7-default1',
+        r'mlbEngine\.js\?v=phase11t-offense-metric-expansion1',
         GAME_JS,
     ),
 )

@@ -1,6 +1,6 @@
 import { getRankHeatClass } from "../engine/colorEngine.js";
 
-const MLB_OFFENSE_METRICS = ["AVG", "wRC+", "K%", "BB%", "OBP", "OPS"];
+const MLB_OFFENSE_METRICS = ["AVG", "wRC+", "K%", "BB%", "OBP", "OPS", "ISO", "SLG"];
 
 const MLB_PITCHER_METRICS = [
   { key: "era", label: "ERA", type: "number" },
@@ -122,6 +122,168 @@ function buildPitcherNameSignal(block) {
   };
 }
 
+
+const OFFENSE_SIGNAL_WEIGHTS = Object.freeze({
+  "AVG": 0.8,
+  "wRC+": 1.4,
+  "K%": 0.9,
+  "BB%": 0.8,
+  "OBP": 1.1,
+  "OPS": 1.3,
+  "ISO": 1.15,
+  "SLG": 1.2
+});
+
+function buildOffenseTimeframeSignal({
+  period,
+  gameLocation
+}) {
+  let weightedScore = 0;
+  let weightTotal = 0;
+  let comparisonsUsed = 0;
+
+  MLB_OFFENSE_METRICS.forEach(metric => {
+    const configuredWeight = Number(
+      OFFENSE_SIGNAL_WEIGHTS[metric]
+    );
+
+    // Every ranked metric displayed in the
+    // offense module contributes automatically.
+    // Future metrics default to a neutral weight
+    // of 1 unless assigned a custom weight above.
+    const metricWeight =
+      Number.isFinite(configuredWeight)
+        ? configuredWeight
+        : 1;
+    const overallMetric =
+      period?.all?.[metric] || {};
+
+    const locationMetric =
+      period?.[gameLocation]?.[metric]
+      || {};
+
+    const rankedContexts = [
+      {
+        rank:
+          overallMetric.overall_rank,
+        weight: 1
+      },
+      {
+        rank:
+          overallMetric.vs_hand_rank,
+        weight: 1.1
+      },
+      {
+        rank:
+          locationMetric.vs_hand_rank,
+        weight: 0.9
+      }
+    ];
+
+    rankedContexts.forEach(
+      context => {
+        const rank =
+          Number(context.rank);
+
+        if (
+          !Number.isFinite(rank) ||
+          rank < 1 ||
+          rank > 30
+        ) {
+          return;
+        }
+
+        // Stored offense rankings use
+        // rank 1 as best throughout.
+        const rankScore =
+          1 -
+          (
+            2 *
+            (rank - 1) /
+            29
+          );
+
+        const combinedWeight =
+          metricWeight *
+          context.weight;
+
+        weightedScore +=
+          rankScore *
+          combinedWeight;
+
+        weightTotal +=
+          combinedWeight;
+
+        comparisonsUsed += 1;
+      }
+    );
+  });
+
+  if (
+    !weightTotal ||
+    comparisonsUsed < 3
+  ) {
+    return {
+      score: 0,
+      className:
+        "offense-signal-neutral",
+      label:
+        "Offense signal unavailable or insufficient"
+    };
+  }
+
+  const score = Math.max(
+    -1,
+    Math.min(
+      1,
+      weightedScore / weightTotal
+    )
+  );
+
+  let className =
+    "offense-signal-neutral";
+
+  let description =
+    "League-average offense";
+
+  if (score >= 0.45) {
+    className =
+      "offense-signal-strong-positive";
+
+    description =
+      "Strong positive offense";
+  } else if (score >= 0.14) {
+    className =
+      "offense-signal-positive";
+
+    description =
+      "Positive offense";
+  } else if (score <= -0.45) {
+    className =
+      "offense-signal-strong-negative";
+
+    description =
+      "Strong negative offense";
+  } else if (score <= -0.14) {
+    className =
+      "offense-signal-negative";
+
+    description =
+      "Negative offense";
+  }
+
+  return {
+    score:
+      Number(score.toFixed(3)),
+
+    className,
+
+    label:
+      `${description} · ` +
+      `${comparisonsUsed} ranked comparisons used`
+  };
+}
+
 export function buildMlbOffenseModule({
   game,
   side,
@@ -149,6 +311,44 @@ export function buildMlbOffenseModule({
   const handLabel = pitcherHand ? `vs ${pitcherHand}HP` : "vs starter hand";
   const locationLabel = `${isAway ? "Away" : "Home"} ${handLabel}`;
 
+  const timeframeLabels = {
+    last_7: "7 Days",
+    last_30: "30 Days",
+    season: "Season"
+  };
+
+  const timeframeSignals =
+    Object.fromEntries(
+      Object.keys(
+        timeframeLabels
+      ).map(option => {
+        const optionPeriod =
+          offense?.stats?.[option]
+          || {};
+
+        const signal =
+          buildOffenseTimeframeSignal({
+            period: optionPeriod,
+            gameLocation
+          });
+
+        return [
+          option,
+          {
+            score:
+              signal.score,
+
+            className:
+              signal.className,
+
+            label:
+              `${timeframeLabels[option]} · ` +
+              signal.label
+          }
+        ];
+      })
+    );
+
   return {
     title: `${team?.abbr || offense?.team || "TEAM"} OFFENSE`,
     context: handLabel,
@@ -156,6 +356,7 @@ export function buildMlbOffenseModule({
     opponent: opposingPitcher?.name || "Starter TBD",
     gameLocation,
     activeTimeframe: timeframeKey,
+    timeframeSignals,
     detailsUrl: `lineup.html?game=${encodeURIComponent(game.id)}&team=${encodeURIComponent(side)}`,
     metrics: MLB_OFFENSE_METRICS.map(metric => {
       const overallMetric = overallBlock?.[metric] || {};
@@ -1502,7 +1703,7 @@ export function buildMlbLineupModule({ game, side }) {
 }
 
 export function getMlbOffenseMetricType(metric) {
-  if (["AVG", "OBP", "OPS"].includes(metric)) return "average";
+  if (["AVG", "OBP", "OPS", "ISO", "SLG"].includes(metric)) return "average";
   if (["K%", "BB%"].includes(metric)) return "percent";
   return "integer";
 }

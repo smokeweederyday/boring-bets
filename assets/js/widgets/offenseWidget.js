@@ -35,6 +35,9 @@ export function renderOffenseWidget({
       ? module.metrics
       : [];
 
+  const timeframeSignals =
+    module.timeframeSignals || {};
+
   container.innerHTML = `
     <div
       class="segmented-control offense-timeframe-control"
@@ -45,13 +48,44 @@ export function renderOffenseWidget({
         ["last_7", "7 Days"],
         ["last_30", "30 Days"],
         ["season", "Season"]
-      ].map(([timeframe, label]) => `
-        <button
-          type="button"
-          data-offense-timeframe="${timeframe}"
-          class="${module.activeTimeframe === timeframe ? "active" : ""}"
-        >${label}</button>
-      `).join("")}
+      ].map(([timeframe, label]) => {
+        const signal =
+          timeframeSignals[timeframe]
+          || {};
+
+        const signalClass =
+          signal.className
+          || "offense-signal-neutral";
+
+        const isActive =
+          module.activeTimeframe
+          === timeframe;
+
+        return `
+          <button
+            type="button"
+            data-offense-timeframe="${timeframe}"
+            class="offense-control-signal ${escapeHtml(
+              signalClass
+            )}${
+              isActive
+                ? " active"
+                : ""
+            }"
+            aria-pressed="${
+              isActive
+                ? "true"
+                : "false"
+            }"
+            title="${escapeAttribute(
+              signal.label
+              || "Offense signal unavailable"
+            )}"
+          >
+            ${label}
+          </button>
+        `;
+      }).join("")}
     </div>
 
     <a
