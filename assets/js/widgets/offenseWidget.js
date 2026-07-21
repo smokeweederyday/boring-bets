@@ -62,10 +62,6 @@ export function renderOffenseWidget({
     >
       <div class="module-heading compact-heading">
         <div>
-          <span class="data-label">
-            OFFENSE VS STARTER
-          </span>
-
           <h3>
             ${escapeHtml(
               module.title || "OFFENSE"

@@ -1,10 +1,10 @@
 import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js?v=phase8c-controls1";
+} from "./assets/js/widgets/offenseWidget.js?v=phase11d-large-pitcher-name1";
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=phase10b-compact-starts1";
+} from "./assets/js/widgets/pitcherWidget.js?v=phase11d-large-pitcher-name1";
 
 import {
   renderBullpenWidget
@@ -33,7 +33,7 @@ import {
   buildMlbMatchupModule,
   buildMlbWeatherModule,
   buildMlbMarketModule
-} from "./assets/js/sports/mlbEngine.js?v=phase10e-start-handedness1";
+} from "./assets/js/sports/mlbEngine.js?v=phase11e-last7-default1";
 
 const GAME_LOGO_BASE =
   "https://www.mlbstatic.com/team-logos/team-cap-on-dark";
@@ -49,8 +49,8 @@ const state = {
   timeframe: "last_30",
   awayPitcherLocation: "all",
   homePitcherLocation: "all",
-  awayPitcherStartMode: false,
-  homePitcherStartMode: false,
+  awayPitcherStartMode: true,
+  homePitcherStartMode: true,
   awayPitcherStartCount: 7,
   homePitcherStartCount: 7,
   awayOffenseTimeframe: "last_30",

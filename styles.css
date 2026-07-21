@@ -4210,3 +4210,60 @@ button.selected
   background: rgba(255, 255, 255, 0.025) !important;
   box-shadow: none;
 }
+
+/* GAME PAGE MODULE HEADING CONTRACT */
+
+:root {
+  --game-module-heading-size: 1rem;
+  --pitcher-name-size:
+    calc(var(--game-module-heading-size) * 2);
+}
+
+.offense-comparison-card
+.module-heading h3,
+
+.bullpen-widget-shell
+.module-heading h3 {
+  margin: 0;
+  font-size:
+    var(--game-module-heading-size);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.pitcher-name-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-bottom: 4px;
+  max-width: 100%;
+}
+
+.pitcher-card-heading
+.pitcher-name-heading {
+  min-width: 0;
+  margin: 0;
+  font-size:
+    var(--pitcher-name-size) !important;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.pitcher-status-label {
+  flex: 0 0 auto;
+  color: var(--teal);
+  font-size: 0.64rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.offense-comparison-card
+.module-heading h3 {
+  margin-bottom: 4px;
+}
+
+/* END GAME PAGE MODULE HEADING CONTRACT */

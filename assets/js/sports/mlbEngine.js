@@ -188,7 +188,7 @@ export function buildMlbPitcherModule({
   side,
   timeframe = "season",
   location = "all",
-  startMode = false,
+  startMode = true,
   startCount = 7
 }) {
   const isAway = side === "away";
@@ -215,7 +215,7 @@ export function buildMlbPitcherModule({
       ? requestedStartCount
       : 7;
 
-  // Season remains the default baseline.
+  // Season remains available when recent-start mode is disabled.
   const season = selectPitcherLocationBlock(
     safePitcher.stats?.season,
     location
@@ -1874,19 +1874,21 @@ function formatLineupUpdatedTime(value) {
 }
 
 function formatPitcherStatus(status) {
-  if (status === "confirmed") {
-    return "CONFIRMED STARTER";
+  const normalized =
+    String(status || "").toLowerCase();
+
+  if (
+    normalized === "changed" ||
+    normalized.includes("change")
+  ) {
+    return "CHANGED";
   }
 
-  if (status === "probable") {
-    return "PROBABLE STARTER";
+  if (normalized === "confirmed") {
+    return "CONFIRMED";
   }
 
-  if (status === "bullpen") {
-    return "BULLPEN GAME";
-  }
-
-  return "STARTER TBD";
+  return "PROBABLE";
 }
 
 function formatTimeframeShort(value) {

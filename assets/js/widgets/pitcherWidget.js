@@ -48,26 +48,28 @@ export function renderPitcherWidget({
     <div class="pitcher-card-link">
       <div class="pitcher-card-heading">
         <div>
-          <span class="data-label">
-            ${escapeHtml(module.statusLabel || "STARTER TBD")}
+<div class="pitcher-name-row">
+          <h2 class="pitcher-name-heading">
+  <a
+  class="pitcher-name-signal pitcher-name-link ${escapeHtml(
+  module.nameSignalClass ||
+  "pitcher-signal-neutral"
+  )}"
+  href="${escapeAttribute(
+  module.detailsUrl || "#"
+  )}"
+  title="${escapeAttribute(
+  module.nameSignalLabel ||
+  "League-relative pitcher signal"
+  )}"
+  >
+  ${escapeHtml(module.name || "Starter TBD")}
+  </a>
+  </h2>
+          <span class="pitcher-status-label">
+            ${escapeHtml(module.statusLabel || "PROBABLE")}
           </span>
-          <h2>
-            <a
-              class="pitcher-name-signal pitcher-name-link ${escapeHtml(
-                module.nameSignalClass ||
-                "pitcher-signal-neutral"
-              )}"
-              href="${escapeAttribute(
-                module.detailsUrl || "#"
-              )}"
-              title="${escapeAttribute(
-                module.nameSignalLabel ||
-                "League-relative pitcher signal"
-              )}"
-            >
-              ${escapeHtml(module.name || "Starter TBD")}
-            </a>
-          </h2>
+        </div>
           <div class="pitcher-meta-line">
             <p>
               ${escapeHtml(module.team || "—")}
