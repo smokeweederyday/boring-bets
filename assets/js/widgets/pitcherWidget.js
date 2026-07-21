@@ -250,6 +250,8 @@ export function renderPitcherWidget({
     </div>
   `;
 
+  let suppressStartClick = false;
+
   container
     .querySelectorAll(
       "[data-pitcher-start-count]"
@@ -260,6 +262,11 @@ export function renderPitcherWidget({
         event => {
           event.preventDefault();
           event.stopPropagation();
+
+          if (suppressStartClick) {
+            suppressStartClick = false;
+            return;
+          }
 
           const count = Number(
             button.dataset
@@ -281,6 +288,247 @@ export function renderPitcherWidget({
         }
       );
     });
+
+  const startSlider =
+    container.querySelector(
+      ".pitcher-start-compact"
+    );
+
+  if (startSlider) {
+    let activePointerId = null;
+    let dragStartX = 0;
+    let dragged = false;
+    let previewCount = null;
+
+    const startButtons = Array.from(
+      startSlider.querySelectorAll(
+        "[data-pitcher-start-count]"
+      )
+    );
+
+    const countFromClientX = clientX => {
+      const bounds =
+        startSlider.getBoundingClientRect();
+
+      if (!bounds.width) {
+        return Number(
+          module.activeStartCount
+        );
+      }
+
+      const localX = Math.max(
+        0,
+        Math.min(
+          bounds.width - 0.01,
+          clientX - bounds.left
+        )
+      );
+
+      const optionIndex = Math.max(
+        0,
+        Math.min(
+          startOptions.length - 1,
+          Math.floor(
+            (
+              localX /
+              bounds.width
+            ) * startOptions.length
+          )
+        )
+      );
+
+      return startOptions[optionIndex];
+    };
+
+    const showScrubPreview = count => {
+      previewCount = Number(count);
+
+      startButtons.forEach(button => {
+        const buttonCount = Number(
+          button.dataset.pitcherStartCount
+        );
+
+        button.classList.toggle(
+          "scrub-preview",
+          buttonCount === previewCount
+        );
+      });
+    };
+
+    const clearScrubPreview = () => {
+      startSlider.classList.remove(
+        "is-scrubbing"
+      );
+
+      startButtons.forEach(button => {
+        button.classList.remove(
+          "scrub-preview"
+        );
+      });
+    };
+
+    const releasePointer = pointerId => {
+      try {
+        if (
+          startSlider.hasPointerCapture(
+            pointerId
+          )
+        ) {
+          startSlider.releasePointerCapture(
+            pointerId
+          );
+        }
+      } catch {
+        // Pointer may already have been released.
+      }
+    };
+
+    startSlider.addEventListener(
+      "pointerdown",
+      event => {
+        if (
+          event.pointerType === "mouse" &&
+          event.button !== 0
+        ) {
+          return;
+        }
+
+        activePointerId = event.pointerId;
+        dragStartX = event.clientX;
+        dragged = false;
+
+        showScrubPreview(
+          countFromClientX(event.clientX)
+        );
+
+        try {
+          startSlider.setPointerCapture(
+            event.pointerId
+          );
+        } catch {
+          // Pointer capture is optional.
+        }
+      }
+    );
+
+    startSlider.addEventListener(
+      "pointermove",
+      event => {
+        if (
+          activePointerId === null ||
+          event.pointerId !== activePointerId
+        ) {
+          return;
+        }
+
+        if (
+          Math.abs(
+            event.clientX - dragStartX
+          ) >= 4
+        ) {
+          dragged = true;
+        }
+
+        if (!dragged) {
+          return;
+        }
+
+        event.preventDefault();
+
+        startSlider.classList.add(
+          "is-scrubbing"
+        );
+
+        showScrubPreview(
+          countFromClientX(event.clientX)
+        );
+      }
+    );
+
+    startSlider.addEventListener(
+      "pointerup",
+      event => {
+        if (
+          activePointerId === null ||
+          event.pointerId !== activePointerId
+        ) {
+          return;
+        }
+
+        const finalCount =
+          previewCount ??
+          countFromClientX(event.clientX);
+
+        releasePointer(event.pointerId);
+
+        activePointerId = null;
+        clearScrubPreview();
+
+        if (!dragged) {
+          const clickedButton =
+            event.target.closest?.(
+              "[data-pitcher-start-count]"
+            );
+
+          // Let an actual number button use its
+          // normal click handler. Clicking the
+          // track itself also selects or disables
+          // the nearest recent-start sample.
+          if (clickedButton) {
+            return;
+          }
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          const tappedCount =
+            Number(finalCount);
+
+          const activeCount =
+            Number(
+              module.activeStartCount
+            );
+
+          if (
+            module.startMode &&
+            activeCount === tappedCount
+          ) {
+            onStartModeChange?.(false);
+          } else {
+            onStartCountChange?.(
+              tappedCount
+            );
+          }
+
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        suppressStartClick = true;
+
+        onStartCountChange?.(
+          Number(finalCount)
+        );
+      }
+    );
+
+    startSlider.addEventListener(
+      "pointercancel",
+      event => {
+        if (
+          activePointerId !== null &&
+          event.pointerId === activePointerId
+        ) {
+          releasePointer(event.pointerId);
+          activePointerId = null;
+          dragged = false;
+          clearScrubPreview();
+        }
+      }
+    );
+  }
 
   container.querySelectorAll("[data-pitcher-location]").forEach(button => {
     button.addEventListener("click", event => {

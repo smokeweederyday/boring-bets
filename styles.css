@@ -3490,12 +3490,12 @@ td.bullpen-pitches.bullpen-zero {
 
 .pitcher-start-compact {
   position: relative;
-  flex: 0 0 148px;
+  flex: 0 0 126px;
   height: 34px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: stretch;
-  padding: 0 5px;
+  padding: 0 2px;
   border: 1px solid rgba(111, 126, 118, 0.36);
   border-radius: 8px;
   background: rgba(8, 13, 11, 0.76);
@@ -3602,7 +3602,7 @@ button.selected
   }
 
   .pitcher-start-compact {
-    flex-basis: 135px;
+    flex-basis: 118px;
   }
 }
 
@@ -4538,3 +4538,65 @@ button.pitcher-control-signal:focus-visible {
   outline-offset: -1px;
 }
 
+/* PITCHER START OUTER BOX REMOVAL
+   Keep the five evaluated start controls.
+   Remove only their protruding outer shell.
+*/
+
+.pitcher-start-compact,
+.pitcher-start-compact.active,
+.pitcher-start-compact.inactive {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+.pitcher-start-compact.active,
+.pitcher-start-compact.inactive {
+  opacity: 1;
+  filter: none;
+}
+
+/* PITCHER START DRAG SCRUBBING */
+
+.pitcher-start-compact {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+.pitcher-start-compact
+button[data-pitcher-start-count] {
+  cursor: pointer;
+}
+
+.pitcher-start-compact.is-scrubbing
+.pitcher-start-track {
+  height: 3px;
+  opacity: 1;
+  filter: brightness(1.25);
+}
+
+.pitcher-start-compact
+button.scrub-preview {
+  z-index: 3;
+  filter: brightness(1.24);
+  transform:
+    translateY(-1px)
+    scale(1.06);
+}
+
+.pitcher-start-compact
+button.scrub-preview
+.pitcher-start-dot {
+  width: 12px !important;
+  height: 12px !important;
+  background: currentColor !important;
+  box-shadow:
+    0 0 0 2px rgba(7, 12, 10, 0.96),
+    0 0 12px currentColor !important;
+}
