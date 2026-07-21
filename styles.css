@@ -4132,3 +4132,81 @@ button.selected
 .lineup-player-profile-link.player-signal-strong-negative {
   color: #ff7185 !important;
 }
+
+/* EXPLICIT HITTER-PERSPECTIVE BVP HIGHLIGHTING */
+
+.matchup-bvp-row.bvp-hitter-strong-positive {
+  border-color: rgba(57, 255, 136, 0.62) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        57,
+        255,
+        136,
+        var(--bvp-bg-opacity, 0.22)
+      ),
+      rgba(57, 255, 136, 0.055)
+    ) !important;
+  box-shadow:
+    inset 3px 0 0 rgba(57, 255, 136, 0.92),
+    0 0 13px rgba(57, 255, 136, 0.11);
+}
+
+.matchup-bvp-row.bvp-hitter-positive {
+  border-color: rgba(116, 230, 157, 0.36) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        57,
+        255,
+        136,
+        calc(var(--bvp-bg-opacity, 0.22) * 0.66)
+      ),
+      rgba(57, 255, 136, 0.025)
+    ) !important;
+  box-shadow:
+    inset 3px 0 0 rgba(116, 230, 157, 0.68);
+}
+
+.matchup-bvp-row.bvp-hitter-negative {
+  border-color: rgba(255, 109, 126, 0.38) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        255,
+        77,
+        99,
+        calc(var(--bvp-bg-opacity, 0.22) * 0.66)
+      ),
+      rgba(255, 77, 99, 0.025)
+    ) !important;
+  box-shadow:
+    inset 3px 0 0 rgba(255, 109, 126, 0.7);
+}
+
+.matchup-bvp-row.bvp-hitter-strong-negative {
+  border-color: rgba(255, 77, 99, 0.65) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        255,
+        77,
+        99,
+        var(--bvp-bg-opacity, 0.22)
+      ),
+      rgba(255, 77, 99, 0.055)
+    ) !important;
+  box-shadow:
+    inset 3px 0 0 rgba(255, 77, 99, 0.94),
+    0 0 13px rgba(255, 77, 99, 0.11);
+}
+
+.matchup-bvp-row.bvp-missing {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  box-shadow: none;
+}

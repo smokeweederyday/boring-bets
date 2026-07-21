@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -744,9 +745,98 @@ def apply_bullpen_ranks(
                 )
 
     return games
+def build_recent_bullpen_index(
+    games: list[dict[str, Any]],
+    cutoff_date: str,
+) -> dict[int, dict[str, Any]]:
+    """
+    Return each MLB team's latest usable bullpen snapshot from
+    before the target date.
+
+    The index supplies cumulative season fields that the MLB API
+    occasionally omits, including hit batsmen needed for FIP.
+    """
+
+    latest: dict[int, dict[str, Any]] = {}
+
+    ordered_games = sorted(
+        games,
+        key=lambda game: (
+            game.get("date") or "",
+            game.get("game_time") or "",
+            game.get("id") or "",
+        ),
+    )
+
+    for game in ordered_games:
+        game_date = str(
+            game.get("date") or ""
+        )
+
+        if (
+            not game_date
+            or game_date >= cutoff_date
+        ):
+            continue
+
+        for side in ("away", "home"):
+            bullpen = (
+                (game.get("bullpens") or {})
+                .get(side)
+                or {}
+            )
+
+            team = (
+                game.get(f"{side}_team")
+                or {}
+            )
+
+            team_id = (
+                bullpen.get("team_id")
+                or team.get("team_id")
+            )
+
+            try:
+                team_id = int(team_id)
+            except (
+                TypeError,
+                ValueError,
+            ):
+                continue
+
+            season_all = (
+                (bullpen.get("stats") or {})
+                .get("season", {})
+                .get("all", {})
+            )
+
+            if not isinstance(
+                season_all,
+                dict,
+            ):
+                continue
+
+            hit_batsmen = (
+                season_all.get(
+                    "hit_batsmen"
+                )
+            )
+
+            if (
+                hit_batsmen is None
+                or hit_batsmen == ""
+            ):
+                continue
+
+            latest[team_id] = bullpen
+
+    return latest
+
+
 def enrich_bullpens(
     games: list[dict[str, Any]],
     target_date: str,
+    prior_games: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """
     Populate both bullpen modules for every game.
@@ -754,6 +844,13 @@ def enrich_bullpens(
     Each team bullpen is fetched once per run. Existing bullpen
     data is preserved if the MLB request fails.
     """
+
+    recent_bullpens = (
+        build_recent_bullpen_index(
+            prior_games or [],
+            target_date,
+        )
+    )
 
     cache: dict[int, dict[str, Any]] = {}
     enriched_games = []
@@ -809,6 +906,11 @@ def enrich_bullpens(
                         build_bullpen_snapshot(
                             numeric_team_id,
                             target_date,
+                            fallback_snapshot=(
+                                recent_bullpens.get(
+                                    numeric_team_id
+                                )
+                            ),
                         )
                     )
                 except Exception as error:
@@ -851,6 +953,313 @@ def enrich_bullpens(
 
     return enriched_games
 
+
+
+def bullpen_has_fip(
+    bullpen: dict[str, Any] | None,
+) -> bool:
+    if not isinstance(bullpen, dict):
+        return False
+
+    season_all = (
+        (bullpen.get("stats") or {})
+        .get("season", {})
+        .get("all", {})
+    )
+
+    fip = (
+        season_all.get("fip")
+        if isinstance(season_all, dict)
+        else None
+    )
+
+    return (
+        isinstance(fip, (int, float))
+        and not isinstance(fip, bool)
+    )
+
+
+def bullpen_team_id(
+    game: dict[str, Any],
+    side: str,
+    bullpen: dict[str, Any] | None = None,
+) -> int | None:
+    team = (
+        game.get(f"{side}_team")
+        or {}
+    )
+
+    value = (
+        (bullpen or {}).get("team_id")
+        or team.get("team_id")
+    )
+
+    try:
+        return int(value)
+    except (
+        TypeError,
+        ValueError,
+    ):
+        return None
+
+
+def build_latest_bullpen_snapshot_index(
+    games: list[dict[str, Any]],
+    as_of_date: str,
+) -> dict[int, dict[str, Any]]:
+    """
+    Find the newest valid bullpen snapshot for each MLB team
+    on or before as_of_date.
+    """
+
+    latest: dict[int, dict[str, Any]] = {}
+
+    ordered_games = sorted(
+        games,
+        key=lambda game: (
+            str(game.get("date") or ""),
+            str(game.get("game_time") or ""),
+            str(game.get("id") or ""),
+        ),
+    )
+
+    for game in ordered_games:
+        game_date = str(
+            game.get("date") or ""
+        )
+
+        if (
+            not game_date
+            or game_date > as_of_date
+        ):
+            continue
+
+        bullpens = (
+            game.get("bullpens")
+            or {}
+        )
+
+        for side in ("away", "home"):
+            bullpen = bullpens.get(side)
+
+            if not bullpen_has_fip(
+                bullpen
+            ):
+                continue
+
+            team_id = bullpen_team_id(
+                game,
+                side,
+                bullpen,
+            )
+
+            if team_id is None:
+                continue
+
+            latest[team_id] = {
+                "source_date": game_date,
+                "source_game_id": game.get("id"),
+                "bullpen": deepcopy(bullpen),
+            }
+
+    return latest
+
+
+def make_future_bullpen_snapshot(
+    source: dict[str, Any],
+    team: dict[str, Any],
+    source_date: str,
+    source_game_id: str | None,
+) -> dict[str, Any]:
+    """
+    Copy current bullpen intelligence into a future game.
+
+    Season, Last 30, Last 7, ranks, and roster remain useful
+    as latest-known information. Day-specific availability is
+    cleared because it cannot be projected safely.
+    """
+
+    snapshot = deepcopy(source)
+
+    team_id = team.get("team_id")
+
+    try:
+        snapshot["team_id"] = int(
+            team_id
+        )
+    except (
+        TypeError,
+        ValueError,
+    ):
+        pass
+
+    snapshot["team"] = (
+        team.get("abbr")
+        or snapshot.get("team")
+    )
+
+    snapshot["used_yesterday"] = None
+    snapshot["back_to_back"] = None
+    snapshot["fresh_leverage"] = None
+    snapshot["usage"] = {}
+
+    snapshot["future_snapshot"] = {
+        "mode": "latest_known",
+        "as_of_date": source_date,
+        "source_game_id": source_game_id,
+        "day_specific_usage_cleared": True,
+    }
+
+    return snapshot
+
+
+def propagate_latest_bullpens_to_future_games(
+    games: list[dict[str, Any]],
+    as_of_date: str,
+) -> tuple[
+    list[dict[str, Any]],
+    dict[str, int],
+]:
+    """
+    Guarantee that every scheduled future MLB game has the
+    latest valid bullpen intelligence available as of the most
+    recent refresh.
+
+    Real future enrichment is preserved. Prior latest-known
+    fallbacks are replaced whenever a newer source is available.
+    """
+
+    latest = (
+        build_latest_bullpen_snapshot_index(
+            games,
+            as_of_date,
+        )
+    )
+
+    summary = {
+        "source_teams": len(latest),
+        "future_games": 0,
+        "future_sides": 0,
+        "propagated": 0,
+        "already_current": 0,
+        "preserved_real": 0,
+        "missing_source": 0,
+    }
+
+    updated_games = []
+
+    for stored_game in games:
+        game = deepcopy(stored_game)
+
+        game_date = str(
+            game.get("date") or ""
+        )
+
+        if (
+            not game_date
+            or game_date <= as_of_date
+        ):
+            updated_games.append(game)
+            continue
+
+        summary["future_games"] += 1
+
+        bullpens = dict(
+            game.get("bullpens")
+            or {}
+        )
+
+        for side in ("away", "home"):
+            summary["future_sides"] += 1
+
+            team = (
+                game.get(f"{side}_team")
+                or {}
+            )
+
+            existing = (
+                bullpens.get(side)
+                if isinstance(
+                    bullpens.get(side),
+                    dict,
+                )
+                else {}
+            )
+
+            team_id = bullpen_team_id(
+                game,
+                side,
+                existing,
+            )
+
+            if team_id is None:
+                summary["missing_source"] += 1
+                continue
+
+            source_record = latest.get(
+                team_id
+            )
+
+            if not source_record:
+                summary["missing_source"] += 1
+                continue
+
+            metadata = (
+                existing.get("future_snapshot")
+                if isinstance(existing, dict)
+                else {}
+            ) or {}
+
+            existing_is_fallback = (
+                metadata.get("mode")
+                == "latest_known"
+            )
+
+            existing_source_date = str(
+                metadata.get("as_of_date")
+                or ""
+            )
+
+            source_date = str(
+                source_record.get(
+                    "source_date"
+                )
+                or ""
+            )
+
+            if (
+                bullpen_has_fip(existing)
+                and not existing_is_fallback
+            ):
+                summary["preserved_real"] += 1
+                continue
+
+            if (
+                bullpen_has_fip(existing)
+                and existing_is_fallback
+                and existing_source_date
+                >= source_date
+            ):
+                summary["already_current"] += 1
+                continue
+
+            bullpens[side] = (
+                make_future_bullpen_snapshot(
+                    source_record["bullpen"],
+                    team,
+                    source_date,
+                    source_record.get(
+                        "source_game_id"
+                    ),
+                )
+            )
+
+            summary["propagated"] += 1
+
+        game["bullpens"] = bullpens
+        updated_games.append(game)
+
+    return updated_games, summary
 
 def build_recent_confirmed_lineup_index(
     games: list[dict[str, Any]],
@@ -2456,6 +2865,7 @@ def main() -> None:
     merged_games = enrich_bullpens(
         merged_games,
         target_date,
+        current.get("games", []),
     )
 
     merged_games = apply_bullpen_ranks(
@@ -2515,6 +2925,24 @@ def main() -> None:
             game.get("game_time") or "",
             game.get("id") or "",
         )
+    )
+
+    (
+        current["games"],
+        future_bullpen_summary,
+    ) = (
+        propagate_latest_bullpens_to_future_games(
+            current["games"],
+            target_date,
+        )
+    )
+
+    print(
+        "Future bullpen propagation: "
+        f"{future_bullpen_summary['propagated']} updated, "
+        f"{future_bullpen_summary['already_current']} current, "
+        f"{future_bullpen_summary['preserved_real']} real snapshots preserved, "
+        f"{future_bullpen_summary['missing_source']} missing sources."
     )
 
     plays_data = load_plays_file()

@@ -916,13 +916,20 @@ function normalizeBvpRow(row = {}) {
   const available = Boolean(row?.available) && Number.isFinite(pa) && pa > 0;
   const opacity = available ? Math.max(0.22, Math.min(1, pa / 50)) : 0.22;
   let resultClass = "bvp-missing";
-  // Classes describe pitcher performance.
-  // Player-button colors are displayed from the hitter's perspective.
+
+  // Player-button colors are always from the hitter's
+  // perspective: strong history is favorable/green and
+  // weak history is unfavorable/red.
   if (available && Number.isFinite(ops)) {
-    if (ops <= 0.650) resultClass = "bvp-pitcher-strong";
-    else if (ops >= 0.850) resultClass = "bvp-pitcher-poor";
-    else if (ops >= 0.750) resultClass = "bvp-neutral-high";
-    else resultClass = "bvp-neutral-low";
+    if (ops >= 0.850) {
+      resultClass = "bvp-hitter-strong-positive";
+    } else if (ops >= 0.750) {
+      resultClass = "bvp-hitter-positive";
+    } else if (ops <= 0.650) {
+      resultClass = "bvp-hitter-strong-negative";
+    } else {
+      resultClass = "bvp-hitter-negative";
+    }
   }
   return {
     available,

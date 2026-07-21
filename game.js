@@ -311,8 +311,8 @@ function renderAll() {
   renderControls();
   renderPitchers();
   renderOffenses();
-  renderLineupMatchups();
   renderBullpens();
+  renderLineupMatchups();
   renderContextCards();
   renderGameContext();
   renderGameArticles();

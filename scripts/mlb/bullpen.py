@@ -141,6 +141,50 @@ def apply_calculated_fip(
         )
 
 
+def carry_forward_season_hit_batsmen(
+    stat: dict[str, Any],
+    fallback_stat: dict[str, Any] | None,
+) -> None:
+    """
+    Preserve the latest known cumulative season HBP total when
+    MLB's relief split omits the field.
+
+    The fallback is used only when the current response has no
+    HBP value. A real zero remains a real zero.
+    """
+
+    if not stat:
+        return
+
+    current_value = first_stat_value(
+        stat,
+        "hit_batsmen",
+        "hitBatsmen",
+        "hitByPitch",
+    )
+
+    if current_value is not None:
+        return
+
+    fallback_value = first_stat_value(
+        fallback_stat or {},
+        "hit_batsmen",
+        "hitBatsmen",
+        "hitByPitch",
+    )
+
+    numeric_fallback = to_int(
+        fallback_value
+    )
+
+    if numeric_fallback is None:
+        return
+
+    stat["hit_batsmen"] = (
+        numeric_fallback
+    )
+
+
 def fetch_league_fip_constant(
     season: int,
     target_date: str,
@@ -1264,6 +1308,7 @@ def build_bullpen_roster(
 def build_bullpen_snapshot(
     team_id: int,
     target_date: str,
+    fallback_snapshot: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     target = datetime.strptime(
         target_date,
@@ -1275,6 +1320,17 @@ def build_bullpen_snapshot(
     season_relief = fetch_relief_split(
         team_id,
         season,
+    )
+
+    fallback_season = (
+        ((fallback_snapshot or {}).get("stats") or {})
+        .get("season", {})
+        .get("all", {})
+    )
+
+    carry_forward_season_hit_batsmen(
+        season_relief,
+        fallback_season,
     )
 
     fip_constant = fetch_league_fip_constant(

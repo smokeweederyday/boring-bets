@@ -1,0 +1,4712 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "league": "rookie",
+  "date": "2026-07-20",
+  "updated_at": "2026-07-21T07:19:11Z",
+  "source": {
+    "provider": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=16&season=2026&hydrate=team%2Cvenue%2CprobablePitcher%2Clinescore%2Cdecisions&startDate=2026-07-20&endDate=2026-07-20"
+  },
+  "events": [
+    {
+      "id": "rookie-844189",
+      "game_pk": 844189,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T14:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "Y",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6083,
+        "name": "Roger Dean Stadium Complex (MIA)"
+      },
+      "away": {
+        "id": 1370,
+        "abbreviation": "F-CAR",
+        "name": "FCL Cardinals",
+        "score": 11,
+        "record": {
+          "wins": 19,
+          "losses": 30,
+          "pct": ".388"
+        }
+      },
+      "home": {
+        "id": 467,
+        "abbreviation": "F-MRL",
+        "name": "FCL Marlins",
+        "score": 12,
+        "record": {
+          "wins": 19,
+          "losses": 30,
+          "pct": ".388"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 6
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 4,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 4,
+            "home": 2
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 4
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 11,
+            "hits": 11,
+            "errors": 1
+          },
+          "home": {
+            "runs": 12,
+            "hits": 9,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 807835,
+          "name": "Jonawel Valdez"
+        },
+        "loser": {
+          "id": 808095,
+          "name": "Jarol Baéz"
+        }
+      },
+      "game_url": "game.html?id=rookie-844189&sport=baseball&league=rookie&gamePk=844189",
+      "live_url": "live.html?id=rookie-844189&sport=baseball&league=rookie&gamePk=844189"
+    },
+    {
+      "id": "rookie-844196",
+      "game_pk": 844196,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T14:05:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 2,
+      "double_header": "Y",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6083,
+        "name": "Roger Dean Stadium Complex (MIA)"
+      },
+      "away": {
+        "id": 1370,
+        "abbreviation": "F-CAR",
+        "name": "FCL Cardinals",
+        "score": 13,
+        "record": {
+          "wins": 20,
+          "losses": 30,
+          "pct": ".400"
+        }
+      },
+      "home": {
+        "id": 467,
+        "abbreviation": "F-MRL",
+        "name": "FCL Marlins",
+        "score": 2,
+        "record": {
+          "wins": 19,
+          "losses": 31,
+          "pct": ".380"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 8,
+            "home": 2
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 3,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 13,
+            "hits": 9,
+            "errors": 2
+          },
+          "home": {
+            "runs": 2,
+            "hits": 4,
+            "errors": 3
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 821638,
+          "name": "Earle Zulueta"
+        },
+        "loser": {
+          "id": 801619,
+          "name": "Jake Faherty"
+        }
+      },
+      "game_url": "game.html?id=rookie-844196&sport=baseball&league=rookie&gamePk=844196",
+      "live_url": "live.html?id=rookie-844196&sport=baseball&league=rookie&gamePk=844196"
+    },
+    {
+      "id": "rookie-848119",
+      "game_pk": 848119,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6089,
+        "name": "Washington Nationals DR Complex"
+      },
+      "away": {
+        "id": 631,
+        "abbreviation": "D-TI1",
+        "name": "DSL Tigers 1",
+        "score": 5,
+        "record": {
+          "wins": 15,
+          "losses": 20,
+          "pct": ".429"
+        }
+      },
+      "home": {
+        "id": 1270,
+        "abbreviation": "D-NAT",
+        "name": "DSL Nationals",
+        "score": 8,
+        "record": {
+          "wins": 8,
+          "losses": 26,
+          "pct": ".235"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 6
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 5,
+            "hits": 7,
+            "errors": 1
+          },
+          "home": {
+            "runs": 8,
+            "hits": 9,
+            "errors": 3
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 821016,
+          "name": "Enmanuel Carela"
+        },
+        "loser": {
+          "id": 839502,
+          "name": "Omar Gonzalez"
+        },
+        "save": {
+          "id": 821807,
+          "name": "Edinson Hernandez"
+        }
+      },
+      "game_url": "game.html?id=rookie-848119&sport=baseball&league=rookie&gamePk=848119",
+      "live_url": "live.html?id=rookie-848119&sport=baseball&league=rookie&gamePk=848119"
+    },
+    {
+      "id": "rookie-848150",
+      "game_pk": 848150,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6088,
+        "name": "Toronto Blue Jays DR Complex"
+      },
+      "away": {
+        "id": 618,
+        "abbreviation": "D-MRN",
+        "name": "DSL Mariners",
+        "score": 3,
+        "record": {
+          "wins": 20,
+          "losses": 15,
+          "pct": ".571"
+        }
+      },
+      "home": {
+        "id": 604,
+        "abbreviation": "D-BJB",
+        "name": "DSL Blue Jays Blue",
+        "score": 6,
+        "record": {
+          "wins": 15,
+          "losses": 20,
+          "pct": ".429"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 5
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 4,
+            "errors": 2
+          },
+          "home": {
+            "runs": 6,
+            "hits": 8,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 842594,
+          "name": "Sebastian Rodriguez"
+        },
+        "loser": {
+          "id": 843059,
+          "name": "Adalberto Vallenilla"
+        },
+        "save": {
+          "id": 830451,
+          "name": "Ire Martinez"
+        }
+      },
+      "game_url": "game.html?id=rookie-848150&sport=baseball&league=rookie&gamePk=848150",
+      "live_url": "live.html?id=rookie-848150&sport=baseball&league=rookie&gamePk=848150"
+    },
+    {
+      "id": "rookie-848222",
+      "game_pk": 848222,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6090,
+        "name": "Texas Rangers DR Complex"
+      },
+      "away": {
+        "id": 2117,
+        "abbreviation": "D-MEO",
+        "name": "DSL Mets Orange",
+        "score": 2,
+        "record": {
+          "wins": 17,
+          "losses": 19,
+          "pct": ".472"
+        }
+      },
+      "home": {
+        "id": 625,
+        "abbreviation": "D-RNB",
+        "name": "DSL Rangers Blue",
+        "score": 9,
+        "record": {
+          "wins": 20,
+          "losses": 14,
+          "pct": ".588"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 8
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 2,
+            "errors": 1
+          },
+          "home": {
+            "runs": 9,
+            "hits": 8,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 831345,
+          "name": "Aneudy Santos"
+        },
+        "loser": {
+          "id": 837766,
+          "name": "Gensil Rosario"
+        }
+      },
+      "game_url": "game.html?id=rookie-848222&sport=baseball&league=rookie&gamePk=848222",
+      "live_url": "live.html?id=rookie-848222&sport=baseball&league=rookie&gamePk=848222"
+    },
+    {
+      "id": "rookie-848284",
+      "game_pk": 848284,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6092,
+        "name": "Tampa Bay Rays DR Complex"
+      },
+      "away": {
+        "id": 627,
+        "abbreviation": "D-RSR",
+        "name": "DSL Red Sox Red",
+        "score": 9,
+        "record": {
+          "wins": 10,
+          "losses": 23,
+          "pct": ".303"
+        }
+      },
+      "home": {
+        "id": 5086,
+        "abbreviation": "D-TAM",
+        "name": "DSL Tampa Bay",
+        "score": 10,
+        "record": {
+          "wins": 22,
+          "losses": 12,
+          "pct": ".647"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 11,
+        "current_inning_ordinal": "11th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 5,
+            "home": 6
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 10,
+            "ordinal": "10th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 11,
+            "ordinal": "11th",
+            "away": 0,
+            "home": 1
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 9,
+            "hits": 11,
+            "errors": 1
+          },
+          "home": {
+            "runs": 10,
+            "hits": 9,
+            "errors": 4
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 835980,
+          "name": "Diego Soriano"
+        },
+        "loser": {
+          "id": 825350,
+          "name": "Ranci Castillo"
+        }
+      },
+      "game_url": "game.html?id=rookie-848284&sport=baseball&league=rookie&gamePk=848284",
+      "live_url": "live.html?id=rookie-848284&sport=baseball&league=rookie&gamePk=848284"
+    },
+    {
+      "id": "rookie-848329",
+      "game_pk": 848329,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6091,
+        "name": "St. Louis Cardinals DR Complex"
+      },
+      "away": {
+        "id": 634,
+        "abbreviation": "D-NYB",
+        "name": "DSL NYY Bombers",
+        "score": 7,
+        "record": {
+          "wins": 15,
+          "losses": 20,
+          "pct": ".429"
+        }
+      },
+      "home": {
+        "id": 608,
+        "abbreviation": "D-CAR",
+        "name": "DSL Cardinals",
+        "score": 8,
+        "record": {
+          "wins": 16,
+          "losses": 17,
+          "pct": ".485"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 3,
+            "home": 2
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 2
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 7,
+            "hits": 6,
+            "errors": 1
+          },
+          "home": {
+            "runs": 8,
+            "hits": 8,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 835309,
+          "name": "Domingo Mejía"
+        },
+        "loser": {
+          "id": 827440,
+          "name": "Josue Silvestre"
+        }
+      },
+      "game_url": "game.html?id=rookie-848329&sport=baseball&league=rookie&gamePk=848329",
+      "live_url": "live.html?id=rookie-848329&sport=baseball&league=rookie&gamePk=848329"
+    },
+    {
+      "id": "rookie-848380",
+      "game_pk": 848380,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6095,
+        "name": "San Diego Padres DR Complex"
+      },
+      "away": {
+        "id": 601,
+        "abbreviation": "D-ASB",
+        "name": "DSL Astros Blue",
+        "score": 4,
+        "record": {
+          "wins": 18,
+          "losses": 14,
+          "pct": ".563"
+        }
+      },
+      "home": {
+        "id": 622,
+        "abbreviation": "D-PAB",
+        "name": "DSL Padres Brown",
+        "score": 2,
+        "record": {
+          "wins": 7,
+          "losses": 27,
+          "pct": ".206"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 5,
+            "errors": 3
+          },
+          "home": {
+            "runs": 2,
+            "hits": 6,
+            "errors": 3
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 837523,
+          "name": "Joel Jimenez"
+        },
+        "loser": {
+          "id": 842373,
+          "name": "Jesus Heredia"
+        },
+        "save": {
+          "id": 839250,
+          "name": "Thomas Sveyda"
+        }
+      },
+      "game_url": "game.html?id=rookie-848380&sport=baseball&league=rookie&gamePk=848380",
+      "live_url": "live.html?id=rookie-848380&sport=baseball&league=rookie&gamePk=848380"
+    },
+    {
+      "id": "rookie-848471",
+      "game_pk": 848471,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6096,
+        "name": "New York Yankees DR Complex"
+      },
+      "away": {
+        "id": 1610,
+        "abbreviation": "D-BJR",
+        "name": "DSL Blue Jays Red",
+        "score": 3,
+        "record": {
+          "wins": 17,
+          "losses": 17,
+          "pct": ".500"
+        }
+      },
+      "home": {
+        "id": 635,
+        "abbreviation": "D-NYY",
+        "name": "DSL NYY Yankees",
+        "score": 9,
+        "record": {
+          "wins": 22,
+          "losses": 12,
+          "pct": ".647"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 3,
+            "home": 4
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 5,
+            "errors": 5
+          },
+          "home": {
+            "runs": 9,
+            "hits": 9,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 832798,
+          "name": "Fredy Penuelas"
+        },
+        "loser": {
+          "id": 837678,
+          "name": "Franiel Severino"
+        }
+      },
+      "game_url": "game.html?id=rookie-848471&sport=baseball&league=rookie&gamePk=848471",
+      "live_url": "live.html?id=rookie-848471&sport=baseball&league=rookie&gamePk=848471"
+    },
+    {
+      "id": "rookie-848510",
+      "game_pk": 848510,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6098,
+        "name": "Minnesota Twins DR Complex"
+      },
+      "away": {
+        "id": 619,
+        "abbreviation": "D-MRL",
+        "name": "DSL Marlins",
+        "score": 10,
+        "record": {
+          "wins": 17,
+          "losses": 17,
+          "pct": ".500"
+        }
+      },
+      "home": {
+        "id": 632,
+        "abbreviation": "D-TWI",
+        "name": "DSL Twins",
+        "score": 1,
+        "record": {
+          "wins": 9,
+          "losses": 24,
+          "pct": ".273"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 5,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 4,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 10,
+            "hits": 12,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 7,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 829780,
+          "name": "Keyner Cedeno"
+        },
+        "loser": {
+          "id": 836310,
+          "name": "Jesus Moreno"
+        }
+      },
+      "game_url": "game.html?id=rookie-848510&sport=baseball&league=rookie&gamePk=848510",
+      "live_url": "live.html?id=rookie-848510&sport=baseball&league=rookie&gamePk=848510"
+    },
+    {
+      "id": "rookie-848568",
+      "game_pk": 848568,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6099,
+        "name": "Milwaukee Brewers DR Complex"
+      },
+      "away": {
+        "id": 616,
+        "abbreviation": "D-CLM",
+        "name": "DSL CLE Mendoza",
+        "score": 5,
+        "record": {
+          "wins": 15,
+          "losses": 20,
+          "pct": ".429"
+        }
+      },
+      "home": {
+        "id": 2101,
+        "abbreviation": "D-BWG",
+        "name": "DSL Brewers Gold",
+        "score": 8,
+        "record": {
+          "wins": 19,
+          "losses": 14,
+          "pct": ".576"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 4
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 5,
+            "hits": 5,
+            "errors": 2
+          },
+          "home": {
+            "runs": 8,
+            "hits": 8,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 835501,
+          "name": "Derlin Garcia"
+        },
+        "loser": {
+          "id": 829772,
+          "name": "Julio M Rossi"
+        },
+        "save": {
+          "id": 815770,
+          "name": "Wandy Cabrera"
+        }
+      },
+      "game_url": "game.html?id=rookie-848568&sport=baseball&league=rookie&gamePk=848568",
+      "live_url": "live.html?id=rookie-848568&sport=baseball&league=rookie&gamePk=848568"
+    },
+    {
+      "id": "rookie-848613",
+      "game_pk": 848613,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6100,
+        "name": "Miami Marlins DR Complex"
+      },
+      "away": {
+        "id": 2413,
+        "abbreviation": "D-RNR",
+        "name": "DSL Rangers Red",
+        "score": 14,
+        "record": {
+          "wins": 21,
+          "losses": 14,
+          "pct": ".600"
+        }
+      },
+      "home": {
+        "id": 2127,
+        "abbreviation": "D-MIA",
+        "name": "DSL Miami",
+        "score": 8,
+        "record": {
+          "wins": 10,
+          "losses": 24,
+          "pct": ".294"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 5
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 6,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 4,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 14,
+            "hits": 14,
+            "errors": 2
+          },
+          "home": {
+            "runs": 8,
+            "hits": 11,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 829420,
+          "name": "Yadiel Roquez"
+        },
+        "loser": {
+          "id": 808529,
+          "name": "Osvaldo Heredia"
+        }
+      },
+      "game_url": "game.html?id=rookie-848613&sport=baseball&league=rookie&gamePk=848613",
+      "live_url": "live.html?id=rookie-848613&sport=baseball&league=rookie&gamePk=848613"
+    },
+    {
+      "id": "rookie-848762",
+      "game_pk": 848762,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6103,
+        "name": "Kansas City Royals DR Complex"
+      },
+      "away": {
+        "id": 611,
+        "abbreviation": "D-LAB",
+        "name": "DSL LAD Bautista",
+        "score": 0,
+        "record": {
+          "wins": 12,
+          "losses": 22,
+          "pct": ".353"
+        }
+      },
+      "home": {
+        "id": 2128,
+        "abbreviation": "D-ROF",
+        "name": "DSL Royals Fortuna",
+        "score": 2,
+        "record": {
+          "wins": 23,
+          "losses": 11,
+          "pct": ".676"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 6,
+        "current_inning_ordinal": "6th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 0,
+            "hits": 2,
+            "errors": 3
+          },
+          "home": {
+            "runs": 2,
+            "hits": 1,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 821777,
+          "name": "Jose Mejia"
+        },
+        "loser": {
+          "id": 822225,
+          "name": "Alexander Pichardo"
+        }
+      },
+      "game_url": "game.html?id=rookie-848762&sport=baseball&league=rookie&gamePk=848762",
+      "live_url": "live.html?id=rookie-848762&sport=baseball&league=rookie&gamePk=848762"
+    },
+    {
+      "id": "rookie-848819",
+      "game_pk": 848819,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6104,
+        "name": "Detroit Tigers DR Complex"
+      },
+      "away": {
+        "id": 600,
+        "abbreviation": "D-ANG",
+        "name": "DSL Angels",
+        "score": 4,
+        "record": {
+          "wins": 23,
+          "losses": 10,
+          "pct": ".697"
+        }
+      },
+      "home": {
+        "id": 2132,
+        "abbreviation": "D-TI2",
+        "name": "DSL Tigers 2",
+        "score": 2,
+        "record": {
+          "wins": 18,
+          "losses": 17,
+          "pct": ".514"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 2
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 7,
+            "errors": 1
+          },
+          "home": {
+            "runs": 2,
+            "hits": 4,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 829848,
+          "name": "Wilner Berroteran"
+        },
+        "loser": {
+          "id": 837819,
+          "name": "Jesus Miranda"
+        },
+        "save": {
+          "id": 825687,
+          "name": "Steuri Amancio"
+        }
+      },
+      "game_url": "game.html?id=rookie-848819&sport=baseball&league=rookie&gamePk=848819",
+      "live_url": "live.html?id=rookie-848819&sport=baseball&league=rookie&gamePk=848819"
+    },
+    {
+      "id": "rookie-848875",
+      "game_pk": 848875,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6106,
+        "name": "Colorado Rockies DR Complex"
+      },
+      "away": {
+        "id": 623,
+        "abbreviation": "D-PHI",
+        "name": "DSL Phillies",
+        "score": 18,
+        "record": {
+          "wins": 21,
+          "losses": 14,
+          "pct": ".600"
+        }
+      },
+      "home": {
+        "id": 629,
+        "abbreviation": "D-RCK",
+        "name": "DSL Rockies",
+        "score": 12,
+        "record": {
+          "wins": 16,
+          "losses": 18,
+          "pct": ".471"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 4,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 3,
+            "home": 6
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": 4
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 18,
+            "hits": 19,
+            "errors": 1
+          },
+          "home": {
+            "runs": 12,
+            "hits": 13,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 837711,
+          "name": "Leonardo Larez"
+        },
+        "loser": {
+          "id": 833315,
+          "name": "Dalvin Marte"
+        }
+      },
+      "game_url": "game.html?id=rookie-848875&sport=baseball&league=rookie&gamePk=848875",
+      "live_url": "live.html?id=rookie-848875&sport=baseball&league=rookie&gamePk=848875"
+    },
+    {
+      "id": "rookie-848950",
+      "game_pk": 848950,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6107,
+        "name": "Cleveland Guardians DR Complex"
+      },
+      "away": {
+        "id": 612,
+        "abbreviation": "D-LAM",
+        "name": "DSL LAD Mega",
+        "score": 6,
+        "record": {
+          "wins": 15,
+          "losses": 20,
+          "pct": ".429"
+        }
+      },
+      "home": {
+        "id": 5506,
+        "abbreviation": "D-CLG",
+        "name": "DSL CLE Goryl",
+        "score": 11,
+        "record": {
+          "wins": 18,
+          "losses": 16,
+          "pct": ".529"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 2,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 9,
+            "errors": 4
+          },
+          "home": {
+            "runs": 11,
+            "hits": 10,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 830041,
+          "name": "Yoshtner Farfan"
+        },
+        "loser": {
+          "id": 844039,
+          "name": "Jose Acevedo"
+        },
+        "save": {
+          "id": 837304,
+          "name": "Antonio Gonzalez"
+        }
+      },
+      "game_url": "game.html?id=rookie-848950&sport=baseball&league=rookie&gamePk=848950",
+      "live_url": "live.html?id=rookie-848950&sport=baseball&league=rookie&gamePk=848950"
+    },
+    {
+      "id": "rookie-848969",
+      "game_pk": 848969,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6105,
+        "name": "Cincinnati Reds DR Complex"
+      },
+      "away": {
+        "id": 3130,
+        "abbreviation": "D-ORO",
+        "name": "DSL Orioles Orange",
+        "score": 1,
+        "record": {
+          "wins": 14,
+          "losses": 21,
+          "pct": ".400"
+        }
+      },
+      "home": {
+        "id": 2412,
+        "abbreviation": "D-ROJ",
+        "name": "DSL Rojos",
+        "score": 2,
+        "record": {
+          "wins": 17,
+          "losses": 18,
+          "pct": ".486"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 5,
+        "current_inning_ordinal": "5th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 1,
+            "hits": 5,
+            "errors": 1
+          },
+          "home": {
+            "runs": 2,
+            "hits": 5,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 842251,
+          "name": "Raymond Cruz"
+        },
+        "loser": {
+          "id": 844000,
+          "name": "Kelvin Cadet"
+        }
+      },
+      "game_url": "game.html?id=rookie-848969&sport=baseball&league=rookie&gamePk=848969",
+      "live_url": "live.html?id=rookie-848969&sport=baseball&league=rookie&gamePk=848969"
+    },
+    {
+      "id": "rookie-849024",
+      "game_pk": 849024,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Postponed",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6108,
+        "name": "Chicago White Sox DR Complex"
+      },
+      "away": {
+        "id": 624,
+        "abbreviation": "D-PIB",
+        "name": "DSL Pirates Black",
+        "score": null,
+        "record": {
+          "wins": 18,
+          "losses": 14,
+          "pct": ".563"
+        }
+      },
+      "home": {
+        "id": 633,
+        "abbreviation": "D-WSX",
+        "name": "DSL White Sox",
+        "score": null,
+        "record": {
+          "wins": 11,
+          "losses": 22,
+          "pct": ".333"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": null,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "game_url": "game.html?id=rookie-849024&sport=baseball&league=rookie&gamePk=849024",
+      "live_url": "live.html?id=rookie-849024&sport=baseball&league=rookie&gamePk=849024"
+    },
+    {
+      "id": "rookie-849075",
+      "game_pk": 849075,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6023,
+        "name": "Chicago Cubs Baseball Operations Dominicana LLC"
+      },
+      "away": {
+        "id": 607,
+        "abbreviation": "D-BWB",
+        "name": "DSL Brewers Blue",
+        "score": 7,
+        "record": {
+          "wins": 20,
+          "losses": 14,
+          "pct": ".588"
+        }
+      },
+      "home": {
+        "id": 609,
+        "abbreviation": "D-CUB",
+        "name": "DSL Cubs Blue",
+        "score": 8,
+        "record": {
+          "wins": 19,
+          "losses": 14,
+          "pct": ".576"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 3
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 2,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 7,
+            "hits": 11,
+            "errors": 2
+          },
+          "home": {
+            "runs": 8,
+            "hits": 9,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 829926,
+          "name": "Jider Corpas"
+        },
+        "loser": {
+          "id": 837883,
+          "name": "Jordy Brache"
+        },
+        "save": {
+          "id": 835195,
+          "name": "Wilfran Ortega"
+        }
+      },
+      "game_url": "game.html?id=rookie-849075&sport=baseball&league=rookie&gamePk=849075",
+      "live_url": "live.html?id=rookie-849075&sport=baseball&league=rookie&gamePk=849075"
+    },
+    {
+      "id": "rookie-849123",
+      "game_pk": 849123,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6111,
+        "name": "Boston Red Sox DR Complex"
+      },
+      "away": {
+        "id": 1611,
+        "abbreviation": "D-RAY",
+        "name": "DSL Rays",
+        "score": 19,
+        "record": {
+          "wins": 18,
+          "losses": 15,
+          "pct": ".545"
+        }
+      },
+      "home": {
+        "id": 626,
+        "abbreviation": "D-RSB",
+        "name": "DSL Red Sox Blue",
+        "score": 7,
+        "record": {
+          "wins": 11,
+          "losses": 22,
+          "pct": ".333"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 7,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 4,
+            "home": 5
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 4,
+            "home": 1
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 19,
+            "hits": 16,
+            "errors": 2
+          },
+          "home": {
+            "runs": 7,
+            "hits": 6,
+            "errors": 3
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 832278,
+          "name": "Ezequiel Martinez"
+        },
+        "loser": {
+          "id": 835013,
+          "name": "Allan Griman"
+        }
+      },
+      "game_url": "game.html?id=rookie-849123&sport=baseball&league=rookie&gamePk=849123",
+      "live_url": "live.html?id=rookie-849123&sport=baseball&league=rookie&gamePk=849123"
+    },
+    {
+      "id": "rookie-849175",
+      "game_pk": 849175,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6110,
+        "name": "Baltimore Orioles DR Complex"
+      },
+      "away": {
+        "id": 630,
+        "abbreviation": "D-ROV",
+        "name": "DSL Royals Ventura",
+        "score": 7,
+        "record": {
+          "wins": 22,
+          "losses": 11,
+          "pct": ".667"
+        }
+      },
+      "home": {
+        "id": 621,
+        "abbreviation": "D-ORB",
+        "name": "DSL Orioles Black",
+        "score": 0,
+        "record": {
+          "wins": 16,
+          "losses": 17,
+          "pct": ".485"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 5,
+        "current_inning_ordinal": "5th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 5,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 7,
+            "hits": 7,
+            "errors": 0
+          },
+          "home": {
+            "runs": 0,
+            "hits": 3,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 837820,
+          "name": "Alejandro Beltran"
+        },
+        "loser": {
+          "id": 834704,
+          "name": "Deimer Rodriguez"
+        }
+      },
+      "game_url": "game.html?id=rookie-849175&sport=baseball&league=rookie&gamePk=849175",
+      "live_url": "live.html?id=rookie-849175&sport=baseball&league=rookie&gamePk=849175"
+    },
+    {
+      "id": "rookie-849240",
+      "game_pk": 849240,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6094,
+        "name": "Athletics DR Complex"
+      },
+      "away": {
+        "id": 2122,
+        "abbreviation": "D-PAG",
+        "name": "DSL Padres Gold",
+        "score": 2,
+        "record": {
+          "wins": 25,
+          "losses": 10,
+          "pct": ".714"
+        }
+      },
+      "home": {
+        "id": 602,
+        "abbreviation": "D-ATH",
+        "name": "DSL Athletics",
+        "score": 6,
+        "record": {
+          "wins": 17,
+          "losses": 17,
+          "pct": ".500"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 2,
+            "home": 1
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 3,
+            "errors": 2
+          },
+          "home": {
+            "runs": 6,
+            "hits": 10,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 807998,
+          "name": "Alvin Veras"
+        },
+        "loser": {
+          "id": 830483,
+          "name": "Michel Cervantes"
+        }
+      },
+      "game_url": "game.html?id=rookie-849240&sport=baseball&league=rookie&gamePk=849240",
+      "live_url": "live.html?id=rookie-849240&sport=baseball&league=rookie&gamePk=849240"
+    },
+    {
+      "id": "rookie-849283",
+      "game_pk": 849283,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6113,
+        "name": "Arizona D-backs DR Complex"
+      },
+      "away": {
+        "id": 2134,
+        "abbreviation": "D-GIB",
+        "name": "DSL Giants Black",
+        "score": 8,
+        "record": {
+          "wins": 20,
+          "losses": 14,
+          "pct": ".588"
+        }
+      },
+      "home": {
+        "id": 5087,
+        "abbreviation": "D-ARR",
+        "name": "DSL Arizona Red",
+        "score": 7,
+        "record": {
+          "wins": 21,
+          "losses": 15,
+          "pct": ".583"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 2
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 2
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 2
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 8,
+            "hits": 11,
+            "errors": 1
+          },
+          "home": {
+            "runs": 7,
+            "hits": 11,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 821640,
+          "name": "Elkyns Villarreal"
+        },
+        "loser": {
+          "id": 834906,
+          "name": "Gregory Sanchez"
+        },
+        "save": {
+          "id": 820930,
+          "name": "Rainiel Duran"
+        }
+      },
+      "game_url": "game.html?id=rookie-849283&sport=baseball&league=rookie&gamePk=849283",
+      "live_url": "live.html?id=rookie-849283&sport=baseball&league=rookie&gamePk=849283"
+    },
+    {
+      "id": "rookie-849347",
+      "game_pk": 849347,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Postponed",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6010,
+        "name": "Academia de Beisbol de Los Piratas de Pittsburgh"
+      },
+      "away": {
+        "id": 2270,
+        "abbreviation": "D-CUR",
+        "name": "DSL Cubs Red",
+        "score": null,
+        "record": {
+          "wins": 18,
+          "losses": 15,
+          "pct": ".545"
+        }
+      },
+      "home": {
+        "id": 4404,
+        "abbreviation": "D-PIG",
+        "name": "DSL Pirates Gold",
+        "score": null,
+        "record": {
+          "wins": 15,
+          "losses": 18,
+          "pct": ".455"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": null,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "game_url": "game.html?id=rookie-849347&sport=baseball&league=rookie&gamePk=849347",
+      "live_url": "live.html?id=rookie-849347&sport=baseball&league=rookie&gamePk=849347"
+    },
+    {
+      "id": "rookie-849398",
+      "game_pk": 849398,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6011,
+        "name": "Academia de Beisbol de los Metros de Nueva York (1)"
+      },
+      "away": {
+        "id": 2131,
+        "abbreviation": "D-COL",
+        "name": "DSL Colorado",
+        "score": 13,
+        "record": {
+          "wins": 24,
+          "losses": 10,
+          "pct": ".706"
+        }
+      },
+      "home": {
+        "id": 620,
+        "abbreviation": "D-MEB",
+        "name": "DSL Mets Blue",
+        "score": 8,
+        "record": {
+          "wins": 14,
+          "losses": 21,
+          "pct": ".400"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 11,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 3
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 13,
+            "hits": 9,
+            "errors": 1
+          },
+          "home": {
+            "runs": 8,
+            "hits": 10,
+            "errors": 3
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 820947,
+          "name": "Maximo Gonzalez"
+        },
+        "loser": {
+          "id": 832317,
+          "name": "Greison Acosta"
+        }
+      },
+      "game_url": "game.html?id=rookie-849398&sport=baseball&league=rookie&gamePk=849398",
+      "live_url": "live.html?id=rookie-849398&sport=baseball&league=rookie&gamePk=849398"
+    },
+    {
+      "id": "rookie-849439",
+      "game_pk": 849439,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6019,
+        "name": "Academia de Beisbol de Los Astros de Houston"
+      },
+      "away": {
+        "id": 605,
+        "abbreviation": "D-BRV",
+        "name": "DSL Braves",
+        "score": 3,
+        "record": {
+          "wins": 10,
+          "losses": 24,
+          "pct": ".294"
+        }
+      },
+      "home": {
+        "id": 5005,
+        "abbreviation": "D-ASO",
+        "name": "DSL Astros Orange",
+        "score": 6,
+        "record": {
+          "wins": 21,
+          "losses": 12,
+          "pct": ".636"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 8,
+        "current_inning_ordinal": "8th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 3,
+            "home": null
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 4,
+            "errors": 1
+          },
+          "home": {
+            "runs": 6,
+            "hits": 9,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 834890,
+          "name": "Anderson Aguilar"
+        },
+        "loser": {
+          "id": 829381,
+          "name": "Ernesto Meza"
+        },
+        "save": {
+          "id": 831046,
+          "name": "Leonel Murrieta"
+        }
+      },
+      "game_url": "game.html?id=rookie-849439&sport=baseball&league=rookie&gamePk=849439",
+      "live_url": "live.html?id=rookie-849439&sport=baseball&league=rookie&gamePk=849439"
+    },
+    {
+      "id": "rookie-849517",
+      "game_pk": 849517,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T15:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6020,
+        "name": "Academia De Béisbol Felipe Alou"
+      },
+      "away": {
+        "id": 610,
+        "abbreviation": "D-ARB",
+        "name": "DSL Arizona Black",
+        "score": 4,
+        "record": {
+          "wins": 17,
+          "losses": 18,
+          "pct": ".486"
+        }
+      },
+      "home": {
+        "id": 615,
+        "abbreviation": "D-GIO",
+        "name": "DSL Giants Orange",
+        "score": 9,
+        "record": {
+          "wins": 21,
+          "losses": 14,
+          "pct": ".600"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 3,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 4
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 4,
+            "errors": 5
+          },
+          "home": {
+            "runs": 9,
+            "hits": 8,
+            "errors": 3
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 815217,
+          "name": "Jhon Leon"
+        },
+        "loser": {
+          "id": 831532,
+          "name": "Luis Cepeda"
+        }
+      },
+      "game_url": "game.html?id=rookie-849517&sport=baseball&league=rookie&gamePk=849517",
+      "live_url": "live.html?id=rookie-849517&sport=baseball&league=rookie&gamePk=849517"
+    },
+    {
+      "id": "rookie-843885",
+      "game_pk": 843885,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T16:00:00Z",
+      "status": "Suspended",
+      "abstract_status": "Live",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2864,
+        "name": "Yankee Complex"
+      },
+      "away": {
+        "id": 469,
+        "abbreviation": "F-PHI",
+        "name": "FCL Phillies",
+        "score": 0,
+        "record": {
+          "wins": 20,
+          "losses": 36,
+          "pct": ".357"
+        }
+      },
+      "home": {
+        "id": 475,
+        "abbreviation": "F-YAN",
+        "name": "FCL Yankees",
+        "score": 0,
+        "record": {
+          "wins": 29,
+          "losses": 26,
+          "pct": ".527"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 1,
+        "current_inning_ordinal": "1st",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 0,
+            "hits": 1,
+            "errors": 0
+          },
+          "home": {
+            "runs": 0,
+            "hits": 1,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {},
+      "game_url": "game.html?id=rookie-843885&sport=baseball&league=rookie&gamePk=843885",
+      "live_url": "live.html?id=rookie-843885&sport=baseball&league=rookie&gamePk=843885"
+    },
+    {
+      "id": "rookie-843951",
+      "game_pk": 843951,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T16:00:00Z",
+      "status": "Cancelled",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4309,
+        "name": "JetBlue Park"
+      },
+      "away": {
+        "id": 464,
+        "abbreviation": "F-BRV",
+        "name": "FCL Braves",
+        "score": null,
+        "record": {
+          "wins": 17,
+          "losses": 37,
+          "pct": ".315"
+        }
+      },
+      "home": {
+        "id": 471,
+        "abbreviation": "F-RSX",
+        "name": "FCL Red Sox",
+        "score": null,
+        "record": {
+          "wins": 23,
+          "losses": 30,
+          "pct": ".434"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": null,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "game_url": "game.html?id=rookie-843951&sport=baseball&league=rookie&gamePk=843951",
+      "live_url": "live.html?id=rookie-843951&sport=baseball&league=rookie&gamePk=843951"
+    },
+    {
+      "id": "rookie-843992",
+      "game_pk": 843992,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T16:00:00Z",
+      "status": "Postponed",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2534,
+        "name": "Charlotte Sports Park"
+      },
+      "away": {
+        "id": 599,
+        "abbreviation": "F-ORI",
+        "name": "FCL Orioles",
+        "score": null,
+        "record": {
+          "wins": 33,
+          "losses": 21,
+          "pct": ".611"
+        }
+      },
+      "home": {
+        "id": 2003,
+        "abbreviation": "F-RAY",
+        "name": "FCL Rays",
+        "score": null,
+        "record": {
+          "wins": 35,
+          "losses": 20,
+          "pct": ".636"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": null,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "game_url": "game.html?id=rookie-843992&sport=baseball&league=rookie&gamePk=843992",
+      "live_url": "live.html?id=rookie-843992&sport=baseball&league=rookie&gamePk=843992"
+    },
+    {
+      "id": "rookie-844012",
+      "game_pk": 844012,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T16:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2829,
+        "name": "Pirate City Complex"
+      },
+      "away": {
+        "id": 474,
+        "abbreviation": "F-TWI",
+        "name": "FCL Twins",
+        "score": 4,
+        "record": {
+          "wins": 31,
+          "losses": 25,
+          "pct": ".554"
+        }
+      },
+      "home": {
+        "id": 470,
+        "abbreviation": "F-PIR",
+        "name": "FCL Pirates",
+        "score": 10,
+        "record": {
+          "wins": 24,
+          "losses": 30,
+          "pct": ".444"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 2
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 6
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 1,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 4,
+            "hits": 6,
+            "errors": 1
+          },
+          "home": {
+            "runs": 10,
+            "hits": 11,
+            "errors": 2
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 832802,
+          "name": "Juan Muniz"
+        },
+        "loser": {
+          "id": 823981,
+          "name": "Carter Holjes"
+        }
+      },
+      "game_url": "game.html?id=rookie-844012&sport=baseball&league=rookie&gamePk=844012",
+      "live_url": "live.html?id=rookie-844012&sport=baseball&league=rookie&gamePk=844012"
+    },
+    {
+      "id": "rookie-844287",
+      "game_pk": 844287,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T16:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4569,
+        "name": "Bobby Mattick Complex"
+      },
+      "away": {
+        "id": 473,
+        "abbreviation": "F-TIG",
+        "name": "FCL Tigers",
+        "score": 8,
+        "record": {
+          "wins": 26,
+          "losses": 31,
+          "pct": ".456"
+        }
+      },
+      "home": {
+        "id": 1390,
+        "abbreviation": "F-BLU",
+        "name": "FCL Blue Jays",
+        "score": 5,
+        "record": {
+          "wins": 37,
+          "losses": 19,
+          "pct": ".661"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 2
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 8,
+            "hits": 11,
+            "errors": 0
+          },
+          "home": {
+            "runs": 5,
+            "hits": 6,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 814133,
+          "name": "Frenny Grant"
+        },
+        "loser": {
+          "id": 821417,
+          "name": "Victor Espiritu"
+        },
+        "save": {
+          "id": 814164,
+          "name": "Johnathan Rogers"
+        }
+      },
+      "game_url": "game.html?id=rookie-844287&sport=baseball&league=rookie&gamePk=844287",
+      "live_url": "live.html?id=rookie-844287&sport=baseball&league=rookie&gamePk=844287"
+    },
+    {
+      "id": "rookie-844312",
+      "game_pk": 844312,
+      "date": "2026-07-20",
+      "start_time": "2026-07-20T16:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6084,
+        "name": "CACTI Park of the Palm Beaches Complex (HOU)"
+      },
+      "away": {
+        "id": 468,
+        "abbreviation": "F-MET",
+        "name": "FCL Mets",
+        "score": 2,
+        "record": {
+          "wins": 23,
+          "losses": 30,
+          "pct": ".434"
+        }
+      },
+      "home": {
+        "id": 1998,
+        "abbreviation": "F-AST",
+        "name": "FCL Astros",
+        "score": 4,
+        "record": {
+          "wins": 39,
+          "losses": 11,
+          "pct": ".780"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 2,
+            "hits": 2,
+            "errors": 5
+          },
+          "home": {
+            "runs": 4,
+            "hits": 5,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 687817,
+          "name": "Andrew Marrero"
+        },
+        "loser": {
+          "id": 807937,
+          "name": "Nathan Hall"
+        },
+        "save": {
+          "id": 806102,
+          "name": "Jose Varela"
+        }
+      },
+      "game_url": "game.html?id=rookie-844312&sport=baseball&league=rookie&gamePk=844312",
+      "live_url": "live.html?id=rookie-844312&sport=baseball&league=rookie&gamePk=844312"
+    },
+    {
+      "id": "rookie-844350",
+      "game_pk": 844350,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2603,
+        "name": "Surprise Stadium"
+      },
+      "away": {
+        "id": 5426,
+        "abbreviation": "A-ATH",
+        "name": "ACL Athletics",
+        "score": 3,
+        "record": {
+          "wins": 16,
+          "losses": 40,
+          "pct": ".286"
+        }
+      },
+      "home": {
+        "id": 412,
+        "abbreviation": "A-ROY",
+        "name": "ACL Royals",
+        "score": 7,
+        "record": {
+          "wins": 33,
+          "losses": 23,
+          "pct": ".589"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 2,
+            "home": 5
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 2
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 5,
+            "errors": 1
+          },
+          "home": {
+            "runs": 7,
+            "hits": 9,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 820863,
+          "name": "Carlos De La Rosa"
+        },
+        "loser": {
+          "id": 692844,
+          "name": "Brayan Restituyo"
+        }
+      },
+      "game_url": "game.html?id=rookie-844350&sport=baseball&league=rookie&gamePk=844350",
+      "live_url": "live.html?id=rookie-844350&sport=baseball&league=rookie&gamePk=844350"
+    },
+    {
+      "id": "rookie-844383",
+      "game_pk": 844383,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6126,
+        "name": "Salt River Fields Complex (COL)"
+      },
+      "away": {
+        "id": 408,
+        "abbreviation": "A-GIA",
+        "name": "ACL Giants",
+        "score": 7,
+        "record": {
+          "wins": 33,
+          "losses": 25,
+          "pct": ".569"
+        }
+      },
+      "home": {
+        "id": 1994,
+        "abbreviation": "A-RCK",
+        "name": "ACL Rockies",
+        "score": 12,
+        "record": {
+          "wins": 38,
+          "losses": 18,
+          "pct": ".679"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 6,
+        "current_inning_ordinal": "6th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 7
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 5,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 2,
+            "home": null
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 7,
+            "hits": 6,
+            "errors": 2
+          },
+          "home": {
+            "runs": 12,
+            "hits": 11,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 700166,
+          "name": "Redinson Gomez"
+        },
+        "loser": {
+          "id": 822215,
+          "name": "Carlos De La Rosa"
+        }
+      },
+      "game_url": "game.html?id=rookie-844383&sport=baseball&league=rookie&gamePk=844383",
+      "live_url": "live.html?id=rookie-844383&sport=baseball&league=rookie&gamePk=844383"
+    },
+    {
+      "id": "rookie-844533",
+      "game_pk": 844533,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6120,
+        "name": "Goodyear Ballpark Complex (CLE)"
+      },
+      "away": {
+        "id": 5427,
+        "abbreviation": "A-DOD",
+        "name": "ACL Dodgers",
+        "score": 6,
+        "record": {
+          "wins": 24,
+          "losses": 33,
+          "pct": ".421"
+        }
+      },
+      "home": {
+        "id": 5374,
+        "abbreviation": "A-GUA",
+        "name": "ACL Guardians",
+        "score": 7,
+        "record": {
+          "wins": 33,
+          "losses": 24,
+          "pct": ".579"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 9,
+        "current_inning_ordinal": "9th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 3,
+            "home": 1
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 1,
+            "home": 2
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": 0,
+            "home": 2
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 8,
+            "errors": 2
+          },
+          "home": {
+            "runs": 7,
+            "hits": 15,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 843503,
+          "name": "Austin Testerman"
+        },
+        "loser": {
+          "id": 806918,
+          "name": "Franderly Morel"
+        }
+      },
+      "game_url": "game.html?id=rookie-844533&sport=baseball&league=rookie&gamePk=844533",
+      "live_url": "live.html?id=rookie-844533&sport=baseball&league=rookie&gamePk=844533"
+    },
+    {
+      "id": "rookie-844632",
+      "game_pk": 844632,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 6117,
+        "name": "Salt River Fields Complex (AZ)"
+      },
+      "away": {
+        "id": 3430,
+        "abbreviation": "A-RED",
+        "name": "ACL Reds",
+        "score": 9,
+        "record": {
+          "wins": 33,
+          "losses": 24,
+          "pct": ".579"
+        }
+      },
+      "home": {
+        "id": 1991,
+        "abbreviation": "A-DBA",
+        "name": "ACL D-backs",
+        "score": 1,
+        "record": {
+          "wins": 30,
+          "losses": 26,
+          "pct": ".536"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 5,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 9,
+            "ordinal": "9th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 9,
+            "hits": 16,
+            "errors": 1
+          },
+          "home": {
+            "runs": 1,
+            "hits": 7,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 826209,
+          "name": "Aaron Watson"
+        },
+        "loser": {
+          "id": 696277,
+          "name": "Mason Marriott"
+        }
+      },
+      "game_url": "game.html?id=rookie-844632&sport=baseball&league=rookie&gamePk=844632",
+      "live_url": "live.html?id=rookie-844632&sport=baseball&league=rookie&gamePk=844632"
+    },
+    {
+      "id": "rookie-844652",
+      "game_pk": 844652,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 4629,
+        "name": "Sloan Park"
+      },
+      "away": {
+        "id": 411,
+        "abbreviation": "A-RAN",
+        "name": "ACL Rangers",
+        "score": 5,
+        "record": {
+          "wins": 26,
+          "losses": 32,
+          "pct": ".448"
+        }
+      },
+      "home": {
+        "id": 407,
+        "abbreviation": "A-CUB",
+        "name": "ACL Cubs",
+        "score": 2,
+        "record": {
+          "wins": 18,
+          "losses": 38,
+          "pct": ".321"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 4,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 5,
+            "hits": 6,
+            "errors": 0
+          },
+          "home": {
+            "runs": 2,
+            "hits": 6,
+            "errors": 0
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 822476,
+          "name": "Connor O'Hara"
+        },
+        "loser": {
+          "id": 814342,
+          "name": "Jackson Kirkpatrick"
+        },
+        "save": {
+          "id": 814275,
+          "name": "Michael Valverde"
+        }
+      },
+      "game_url": "game.html?id=rookie-844652&sport=baseball&league=rookie&gamePk=844652",
+      "live_url": "live.html?id=rookie-844652&sport=baseball&league=rookie&gamePk=844652"
+    },
+    {
+      "id": "rookie-844682",
+      "game_pk": 844682,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Final",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2518,
+        "name": "American Family Fields of Phoenix"
+      },
+      "away": {
+        "id": 1997,
+        "abbreviation": "A-WSX",
+        "name": "ACL White Sox",
+        "score": 8,
+        "record": {
+          "wins": 18,
+          "losses": 39,
+          "pct": ".316"
+        }
+      },
+      "home": {
+        "id": 406,
+        "abbreviation": "A-BRW",
+        "name": "ACL Brewers",
+        "score": 7,
+        "record": {
+          "wins": 25,
+          "losses": 33,
+          "pct": ".431"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 7,
+        "current_inning_ordinal": "7th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 2
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 3,
+            "home": 5
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 3,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 0,
+            "home": 0
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 8,
+            "hits": 11,
+            "errors": 0
+          },
+          "home": {
+            "runs": 7,
+            "hits": 5,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 700320,
+          "name": "Fidel Montero"
+        },
+        "loser": {
+          "id": 820936,
+          "name": "Wenderlyn King"
+        },
+        "save": {
+          "id": 830407,
+          "name": "Reinder Gomez"
+        }
+      },
+      "game_url": "game.html?id=rookie-844682&sport=baseball&league=rookie&gamePk=844682",
+      "live_url": "live.html?id=rookie-844682&sport=baseball&league=rookie&gamePk=844682"
+    },
+    {
+      "id": "rookie-844744",
+      "game_pk": 844744,
+      "date": "2026-07-20",
+      "start_time": "2026-07-21T01:00:00Z",
+      "status": "Completed Early",
+      "abstract_status": "Final",
+      "league": "rookie",
+      "sport_id": 16,
+      "game_type": "R",
+      "game_number": 1,
+      "double_header": "N",
+      "series_description": "Regular Season",
+      "venue": {
+        "id": 2500,
+        "name": "Tempe Diablo Stadium"
+      },
+      "away": {
+        "id": 410,
+        "abbreviation": "A-PAD",
+        "name": "ACL Padres",
+        "score": 16,
+        "record": {
+          "wins": 32,
+          "losses": 25,
+          "pct": ".561"
+        }
+      },
+      "home": {
+        "id": 404,
+        "abbreviation": "A-ANG",
+        "name": "ACL Angels",
+        "score": 6,
+        "record": {
+          "wins": 34,
+          "losses": 24,
+          "pct": ".586"
+        }
+      },
+      "away_detail": "Starter TBD",
+      "home_detail": "Starter TBD",
+      "linescore": {
+        "scheduled_innings": 7,
+        "current_inning": 6,
+        "current_inning_ordinal": "6th",
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 5,
+            "home": 1
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 4
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 8,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": null,
+            "home": null
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": null,
+            "home": null
+          }
+        ],
+        "totals": {
+          "away": {
+            "runs": 16,
+            "hits": 12,
+            "errors": 0
+          },
+          "home": {
+            "runs": 6,
+            "hits": 5,
+            "errors": 1
+          }
+        }
+      },
+      "decisions": {
+        "winner": {
+          "id": 831960,
+          "name": "Florangel Vasquez"
+        },
+        "loser": {
+          "id": 834241,
+          "name": "Luke LaCourse"
+        }
+      },
+      "game_url": "game.html?id=rookie-844744&sport=baseball&league=rookie&gamePk=844744",
+      "live_url": "live.html?id=rookie-844744&sport=baseball&league=rookie&gamePk=844744"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "sport": "baseball",
+  "league": "high-a",
+  "date": "2026-07-20",
+  "updated_at": "2026-07-21T07:19:11Z",
+  "source": {
+    "provider": "MLB Stats API",
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=13&season=2026&hydrate=team%2Cvenue%2CprobablePitcher%2Clinescore%2Cdecisions&startDate=2026-07-20&endDate=2026-07-20"
+  },
+  "events": []
+}
