@@ -65,6 +65,14 @@ export function renderOffenseWidget({
           <button
             type="button"
             data-offense-timeframe="${timeframe}"
+            data-global-signal-family="offense-signal"
+            data-global-signal-score="${
+              Number.isFinite(
+                Number(signal.score)
+              )
+                ? Number(signal.score)
+                : ""
+            }"
             class="offense-control-signal ${escapeHtml(
               signalClass
             )}${
@@ -220,7 +228,15 @@ function renderValueCell(
   const hasValue = value !== null && value !== undefined && value !== "";
   const heatClass = hasValue ? getRankHeatClass(rank, 30) : "metric-missing";
   return `
-    <td class="${heatClass}">
+    <td
+      class="${heatClass}"
+      data-global-rank="${
+        Number.isFinite(Number(rank))
+          ? Number(rank)
+          : ""
+      }"
+      data-global-league-size="30"
+    >
       ${escapeHtml(
         formatMetricValue(value, type)
       )}
@@ -242,7 +258,15 @@ function renderRankCell(rank) {
     : "metric-missing";
 
   return `
-    <td class="rank-cell ${heatClass}">
+    <td
+      class="rank-cell ${heatClass}"
+      data-global-rank="${
+        Number.isFinite(numericRank)
+          ? numericRank
+          : ""
+      }"
+      data-global-league-size="30"
+    >
       ${displayRank}
     </td>
   `;

@@ -1,10 +1,15 @@
 import {
+  initializeHighlightControls,
+  applyGlobalTierHighlights
+} from "./assets/js/engine/highlightPreferences.js?v=phase11z-exact-typed-spread3";
+
+import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js?v=phase11t-offense-metric-expansion1";
+} from "./assets/js/widgets/offenseWidget.js?v=phase11u-global-highlight-controls1";
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=phase11t-offense-metric-expansion1";
+} from "./assets/js/widgets/pitcherWidget.js?v=phase11u-global-highlight-controls1";
 
 import {
   renderBullpenWidget
@@ -304,7 +309,35 @@ async function loadGame() {
   }
 }
 
+function initializeGlobalHighlightControls() {
+  initializeHighlightControls({
+    rangeInput:
+      document.getElementById(
+        "globalHighlightRange"
+      ),
+
+    rangeOutput:
+      document.getElementById(
+        "globalHighlightRangeOutput"
+      ),
+
+    neutralInput:
+      document.getElementById(
+        "globalHighlightNeutral"
+      ),
+
+    onChange: () => {
+      applyGlobalTierHighlights(
+        document
+      );
+    }
+  });
+}
+
+
 function renderAll() {
+  initializeGlobalHighlightControls();
+
   renderGameNavigation();
   renderGameHeader();
   renderStatusStrip();
@@ -317,6 +350,10 @@ function renderAll() {
   renderGameContext();
   renderGameArticles();
   renderGameLifecycle();
+
+  applyGlobalTierHighlights(
+    document
+  );
 }
 
 function renderGameNavigation() {

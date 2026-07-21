@@ -118,6 +118,14 @@ export function renderPitcherWidget({
                 <button
                   type="button"
                   data-pitcher-location="${location}"
+                  data-global-signal-family="pitcher-signal"
+                  data-global-signal-score="${
+                    Number.isFinite(
+                      Number(signal.score)
+                    )
+                      ? Number(signal.score)
+                      : ""
+                  }"
                   class="pitcher-control-signal ${escapeHtml(
                     signalClass
                   )}${
@@ -202,6 +210,14 @@ export function renderPitcherWidget({
               <button
                 type="button"
                 data-pitcher-start-count="${option}"
+                data-global-signal-family="pitcher-signal"
+                data-global-signal-score="${
+                  Number.isFinite(
+                    Number(signal.score)
+                  )
+                    ? Number(signal.score)
+                    : ""
+                }"
                 class="pitcher-control-signal ${escapeHtml(
                   signalClass
                 )}${
@@ -654,6 +670,16 @@ function renderPitcherStatCell(value) {
   return `
     <td
       class="${heatClass} pitcher-stat-cell"
+      data-global-rank="${
+        hasRank
+          ? rank
+          : ""
+      }"
+      data-global-league-size="${
+        Number.isFinite(poolSize)
+          ? poolSize
+          : 30
+      }"
       title="${escapeAttribute(tooltip)}"
       aria-label="${escapeAttribute(tooltip)}"
     >
