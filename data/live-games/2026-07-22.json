@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0-live",
   "date": "2026-07-22",
-  "updated_at": "2026-07-22T05:15:22.634745Z",
+  "updated_at": "2026-07-22T19:14:41.971394Z",
   "source": "MLB Stats API schedule + game feed/live",
   "refresh_interval_seconds": 2.0,
   "games": [
@@ -10,43 +10,92 @@
       "mlb_game_pk": 823518,
       "date": "2026-07-22",
       "game_time": "2026-07-22T17:05:00Z",
-      "status": "Scheduled",
-      "abstract_status": "Preview",
+      "status": "In Progress",
+      "abstract_status": "Live",
       "score": {
-        "away": null,
-        "home": null
+        "away": 3,
+        "home": 3
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 8,
+        "current_inning_ordinal": "8th",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 1,
+        "strikes": 1,
+        "outs": 1,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 2,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 7,
+            "ordinal": "7th",
+            "away": 1,
+            "home": 3
+          },
+          {
+            "num": 8,
+            "ordinal": "8th",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 3,
+            "hits": 4,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 3,
+            "hits": 6,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051508",
+      "live_feed_updated_at": "20260722_191431",
       "venue": {
         "id": 3313,
         "name": "Yankee Stadium"
@@ -78,9 +127,10 @@
           "status": "probable"
         },
         "home": {
-          "id": 543037,
-          "name": "Gerrit Cole",
-          "status": "probable"
+          "id": 687396,
+          "name": "Brent Headrick",
+          "throws": "L",
+          "status": "current"
         }
       }
     },
@@ -89,43 +139,80 @@
       "mlb_game_pk": 824735,
       "date": "2026-07-22",
       "game_time": "2026-07-22T17:35:00Z",
-      "status": "Scheduled",
-      "abstract_status": "Preview",
+      "status": "In Progress",
+      "abstract_status": "Live",
       "score": {
-        "away": null,
-        "home": null
+        "away": 3,
+        "home": 6
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 6,
+        "current_inning_ordinal": "6th",
+        "inning_state": "Bottom",
+        "inning_half": "Bottom",
+        "balls": 0,
+        "strikes": 2,
+        "outs": 0,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 4
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 1,
+            "home": 1
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": 1,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 3,
+            "hits": 9,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 6,
+            "hits": 8,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051510",
+      "live_feed_updated_at": "20260722_191407",
       "venue": {
         "id": 3,
         "name": "Fenway Park"
@@ -154,7 +241,8 @@
         "away": {
           "id": 665152,
           "name": "Dean Kremer",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         },
         "home": {
           "id": 687562,
@@ -168,43 +256,68 @@
       "mlb_game_pk": 823761,
       "date": "2026-07-22",
       "game_time": "2026-07-22T18:10:00Z",
-      "status": "Scheduled",
-      "abstract_status": "Preview",
+      "status": "In Progress",
+      "abstract_status": "Live",
       "score": {
-        "away": null,
-        "home": null
+        "away": 1,
+        "home": 3
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 4,
+        "current_inning_ordinal": "4th",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 3,
+        "strikes": 1,
+        "outs": 0,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 1,
+            "home": 3
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 1,
+            "hits": 3,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 3,
+            "hits": 3,
+            "errors": 1
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051509",
+      "live_feed_updated_at": "20260722_191421",
       "venue": {
         "id": 32,
         "name": "American Family Field"
@@ -238,7 +351,8 @@
         "home": {
           "id": 701656,
           "name": "Logan Henderson",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         }
       }
     },
@@ -247,43 +361,80 @@
       "mlb_game_pk": 824083,
       "date": "2026-07-22",
       "game_time": "2026-07-22T18:10:00Z",
-      "status": "Scheduled",
-      "abstract_status": "Preview",
+      "status": "In Progress",
+      "abstract_status": "Live",
       "score": {
-        "away": null,
-        "home": null
+        "away": 0,
+        "home": 0
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 6,
+        "current_inning_ordinal": "6th",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 0,
+        "strikes": 1,
+        "outs": 1,
         "bases": {
           "first": false,
-          "second": false,
-          "third": false
+          "second": true,
+          "third": true
         },
-        "runners_on": 0,
-        "innings": [],
+        "runners_on": 2,
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 2,
+            "ordinal": "2nd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 3,
+            "ordinal": "3rd",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 4,
+            "ordinal": "4th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 5,
+            "ordinal": "5th",
+            "away": 0,
+            "home": 0
+          },
+          {
+            "num": 6,
+            "ordinal": "6th",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 1,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 1,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051508",
+      "live_feed_updated_at": "20260722_191412",
       "venue": {
         "id": 7,
         "name": "Kauffman Stadium"
@@ -317,7 +468,8 @@
         "home": {
           "id": 607625,
           "name": "Seth Lugo",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         }
       }
     },
@@ -326,43 +478,50 @@
       "mlb_game_pk": 824327,
       "date": "2026-07-22",
       "game_time": "2026-07-22T19:10:00Z",
-      "status": "Scheduled",
-      "abstract_status": "Preview",
+      "status": "In Progress",
+      "abstract_status": "Live",
       "score": {
-        "away": null,
-        "home": null
+        "away": 0,
+        "home": 0
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 1,
+        "current_inning_ordinal": "1st",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 1,
+        "strikes": 2,
+        "outs": 1,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051509",
+      "live_feed_updated_at": "20260722_191402",
       "venue": {
         "id": 19,
         "name": "Coors Field"
@@ -396,7 +555,8 @@
         "home": {
           "id": 687312,
           "name": "Gabriel Hughes",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         }
       }
     },
@@ -405,43 +565,50 @@
       "mlb_game_pk": 823110,
       "date": "2026-07-22",
       "game_time": "2026-07-22T19:40:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "abstract_status": "Preview",
       "score": {
-        "away": null,
-        "home": null
+        "away": 0,
+        "home": 0
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 1,
+        "current_inning_ordinal": "1st",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 0,
+        "strikes": 0,
+        "outs": 0,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051512",
+      "live_feed_updated_at": "20260722_170554",
       "venue": {
         "id": 680,
         "name": "T-Mobile Park"
@@ -475,7 +642,8 @@
         "home": {
           "id": 676106,
           "name": "Emerson Hancock",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         }
       }
     },
@@ -484,43 +652,50 @@
       "mlb_game_pk": 825055,
       "date": "2026-07-22",
       "game_time": "2026-07-22T19:40:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "abstract_status": "Preview",
       "score": {
-        "away": null,
-        "home": null
+        "away": 0,
+        "home": 0
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 1,
+        "current_inning_ordinal": "1st",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 0,
+        "strikes": 0,
+        "outs": 0,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051512",
+      "live_feed_updated_at": "20260722_173355",
       "venue": {
         "id": 15,
         "name": "Chase Field"
@@ -531,8 +706,8 @@
         "name": "Athletics",
         "record": {
           "wins": 43,
-          "losses": 57,
-          "pct": ".430"
+          "losses": 58,
+          "pct": ".426"
         }
       },
       "home_team": {
@@ -540,9 +715,9 @@
         "abbr": "AZ",
         "name": "Arizona Diamondbacks",
         "record": {
-          "wins": 51,
+          "wins": 52,
           "losses": 49,
-          "pct": ".510"
+          "pct": ".515"
         }
       },
       "pitchers": {
@@ -554,7 +729,8 @@
         "home": {
           "id": 518876,
           "name": "Merrill Kelly",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         }
       }
     },
@@ -563,43 +739,50 @@
       "mlb_game_pk": 824004,
       "date": "2026-07-22",
       "game_time": "2026-07-22T20:07:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "abstract_status": "Preview",
       "score": {
-        "away": null,
-        "home": null
+        "away": 0,
+        "home": 0
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 1,
+        "current_inning_ordinal": "1st",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 0,
+        "strikes": 0,
+        "outs": 0,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051511",
+      "live_feed_updated_at": "20260722_173520",
       "venue": {
         "id": 1,
         "name": "Angel Stadium"
@@ -633,7 +816,8 @@
         "home": {
           "id": 672282,
           "name": "Reid Detmers",
-          "status": "probable"
+          "throws": "L",
+          "status": "current"
         }
       }
     },
@@ -678,7 +862,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051512",
+      "live_feed_updated_at": "20260722_191439",
       "venue": {
         "id": 2681,
         "name": "Citizens Bank Park"
@@ -721,43 +905,50 @@
       "mlb_game_pk": 824408,
       "date": "2026-07-22",
       "game_time": "2026-07-22T22:40:00Z",
-      "status": "Scheduled",
+      "status": "Pre-Game",
       "abstract_status": "Preview",
       "score": {
-        "away": null,
-        "home": null
+        "away": 0,
+        "home": 0
       },
       "linescore": {
         "scheduled_innings": 9,
-        "current_inning": null,
-        "current_inning_ordinal": null,
-        "inning_state": null,
-        "inning_half": null,
-        "balls": null,
-        "strikes": null,
-        "outs": null,
+        "current_inning": 1,
+        "current_inning_ordinal": "1st",
+        "inning_state": "Top",
+        "inning_half": "Top",
+        "balls": 0,
+        "strikes": 0,
+        "outs": 0,
         "bases": {
           "first": false,
           "second": false,
           "third": false
         },
         "runners_on": 0,
-        "innings": [],
+        "innings": [
+          {
+            "num": 1,
+            "ordinal": "1st",
+            "away": null,
+            "home": null
+          }
+        ],
         "totals": {
           "away": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           },
           "home": {
-            "runs": null,
-            "hits": null,
-            "errors": null
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
           }
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051512",
+      "live_feed_updated_at": "20260722_184945",
       "venue": {
         "id": 5,
         "name": "Progressive Field"
@@ -791,7 +982,8 @@
         "home": {
           "id": 677944,
           "name": "Slade Cecconi",
-          "status": "probable"
+          "throws": "R",
+          "status": "current"
         }
       }
     },
@@ -836,7 +1028,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051513",
+      "live_feed_updated_at": "20260722_191433",
       "venue": {
         "id": 3313,
         "name": "Yankee Stadium"
@@ -915,7 +1107,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051510",
+      "live_feed_updated_at": "20260722_191438",
       "venue": {
         "id": 14,
         "name": "Rogers Centre"
@@ -994,7 +1186,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051508",
+      "live_feed_updated_at": "20260722_191433",
       "venue": {
         "id": 3,
         "name": "Fenway Park"
@@ -1072,7 +1264,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051518",
+      "live_feed_updated_at": "20260722_191432",
       "venue": {
         "id": 4705,
         "name": "Truist Park"
@@ -1151,7 +1343,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051511",
+      "live_feed_updated_at": "20260722_191433",
       "venue": {
         "id": 5325,
         "name": "Globe Life Field"
@@ -1230,7 +1422,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051513",
+      "live_feed_updated_at": "20260722_191439",
       "venue": {
         "id": 2392,
         "name": "Daikin Park"
@@ -1309,7 +1501,7 @@
         }
       },
       "decisions": {},
-      "live_feed_updated_at": "20260722_051512",
+      "live_feed_updated_at": "20260722_191434",
       "venue": {
         "id": 17,
         "name": "Wrigley Field"
@@ -1348,5 +1540,5 @@
       }
     }
   ],
-  "fetch_duration_ms": 1774
+  "fetch_duration_ms": 2056
 }
