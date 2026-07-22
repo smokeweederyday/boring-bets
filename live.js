@@ -11,7 +11,7 @@
 
   const state = {
     games: [], days: [], parks: [], index: null, lineupArchive: {}, game: null, dayGames: [], lineupSide: "away", eventFilter: "all",
-    events: [], eventIndex: 0, paused: false, timer: null, demo: true, currentBatterIndex: 2,
+    events: [], eventIndex: 0, paused: false, timer: null, demo: false, currentBatterIndex: 2,
     hudView: "field", autoView: false, heatLayer: "combined", pitchHistory: [], fieldProjection: null, plateLook: 0, lastPlateEvent: null,
     simulated: { awayScore: 3, homeScore: 2, inning: 6, half: "top", outs: 1, balls: 2, strikes: 1, pitchCount: 84, bases: [true, false, true] }
   };
@@ -43,9 +43,32 @@
       state.parks = Array.isArray(parksPayload.parks) ? parksPayload.parks : [];
       state.lineupArchive = lineupsPayload.lineups || {};
       const requested = new URLSearchParams(location.search).get("id");
-      const requestedDate = requested ? requested.slice(0, 10) : state.index.recommended_demo_date;
-      await loadDay(requestedDate, requested || state.index.recommended_demo_game_id, false);
-      startDemoFeed();
+
+      const todayParts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(new Date());
+
+      const todayPart = type =>
+        todayParts.find(part => part.type === type)?.value || "";
+
+      const today =
+        `${todayPart("year")}-${todayPart("month")}-${todayPart("day")}`;
+
+      const todayExists =
+        (state.index?.dates || []).some(entry => entry.date === today);
+
+      const requestedDate =
+        requested
+          ? requested.slice(0, 10)
+          : todayExists
+            ? today
+            : state.index.recommended_demo_date;
+
+      await loadDay(requestedDate, requested || null, false);
+      startLiveFeed();
     } catch (error) {
       console.error(error);
       showToast(error.message || "Live page could not load.");
@@ -136,24 +159,79 @@
     state.events = buildSeedEvents(game);
     state.eventIndex = 0;
     state.currentBatterIndex = 2;
-    state.simulated = deriveInitialState(game);
+    state.simulated = deriveLiveState(game, null);
     state.pitchHistory = buildInitialPitchHistory(game);
     if (pushHistory) history.pushState({}, "", `live.html?id=${encodeURIComponent(game.id)}`);
     renderEverything();
   }
 
-  function deriveInitialState(game) {
-    const numericSeed = Number(game.mlb_game_pk || game.venue?.id || 17);
+  function liveNumber(value, fallback = 0) {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : fallback;
+  }
+
+  function deriveLiveState(game, previous = null) {
+    const linescore = game?.linescore || {};
+    const totals = linescore.totals || {};
+    const bases = linescore.bases || {};
+
+    const inningState = String(
+      linescore.inning_half ||
+      linescore.inning_state ||
+      ""
+    ).toLowerCase();
+
+    let half = previous?.half || "top";
+
+    if (inningState.includes("bottom")) {
+      half = "bottom";
+    } else if (inningState.includes("top")) {
+      half = "top";
+    }
+
+    const suppliedPitchCount =
+      game?.pitch_count ??
+      game?.current_pitcher?.pitch_count ??
+      game?.live?.pitch_count;
+
     return {
-      awayScore: numericSeed % 5,
-      homeScore: (numericSeed + 2) % 5,
-      inning: 6,
-      half: numericSeed % 2 ? "bottom" : "top",
-      outs: numericSeed % 3,
-      balls: 2,
-      strikes: 1,
-      pitchCount: 78 + (numericSeed % 18),
-      bases: [true, numericSeed % 2 === 0, true]
+      awayScore: liveNumber(
+        game?.score?.away ?? totals?.away?.runs,
+        previous?.awayScore ?? 0
+      ),
+      homeScore: liveNumber(
+        game?.score?.home ?? totals?.home?.runs,
+        previous?.homeScore ?? 0
+      ),
+      inning: Math.max(
+        1,
+        liveNumber(
+          linescore.current_inning,
+          previous?.inning ?? 1
+        )
+      ),
+      half,
+      outs: liveNumber(
+        linescore.outs,
+        previous?.outs ?? 0
+      ),
+      balls: liveNumber(
+        linescore.balls,
+        previous?.balls ?? 0
+      ),
+      strikes: liveNumber(
+        linescore.strikes,
+        previous?.strikes ?? 0
+      ),
+      pitchCount: liveNumber(
+        suppliedPitchCount,
+        previous?.pitchCount ?? 0
+      ),
+      bases: [
+        Boolean(bases.first),
+        Boolean(bases.second),
+        Boolean(bases.third)
+      ]
     };
   }
 
@@ -181,7 +259,7 @@
       return `<button class="game-tile${active ? " active" : ""}" data-game-id="${html(game.id)}" type="button">
         <span class="game-tile-logos"><img src="${logo(away.team_id)}" alt="${html(away.abbr || "Away")}"><img src="${logo(home.team_id)}" alt="${html(home.abbr || "Home")}"></span>
         <span class="game-tile-copy"><strong>${html(away.abbr || "AWY")} @ ${html(home.abbr || "HME")}</strong><span>${html(statusLabel(game))}</span></span>
-        <span class="game-tile-score">${active ? `${state.simulated.awayScore}-${state.simulated.homeScore}` : "—"}</span>
+        <span class="game-tile-score">${safe(game.score?.away)}-${safe(game.score?.home)}</span>
       </button>`;
     }).join("") || `<p style="color:#789083;font-size:.65rem;padding:8px">No games on this date.</p>`;
     document.querySelectorAll("[data-game-id]").forEach(button => button.addEventListener("click", () => startGame(button.dataset.gameId)));
@@ -846,12 +924,90 @@
     $("eventStream").innerHTML = events.map(item => `<article class="event-card ${item.type}"><header><span>${html(item.time)}</span><span>${html(item.title)}</span></header><strong>${html(item.detail)}</strong><p>${html(item.meta)}</p></article>`).join("");
   }
 
-  function startDemoFeed() {
+  let livePollInFlight = false;
+
+  function startLiveFeed() {
     clearInterval(state.timer);
+    state.demo = false;
+
+    refreshLiveSlate();
+
     state.timer = setInterval(() => {
-      if (state.paused || !state.game) return;
-      simulatePitch();
-    }, 5200);
+      refreshLiveSlate();
+    }, 3000);
+  }
+
+  async function refreshLiveSlate() {
+    if (
+      state.paused ||
+      !state.game ||
+      livePollInFlight
+    ) {
+      return;
+    }
+
+    const entry = (state.index?.dates || []).find(
+      item => item.date === state.game.date
+    );
+
+    if (!entry?.file) {
+      return;
+    }
+
+    livePollInFlight = true;
+
+    try {
+      const response = await fetch(
+        `${entry.file}?v=${Date.now()}`,
+        { cache: "no-store" }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Live slate returned HTTP ${response.status}.`
+        );
+      }
+
+      const payload = await response.json();
+      const games = Array.isArray(payload.games)
+        ? payload.games
+        : [];
+
+      const currentGame = games.find(
+        game => game.id === state.game.id
+      );
+
+      if (!currentGame) {
+        throw new Error(
+          `Game ${state.game.id} is missing from the live slate.`
+        );
+      }
+
+      state.games = games;
+      state.dayGames = games;
+      state.game = currentGame;
+      state.simulated = deriveLiveState(
+        currentGame,
+        state.simulated
+      );
+      state.demo = false;
+
+      renderEverything();
+
+      $("feedHealthText").textContent = "LIVE FEED";
+      document
+        .querySelector(".feed-health")
+        ?.classList.remove("stale");
+    } catch (error) {
+      console.warn("Live refresh failed:", error);
+
+      $("feedHealthText").textContent = "FEED RETRYING";
+      document
+        .querySelector(".feed-health")
+        ?.classList.add("stale");
+    } finally {
+      livePollInFlight = false;
+    }
   }
 
   function simulatePitch() {
