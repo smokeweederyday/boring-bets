@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-22T14:18:30.989396+00:00",
+    "updated_at": "2026-07-22T16:04:57.313155+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -386,6 +386,24 @@
       "from": "See description",
       "to": "See description",
       "players": "Kansas City Royals traded RF Rudy Martin Jr.",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-22",
+      "from": "See description",
+      "to": "See description",
+      "players": "Houston Astros traded RHP Nate Pearson to Kansas City Royals for RHP Max Martin .",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-22",
+      "from": "See description",
+      "to": "See description",
+      "players": "Houston Astros traded RHP Nate Pearson to Kansas City Royals for RHP Max Martin.",
       "return": "See official source",
       "betting_impact": "Editorial review required.",
       "source": "https://www.mlb.com/transactions"
