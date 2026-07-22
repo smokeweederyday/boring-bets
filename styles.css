@@ -6287,3 +6287,122 @@ button.global-tier-highlight.offense-signal-strong-negative {
   background: #69e9ff !important;
 }
 
+
+
+/* BORING BETS: GAME CARD BORDER ATMOSPHERE V1 */
+
+.compact-event-card.has-card-atmosphere {
+  position: relative;
+  isolation: isolate;
+
+  border: 1px solid transparent !important;
+  outline: none !important;
+
+  background:
+    radial-gradient(
+      circle at 15% 12%,
+      color-mix(
+        in srgb,
+        var(--compact-live-vibe-a, #5aa7ff) 17%,
+        transparent
+      ),
+      transparent 45%
+    ) padding-box,
+
+    radial-gradient(
+      circle at 86% 88%,
+      color-mix(
+        in srgb,
+        var(--compact-live-vibe-b, #9674ff) 16%,
+        transparent
+      ),
+      transparent 48%
+    ) padding-box,
+
+    linear-gradient(
+      145deg,
+      rgba(6, 12, 21, 0.95),
+      rgba(4, 9, 17, 0.98)
+    ) padding-box,
+
+    linear-gradient(
+      115deg,
+      var(--compact-live-vibe-a, #5aa7ff),
+      var(--compact-live-vibe-b, #9674ff),
+      color-mix(
+        in srgb,
+        var(--compact-live-vibe-a, #5aa7ff) 44%,
+        var(--compact-live-vibe-b, #9674ff) 56%
+      ),
+      var(--compact-live-vibe-a, #5aa7ff)
+    ) border-box !important;
+
+  background-size:
+    165% 165%,
+    165% 165%,
+    100% 100%,
+    320% 320% !important;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.28),
+    0 0 18px
+      color-mix(
+        in srgb,
+        var(--compact-live-vibe-a, #5aa7ff) 16%,
+        transparent
+      ),
+    0 0 24px
+      color-mix(
+        in srgb,
+        var(--compact-live-vibe-b, #9674ff) 12%,
+        transparent
+      ) !important;
+
+  animation:
+    boring-bets-card-border-atmosphere
+    13s
+    ease-in-out
+    infinite alternate;
+}
+
+.compact-event-card.has-card-atmosphere.is-final {
+  animation-duration: 28s;
+  filter: saturate(0.72) brightness(0.88);
+}
+
+.compact-event-card.has-card-atmosphere.is-live {
+  animation-duration: 8s;
+  filter: saturate(1.12) brightness(1.03);
+}
+
+@keyframes boring-bets-card-border-atmosphere {
+  0% {
+    background-position:
+      0% 0%,
+      100% 100%,
+      0 0,
+      0% 48%;
+  }
+
+  50% {
+    background-position:
+      55% 35%,
+      42% 62%,
+      0 0,
+      56% 58%;
+  }
+
+  100% {
+    background-position:
+      100% 80%,
+      0% 15%,
+      0 0,
+      100% 42%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compact-event-card.has-card-atmosphere {
+    animation: none !important;
+  }
+}

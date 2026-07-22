@@ -744,6 +744,29 @@ function normalizeMlbLiveState(linescore = {}) {
   };
 }
 
+function mlbStatusIsExplicitlyLive(value) {
+  const status = String(value || "").toLowerCase();
+
+  if (
+    status.includes("postpon") ||
+    status.includes("cancel") ||
+    status.includes("final") ||
+    status.includes("completed")
+  ) {
+    return false;
+  }
+
+  return (
+    status.includes("in progress") ||
+    status.includes("live") ||
+    status.includes("warmup") ||
+    status.includes("delayed") ||
+    status.includes("game delay") ||
+    status.includes("challenge") ||
+    status.includes("review")
+  );
+}
+
 function normalizeMlbEvent(game, cardDate = cardState.date) {
   const startTime = game.game_time || game.start_time || game.gameDate;
   const eventDate = eventDateKey(game) || cardDate;
@@ -751,7 +774,22 @@ function normalizeMlbEvent(game, cardDate = cardState.date) {
   const awayScore = readTeamScore(game, "away");
   const homeScore = readTeamScore(game, "home");
   const finalScoreAvailable = hasFinalScore(awayScore, homeScore);
-  const status = resolveEventStatus(rawStatus, startTime, eventDate, cardDate, finalScoreAvailable);
+
+  /*
+    An explicit MLB live status always wins over calendar-date
+    completion logic. This keeps late games live after midnight.
+  */
+  const resolvedStatus = resolveEventStatus(
+    rawStatus,
+    startTime,
+    eventDate,
+    cardDate,
+    finalScoreAvailable
+  );
+
+  const status = mlbStatusIsExplicitlyLive(rawStatus)
+    ? "live"
+    : resolvedStatus;
   const gameUrl = game.game_url || `game.html?id=${encodeURIComponent(game.id)}`;
   const liveUrl = game.live_url || `live.html?id=${encodeURIComponent(game.id)}`;
   const awayPitcher = game.pitchers?.away || {};
@@ -907,12 +945,246 @@ function renderLeagueResult(panel, sportId, leagueId, result) {
   panel.innerHTML = `${seasonNote}<div class="compact-event-grid">${filtered.map(event => renderCompactEventCard(event, league)).join("")}</div>`;
 }
 
+/* BORING BETS: TEAM + WEATHER CARD BORDERS V3 */
+
+const MLB_CARD_OFFICIAL_COLORS = Object.freeze({
+  ARI: ["#a71930", "#e3d4ad", "#000000"],
+  AZ:  ["#a71930", "#e3d4ad", "#000000"],
+  ATL: ["#ce1141", "#13274f", "#eaaa00"],
+  BAL: ["#df4601", "#000000", "#ffffff"],
+  BOS: ["#bd3039", "#0c2340", "#ffffff"],
+  CHC: ["#0e3386", "#cc3433", "#ffffff"],
+  CHW: ["#27251f", "#c4ced4", "#ffffff"],
+  CWS: ["#27251f", "#c4ced4", "#ffffff"],
+  CIN: ["#c6011f", "#000000", "#ffffff"],
+  CLE: ["#e31937", "#0c2340", "#ffffff"],
+  COL: ["#33006f", "#c4ced4", "#000000"],
+  DET: ["#0c2340", "#fa4616", "#ffffff"],
+  HOU: ["#002d62", "#eb6e1f", "#ffffff"],
+  KC:  ["#004687", "#bd9b60", "#ffffff"],
+  KCR: ["#004687", "#bd9b60", "#ffffff"],
+  LAA: ["#ba0021", "#003263", "#c4ced4"],
+  LAD: ["#005a9c", "#ef3e42", "#ffffff"],
+  MIA: ["#00a3e0", "#ef3340", "#000000"],
+  MIL: ["#12284b", "#ffc52f", "#ffffff"],
+  MIN: ["#002b5c", "#d31145", "#b9975b"],
+  NYM: ["#002d72", "#ff5910", "#ffffff"],
+  NYY: ["#0c2340", "#c4ced4", "#ffffff"],
+  ATH: ["#003831", "#efb21e", "#ffffff"],
+  OAK: ["#003831", "#efb21e", "#ffffff"],
+  PHI: ["#e81828", "#002d72", "#ffffff"],
+  PIT: ["#27251f", "#fdb827", "#ffffff"],
+  SD:  ["#2f241d", "#ffc425", "#ffffff"],
+  SDP: ["#2f241d", "#ffc425", "#ffffff"],
+  SF:  ["#fd5a1e", "#27251f", "#efd19f"],
+  SFG: ["#fd5a1e", "#27251f", "#efd19f"],
+  SEA: ["#0c2c56", "#005c5c", "#c4ced4"],
+  STL: ["#c41e3a", "#0c2340", "#fedb00"],
+  TB:  ["#092c5c", "#8fbce6", "#f5d130"],
+  TBR: ["#092c5c", "#8fbce6", "#f5d130"],
+  TEX: ["#003278", "#c0111f", "#ffffff"],
+  TOR: ["#134a8e", "#e8291c", "#ffffff"],
+  WSH: ["#ab0003", "#14225a", "#ffffff"],
+  WSN: ["#ab0003", "#14225a", "#ffffff"]
+});
+
+function teamWeatherCardBorderAtmosphere(event) {
+  const awayCode = cardAtmosphereTeamCode(event.away);
+  const homeCode = cardAtmosphereTeamCode(event.home);
+
+  const awayColors =
+    MLB_CARD_OFFICIAL_COLORS[awayCode] ||
+    ["#6f7f8f", "#bcc6cf", "#35404b"];
+
+  const homeColors =
+    MLB_CARD_OFFICIAL_COLORS[homeCode] ||
+    ["#8293a3", "#d5dde4", "#465563"];
+
+  const weather =
+    event.cardData?.weather ||
+    {};
+
+  const condition = String(
+    weather.condition ||
+    weather.summary ||
+    weather.description ||
+    weather.weather ||
+    ""
+  ).toLowerCase();
+
+  const temperature = cardAtmosphereNumber(
+    weather.temperature,
+    weather.temp,
+    weather.temperature_f
+  );
+
+  const wind = cardAtmosphereNumber(
+    weather.wind_gust,
+    weather.wind_speed,
+    weather.wind_mph
+  ) || 0;
+
+  const rainChance = cardAtmosphereNumber(
+    weather.rain_probability,
+    weather.precipitation_probability,
+    weather.precip_probability
+  ) || 0;
+
+  let weatherColors = [
+    "#8ba0b2",
+    "#c2ccd4"
+  ];
+
+  let weatherClass = "is-weather-neutral";
+  let speed = 14;
+
+  if (
+    /thunder|lightning|electrical storm/.test(condition)
+  ) {
+    weatherColors = [
+      "#f7fbff",
+      "#759dff"
+    ];
+
+    weatherClass = "is-weather-thunder";
+    speed = 6;
+  } else if (
+    /snow|sleet|flurr/.test(condition)
+  ) {
+    weatherColors = [
+      "#f4fbff",
+      "#9edbff"
+    ];
+
+    weatherClass = "is-weather-snow";
+    speed = 17;
+  } else if (
+    /rain|shower|drizzle|storm/.test(condition) ||
+    rainChance >= 45
+  ) {
+    weatherColors = [
+      "#5e89a5",
+      "#9bb6c7"
+    ];
+
+    weatherClass = "is-weather-rain";
+    speed = 10;
+  } else if (
+    /overcast|cloud|fog|mist|haze|smoke/.test(condition)
+  ) {
+    weatherColors = [
+      "#737e88",
+      "#adb5bc"
+    ];
+
+    weatherClass = "is-weather-gray";
+    speed = 20;
+  } else if (
+    /clear|sunny|sun/.test(condition)
+  ) {
+    weatherColors = [
+      "#ffd166",
+      "#61c8ff"
+    ];
+
+    weatherClass = "is-weather-clear";
+    speed = 13;
+  }
+
+  if (
+    Number.isFinite(temperature) &&
+    temperature >= 90
+  ) {
+    weatherColors = [
+      "#ffad42",
+      weatherColors[1]
+    ];
+
+    weatherClass += " is-weather-hot";
+    speed = Math.min(speed, 11);
+  } else if (
+    Number.isFinite(temperature) &&
+    temperature <= 45
+  ) {
+    weatherColors = [
+      "#a9e0ff",
+      weatherColors[1]
+    ];
+
+    weatherClass += " is-weather-cold";
+  }
+
+  if (wind >= 15) {
+    weatherColors[1] = "#55d7d0";
+    weatherClass += " is-weather-windy";
+    speed = Math.min(speed, 9);
+  }
+
+  if (event.status === "live") {
+    speed = Math.min(speed, 9);
+  }
+
+  if (event.status === "final") {
+    speed = Math.max(speed, 24);
+  }
+
+  if (event.status === "postponed") {
+    speed = 30;
+    weatherClass += " is-weather-postponed";
+  }
+
+  return {
+    classes: weatherClass,
+    style: [
+      `--card-away-1:${awayColors[0]}`,
+      `--card-away-2:${awayColors[1]}`,
+      `--card-away-3:${awayColors[2]}`,
+      `--card-weather-1:${weatherColors[0]}`,
+      `--card-weather-2:${weatherColors[1]}`,
+      `--card-home-1:${homeColors[0]}`,
+      `--card-home-2:${homeColors[1]}`,
+      `--card-home-3:${homeColors[2]}`,
+      `--card-border-speed:${speed}s`
+    ].join(";")
+  };
+}
+
+function cardAtmosphereTeamCode(participant) {
+  return String(
+    participant?.abbreviation ||
+    participant?.abbr ||
+    participant?.name ||
+    ""
+  )
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "");
+}
+
+function cardAtmosphereNumber(...values) {
+  for (const value of values) {
+    const number = Number(value);
+
+    if (Number.isFinite(number)) {
+      return number;
+    }
+  }
+
+  return null;
+}
+
 function renderCompactEventCard(event, league) {
   const statusLabel = formatStatus(event);
   const live = event.status === "live";
   const final = event.status === "final";
   const pastCard = isPastCardDate(event.eventDate || cardState.date);
-  const completed = final || (pastCard && event.status !== "postponed");
+  const completed =
+    final ||
+    (
+      pastCard &&
+      event.status !== "postponed" &&
+      event.status !== "live"
+    );
   const primaryUrl = completed
     ? event.breakdownUrl
     : live
@@ -930,12 +1202,10 @@ function renderCompactEventCard(event, league) {
     ? `<p class="compact-event-venue">Final score sync required</p>`
     : "";
 
-  const liveVibeStyle = live
-    ? compactLiveVibeStyle(event)
-    : "";
+  const cardAtmosphere = teamWeatherCardBorderAtmosphere(event);
 
   return `
-    <article class="compact-event-card${live ? " is-live" : ""}${completed ? " is-final" : ""}${plays.length ? " has-play" : ""}" data-event-id="${cardEscape(event.id)}" data-event-status="${cardEscape(event.status)}" data-event-date="${cardEscape(event.eventDate || cardState.date)}"${liveVibeStyle ? ` style="${cardEscape(liveVibeStyle)}"` : ""}>
+    <article class="compact-event-card has-card-atmosphere${live ? " is-live" : ""}${completed ? " is-final" : ""}${plays.length ? " has-play" : ""}${cardAtmosphere.classes ? ` ${cardAtmosphere.classes}` : ""}" data-event-id="${cardEscape(event.id)}" data-event-status="${cardEscape(event.status)}" data-event-date="${cardEscape(event.eventDate || cardState.date)}" style="${cardEscape(cardAtmosphere.style)}">
       <div class="compact-event-topline"><span>${cardEscape(league?.label || event.leagueId.toUpperCase())}</span><b class="compact-event-status">${cardEscape(statusLabel)}</b></div>
       ${live
         ? renderCompactLiveScoreboard(event, primaryUrl, primaryAction)
@@ -1804,7 +2074,18 @@ function scheduleMlbLivePoll(delay = null) {
   }
 
   const today = getLocalDateString(new Date());
-  const defaultDelay = cardState.date === today ? 2_500 : 300_000;
+
+  /*
+    Today's card always polls rapidly. A past card continues polling
+    rapidly only while its feed still contains an unfinished live game.
+    This preserves late-night games after midnight without hammering
+    every historical card.
+  */
+  const defaultDelay =
+    cardState.date === today ||
+    cardState.mlbLiveHasOpenGames === true
+      ? 2_500
+      : 300_000;
 
   cardState.mlbLiveTimer = window.setTimeout(
     pollMlbLiveState,
@@ -1819,13 +2100,11 @@ async function pollMlbLiveState() {
   }
 
   const activeDate = cardState.date;
-  const today = getLocalDateString(new Date());
 
-  if (activeDate !== today) {
-    scheduleMlbLivePoll(300_000);
-    return;
-  }
-
+  /*
+    Do not stop polling solely because midnight passed. The selected
+    date may still contain a legitimate unfinished late-night game.
+  */
   cardState.mlbLiveInFlight = true;
 
   try {
@@ -1852,6 +2131,11 @@ async function pollMlbLiveState() {
     const normalizedEvents = rawGames
       .map(game => normalizeMlbEvent(game, activeDate))
       .sort(sortEvents);
+
+    cardState.mlbLiveHasOpenGames =
+      normalizedEvents.some(
+        event => event.status === "live"
+      );
 
     normalizedEvents.forEach(event => {
       const article = document.querySelector(

@@ -1,1 +1,1352 @@
-{"schema_version":"1.0","date":"2026-07-22","games":[{"id":"2026-07-22-pit-nyy","mlb_game_pk":823518,"date":"2026-07-22","game_time":"2026-07-22T17:35:00Z","sport":"MLB","status":"scheduled","venue":{"id":3313,"name":"Yankee Stadium"},"away_team":{"abbr":"PIT","name":"Pittsburgh Pirates","team_id":134},"home_team":{"abbr":"NYY","name":"New York Yankees","team_id":147},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-nym-mil","mlb_game_pk":823761,"date":"2026-07-22","game_time":"2026-07-22T18:10:00Z","sport":"MLB","status":"scheduled","venue":{"id":32,"name":"American Family Field"},"away_team":{"abbr":"NYM","name":"New York Mets","team_id":121},"home_team":{"abbr":"MIL","name":"Milwaukee Brewers","team_id":158},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-sfg-kc","mlb_game_pk":824083,"date":"2026-07-22","game_time":"2026-07-22T18:10:00Z","sport":"MLB","status":"scheduled","venue":{"id":7,"name":"Kauffman Stadium"},"away_team":{"abbr":"SFG","name":"San Francisco Giants","team_id":137},"home_team":{"abbr":"KC","name":"Kansas City Royals","team_id":118},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-wsh-col","mlb_game_pk":824327,"date":"2026-07-22","game_time":"2026-07-22T19:10:00Z","sport":"MLB","status":"scheduled","venue":{"id":19,"name":"Coors Field"},"away_team":{"abbr":"WSH","name":"Washington Nationals","team_id":120},"home_team":{"abbr":"COL","name":"Colorado Rockies","team_id":115},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-ath-ari","mlb_game_pk":825055,"date":"2026-07-22","game_time":"2026-07-22T19:40:00Z","sport":"MLB","status":"scheduled","venue":{"id":15,"name":"Chase Field"},"away_team":{"abbr":"ATH","name":"Athletics","team_id":133},"home_team":{"abbr":"ARI","name":"Arizona Diamondbacks","team_id":109},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-cin-sea","mlb_game_pk":823110,"date":"2026-07-22","game_time":"2026-07-22T19:40:00Z","sport":"MLB","status":"scheduled","venue":{"id":680,"name":"T-Mobile Park"},"away_team":{"abbr":"CIN","name":"Cincinnati Reds","team_id":113},"home_team":{"abbr":"SEA","name":"Seattle Mariners","team_id":136},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-stl-laa","mlb_game_pk":824004,"date":"2026-07-22","game_time":"2026-07-22T20:07:00Z","sport":"MLB","status":"scheduled","venue":{"id":1,"name":"Angel Stadium"},"away_team":{"abbr":"STL","name":"St. Louis Cardinals","team_id":138},"home_team":{"abbr":"LAA","name":"Los Angeles Angels","team_id":108},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-lad-phi","mlb_game_pk":823438,"date":"2026-07-22","game_time":"2026-07-22T22:40:00Z","sport":"MLB","status":"scheduled","venue":{"id":2681,"name":"Citizens Bank Park"},"away_team":{"abbr":"LAD","name":"Los Angeles Dodgers","team_id":119},"home_team":{"abbr":"PHI","name":"Philadelphia Phillies","team_id":143},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-min-cle","mlb_game_pk":824408,"date":"2026-07-22","game_time":"2026-07-22T22:40:00Z","sport":"MLB","status":"scheduled","venue":{"id":5,"name":"Progressive Field"},"away_team":{"abbr":"MIN","name":"Minnesota Twins","team_id":142},"home_team":{"abbr":"CLE","name":"Cleveland Guardians","team_id":114},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-tb-tor","mlb_game_pk":822784,"date":"2026-07-22","game_time":"2026-07-22T23:07:00Z","sport":"MLB","status":"scheduled","venue":{"id":14,"name":"Rogers Centre"},"away_team":{"abbr":"TB","name":"Tampa Bay Rays","team_id":139},"home_team":{"abbr":"TOR","name":"Toronto Blue Jays","team_id":141},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-bal-bos","mlb_game_pk":824732,"date":"2026-07-22","game_time":"2026-07-22T23:10:00Z","sport":"MLB","status":"scheduled","venue":{"id":3,"name":"Fenway Park"},"away_team":{"abbr":"BAL","name":"Baltimore Orioles","team_id":110},"home_team":{"abbr":"BOS","name":"Boston Red Sox","team_id":111},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-sd-atl","mlb_game_pk":824896,"date":"2026-07-22","game_time":"2026-07-22T23:15:00Z","sport":"MLB","status":"scheduled","venue":{"id":4705,"name":"Truist Park"},"away_team":{"abbr":"SD","name":"San Diego Padres","team_id":135},"home_team":{"abbr":"ATL","name":"Atlanta Braves","team_id":144},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-cws-tex","mlb_game_pk":822873,"date":"2026-07-22","game_time":"2026-07-23T00:05:00Z","sport":"MLB","status":"scheduled","venue":{"id":5325,"name":"Globe Life Field"},"away_team":{"abbr":"CWS","name":"Chicago White Sox","team_id":145},"home_team":{"abbr":"TEX","name":"Texas Rangers","team_id":140},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-det-chc","mlb_game_pk":824650,"date":"2026-07-22","game_time":"2026-07-23T00:10:00Z","sport":"MLB","status":"scheduled","venue":{"id":17,"name":"Wrigley Field"},"away_team":{"abbr":"DET","name":"Detroit Tigers","team_id":116},"home_team":{"abbr":"CHC","name":"Chicago Cubs","team_id":112},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}},{"id":"2026-07-22-mia-hou","mlb_game_pk":824166,"date":"2026-07-22","game_time":"2026-07-23T00:10:00Z","sport":"MLB","status":"scheduled","venue":{"id":2392,"name":"Daikin Park"},"away_team":{"abbr":"MIA","name":"Miami Marlins","team_id":146},"home_team":{"abbr":"HOU","name":"Houston Astros","team_id":117},"pitchers":{"away":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}},"home":{"id":null,"name":"Starter TBD","status":"unknown","age":null,"throws":null,"profile_url":"#","stats":{"last_30":{},"season":{}}}},"lineups":{},"pitcher_vs_lineup":{},"bullpens":{},"weather":{},"market":{},"controls":{"default_timeframe":"last_30","default_location":"all"}}]}
+{
+  "schema_version": "2.0-live",
+  "date": "2026-07-22",
+  "updated_at": "2026-07-22T05:15:22.634745Z",
+  "source": "MLB Stats API schedule + game feed/live",
+  "refresh_interval_seconds": 2.0,
+  "games": [
+    {
+      "id": "2026-07-22-pit-nyy",
+      "mlb_game_pk": 823518,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T17:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051508",
+      "venue": {
+        "id": 3313,
+        "name": "Yankee Stadium"
+      },
+      "away_team": {
+        "team_id": 134,
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "record": {
+          "wins": 52,
+          "losses": 49,
+          "pct": ".515"
+        }
+      },
+      "home_team": {
+        "team_id": 147,
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "record": {
+          "wins": 56,
+          "losses": 44,
+          "pct": ".560"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 656605,
+          "name": "Mitch Keller",
+          "status": "probable"
+        },
+        "home": {
+          "id": 543037,
+          "name": "Gerrit Cole",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-bal-bos",
+      "mlb_game_pk": 824735,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T17:35:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051510",
+      "venue": {
+        "id": 3,
+        "name": "Fenway Park"
+      },
+      "away_team": {
+        "team_id": 110,
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "record": {
+          "wins": 49,
+          "losses": 52,
+          "pct": ".485"
+        }
+      },
+      "home_team": {
+        "team_id": 111,
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "record": {
+          "wins": 51,
+          "losses": 48,
+          "pct": ".515"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 665152,
+          "name": "Dean Kremer",
+          "status": "probable"
+        },
+        "home": {
+          "id": 687562,
+          "name": "Jake Bennett",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-nym-mil",
+      "mlb_game_pk": 823761,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T18:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051509",
+      "venue": {
+        "id": 32,
+        "name": "American Family Field"
+      },
+      "away_team": {
+        "team_id": 121,
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "record": {
+          "wins": 43,
+          "losses": 59,
+          "pct": ".422"
+        }
+      },
+      "home_team": {
+        "team_id": 158,
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "record": {
+          "wins": 63,
+          "losses": 38,
+          "pct": ".624"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 681035,
+          "name": "Christian Scott",
+          "status": "probable"
+        },
+        "home": {
+          "id": 701656,
+          "name": "Logan Henderson",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-sf-kc",
+      "mlb_game_pk": 824083,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T18:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051508",
+      "venue": {
+        "id": 7,
+        "name": "Kauffman Stadium"
+      },
+      "away_team": {
+        "team_id": 137,
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "record": {
+          "wins": 42,
+          "losses": 59,
+          "pct": ".416"
+        }
+      },
+      "home_team": {
+        "team_id": 118,
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "record": {
+          "wins": 42,
+          "losses": 60,
+          "pct": ".412"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 694738,
+          "name": "Landen Roupp",
+          "status": "probable"
+        },
+        "home": {
+          "id": 607625,
+          "name": "Seth Lugo",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-wsh-col",
+      "mlb_game_pk": 824327,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T19:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051509",
+      "venue": {
+        "id": 19,
+        "name": "Coors Field"
+      },
+      "away_team": {
+        "team_id": 120,
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "record": {
+          "wins": 51,
+          "losses": 51,
+          "pct": ".500"
+        }
+      },
+      "home_team": {
+        "team_id": 115,
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "record": {
+          "wins": 41,
+          "losses": 62,
+          "pct": ".398"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 676917,
+          "name": "Cade Cavalli",
+          "status": "probable"
+        },
+        "home": {
+          "id": 687312,
+          "name": "Gabriel Hughes",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-cin-sea",
+      "mlb_game_pk": 823110,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T19:40:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051512",
+      "venue": {
+        "id": 680,
+        "name": "T-Mobile Park"
+      },
+      "away_team": {
+        "team_id": 113,
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "record": {
+          "wins": 46,
+          "losses": 54,
+          "pct": ".460"
+        }
+      },
+      "home_team": {
+        "team_id": 136,
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "record": {
+          "wins": 51,
+          "losses": 51,
+          "pct": ".500"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 663903,
+          "name": "Brady Singer",
+          "status": "probable"
+        },
+        "home": {
+          "id": 676106,
+          "name": "Emerson Hancock",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-ath-az",
+      "mlb_game_pk": 825055,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T19:40:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051512",
+      "venue": {
+        "id": 15,
+        "name": "Chase Field"
+      },
+      "away_team": {
+        "team_id": 133,
+        "abbr": "ATH",
+        "name": "Athletics",
+        "record": {
+          "wins": 43,
+          "losses": 57,
+          "pct": ".430"
+        }
+      },
+      "home_team": {
+        "team_id": 109,
+        "abbr": "AZ",
+        "name": "Arizona Diamondbacks",
+        "record": {
+          "wins": 51,
+          "losses": 49,
+          "pct": ".510"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 695611,
+          "name": "Gage Jump",
+          "status": "probable"
+        },
+        "home": {
+          "id": 518876,
+          "name": "Merrill Kelly",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-stl-laa",
+      "mlb_game_pk": 824004,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T20:07:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051511",
+      "venue": {
+        "id": 1,
+        "name": "Angel Stadium"
+      },
+      "away_team": {
+        "team_id": 138,
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "record": {
+          "wins": 51,
+          "losses": 49,
+          "pct": ".510"
+        }
+      },
+      "home_team": {
+        "team_id": 108,
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "record": {
+          "wins": 41,
+          "losses": 61,
+          "pct": ".402"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 690928,
+          "name": "Hunter Dobbins",
+          "status": "probable"
+        },
+        "home": {
+          "id": 672282,
+          "name": "Reid Detmers",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-lad-phi",
+      "mlb_game_pk": 823438,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T22:40:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051512",
+      "venue": {
+        "id": 2681,
+        "name": "Citizens Bank Park"
+      },
+      "away_team": {
+        "team_id": 119,
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "record": {
+          "wins": 64,
+          "losses": 38,
+          "pct": ".627"
+        }
+      },
+      "home_team": {
+        "team_id": 143,
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "record": {
+          "wins": 56,
+          "losses": 46,
+          "pct": ".549"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 641778,
+          "name": "Eric Lauer",
+          "status": "probable"
+        },
+        "home": {
+          "id": 605400,
+          "name": "Aaron Nola",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-min-cle",
+      "mlb_game_pk": 824408,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T22:40:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051512",
+      "venue": {
+        "id": 5,
+        "name": "Progressive Field"
+      },
+      "away_team": {
+        "team_id": 142,
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "record": {
+          "wins": 49,
+          "losses": 53,
+          "pct": ".480"
+        }
+      },
+      "home_team": {
+        "team_id": 114,
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "record": {
+          "wins": 54,
+          "losses": 48,
+          "pct": ".529"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 641927,
+          "name": "Bailey Ober",
+          "status": "probable"
+        },
+        "home": {
+          "id": 677944,
+          "name": "Slade Cecconi",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-pit-nyy",
+      "mlb_game_pk": 823519,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T23:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051513",
+      "venue": {
+        "id": 3313,
+        "name": "Yankee Stadium"
+      },
+      "away_team": {
+        "team_id": 134,
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "record": {
+          "wins": 52,
+          "losses": 49,
+          "pct": ".515"
+        }
+      },
+      "home_team": {
+        "team_id": 147,
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "record": {
+          "wins": 56,
+          "losses": 44,
+          "pct": ".560"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 696149,
+          "name": "Bubba Chandler",
+          "status": "probable"
+        },
+        "home": {
+          "id": 608331,
+          "name": "Max Fried",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-tb-tor",
+      "mlb_game_pk": 822784,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T23:07:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051510",
+      "venue": {
+        "id": 14,
+        "name": "Rogers Centre"
+      },
+      "away_team": {
+        "team_id": 139,
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "record": {
+          "wins": 58,
+          "losses": 42,
+          "pct": ".580"
+        }
+      },
+      "home_team": {
+        "team_id": 141,
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "record": {
+          "wins": 46,
+          "losses": 55,
+          "pct": ".455"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 643377,
+          "name": "Griffin Jax",
+          "status": "probable"
+        },
+        "home": {
+          "id": 680755,
+          "name": "Braydon Fisher",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-bal-bos",
+      "mlb_game_pk": 824732,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T23:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051508",
+      "venue": {
+        "id": 3,
+        "name": "Fenway Park"
+      },
+      "away_team": {
+        "team_id": 110,
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "record": {
+          "wins": 49,
+          "losses": 52,
+          "pct": ".485"
+        }
+      },
+      "home_team": {
+        "team_id": 111,
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "record": {
+          "wins": 51,
+          "losses": 48,
+          "pct": ".515"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 680694,
+          "name": "Kyle Bradish",
+          "status": "probable"
+        },
+        "home": {
+          "name": "Starter TBD",
+          "status": "unknown"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-sd-atl",
+      "mlb_game_pk": 824896,
+      "date": "2026-07-22",
+      "game_time": "2026-07-22T23:15:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051518",
+      "venue": {
+        "id": 4705,
+        "name": "Truist Park"
+      },
+      "away_team": {
+        "team_id": 135,
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "record": {
+          "wins": 50,
+          "losses": 51,
+          "pct": ".495"
+        }
+      },
+      "home_team": {
+        "team_id": 144,
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "record": {
+          "wins": 58,
+          "losses": 42,
+          "pct": ".580"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 650633,
+          "name": "Michael King",
+          "status": "probable"
+        },
+        "home": {
+          "id": 527048,
+          "name": "Martín Pérez",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-cws-tex",
+      "mlb_game_pk": 822873,
+      "date": "2026-07-22",
+      "game_time": "2026-07-23T00:05:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051511",
+      "venue": {
+        "id": 5325,
+        "name": "Globe Life Field"
+      },
+      "away_team": {
+        "team_id": 145,
+        "abbr": "CWS",
+        "name": "Chicago White Sox",
+        "record": {
+          "wins": 53,
+          "losses": 47,
+          "pct": ".530"
+        }
+      },
+      "home_team": {
+        "team_id": 140,
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "record": {
+          "wins": 51,
+          "losses": 50,
+          "pct": ".505"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 641743,
+          "name": "Anthony Kay",
+          "status": "probable"
+        },
+        "home": {
+          "id": 641302,
+          "name": "Tyler Alexander",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-mia-hou",
+      "mlb_game_pk": 824166,
+      "date": "2026-07-22",
+      "game_time": "2026-07-23T00:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051513",
+      "venue": {
+        "id": 2392,
+        "name": "Daikin Park"
+      },
+      "away_team": {
+        "team_id": 146,
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "record": {
+          "wins": 52,
+          "losses": 50,
+          "pct": ".510"
+        }
+      },
+      "home_team": {
+        "team_id": 117,
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "record": {
+          "wins": 49,
+          "losses": 54,
+          "pct": ".476"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 645261,
+          "name": "Sandy Alcantara",
+          "status": "probable"
+        },
+        "home": {
+          "id": 663567,
+          "name": "Peter Lambert",
+          "status": "probable"
+        }
+      }
+    },
+    {
+      "id": "2026-07-22-det-chc",
+      "mlb_game_pk": 824650,
+      "date": "2026-07-22",
+      "game_time": "2026-07-23T00:10:00Z",
+      "status": "Scheduled",
+      "abstract_status": "Preview",
+      "score": {
+        "away": null,
+        "home": null
+      },
+      "linescore": {
+        "scheduled_innings": 9,
+        "current_inning": null,
+        "current_inning_ordinal": null,
+        "inning_state": null,
+        "inning_half": null,
+        "balls": null,
+        "strikes": null,
+        "outs": null,
+        "bases": {
+          "first": false,
+          "second": false,
+          "third": false
+        },
+        "runners_on": 0,
+        "innings": [],
+        "totals": {
+          "away": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          },
+          "home": {
+            "runs": null,
+            "hits": null,
+            "errors": null
+          }
+        }
+      },
+      "decisions": {},
+      "live_feed_updated_at": "20260722_051512",
+      "venue": {
+        "id": 17,
+        "name": "Wrigley Field"
+      },
+      "away_team": {
+        "team_id": 116,
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "record": {
+          "wins": 47,
+          "losses": 54,
+          "pct": ".465"
+        }
+      },
+      "home_team": {
+        "team_id": 112,
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "record": {
+          "wins": 57,
+          "losses": 44,
+          "pct": ".564"
+        }
+      },
+      "pitchers": {
+        "away": {
+          "id": 672456,
+          "name": "Keider Montero",
+          "status": "probable"
+        },
+        "home": {
+          "id": 607067,
+          "name": "Colin Rea",
+          "status": "probable"
+        }
+      }
+    }
+  ],
+  "fetch_duration_ms": 1774
+}
