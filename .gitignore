@@ -21,3 +21,9 @@ archive/backups/
 # Generated live runtime files
 logs/live-mlb-refresh-*.log
 data/live-games/*.json
+
+# Local generated/runtime files
+/logs/
+/data/live-games/
+/backups/
+.DS_Store
