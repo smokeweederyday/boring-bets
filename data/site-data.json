@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-23T19:57:51.217467+00:00",
+    "updated_at": "2026-07-23T21:17:55.474360+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -74,9 +74,9 @@
       "team": "CLE",
       "division": "",
       "w": 54,
-      "l": 49,
-      "wcgb": 1.0,
-      "run_diff": -4,
+      "l": 50,
+      "wcgb": 0.5,
+      "run_diff": -6,
       "tier": "Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -84,10 +84,10 @@
     {
       "team": "MIN",
       "division": "",
-      "w": 50,
+      "w": 51,
       "l": 53,
-      "wcgb": 3.0,
-      "run_diff": -32,
+      "wcgb": 2.5,
+      "run_diff": -30,
       "tier": "Aggressive Buyer",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
@@ -404,6 +404,15 @@
       "from": "See description",
       "to": "See description",
       "players": "Houston Astros traded RHP Nate Pearson to Kansas City Royals for RHP Max Martin.",
+      "return": "See official source",
+      "betting_impact": "Editorial review required.",
+      "source": "https://www.mlb.com/transactions"
+    },
+    {
+      "date": "2026-07-23",
+      "from": "See description",
+      "to": "See description",
+      "players": "San Diego Padres traded RHP Ron Marinaccio to Pittsburgh Pirates for Future Considerations.",
       "return": "See official source",
       "betting_impact": "Editorial review required.",
       "source": "https://www.mlb.com/transactions"
