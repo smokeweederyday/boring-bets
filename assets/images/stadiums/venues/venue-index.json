@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-07-23T07:34:22.323107+00:00",
+  "generated_at": "2026-07-23T10:22:00.463377+00:00",
   "naming": {
     "recursive": "<category>/<condition>/<time>-01.<extension>",
     "primary": "<time>-01.<extension>",
@@ -48,7 +48,44 @@
       ],
       "source_type": "legacy-stadium",
       "folder": "assets/images/stadiums/venues/american-family-field",
-      "files": {},
+      "files": {
+        "roof/open/day": [
+          {
+            "path": "assets/images/stadiums/venues/american-family-field/roof/open/day-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "day-01.webp"
+          }
+        ],
+        "weather/fair/day": [
+          {
+            "path": "assets/images/stadiums/venues/american-family-field/weather/fair/day-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "day-01.webp"
+          }
+        ],
+        "weather/fair/dusk": [
+          {
+            "path": "assets/images/stadiums/venues/american-family-field/weather/fair/dusk-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "dusk-01.webp"
+          }
+        ],
+        "weather/fair/night": [
+          {
+            "path": "assets/images/stadiums/venues/american-family-field/weather/fair/night-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "night-01.webp"
+          }
+        ]
+      },
       "warnings": []
     },
     {
@@ -61,7 +98,35 @@
       ],
       "source_type": "legacy-stadium",
       "folder": "assets/images/stadiums/venues/angel-stadium",
-      "files": {},
+      "files": {
+        "weather/fair/day": [
+          {
+            "path": "assets/images/stadiums/venues/angel-stadium/weather/fair/day-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "day-01.webp"
+          }
+        ],
+        "weather/fair/dusk": [
+          {
+            "path": "assets/images/stadiums/venues/angel-stadium/weather/fair/dusk-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "dusk-01.webp"
+          }
+        ],
+        "weather/fair/night": [
+          {
+            "path": "assets/images/stadiums/venues/angel-stadium/weather/fair/night-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "night-01.webp"
+          }
+        ]
+      },
       "warnings": []
     },
     {
@@ -74,7 +139,35 @@
       ],
       "source_type": "legacy-stadium",
       "folder": "assets/images/stadiums/venues/busch-stadium",
-      "files": {},
+      "files": {
+        "weather/fair/day": [
+          {
+            "path": "assets/images/stadiums/venues/busch-stadium/weather/fair/day-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "day-01.webp"
+          }
+        ],
+        "weather/fair/dusk": [
+          {
+            "path": "assets/images/stadiums/venues/busch-stadium/weather/fair/dusk-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "dusk-01.webp"
+          }
+        ],
+        "weather/fair/night": [
+          {
+            "path": "assets/images/stadiums/venues/busch-stadium/weather/fair/night-01.jpg",
+            "priority": 1,
+            "legacy": false,
+            "format": "jpg",
+            "filename": "night-01.jpg"
+          }
+        ]
+      },
       "warnings": []
     },
     {
@@ -195,20 +288,85 @@
       ],
       "source_type": "legacy-stadium",
       "folder": "assets/images/stadiums/venues/coors-field",
-      "files": {},
+      "files": {
+        "weather/fair/day": [
+          {
+            "path": "assets/images/stadiums/venues/coors-field/weather/fair/day-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "day-01.webp"
+          }
+        ],
+        "weather/fair/dusk": [
+          {
+            "path": "assets/images/stadiums/venues/coors-field/weather/fair/dusk-01.jpg",
+            "priority": 1,
+            "legacy": false,
+            "format": "jpg",
+            "filename": "dusk-01.jpg"
+          }
+        ],
+        "weather/fair/night": [
+          {
+            "path": "assets/images/stadiums/venues/coors-field/weather/fair/night-01.webp",
+            "priority": 1,
+            "legacy": false,
+            "format": "webp",
+            "filename": "night-01.webp"
+          }
+        ]
+      },
       "warnings": []
     },
     {
       "sport": "baseball",
       "slug": "daikin-park",
-      "venue_id": "2392",
+      "venue_id": "",
       "venue_name": "Daikin Park",
       "aliases": [
         "daikin-park"
       ],
       "source_type": "legacy-stadium",
       "folder": "assets/images/stadiums/venues/daikin-park",
-      "files": {},
+      "files": {
+        "roof/closed/weather/fair/day": [
+          {
+            "path": "assets/images/stadiums/venues/daikin-park/roof/closed/weather/fair/day-01.jpg",
+            "priority": 1,
+            "legacy": false,
+            "format": "jpg",
+            "filename": "day-01.jpg"
+          }
+        ],
+        "roof/open/weather/fair/day": [
+          {
+            "path": "assets/images/stadiums/venues/daikin-park/roof/open/weather/fair/day-01.jpg",
+            "priority": 1,
+            "legacy": false,
+            "format": "jpg",
+            "filename": "day-01.jpg"
+          }
+        ],
+        "roof/open/weather/fair/dusk": [
+          {
+            "path": "assets/images/stadiums/venues/daikin-park/roof/open/weather/fair/dusk-01.jpg",
+            "priority": 1,
+            "legacy": false,
+            "format": "jpg",
+            "filename": "dusk-01.jpg"
+          }
+        ],
+        "roof/open/weather/fair/night": [
+          {
+            "path": "assets/images/stadiums/venues/daikin-park/roof/open/weather/fair/night-01.jpg",
+            "priority": 1,
+            "legacy": false,
+            "format": "jpg",
+            "filename": "night-01.jpg"
+          }
+        ]
+      },
       "warnings": []
     },
     {
