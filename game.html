@@ -57,12 +57,65 @@
     <div id="gameStatus" class="card-message">Loading matchup…</div>
 
     <article id="gameDetails" hidden>
-      <section class="game-matchup">
-        <div class="game-team">
+      <section class="game-matchup game-matchup-stadium">
+        <div class="game-team game-team-away">
           <img id="gameAwayLogo" alt="">
           <span id="gameAwayTeam"></span>
         </div>
-        <div class="game-versus">@</div>
+
+        <section
+          id="gameStadiumWeather"
+          class="game-stadium-weather is-weather-neutral"
+          aria-label="Stadium and game weather"
+        >
+          <div class="game-stadium-photo-frame">
+            <img
+              id="gameStadiumPhoto"
+              class="game-stadium-photo"
+              src="assets/images/stadiums/default.svg"
+              alt=""
+            >
+
+            <div class="game-stadium-weather-effect" aria-hidden="true"></div>
+            <div class="game-stadium-photo-shade" aria-hidden="true"></div>
+
+            <div id="gameRainChance" class="game-stadium-rain-chance" hidden>
+              Rain —
+            </div>
+
+            <div class="game-stadium-weather-bar">
+              <div class="game-stadium-weather-stat game-stadium-weather-primary">
+                <span id="gameWeatherIcon" class="game-stadium-weather-icon" aria-hidden="true">◌</span>
+                <div>
+                  <strong id="gameWeatherTemperature">—°</strong>
+                  <span id="gameWeatherCondition">Conditions pending</span>
+                </div>
+              </div>
+
+              <div class="game-stadium-weather-stat">
+                <span class="game-stadium-weather-icon" aria-hidden="true">≋</span>
+                <div>
+                  <strong id="gameWeatherWind">— mph</strong>
+                  <span>Wind</span>
+                </div>
+              </div>
+
+              <div class="game-stadium-weather-stat">
+                <span class="game-stadium-weather-icon" aria-hidden="true">◒</span>
+                <div>
+                  <strong id="gameWeatherHumidity">—%</strong>
+                  <span>Humidity</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-stadium-caption">
+            <strong id="gameVenueName">Venue TBD</strong>
+            <span id="gameStartTime">Time TBD</span>
+          </div>
+        </section>
+
         <div class="game-team game-team-home">
           <img id="gameHomeLogo" alt="">
           <span id="gameHomeTeam"></span>

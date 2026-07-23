@@ -1,0 +1,10 @@
+{
+  "venue_id": "14",
+  "venue_name": "Rogers Centre",
+  "folder": "rogers-centre",
+  "preferred_format": "webp",
+  "recommended_size": {
+    "width": 1916,
+    "height": 821
+  }
+}

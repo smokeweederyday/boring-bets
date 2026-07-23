@@ -1,0 +1,10 @@
+{
+  "venue_id": "15",
+  "venue_name": "Chase Field",
+  "folder": "chase-field",
+  "preferred_format": "webp",
+  "recommended_size": {
+    "width": 1916,
+    "height": 821
+  }
+}

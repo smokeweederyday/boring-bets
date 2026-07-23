@@ -1,0 +1,10 @@
+{
+  "venue_id": "17",
+  "venue_name": "Wrigley Field",
+  "folder": "wrigley-field",
+  "preferred_format": "webp",
+  "recommended_size": {
+    "width": 1916,
+    "height": 821
+  }
+}

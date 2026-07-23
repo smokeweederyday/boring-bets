@@ -545,6 +545,8 @@ function renderGameHeader() {
   const game =
     state.game;
 
+  renderGameStadiumWeather(game);
+
   setLogo(
     "gameAwayLogo",
     game.away_team?.team_id,
@@ -644,6 +646,1791 @@ function renderStatusStrip() {
     } CONFIRMED`
   );
 }
+
+
+/* BORING BETS: GAME HEADER STADIUM WEATHER V1 */
+
+function renderGameStadiumWeather(game) {
+  const card = document.getElementById("gameStadiumWeather");
+  const photo = document.getElementById("gameStadiumPhoto");
+
+  if (!card || !photo) return;
+
+  const venue = game?.venue || {};
+  const weather = game?.weather || {};
+  const venueName = String(
+    venue.name ||
+    venue.full_name ||
+    game?.venue_name ||
+    "Venue TBD"
+  );
+
+  const condition = String(
+    weather.condition ||
+    weather.summary ||
+    weather.description ||
+    "Conditions pending"
+  );
+
+  const temperature = gameHeaderFiniteNumber(
+    weather.temperature,
+    weather.temp,
+    weather.temperature_f
+  );
+
+  const humidity = gameHeaderFiniteNumber(
+    weather.humidity,
+    weather.relative_humidity
+  );
+
+  const windSpeed = gameHeaderFiniteNumber(
+    weather.wind_speed,
+    weather.wind_mph
+  );
+
+  const rainChance = gameHeaderFiniteNumber(
+    weather.rain_probability,
+    weather.precipitation_probability,
+    weather.precip_probability
+  );
+
+  const windDirection = String(
+    weather.wind_direction ||
+    weather.wind_direction_text ||
+    ""
+  ).trim();
+
+  const weatherClass = gameHeaderWeatherClass(weather, venue);
+
+  card.className = `game-stadium-weather ${weatherClass}`;
+  /*
+    BORING BETS: ROBUST INDOOR ROOF ATTRIBUTES V2
+    Record whether this header image is truly exposed to weather.
+  */
+  {
+    const bbIndoorGateVenueSlug =
+      typeof gameHeaderVariantSlug === "function"
+        ? gameHeaderVariantSlug(venueName)
+        : String(venueName || "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+    const bbIndoorGateRoof =
+      typeof gameHeaderVenueRoofState === "function"
+        ? gameHeaderVenueRoofState(
+            game,
+            venue,
+            bbIndoorGateVenueSlug
+          )
+        : { profile: "outdoor", state: "unknown" };
+
+    card.dataset.venueSlug = bbIndoorGateVenueSlug;
+    card.dataset.roofProfile =
+      bbIndoorGateRoof?.profile || "outdoor";
+    card.dataset.roofState =
+      bbIndoorGateRoof?.state || "unknown";
+    /*
+      BORING BETS: T-MOBILE WEATHER EXPOSURE EXCEPTION V1
+
+      T-Mobile Park remains exposed to outside weather even when its
+      movable roof is closed. Weather exposure and roof state are
+      therefore tracked independently.
+    */
+    const bbWeatherExposureVenueId = String(
+      venue?.id ??
+      venue?.venue_id ??
+      venue?.venueId ??
+      game?.venue_id ??
+      game?.venueId ??
+      game?.venue?.id ??
+      game?.venue?.venue_id ??
+      game?.venue?.venueId ??
+      ""
+    ).trim();
+
+    const bbWeatherExposureVenueName = String(
+      venue?.name ??
+      venue?.venue_name ??
+      venue?.venueName ??
+      game?.venue_name ??
+      game?.venueName ??
+      game?.venue?.name ??
+      ""
+    ).toLowerCase();
+
+    const bbAlwaysWeatherExposed =
+      bbWeatherExposureVenueId === "680" ||
+      card.dataset.venueSlug === "t-mobile-park" ||
+      bbWeatherExposureVenueName.includes("t-mobile park");
+
+    card.dataset.weatherExposed =
+      bbAlwaysWeatherExposed ? "true" : "false";
+
+  }
+
+  card.setAttribute(
+    "aria-label",
+    `${venueName}. ${condition}. ${
+      Number.isFinite(temperature)
+        ? `${Math.round(temperature)} degrees.`
+        : "Temperature unavailable."
+    }`
+  );
+
+  setText(
+    "gameVenueName",
+    venueName
+  );
+
+  const gameHeaderTimeOnly = String(
+    gameHeaderFormatTime(game?.game_time, venue) || "Time TBD"
+  )
+    .split("•")[0]
+    .trim();
+
+  setText(
+    "gameStartTime",
+    gameHeaderTimeOnly || "Time TBD"
+  );
+
+  setText(
+    "gameWeatherTemperature",
+    Number.isFinite(temperature)
+      ? `${Math.round(temperature)}°`
+      : "—°"
+  );
+
+  setText(
+    "gameWeatherCondition",
+    condition
+  );
+
+  setText(
+    "gameWeatherWind",
+    Number.isFinite(windSpeed)
+      ? `${windDirection ? `${windDirection} ` : ""}${windSpeed.toFixed(1)} mph`
+      : "— mph"
+  );
+
+  setText(
+    "gameWeatherHumidity",
+    Number.isFinite(humidity)
+      ? `${Math.round(humidity)}%`
+      : "—%"
+  );
+
+  setText(
+    "gameWeatherIcon",
+    gameHeaderWeatherIcon(weatherClass)
+  );
+
+  const rainElement = document.getElementById("gameRainChance");
+  if (rainElement) {
+    const showRain = Number.isFinite(rainChance) && rainChance > 0;
+    rainElement.hidden = !showRain;
+    rainElement.textContent = showRain
+      ? `Rain ${Math.round(rainChance)}%`
+      : "";
+  }
+
+  photo.alt = `${venueName} under ${condition.toLowerCase()} conditions`;
+
+  /* BORING BETS: PER-VENUE STADIUM PHOTO POSITION V1 */
+  const stadiumPhotoPositionSlug = typeof gameHeaderVariantSlug === "function"
+    ? gameHeaderVariantSlug(venueName)
+    : String(venueName || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+  const stadiumPhotoPositions = {
+    /*
+      Rogers Centre approved closed-roof image is already the final asset
+      dimensions. Shift the source lower inside the viewport so the visible
+      picture moves upward and shows more stadium below the roof.
+    */
+    "rogers-centre": "50% 72%"
+  };
+
+  photo.style.objectPosition =
+    stadiumPhotoPositions[stadiumPhotoPositionSlug] || "50% 50%";
+
+  /*
+    BORING BETS: LOANDEPOT CLOSED HARD PHOTO FREEZE V1
+
+    A closed LoanDepot Park must remain completely static. Do not re-run the
+    candidate loader or permit any inherited animation beneath the stadium
+    header. Open-roof games continue through the normal dynamic path.
+  */
+  const bbFreezeLoanDepotClosed =
+    stadiumPhotoPositionSlug === "loandepot-park" &&
+    card.dataset.roofState !== "open";
+
+  if (bbFreezeLoanDepotClosed) {
+    const bbLoanDepotClosedPhoto =
+      "assets/images/stadiums/4169-hero-commons-v1.jpg";
+
+    card.classList.add("is-enclosed-static");
+    photo.classList.remove("is-loading");
+
+    photo.style.animation = "none";
+    photo.style.transition = "none";
+    photo.style.opacity = "1";
+    photo.style.filter = "none";
+    photo.style.transform = "none";
+
+    const currentPhoto = photo.getAttribute("src") || "";
+
+    if (
+      currentPhoto !== bbLoanDepotClosedPhoto &&
+      !photo.currentSrc.endsWith("/4169-hero-commons-v1.jpg")
+    ) {
+      photo.src = bbLoanDepotClosedPhoto;
+    }
+
+    photo.dataset.stadiumCandidateKey = bbLoanDepotClosedPhoto;
+    photo.dataset.stadiumResolvedUrl = bbLoanDepotClosedPhoto;
+
+    const cancelLoanDepotAnimations = () => {
+      if (typeof card.getAnimations !== "function") return;
+
+      card.getAnimations({ subtree: true }).forEach((animation) => {
+        try {
+          animation.cancel();
+        } catch (_) {
+          // Ignore already-finished or browser-owned animations.
+        }
+      });
+    };
+
+    cancelLoanDepotAnimations();
+
+    requestAnimationFrame(() => {
+      cancelLoanDepotAnimations();
+      photo.classList.remove("is-loading");
+      photo.style.opacity = "1";
+      photo.style.filter = "none";
+      photo.style.transform = "none";
+    });
+  } else {
+    gameHeaderLoadStadiumPhoto(
+      photo,
+      gameHeaderStadiumPhotoCandidates(game, venue)
+    );
+  }
+}
+
+function gameHeaderFiniteNumber(...values) {
+  for (const value of values) {
+    if (value === null || value === undefined || value === "") continue;
+    const number = Number(value);
+    if (Number.isFinite(number)) return number;
+  }
+
+  return null;
+}
+
+function gameHeaderFormatTime(value, venue = {}) {
+  if (!value) return "Time TBD";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Time TBD";
+
+  const requestedZone = String(
+    venue.timezone ||
+    venue.time_zone ||
+    venue.tz ||
+    "America/New_York"
+  ).trim();
+
+  const options = {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short"
+  };
+
+  try {
+    return date.toLocaleTimeString(
+      "en-US",
+      {
+        ...options,
+        timeZone: requestedZone
+      }
+    );
+  } catch (_error) {
+    return date.toLocaleTimeString("en-US", options);
+  }
+}
+
+function gameHeaderWeatherClass(weather = {}, venue = {}) {
+  const condition = String(
+    weather.condition ||
+    weather.summary ||
+    weather.description ||
+    ""
+  ).toLowerCase();
+
+  const roofText = [
+    weather.roof,
+    weather.roof_status,
+    weather.roof_type,
+    venue.roof,
+    venue.roof_status,
+    venue.roof_type
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const temperature = gameHeaderFiniteNumber(
+    weather.temperature,
+    weather.temp,
+    weather.temperature_f
+  );
+
+  const wind = gameHeaderFiniteNumber(
+    weather.wind_speed,
+    weather.wind_mph
+  );
+
+  const rainChance = gameHeaderFiniteNumber(
+    weather.rain_probability,
+    weather.precipitation_probability,
+    weather.precip_probability
+  );
+
+  const classes = [];
+
+  if (/closed|indoor|dome/.test(roofText)) {
+    classes.push("is-weather-roofed");
+  } else if (/thunder|lightning/.test(condition)) {
+    classes.push("is-weather-thunder");
+  } else if (/snow|sleet|flurr/.test(condition)) {
+    classes.push("is-weather-snow");
+  } else if (
+    /rain|shower|drizzle|storm/.test(condition) ||
+    (Number.isFinite(rainChance) && rainChance >= 45)
+  ) {
+    classes.push("is-weather-rain");
+  } else if (/cloud|overcast|fog|mist|haze|smoke/.test(condition)) {
+    classes.push("is-weather-cloudy");
+  } else if (/clear|sunny|sun/.test(condition)) {
+    classes.push("is-weather-clear");
+  } else {
+    classes.push("is-weather-neutral");
+  }
+
+  if (Number.isFinite(temperature) && temperature >= 90) {
+    classes.push("is-weather-hot");
+  } else if (Number.isFinite(temperature) && temperature <= 45) {
+    classes.push("is-weather-cold");
+  }
+
+  if (Number.isFinite(wind) && wind >= 15) {
+    classes.push("is-weather-windy");
+  }
+
+  return classes.join(" ");
+}
+
+function gameHeaderWeatherIcon(weatherClass) {
+  if (weatherClass.includes("is-weather-thunder")) return "ϟ";
+  if (weatherClass.includes("is-weather-snow")) return "✣";
+  if (weatherClass.includes("is-weather-rain")) return "☂";
+  if (weatherClass.includes("is-weather-cloudy")) return "☁";
+  if (weatherClass.includes("is-weather-clear")) return "☀";
+  if (weatherClass.includes("is-weather-roofed")) return "⌂";
+  return "◌";
+}
+
+/* BORING BETS: SAFE STADIUM VARIANT SELECTOR V2 */
+
+const GAME_HEADER_RETRACTABLE_ROOF_VENUES = new Set([
+  "american-family-field",
+  "chase-field",
+  "daikin-park",
+  "globe-life-field",
+  "loandepot-park",
+  "rogers-centre",
+  "t-mobile-park"
+]);
+
+const GAME_HEADER_FIXED_CLOSED_ROOF_VENUES = new Set([
+  "tropicana-field"
+]);
+
+const GAME_HEADER_VENUE_TIMEZONES = {
+  "american-family-field": "America/Chicago",
+  "angel-stadium": "America/Los_Angeles",
+  "busch-stadium": "America/Chicago",
+  "chase-field": "America/Phoenix",
+  "citizens-bank-park": "America/New_York",
+  "citi-field": "America/New_York",
+  "comerica-park": "America/Detroit",
+  "coors-field": "America/Denver",
+  "daikin-park": "America/Chicago",
+  "fenway-park": "America/New_York",
+  "globe-life-field": "America/Chicago",
+  "great-american-ball-park": "America/New_York",
+  "kauffman-stadium": "America/Chicago",
+  "las-vegas-ballpark": "America/Los_Angeles",
+  "loandepot-park": "America/New_York",
+  "nationals-park": "America/New_York",
+  "oracle-park": "America/Los_Angeles",
+  "oriole-park-at-camden-yards": "America/New_York",
+  "petco-park": "America/Los_Angeles",
+  "pnc-park": "America/New_York",
+  "progressive-field": "America/New_York",
+  "rate-field": "America/Chicago",
+  "rogers-centre": "America/Toronto",
+  "sutter-health-park": "America/Los_Angeles",
+  "t-mobile-park": "America/Los_Angeles",
+  "target-field": "America/Chicago",
+  "tropicana-field": "America/New_York",
+  "truist-park": "America/New_York",
+  "uniqlo-field-at-dodger-stadium": "America/Los_Angeles",
+  "dodger-stadium": "America/Los_Angeles",
+  "wrigley-field": "America/Chicago",
+  "yankee-stadium": "America/New_York"
+};
+
+function gameHeaderVariantSlug(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function gameHeaderVenueRoofState(game = {}, venue = {}, venueSlug = "") {
+  if (GAME_HEADER_FIXED_CLOSED_ROOF_VENUES.has(venueSlug)) {
+    return {
+      profile: "fixed_closed",
+      state: "closed"
+    };
+  }
+
+  const profile = GAME_HEADER_RETRACTABLE_ROOF_VENUES.has(venueSlug)
+    ? "retractable"
+    : "outdoor";
+
+  const weather = game && game.weather ? game.weather : {};
+  const roofText = [
+    game.roof,
+    game.roof_status,
+    game.roof_type,
+    weather.roof,
+    weather.roof_status,
+    weather.roof_type,
+    venue.roof,
+    venue.roof_status,
+    venue.roof_type
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  let state = "unknown";
+
+  if (/closed|indoor|dome/.test(roofText)) {
+    state = "closed";
+  } else if (/open/.test(roofText)) {
+    state = "open";
+  }
+
+  return {
+    profile,
+    state
+  };
+}
+
+function gameHeaderVenueLocalHour(value, venue = {}, venueSlug = "") {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  const requestedZone = String(
+    venue.timezone ||
+    venue.time_zone ||
+    venue.tz ||
+    GAME_HEADER_VENUE_TIMEZONES[venueSlug] ||
+    "America/New_York"
+  ).trim();
+
+  try {
+    const formatter = new Intl.DateTimeFormat(
+      "en-US",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: requestedZone
+      }
+    );
+
+    const parts = formatter.formatToParts(date);
+    const hourPart = parts.find((part) => part.type === "hour");
+    const minutePart = parts.find((part) => part.type === "minute");
+
+    if (!hourPart) return null;
+
+    const hour = Number(hourPart.value) % 24;
+    const minute = minutePart ? Number(minutePart.value) : 0;
+
+    if (!Number.isFinite(hour) || !Number.isFinite(minute)) return null;
+    return hour + (minute / 60);
+  } catch (_error) {
+    return null;
+  }
+}
+
+function gameHeaderTimeOfDay(game = {}, venue = {}, venueSlug = "") {
+  const hour = gameHeaderVenueLocalHour(
+    game.game_time,
+    venue,
+    venueSlug
+  );
+
+  if (!Number.isFinite(hour)) return "";
+
+  if (hour >= 17 && hour < 20) return "dusk";
+  if (hour >= 7 && hour < 17) return "day";
+  return "night";
+}
+
+function gameHeaderAppendVariantBases(
+  target,
+  key,
+  roofProfile,
+  roofState,
+  timeOfDay
+) {
+  if (!key) return;
+
+  const add = (value) => {
+    if (value && !target.includes(value)) {
+      target.push(value);
+    }
+  };
+
+  if (roofProfile === "fixed_closed" || roofState === "closed") {
+    add(`${key}-closed`);
+    add(key);
+    return;
+  }
+
+  if (roofProfile === "retractable") {
+    if (roofState === "open") {
+      if (timeOfDay) add(`${key}-open-${timeOfDay}`);
+      add(`${key}-open`);
+    }
+
+    add(key);
+    return;
+  }
+
+  if (timeOfDay) add(`${key}-${timeOfDay}`);
+  add(key);
+}
+
+function gameHeaderStadiumPhotoCandidates(game, venue = {}) {
+  const venueId = String(
+    venue.id ||
+    venue.venue_id ||
+    game?.venue_id ||
+    ""
+  ).trim();
+
+  const venueName = String(
+    venue.name ||
+    venue.full_name ||
+    game?.venue_name ||
+    "stadium"
+  );
+
+  const slug = gameHeaderVariantSlug(venueName);
+  const roof = gameHeaderVenueRoofState(game, venue, slug);
+  const timeOfDay = gameHeaderTimeOfDay(game, venue, slug);
+
+  const variantExplicit = [];
+
+  if (roof.state === "closed") {
+    variantExplicit.push(
+      game?.stadium_image_closed_url,
+      game?.venue_image_closed_url,
+      venue.image_closed_url,
+      venue.photo_closed_url
+    );
+  } else if (roof.state === "open") {
+    variantExplicit.push(
+      game?.stadium_image_open_url,
+      game?.venue_image_open_url,
+      venue.image_open_url,
+      venue.photo_open_url
+    );
+  }
+
+  const explicit = [
+    ...variantExplicit,
+    game?.stadium_image_url,
+    game?.venue_image_url,
+    venue.image_url,
+    venue.photo_url,
+    venue.hero_image_url,
+    venue.image,
+    venue.photo
+  ].filter(Boolean);
+
+  const baseNames = [];
+
+  for (const key of [venueId, slug]) {
+    gameHeaderAppendVariantBases(
+      baseNames,
+      key,
+      roof.profile,
+      roof.state,
+      timeOfDay
+    );
+  }
+
+  const local = [];
+
+  for (const baseName of baseNames) {
+    for (const extension of ["webp", "jpg", "jpeg", "png"]) {
+      local.push(`assets/images/stadiums/${baseName}.${extension}`);
+    }
+  }
+
+  /* BORING BETS: LOANDEPOT EXPLICIT OLD FALLBACK V2 */
+  const venueSpecificFallbacks = [];
+  /*
+    BORING BETS: ADMIN STADIUM NAME FOLDERS V4
+
+    Tarp-covered fields are rain-delay images, not ordinary rain images.
+
+    Admin convention:
+      assets/images/stadiums/venues/<stadium-name-slug>/<variant>.<extension>
+
+    Relevant variants:
+      fair-day.webp
+      fair-night.webp
+      rain-day.webp
+      rain-night.webp
+      rain-delay-day.webp
+      rain-delay-night.webp
+
+    Rain-delay images are selected only for an official delay, an explicit
+    rain-delay-photo flag, or near-certain rain across most of the game window.
+  */
+  {
+    const adminVenueName = String(
+      venue?.name ??
+      venue?.venue_name ??
+      venue?.venueName ??
+      game?.venue_name ??
+      game?.venueName ??
+      game?.venue?.name ??
+      ""
+    ).trim();
+
+    const adminVenueId = String(
+      venue?.id ??
+      venue?.venue_id ??
+      venue?.venueId ??
+      game?.venue_id ??
+      game?.venueId ??
+      game?.venue?.id ??
+      game?.venue?.venue_id ??
+      game?.venue?.venueId ??
+      ""
+    ).trim();
+
+    const adminVenueFolder = (
+      adminVenueName ||
+      String(slug || "") ||
+      (adminVenueId ? `venue-${adminVenueId}` : "")
+    )
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+    if (adminVenueFolder) {
+      const adminStatusText = [
+        game?.status,
+        game?.status_detail,
+        game?.statusDetail,
+        game?.detailed_state,
+        game?.detailedState,
+        game?.state,
+        game?.game_status,
+        game?.gameStatus,
+        game?.delay_reason,
+        game?.delayReason,
+        game?.postponement_reason,
+        game?.postponementReason,
+        game?.notes,
+        game?.note,
+        game?.weather?.status,
+        game?.weather?.delay_reason,
+        game?.weather?.delayReason
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const adminWeatherText = [
+        game?.weather?.condition,
+        game?.weather?.short_forecast,
+        game?.weather?.forecast,
+        game?.weather?.summary,
+        game?.weather?.text,
+        game?.weather_condition,
+        game?.weather_text,
+        game?.forecast,
+        game?.condition
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const adminOfficialRainDelay =
+        /\brain(?:ed)?\s+delay\b/.test(adminStatusText) ||
+        /\bweather\s+delay\b/.test(adminStatusText) ||
+        /\bdelayed\b.{0,32}\b(?:rain|weather)\b/.test(adminStatusText) ||
+        /\b(?:rain|weather)\b.{0,32}\bdelayed\b/.test(adminStatusText) ||
+        /\bsuspended\b.{0,32}\b(?:rain|weather)\b/.test(adminStatusText) ||
+        /\b(?:rain|weather)\b.{0,32}\bsuspended\b/.test(adminStatusText) ||
+        /\bpostponed\b.{0,32}\b(?:rain|weather)\b/.test(adminStatusText) ||
+        /\b(?:rain|weather)\b.{0,32}\bpostponed\b/.test(adminStatusText);
+
+      const adminExplicitRainDelayPhoto = [
+        game?.use_rain_delay_photo,
+        game?.useRainDelayPhoto,
+        game?.rain_delay_photo,
+        game?.rainDelayPhoto,
+        game?.rain_delay_likely,
+        game?.rainDelayLikely,
+        game?.tarp_expected,
+        game?.tarpExpected,
+        game?.weather?.use_rain_delay_photo,
+        game?.weather?.useRainDelayPhoto,
+        game?.weather?.rain_delay_likely,
+        game?.weather?.rainDelayLikely,
+        game?.weather?.tarp_expected,
+        game?.weather?.tarpExpected
+      ].some((value) => value === true);
+
+      const adminToProbability = (value) => {
+        if (value === null || value === undefined || value === "") {
+          return null;
+        }
+
+        const parsed = Number.parseFloat(
+          String(value).replace("%", "").trim()
+        );
+
+        if (!Number.isFinite(parsed)) {
+          return null;
+        }
+
+        return parsed <= 1 ? parsed * 100 : parsed;
+      };
+
+      const adminToCoverage = (value) => {
+        if (value === null || value === undefined || value === "") {
+          return null;
+        }
+
+        const parsed = Number.parseFloat(
+          String(value).replace("%", "").trim()
+        );
+
+        if (!Number.isFinite(parsed)) {
+          return null;
+        }
+
+        return parsed > 1 ? parsed / 100 : parsed;
+      };
+
+      const adminProbabilityValues = [
+        game?.rain_probability,
+        game?.rainProbability,
+        game?.precip_probability,
+        game?.precipProbability,
+        game?.precipitation_probability,
+        game?.precipitationProbability,
+        game?.weather?.rain_probability,
+        game?.weather?.rainProbability,
+        game?.weather?.precip_probability,
+        game?.weather?.precipProbability,
+        game?.weather?.precipitation_probability,
+        game?.weather?.precipitationProbability
+      ]
+        .map(adminToProbability)
+        .filter((value) => value !== null);
+
+      const adminCoverageValues = [
+        game?.rain_game_window_coverage,
+        game?.rainGameWindowCoverage,
+        game?.precip_game_window_coverage,
+        game?.precipGameWindowCoverage,
+        game?.rain_window_coverage,
+        game?.rainWindowCoverage,
+        game?.precip_window_coverage,
+        game?.precipWindowCoverage,
+        game?.weather?.rain_game_window_coverage,
+        game?.weather?.rainGameWindowCoverage,
+        game?.weather?.precip_game_window_coverage,
+        game?.weather?.precipGameWindowCoverage,
+        game?.weather?.rain_window_coverage,
+        game?.weather?.rainWindowCoverage,
+        game?.weather?.precip_window_coverage,
+        game?.weather?.precipWindowCoverage
+      ]
+        .map(adminToCoverage)
+        .filter((value) => value !== null);
+
+      const adminMostGameRainFlag = [
+        game?.rain_for_most_of_game,
+        game?.rainForMostOfGame,
+        game?.precip_for_most_of_game,
+        game?.precipForMostOfGame,
+        game?.weather?.rain_for_most_of_game,
+        game?.weather?.rainForMostOfGame,
+        game?.weather?.precip_for_most_of_game,
+        game?.weather?.precipForMostOfGame
+      ].some((value) => value === true);
+
+      const adminGameWindowArrays = [
+        game?.weather?.game_window,
+        game?.weather?.gameWindow,
+        game?.weather?.game_hours,
+        game?.weather?.gameHours,
+        game?.weather?.hourly_game_window,
+        game?.weather?.hourlyGameWindow,
+        game?.game_window_weather,
+        game?.gameWindowWeather
+      ].filter(Array.isArray);
+
+      let adminNearCertainHourlyCoverage = false;
+
+      for (const entries of adminGameWindowArrays) {
+        const probabilities = entries
+          .map((entry) =>
+            adminToProbability(
+              entry?.rain_probability ??
+              entry?.rainProbability ??
+              entry?.precip_probability ??
+              entry?.precipProbability ??
+              entry?.precipitation_probability ??
+              entry?.precipitationProbability ??
+              entry?.probability
+            )
+          )
+          .filter((value) => value !== null);
+
+        if (probabilities.length >= 2) {
+          const nearCertainCount = probabilities.filter(
+            (value) => value >= 99.5
+          ).length;
+
+          if (nearCertainCount / probabilities.length >= 0.75) {
+            adminNearCertainHourlyCoverage = true;
+            break;
+          }
+        }
+      }
+
+      const adminMaxProbability = adminProbabilityValues.length
+        ? Math.max(...adminProbabilityValues)
+        : null;
+
+      const adminMaxCoverage = adminCoverageValues.length
+        ? Math.max(...adminCoverageValues)
+        : null;
+
+      const adminNearCertainMostGame =
+        adminNearCertainHourlyCoverage ||
+        (
+          adminMaxProbability !== null &&
+          adminMaxProbability >= 99.5 &&
+          (
+            adminMostGameRainFlag ||
+            (
+              adminMaxCoverage !== null &&
+              adminMaxCoverage >= 0.75
+            )
+          )
+        );
+
+      const adminUseRainDelayPhoto =
+        adminOfficialRainDelay ||
+        adminExplicitRainDelayPhoto ||
+        adminNearCertainMostGame;
+
+      let adminWeather = "fair";
+
+      if (adminUseRainDelayPhoto) {
+        adminWeather = "rain-delay";
+      } else if (
+        /\blightning\b/.test(adminWeatherText) ||
+        /\bthunder\b/.test(adminWeatherText) ||
+        /\bstorm\b/.test(adminWeatherText)
+      ) {
+        adminWeather = "storm";
+      } else if (
+        /\brain\b/.test(adminWeatherText) ||
+        /\bdrizzle\b/.test(adminWeatherText) ||
+        /\bshowers?\b/.test(adminWeatherText)
+      ) {
+        adminWeather = "rain";
+      } else if (
+        /\bsnow\b/.test(adminWeatherText) ||
+        /\bsleet\b/.test(adminWeatherText) ||
+        /\bflurr/.test(adminWeatherText)
+      ) {
+        adminWeather = "snow";
+      } else if (
+        /\bfog\b/.test(adminWeatherText) ||
+        /\bmist\b/.test(adminWeatherText) ||
+        /\bhaze\b/.test(adminWeatherText)
+      ) {
+        adminWeather = "fog";
+      } else if (
+        /\bwind\b/.test(adminWeatherText) ||
+        /\bwindy\b/.test(adminWeatherText)
+      ) {
+        adminWeather = "wind";
+      }
+
+      const adminRoofText = [
+        game?.roof,
+        game?.roof_status,
+        game?.roofStatus,
+        game?.venue?.roof,
+        game?.venue?.roof_status,
+        game?.venue?.roofStatus,
+        venue?.roof,
+        venue?.roof_status,
+        venue?.roofStatus
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      let adminRoof = "";
+
+      if (
+        /\bclosed\b/.test(adminRoofText) ||
+        /\bfixed\b/.test(adminRoofText) ||
+        /\bdome\b/.test(adminRoofText)
+      ) {
+        adminRoof = "closed";
+      } else if (/\bopen\b/.test(adminRoofText)) {
+        adminRoof = "open";
+      }
+
+      const adminTimeSources = [];
+
+      try {
+        if (typeof gameHeaderFormatTime === "function") {
+          adminTimeSources.push(
+            gameHeaderFormatTime(
+              game?.game_time ??
+                game?.start_time ??
+                game?.datetime ??
+                game?.date_time ??
+                game?.game_datetime ??
+                game?.time ??
+                "",
+              venue
+            )
+          );
+        }
+      } catch (_) {
+        // Continue through explicit and raw time fields.
+      }
+
+      adminTimeSources.push(
+        game?.display_time,
+        game?.local_time,
+        game?.game_time_local,
+        game?.start_time_local,
+        game?.scheduled_time,
+        game?.game_time,
+        game?.start_time,
+        game?.datetime,
+        game?.date_time,
+        game?.game_datetime,
+        game?.time
+      );
+
+      let adminHour = null;
+
+      for (const source of adminTimeSources) {
+        const text = String(source || "").trim();
+        if (!text) continue;
+
+        const match12 = text.match(
+          /\b(\d{1,2})(?::\d{2})?\s*(AM|PM)\b/i
+        );
+
+        if (match12) {
+          let parsedHour = Number.parseInt(match12[1], 10) % 12;
+          if (match12[2].toUpperCase() === "PM") {
+            parsedHour += 12;
+          }
+          adminHour = parsedHour;
+          break;
+        }
+
+        const match24 = text.match(
+          /(?:T|\s)([01]\d|2[0-3]):[0-5]\d/
+        );
+
+        if (match24) {
+          adminHour = Number.parseInt(match24[1], 10);
+          break;
+        }
+      }
+
+      if (adminHour === null) {
+        const rawStart =
+          game?.game_time ??
+          game?.start_time ??
+          game?.datetime ??
+          game?.date_time ??
+          game?.game_datetime ??
+          "";
+
+        const startDate = new Date(rawStart);
+
+        if (!Number.isNaN(startDate.getTime())) {
+          try {
+            const hourText = new Intl.DateTimeFormat("en-US", {
+              timeZone:
+                venue?.timezone ??
+                venue?.time_zone ??
+                "America/New_York",
+              hour: "2-digit",
+              hourCycle: "h23"
+            }).format(startDate);
+
+            const parsedHour = Number.parseInt(hourText, 10);
+            if (Number.isFinite(parsedHour)) {
+              adminHour = parsedHour;
+            }
+          } catch (_) {
+            // Leave unknown rather than guessing.
+          }
+        }
+      }
+
+      let adminTime = "day";
+
+      if (
+        adminHour !== null &&
+        (adminHour >= 19 || adminHour < 6)
+      ) {
+        adminTime = "night";
+      } else if (
+        adminHour !== null &&
+        adminHour >= 17 &&
+        adminHour < 19
+      ) {
+        adminTime = "dusk";
+      }
+
+      const adminFolder =
+        `assets/images/stadiums/venues/${adminVenueFolder}`;
+
+      const adminBases = [];
+
+      const addAdminBase = (value) => {
+        if (value && !adminBases.includes(value)) {
+          adminBases.push(value);
+        }
+      };
+
+      if (adminRoof) {
+        addAdminBase(
+          `${adminRoof}-${adminWeather}-${adminTime}`
+        );
+        addAdminBase(`${adminRoof}-${adminWeather}`);
+      }
+
+      addAdminBase(`${adminWeather}-${adminTime}`);
+      addAdminBase(adminWeather);
+
+      if (adminRoof) {
+        addAdminBase(`${adminRoof}-fair-${adminTime}`);
+        addAdminBase(`${adminRoof}-fair`);
+        addAdminBase(adminRoof);
+      }
+
+      addAdminBase(`fair-${adminTime}`);
+
+      if (adminTime === "dusk") {
+        addAdminBase("fair-night");
+      }
+
+      addAdminBase(adminTime);
+      addAdminBase("default");
+
+      const adminExtensions = [
+        "webp",
+        "jpg",
+        "jpeg",
+        "png"
+      ];
+
+      const adminCandidates = [];
+
+      for (const base of adminBases) {
+        for (const extension of adminExtensions) {
+          adminCandidates.push(
+            `${adminFolder}/${base}.${extension}`
+          );
+        }
+      }
+
+      venueSpecificFallbacks.unshift(...adminCandidates);
+    }
+  }
+
+
+
+
+  /*
+    BORING BETS: CITI FIELD COMPLETE PHOTO RESTORE V3
+
+    Citi does not yet have an approved real rain-delay photograph.
+    Rainy games use the correct Citi day/night photograph, while the existing
+    outdoor weather layer supplies the rain treatment.
+  */
+  {
+    const citiRestoreVenueId = String(
+      venue?.id ??
+      venue?.venue_id ??
+      venue?.venueId ??
+      game?.venue_id ??
+      game?.venueId ??
+      game?.venue?.id ??
+      game?.venue?.venue_id ??
+      game?.venue?.venueId ??
+      ""
+    ).trim();
+
+    const citiRestoreVenueName = String(
+      venue?.name ??
+      venue?.venue_name ??
+      venue?.venueName ??
+      game?.venue_name ??
+      game?.venueName ??
+      game?.venue?.name ??
+      ""
+    ).toLowerCase();
+
+    const citiRestoreIsVenue =
+      citiRestoreVenueId === "3289" ||
+      slug === "citi-field" ||
+      slug.includes("citi-field") ||
+      citiRestoreVenueName.includes("citi field");
+
+    if (citiRestoreIsVenue) {
+      const citiRestoreWeatherText = [
+        game?.weather?.condition,
+        game?.weather?.short_forecast,
+        game?.weather?.forecast,
+        game?.weather?.summary,
+        game?.weather?.text,
+        game?.weather_condition,
+        game?.weather_text,
+        game?.forecast,
+        game?.condition
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const citiRestoreIsRain =
+        /\brain\b/.test(citiRestoreWeatherText) ||
+        /\bdrizzle\b/.test(citiRestoreWeatherText) ||
+        /\bshowers?\b/.test(citiRestoreWeatherText) ||
+        /\bstorm\b/.test(citiRestoreWeatherText) ||
+        /\bthunder\b/.test(citiRestoreWeatherText);
+
+      if (citiRestoreIsRain) {
+        const citiRestoreTimeSources = [];
+
+        try {
+          if (typeof gameHeaderFormatTime === "function") {
+            citiRestoreTimeSources.push(
+              gameHeaderFormatTime(
+                game?.game_time ??
+                  game?.start_time ??
+                  game?.datetime ??
+                  game?.date_time ??
+                  game?.game_datetime ??
+                  game?.time ??
+                  "",
+                venue
+              )
+            );
+          }
+        } catch (_) {
+          // Continue through explicit and raw time fields.
+        }
+
+        citiRestoreTimeSources.push(
+          game?.display_time,
+          game?.local_time,
+          game?.game_time_local,
+          game?.start_time_local,
+          game?.scheduled_time,
+          game?.game_time,
+          game?.start_time,
+          game?.datetime,
+          game?.date_time,
+          game?.game_datetime,
+          game?.time
+        );
+
+        let citiRestoreHour = null;
+
+        for (const source of citiRestoreTimeSources) {
+          const text = String(source || "").trim();
+          if (!text) continue;
+
+          const match12 = text.match(
+            /\b(\d{1,2})(?::\d{2})?\s*(AM|PM)\b/i
+          );
+
+          if (match12) {
+            let parsedHour = Number.parseInt(match12[1], 10) % 12;
+            if (match12[2].toUpperCase() === "PM") {
+              parsedHour += 12;
+            }
+            citiRestoreHour = parsedHour;
+            break;
+          }
+
+          const match24 = text.match(
+            /(?:T|\s)([01]\d|2[0-3]):[0-5]\d/
+          );
+
+          if (match24) {
+            citiRestoreHour = Number.parseInt(match24[1], 10);
+            break;
+          }
+        }
+
+        if (citiRestoreHour === null) {
+          const rawStart =
+            game?.game_time ??
+            game?.start_time ??
+            game?.datetime ??
+            game?.date_time ??
+            game?.game_datetime ??
+            "";
+
+          const startDate = new Date(rawStart);
+
+          if (!Number.isNaN(startDate.getTime())) {
+            try {
+              const hourText = new Intl.DateTimeFormat("en-US", {
+                timeZone:
+                  venue?.timezone ??
+                  venue?.time_zone ??
+                  "America/New_York",
+                hour: "2-digit",
+                hourCycle: "h23"
+              }).format(startDate);
+
+              const parsedHour = Number.parseInt(hourText, 10);
+              if (Number.isFinite(parsedHour)) {
+                citiRestoreHour = parsedHour;
+              }
+            } catch (_) {
+              // Leave unknown rather than guessing.
+            }
+          }
+        }
+
+        const citiRestoreIsNight =
+          citiRestoreHour !== null &&
+          (citiRestoreHour >= 19 || citiRestoreHour < 6);
+
+        venueSpecificFallbacks.push(
+          citiRestoreIsNight
+            ? "assets/images/stadiums/3289-night-rain-v3.webp"
+            : "assets/images/stadiums/3289-day-rain-v3.webp"
+        );
+      }
+    }
+  }
+
+
+  /*
+    BORING BETS: WRIGLEY NIGHT SELECTION V2
+
+    Recognize Wrigley primarily by MLB venue ID 17 and use the same displayed
+    time information as the header. A unique night filename avoids stale
+    browser caching.
+  */
+  {
+    const wrigleyNightVenueId = String(
+      venue?.id ??
+      venue?.venue_id ??
+      venue?.venueId ??
+      game?.venue_id ??
+      game?.venueId ??
+      game?.venue?.id ??
+      game?.venue?.venue_id ??
+      game?.venue?.venueId ??
+      ""
+    ).trim();
+
+    const wrigleyNightVenueName = String(
+      venue?.name ??
+      venue?.venue_name ??
+      venue?.venueName ??
+      game?.venue_name ??
+      game?.venueName ??
+      game?.venue?.name ??
+      ""
+    ).toLowerCase();
+
+    const wrigleyNightIsVenue =
+      wrigleyNightVenueId === "17" ||
+      slug === "wrigley-field" ||
+      slug.includes("wrigley-field") ||
+      wrigleyNightVenueName.includes("wrigley field");
+
+    if (wrigleyNightIsVenue) {
+      const wrigleyNightTimeSources = [];
+
+      try {
+        if (typeof gameHeaderFormatTime === "function") {
+          wrigleyNightTimeSources.push(
+            gameHeaderFormatTime(
+              game?.game_time ??
+                game?.start_time ??
+                game?.datetime ??
+                game?.date_time ??
+                game?.game_datetime ??
+                game?.time ??
+                "",
+              venue
+            )
+          );
+        }
+      } catch (_) {
+        // Continue through explicit and raw time fields.
+      }
+
+      wrigleyNightTimeSources.push(
+        game?.display_time,
+        game?.local_time,
+        game?.game_time_local,
+        game?.start_time_local,
+        game?.scheduled_time,
+        game?.game_time,
+        game?.start_time,
+        game?.datetime,
+        game?.date_time,
+        game?.game_datetime,
+        game?.time
+      );
+
+      let wrigleyNightHour = null;
+
+      for (const source of wrigleyNightTimeSources) {
+        const text = String(source || "").trim();
+        if (!text) continue;
+
+        const match12 = text.match(
+          /\b(\d{1,2})(?::\d{2})?\s*(AM|PM)\b/i
+        );
+
+        if (match12) {
+          let parsedHour = Number.parseInt(match12[1], 10) % 12;
+          if (match12[2].toUpperCase() === "PM") {
+            parsedHour += 12;
+          }
+          wrigleyNightHour = parsedHour;
+          break;
+        }
+
+        const match24 = text.match(
+          /(?:T|\s)([01]\d|2[0-3]):[0-5]\d/
+        );
+
+        if (match24) {
+          wrigleyNightHour = Number.parseInt(match24[1], 10);
+          break;
+        }
+      }
+
+      if (wrigleyNightHour === null) {
+        const rawStart =
+          game?.game_time ??
+          game?.start_time ??
+          game?.datetime ??
+          game?.date_time ??
+          game?.game_datetime ??
+          "";
+
+        const startDate = new Date(rawStart);
+
+        if (!Number.isNaN(startDate.getTime())) {
+          try {
+            const hourText = new Intl.DateTimeFormat("en-US", {
+              timeZone:
+                venue?.timezone ??
+                venue?.time_zone ??
+                "America/Chicago",
+              hour: "2-digit",
+              hourCycle: "h23"
+            }).format(startDate);
+
+            const parsedHour = Number.parseInt(hourText, 10);
+            if (Number.isFinite(parsedHour)) {
+              wrigleyNightHour = parsedHour;
+            }
+          } catch (_) {
+            // Leave unknown rather than guessing.
+          }
+        }
+      }
+
+      const wrigleyNightIsNight =
+        wrigleyNightHour !== null &&
+        (wrigleyNightHour >= 19 || wrigleyNightHour < 6);
+
+      if (wrigleyNightIsNight) {
+        venueSpecificFallbacks.push(
+          "assets/images/stadiums/17-night-v2.webp"
+        );
+      }
+    }
+  }
+
+
+  /* BORING BETS: FENWAY RAIN HERO V1 */
+  {
+    const fenwayVenueId = String(
+      venue?.id ??
+      venue?.venue_id ??
+      venue?.venueId ??
+      game?.venue_id ??
+      game?.venueId ??
+      game?.venue?.id ??
+      game?.venue?.venue_id ??
+      game?.venue?.venueId ??
+      ""
+    ).trim();
+
+    const fenwayVenueName = String(
+      venue?.name ??
+      venue?.venue_name ??
+      venue?.venueName ??
+      game?.venue_name ??
+      game?.venueName ??
+      game?.venue?.name ??
+      ""
+    ).toLowerCase();
+
+    const fenwayIsVenue =
+      fenwayVenueId === "3" ||
+      slug === "fenway-park" ||
+      slug.includes("fenway-park") ||
+      fenwayVenueName.includes("fenway park");
+
+    if (fenwayIsVenue) {
+      const fenwayWeatherText = [
+        game?.weather?.condition,
+        game?.weather?.short_forecast,
+        game?.weather?.forecast,
+        game?.weather?.summary,
+        game?.weather?.text,
+        game?.weather_condition,
+        game?.weather_text,
+        game?.forecast,
+        game?.condition
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const fenwayIsRain =
+        /\brain\b/.test(fenwayWeatherText) ||
+        /\bdrizzle\b/.test(fenwayWeatherText) ||
+        /\bshowers?\b/.test(fenwayWeatherText) ||
+        /\bstorm\b/.test(fenwayWeatherText) ||
+        /\bthunder\b/.test(fenwayWeatherText);
+
+      if (fenwayIsRain) {
+        venueSpecificFallbacks.push(
+          "assets/images/stadiums/3-rain.webp"
+        );
+      }
+    }
+  }
+
+  /*
+    BORING BETS: CHASE FIELD NIGHT HERO V4
+
+    Identify Chase Field primarily by MLB venue ID 15. Venue-name and slug
+    checks remain as fallbacks so this rule does not depend on one exact name.
+  */
+  {
+    const chaseVenueId = String(
+      venue?.id ??
+      venue?.venue_id ??
+      venue?.venueId ??
+      game?.venue_id ??
+      game?.venueId ??
+      game?.venue?.id ??
+      game?.venue?.venue_id ??
+      game?.venue?.venueId ??
+      ""
+    ).trim();
+
+    const chaseVenueName = String(
+      venue?.name ??
+      venue?.venue_name ??
+      venue?.venueName ??
+      game?.venue_name ??
+      game?.venueName ??
+      game?.venue?.name ??
+      ""
+    ).toLowerCase();
+
+    const chaseIsVenue =
+      chaseVenueId === "15" ||
+      slug === "chase-field" ||
+      slug.includes("chase-field") ||
+      chaseVenueName.includes("chase field");
+
+    if (chaseIsVenue) {
+      const chaseTimeSources = [];
+
+      try {
+        if (typeof gameHeaderFormatTime === "function") {
+          chaseTimeSources.push(
+            gameHeaderFormatTime(
+              game?.game_time ??
+                game?.start_time ??
+                game?.datetime ??
+                game?.date_time ??
+                game?.game_datetime ??
+                game?.time ??
+                "",
+              venue
+            )
+          );
+        }
+      } catch (_) {
+        // Continue through raw source fields.
+      }
+
+      chaseTimeSources.push(
+        game?.display_time,
+        game?.local_time,
+        game?.game_time_local,
+        game?.start_time_local,
+        game?.scheduled_time,
+        game?.game_time,
+        game?.start_time,
+        game?.datetime,
+        game?.date_time,
+        game?.game_datetime,
+        game?.time
+      );
+
+      let chaseDisplayHour = null;
+
+      for (const chaseTimeSource of chaseTimeSources) {
+        const chaseTimeText = String(chaseTimeSource || "").trim();
+        if (!chaseTimeText) continue;
+
+        const chase12HourMatch = chaseTimeText.match(
+          /\b(\d{1,2})(?::(\d{2}))?\s*(AM|PM)\b/i
+        );
+
+        if (chase12HourMatch) {
+          let parsedChaseHour =
+            Number.parseInt(chase12HourMatch[1], 10) % 12;
+
+          if (chase12HourMatch[3].toUpperCase() === "PM") {
+            parsedChaseHour += 12;
+          }
+
+          chaseDisplayHour = parsedChaseHour;
+          break;
+        }
+
+        const chase24HourMatch = chaseTimeText.match(
+          /(?:T|\s)([01]\d|2[0-3]):[0-5]\d/
+        );
+
+        if (chase24HourMatch) {
+          chaseDisplayHour =
+            Number.parseInt(chase24HourMatch[1], 10);
+          break;
+        }
+      }
+
+      const chaseIsNight =
+        chaseDisplayHour !== null &&
+        (chaseDisplayHour >= 19 || chaseDisplayHour < 6);
+
+      if (chaseIsNight) {
+        venueSpecificFallbacks.push(
+          "assets/images/stadiums/15-night.webp"
+        );
+      }
+    }
+  }
+
+  if (
+    slug === "loandepot-park" &&
+    roof.state !== "open"
+  ) {
+    venueSpecificFallbacks.push(
+      "assets/images/stadiums/4169-hero-commons-v1.jpg"
+    );
+  }
+
+  /*
+    BORING BETS: CHASE FIELD NIGHT PRIORITY FIX V2
+
+    Venue-specific time/roof overrides must be evaluated before the ordinary
+    closed/default candidates. This lets Chase Field's night image win from
+    7:00 PM through 5:59 AM local time, while the regular image wins during
+    the daytime.
+  */
+  return [
+    ...venueSpecificFallbacks,
+    ...explicit,
+    ...local,
+    "assets/images/stadiums/default.svg"
+  ];
+}
+/*
+  BORING BETS: STABLE STADIUM PHOTO LOADER V1
+
+  Live data refreshes may rerender the stadium header many times. Keep the
+  current photograph visible while checking candidates and avoid reloading the
+  same candidate list on every refresh.
+*/
+function gameHeaderLoadStadiumPhoto(image, candidates) {
+  const urls = [...new Set(candidates.filter(Boolean))];
+
+  if (!urls.length) {
+    image.classList.remove("is-loading");
+    return;
+  }
+
+  const candidateKey = urls.join("\n");
+  const currentKey = image.dataset.stadiumCandidateKey || "";
+  const hasVisiblePhoto = Boolean(
+    image.currentSrc ||
+    image.getAttribute("src")
+  );
+
+  /*
+    Nothing relevant changed. Do not reset src, opacity, event handlers, or the
+    fallback search just because live game data refreshed.
+  */
+  if (candidateKey === currentKey && hasVisiblePhoto) {
+    image.classList.remove("is-loading");
+    return;
+  }
+
+  image.dataset.stadiumCandidateKey = candidateKey;
+
+  const requestId = String(
+    (Number(image.dataset.stadiumLoadRequestId) || 0) + 1
+  );
+
+  image.dataset.stadiumLoadRequestId = requestId;
+
+  /*
+    Only show the initial loading state when there is no photo yet. During a
+    replacement search, preserve the existing stadium photograph at full
+    opacity.
+  */
+  if (hasVisiblePhoto) {
+    image.classList.remove("is-loading");
+  } else {
+    image.classList.add("is-loading");
+  }
+
+  let index = 0;
+
+  const requestIsCurrent = () =>
+    image.dataset.stadiumLoadRequestId === requestId;
+
+  const tryNext = () => {
+    if (!requestIsCurrent()) return;
+
+    if (index >= urls.length) {
+      image.classList.remove("is-loading");
+      return;
+    }
+
+    const url = urls[index++];
+    const probe = new Image();
+
+    probe.onload = () => {
+      if (!requestIsCurrent()) return;
+
+      const currentAttribute = image.getAttribute("src") || "";
+
+      if (currentAttribute === url || image.currentSrc === probe.currentSrc) {
+        image.classList.remove("is-loading");
+        image.dataset.stadiumResolvedUrl = url;
+        return;
+      }
+
+      /*
+        The replacement is already decoded/cached by the probe. Swap only now,
+        after success, so a missing candidate can never blank or flash the
+        visible stadium photo.
+      */
+      image.onload = () => {
+        if (!requestIsCurrent()) return;
+
+        image.classList.remove("is-loading");
+        image.dataset.stadiumResolvedUrl = url;
+        image.onload = null;
+        image.onerror = null;
+      };
+
+      image.onerror = () => {
+        if (!requestIsCurrent()) return;
+
+        image.onload = null;
+        image.onerror = null;
+        tryNext();
+      };
+
+      image.src = url;
+    };
+
+    probe.onerror = tryNext;
+    probe.src = url;
+  };
+
+  tryNext();
+}
+
 
 function renderControls() {
   document
@@ -2056,3 +3843,5 @@ function escapeHtml(value) {
 }
 
 loadGame();
+
+/* BORING BETS: LOANDEPOT COMMONS HERO V1 */

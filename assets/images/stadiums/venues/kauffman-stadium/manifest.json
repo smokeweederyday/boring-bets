@@ -1,0 +1,10 @@
+{
+  "venue_id": "7",
+  "venue_name": "Kauffman Stadium",
+  "folder": "kauffman-stadium",
+  "preferred_format": "webp",
+  "recommended_size": {
+    "width": 1916,
+    "height": 821
+  }
+}

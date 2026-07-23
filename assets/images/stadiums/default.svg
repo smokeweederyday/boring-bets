@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Baseball stadium placeholder</title>
+  <desc id="desc">A dark retro-styled baseball stadium used until a venue photograph is available.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#17283b"/>
+      <stop offset="0.58" stop-color="#0b1522"/>
+      <stop offset="1" stop-color="#030810"/>
+    </linearGradient>
+    <radialGradient id="field" cx="50%" cy="90%" r="78%">
+      <stop offset="0" stop-color="#237143"/>
+      <stop offset="0.58" stop-color="#123d2a"/>
+      <stop offset="1" stop-color="#071711"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#sky)"/>
+  <path d="M0 235 Q600 75 1200 235 V505 H0Z" fill="#07101a" stroke="#264766" stroke-width="4"/>
+  <g fill="#162b3f" stroke="#355d7e" stroke-width="3">
+    <path d="M35 270 Q600 125 1165 270 L1108 430 Q600 305 92 430Z"/>
+    <path d="M105 300 Q600 190 1095 300 L1055 392 Q600 300 145 392Z" fill="#0d1e2c"/>
+  </g>
+  <path d="M155 675 Q600 285 1045 675Z" fill="url(#field)"/>
+  <path d="M478 675 L600 420 L722 675Z" fill="#a97843" opacity="0.88"/>
+  <path d="M600 420 L639 478 L600 535 L561 478Z" fill="#d6c09d"/>
+  <g fill="#dff8ff" filter="url(#glow)">
+    <circle cx="160" cy="178" r="12"/><circle cx="235" cy="148" r="12"/><circle cx="965" cy="148" r="12"/><circle cx="1040" cy="178" r="12"/>
+  </g>
+  <g stroke="#39d7df" stroke-width="4" opacity="0.55">
+    <path d="M118 510 H1082"/><path d="M230 570 H970"/>
+  </g>
+  <text x="600" y="325" text-anchor="middle" fill="#eaf7ff" font-family="Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="8">BALLPARK</text>
+  <text x="600" y="366" text-anchor="middle" fill="#58dce1" font-family="Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="5">VENUE PHOTO PENDING</text>
+</svg>

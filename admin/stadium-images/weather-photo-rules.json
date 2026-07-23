@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "ordinary_rain_variants": [
+    "rain-day",
+    "rain-dusk",
+    "rain-night"
+  ],
+  "rain_delay_variants": [
+    "rain-delay-day",
+    "rain-delay-dusk",
+    "rain-delay-night"
+  ],
+  "rain_delay_conditions": {
+    "official_status": true,
+    "explicit_flags": [
+      "use_rain_delay_photo",
+      "rain_delay_photo",
+      "rain_delay_likely",
+      "tarp_expected"
+    ],
+    "near_certain_probability_percent": 99.5,
+    "minimum_game_window_coverage": 0.75
+  }
+}

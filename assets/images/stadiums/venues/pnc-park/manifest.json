@@ -1,0 +1,16 @@
+{
+  "venue_id": "31",
+  "venue_name": "PNC Park",
+  "folder": "pnc-park",
+  "preferred_format": "webp",
+  "recommended_size": {
+    "width": 1916,
+    "height": 821
+  },
+  "managed_variants": [
+    "fair-day.webp",
+    "fair-dusk.webp",
+    "fair-night.webp"
+  ],
+  "weather_specific_status": "No approved rain or rain-delay photo yet; use fair day/night fallback."
+}

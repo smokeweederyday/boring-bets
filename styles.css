@@ -6406,3 +6406,1415 @@ button.global-tier-highlight.offense-signal-strong-negative {
     animation: none !important;
   }
 }
+
+/* BORING BETS: GAME HEADER STADIUM WEATHER V1 */
+
+.game-matchup.game-matchup-stadium {
+  display: grid;
+  grid-template-columns:
+    minmax(150px, 0.72fr)
+    minmax(390px, 1.56fr)
+    minmax(150px, 0.72fr);
+  align-items: stretch;
+  gap: clamp(0.85rem, 2vw, 1.7rem);
+  padding: clamp(0.9rem, 2vw, 1.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(116, 170, 217, 0.2);
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg, rgba(16, 37, 61, 0.46), transparent 34%),
+    linear-gradient(270deg, rgba(36, 22, 47, 0.42), transparent 34%),
+    rgba(2, 7, 14, 0.9);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.game-matchup-stadium .game-team {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 0.8rem 0.35rem;
+  text-align: center;
+}
+
+.game-matchup-stadium .game-team img {
+  width: clamp(92px, 10vw, 156px);
+  height: clamp(92px, 10vw, 156px);
+  object-fit: contain;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5));
+}
+
+.game-matchup-stadium .game-team span {
+  overflow: hidden;
+  max-width: 100%;
+  color: #f5f9ff;
+  font-size: clamp(1rem, 1.6vw, 1.34rem);
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  line-height: 1.08;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.game-stadium-weather {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.game-stadium-photo-frame {
+  position: relative;
+  min-height: clamp(230px, 25vw, 340px);
+  overflow: hidden;
+  border: 1px solid rgba(115, 202, 255, 0.34);
+  border-radius: 16px;
+  background: #07101a;
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.42),
+    0 0 26px rgba(30, 194, 226, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  isolation: isolate;
+}
+
+.game-stadium-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.01);
+  transition: opacity 180ms ease, filter 260ms ease, transform 6s ease;
+}
+
+.game-stadium-photo.is-loading {
+  opacity: 0.35;
+}
+
+.game-stadium-weather:hover .game-stadium-photo {
+  transform: scale(1.035);
+}
+
+.game-stadium-photo-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(1, 5, 10, 0.12), rgba(1, 5, 10, 0.04) 42%, rgba(1, 5, 10, 0.86) 100%),
+    linear-gradient(90deg, rgba(2, 8, 15, 0.2), transparent 28%, transparent 72%, rgba(2, 8, 15, 0.2));
+}
+
+.game-stadium-weather-effect {
+  position: absolute;
+  inset: -10%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.game-stadium-weather.is-weather-clear .game-stadium-weather-effect {
+  opacity: 0.55;
+  background:
+    radial-gradient(circle at 72% 8%, rgba(255, 224, 112, 0.72), transparent 28%),
+    linear-gradient(180deg, rgba(69, 174, 255, 0.18), transparent 60%);
+}
+
+.game-stadium-weather.is-weather-cloudy .game-stadium-photo,
+.game-stadium-weather.is-weather-neutral .game-stadium-photo {
+  filter: saturate(0.8) brightness(0.78) contrast(1.06);
+}
+
+.game-stadium-weather.is-weather-cloudy .game-stadium-weather-effect {
+  opacity: 0.72;
+  background:
+    radial-gradient(ellipse at 22% 14%, rgba(185, 198, 211, 0.45), transparent 34%),
+    radial-gradient(ellipse at 74% 10%, rgba(105, 119, 135, 0.55), transparent 38%),
+    linear-gradient(180deg, rgba(83, 96, 111, 0.55), transparent 68%);
+  filter: blur(8px);
+}
+
+.game-stadium-weather.is-weather-rain .game-stadium-photo,
+.game-stadium-weather.is-weather-thunder .game-stadium-photo {
+  filter: saturate(0.72) brightness(0.62) contrast(1.08) hue-rotate(5deg);
+}
+
+.game-stadium-weather.is-weather-rain .game-stadium-weather-effect,
+.game-stadium-weather.is-weather-thunder .game-stadium-weather-effect {
+  opacity: 0.68;
+  background:
+    repeating-linear-gradient(105deg, transparent 0 14px, rgba(178, 224, 255, 0.36) 15px 16px, transparent 17px 28px),
+    linear-gradient(180deg, rgba(44, 68, 92, 0.58), rgba(14, 32, 49, 0.12));
+  background-size: 100% 100%, 100% 100%;
+  animation: game-stadium-rain 0.85s linear infinite;
+}
+
+.game-stadium-weather.is-weather-thunder .game-stadium-photo-frame {
+  animation: game-stadium-lightning 10.5s steps(1, end) infinite;
+}
+
+.game-stadium-weather.is-weather-snow .game-stadium-photo {
+  filter: saturate(0.65) brightness(0.82) contrast(0.96);
+}
+
+.game-stadium-weather.is-weather-snow .game-stadium-weather-effect {
+  opacity: 0.74;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.92) 0 2px, transparent 2.8px),
+    radial-gradient(circle, rgba(225,243,255,0.78) 0 1.5px, transparent 2.2px);
+  background-size: 42px 42px, 66px 66px;
+  animation: game-stadium-snow 7s linear infinite;
+}
+
+.game-stadium-weather.is-weather-roofed .game-stadium-photo {
+  filter: saturate(0.72) brightness(0.78) contrast(1.08);
+}
+
+.game-stadium-weather.is-weather-roofed .game-stadium-weather-effect {
+  opacity: 0.34;
+  background: linear-gradient(180deg, rgba(171, 188, 201, 0.34), transparent 55%);
+}
+
+.game-stadium-weather.is-weather-hot .game-stadium-photo {
+  filter: saturate(1.12) sepia(0.08) brightness(0.88);
+}
+
+.game-stadium-weather.is-weather-cold .game-stadium-photo {
+  filter: saturate(0.76) hue-rotate(9deg) brightness(0.82);
+}
+
+.game-stadium-weather.is-weather-windy .game-stadium-weather-effect::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 10%, rgba(152, 239, 240, 0.15) 38%, transparent 62%);
+  transform: translateX(-120%);
+  animation: game-stadium-wind 4.8s ease-in-out infinite;
+}
+
+.game-stadium-rain-chance {
+  position: absolute;
+  top: 0.72rem;
+  right: 0.72rem;
+  z-index: 5;
+  padding: 0.34rem 0.58rem;
+  border: 1px solid rgba(140, 219, 255, 0.36);
+  border-radius: 999px;
+  color: #dff7ff;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  background: rgba(3, 15, 27, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.game-stadium-weather-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 1.28fr 1fr 1fr;
+  min-height: 82px;
+  border-top: 1px solid rgba(166, 220, 255, 0.22);
+  background: rgba(2, 10, 18, 0.72);
+  backdrop-filter: blur(11px);
+}
+
+.game-stadium-weather-stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.62rem;
+  min-width: 0;
+  padding: 0.68rem 0.8rem;
+}
+
+.game-stadium-weather-stat + .game-stadium-weather-stat {
+  border-left: 1px solid rgba(158, 204, 237, 0.16);
+}
+
+.game-stadium-weather-stat > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.game-stadium-weather-stat strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-weight: 900;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-stadium-weather-stat span:not(.game-stadium-weather-icon) {
+  overflow: hidden;
+  margin-top: 0.3rem;
+  color: rgba(219, 232, 244, 0.72);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.055em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.game-stadium-weather-icon {
+  flex: 0 0 auto;
+  color: #52d9de;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(49, 220, 226, 0.34);
+}
+
+.game-stadium-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.8rem 0.7rem 0;
+  text-align: center;
+}
+
+.game-stadium-caption strong {
+  position: relative;
+  max-width: 100%;
+  color: #f6f9fc;
+  font-size: clamp(0.95rem, 1.65vw, 1.3rem);
+  font-weight: 900;
+  letter-spacing: 0.075em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.game-stadium-caption span {
+  margin-top: 0.38rem;
+  color: rgba(231, 239, 247, 0.78);
+  font-size: 0.84rem;
+  font-weight: 760;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@keyframes game-stadium-rain {
+  from { transform: translate3d(-2%, -4%, 0); }
+  to { transform: translate3d(2%, 4%, 0); }
+}
+
+@keyframes game-stadium-snow {
+  from { background-position: 0 -10px, 0 -30px; }
+  to { background-position: 30px 160px, -24px 210px; }
+}
+
+@keyframes game-stadium-wind {
+  0%, 35% { transform: translateX(-120%); opacity: 0; }
+  48% { opacity: 1; }
+  66%, 100% { transform: translateX(120%); opacity: 0; }
+}
+
+@keyframes game-stadium-lightning {
+  0%, 48%, 49%, 76%, 77%, 100% { filter: brightness(1); }
+  48.3%, 76.3% { filter: brightness(1.7); }
+  48.6%, 76.6% { filter: brightness(0.82); }
+}
+
+@media (max-width: 900px) {
+  .game-matchup.game-matchup-stadium {
+    grid-template-columns:
+      minmax(86px, 0.58fr)
+      minmax(280px, 1.84fr)
+      minmax(86px, 0.58fr);
+    gap: 0.65rem;
+    padding: 0.75rem;
+  }
+
+  .game-matchup-stadium .game-team img {
+    width: clamp(62px, 11vw, 98px);
+    height: clamp(62px, 11vw, 98px);
+  }
+
+  .game-matchup-stadium .game-team span {
+    font-size: clamp(0.74rem, 2vw, 1rem);
+  }
+
+  .game-stadium-photo-frame {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 620px) {
+  .game-matchup.game-matchup-stadium {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .game-stadium-weather {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .game-team-away {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .game-team-home {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .game-matchup-stadium .game-team {
+    flex-direction: row;
+    padding: 0.45rem;
+  }
+
+  .game-matchup-stadium .game-team img {
+    width: 54px;
+    height: 54px;
+  }
+
+  .game-stadium-photo-frame {
+    min-height: 225px;
+  }
+
+  .game-stadium-weather-bar {
+    grid-template-columns: 1.12fr 0.94fr 0.94fr;
+    min-height: 74px;
+  }
+
+  .game-stadium-weather-stat {
+    gap: 0.4rem;
+    padding: 0.58rem 0.42rem;
+  }
+
+  .game-stadium-weather-stat strong {
+    font-size: 0.9rem;
+  }
+
+  .game-stadium-weather-stat span:not(.game-stadium-weather-icon) {
+    font-size: 0.56rem;
+  }
+
+  .game-stadium-weather-icon {
+    font-size: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-stadium-photo,
+  .game-stadium-weather-effect,
+  .game-stadium-weather-effect::after,
+  .game-stadium-photo-frame {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* BORING BETS: GAME HEADER ULTRA COMPACT V3 */
+
+/*
+  Final hard-size override. This keeps the stadium/weather feature inside
+  approximately the same vertical footprint as the original matchup bar.
+*/
+.game-matchup.game-matchup-stadium {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(300px, 390px)
+    minmax(150px, 1fr) !important;
+  align-items: center !important;
+  gap: 0.7rem !important;
+  box-sizing: border-box !important;
+  height: 134px !important;
+  min-height: 134px !important;
+  max-height: 134px !important;
+  padding: 0.45rem 0.85rem !important;
+  overflow: hidden !important;
+}
+
+.game-matchup-stadium .game-team,
+.game-matchup-stadium .game-team.game-team-home {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+}
+
+.game-matchup-stadium .game-team img {
+  width: 62px !important;
+  height: 62px !important;
+  max-width: 62px !important;
+  max-height: 62px !important;
+  object-fit: contain !important;
+}
+
+.game-matchup-stadium .game-team span {
+  font-size: 1rem !important;
+  line-height: 1 !important;
+}
+
+.game-stadium-weather {
+  position: relative !important;
+  align-self: center !important;
+  width: 100% !important;
+  height: 112px !important;
+  min-height: 112px !important;
+  max-height: 112px !important;
+  overflow: hidden !important;
+  border-radius: 10px !important;
+}
+
+.game-stadium-photo-frame {
+  position: relative !important;
+  box-sizing: border-box !important;
+  height: 84px !important;
+  min-height: 84px !important;
+  max-height: 84px !important;
+  overflow: hidden !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.game-stadium-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.game-stadium-weather:hover .game-stadium-photo {
+  transform: none !important;
+}
+
+.game-stadium-weather-bar {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 5 !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  box-sizing: border-box !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  overflow: hidden !important;
+}
+
+.game-stadium-weather-stat {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.22rem !important;
+  min-width: 0 !important;
+  padding: 0 0.25rem !important;
+}
+
+.game-stadium-weather-stat strong {
+  font-size: 0.69rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.game-stadium-weather-stat span:not(.game-stadium-weather-icon) {
+  display: none !important;
+}
+
+.game-stadium-weather-icon {
+  font-size: 0.74rem !important;
+  line-height: 1 !important;
+}
+
+.game-stadium-caption {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 28px !important;
+  z-index: 4 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.42rem !important;
+  box-sizing: border-box !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  padding: 0.2rem 0.45rem !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 8, 12, 0),
+      rgba(2, 8, 12, 0.88)
+    ) !important;
+  pointer-events: none !important;
+}
+
+.game-stadium-caption strong,
+.game-stadium-caption span {
+  overflow: hidden !important;
+  margin: 0 !important;
+  color: #fff !important;
+  line-height: 1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.game-stadium-caption strong {
+  max-width: 62% !important;
+  font-size: 0.58rem !important;
+  letter-spacing: 0.045em !important;
+}
+
+.game-stadium-caption span {
+  max-width: 38% !important;
+  font-size: 0.53rem !important;
+  letter-spacing: 0.035em !important;
+}
+
+.game-stadium-caption span::before {
+  content: "•" !important;
+  margin-right: 0.42rem !important;
+}
+
+.game-stadium-rain-chance {
+  top: 0.26rem !important;
+  right: 0.3rem !important;
+  padding: 0.12rem 0.28rem !important;
+  font-size: 0.47rem !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 900px) {
+  .game-matchup.game-matchup-stadium {
+    grid-template-columns:
+      minmax(105px, 0.8fr)
+      minmax(270px, 1.5fr)
+      minmax(105px, 0.8fr) !important;
+    height: 124px !important;
+    min-height: 124px !important;
+    max-height: 124px !important;
+    gap: 0.45rem !important;
+    padding: 0.38rem 0.55rem !important;
+  }
+
+  .game-stadium-weather {
+    height: 104px !important;
+    min-height: 104px !important;
+    max-height: 104px !important;
+  }
+
+  .game-stadium-photo-frame {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+  }
+
+  .game-matchup-stadium .game-team img {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .game-matchup-stadium .game-team span {
+    font-size: 0.82rem !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .game-matchup.game-matchup-stadium {
+    grid-template-columns:
+      minmax(64px, 0.72fr)
+      minmax(190px, 2fr)
+      minmax(64px, 0.72fr) !important;
+    height: 108px !important;
+    min-height: 108px !important;
+    max-height: 108px !important;
+    gap: 0.25rem !important;
+    padding: 0.3rem !important;
+  }
+
+  .game-matchup-stadium .game-team,
+  .game-matchup-stadium .game-team.game-team-home {
+    flex-direction: column !important;
+    gap: 0.18rem !important;
+  }
+
+  .game-matchup-stadium .game-team img {
+    width: 39px !important;
+    height: 39px !important;
+  }
+
+  .game-matchup-stadium .game-team span {
+    font-size: 0.62rem !important;
+  }
+
+  .game-stadium-weather {
+    height: 92px !important;
+    min-height: 92px !important;
+    max-height: 92px !important;
+  }
+
+  .game-stadium-photo-frame {
+    height: 66px !important;
+    min-height: 66px !important;
+    max-height: 66px !important;
+  }
+
+  .game-stadium-weather-bar {
+    height: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+  }
+
+  .game-stadium-caption {
+    bottom: 26px !important;
+    height: 20px !important;
+    min-height: 20px !important;
+  }
+
+  .game-stadium-caption strong {
+    max-width: 58% !important;
+    font-size: 0.47rem !important;
+  }
+
+  .game-stadium-caption span {
+    max-width: 42% !important;
+    font-size: 0.43rem !important;
+  }
+
+  .game-stadium-weather-stat strong {
+    font-size: 0.56rem !important;
+  }
+
+  .game-stadium-weather-icon {
+    font-size: 0.61rem !important;
+  }
+}
+
+/* BORING BETS: GAME HEADER TOP META V4 */
+
+/*
+  Move venue + time above the header, remove the dead bottom space,
+  and neutralize the yellow/hot sky tint.
+*/
+.game-matchup.game-matchup-stadium {
+  position: relative !important;
+  overflow: visible !important;
+  margin-top: 1.35rem !important;
+  height: 116px !important;
+  min-height: 116px !important;
+  max-height: 116px !important;
+  padding: 0.38rem 0.8rem !important;
+  gap: 0.7rem !important;
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(300px, 390px)
+    minmax(150px, 1fr) !important;
+  align-items: center !important;
+}
+
+.game-matchup-stadium .game-team,
+.game-matchup-stadium .game-team.game-team-home {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+}
+
+.game-matchup-stadium .game-team img {
+  width: 58px !important;
+  height: 58px !important;
+  max-width: 58px !important;
+  max-height: 58px !important;
+  object-fit: contain !important;
+}
+
+.game-matchup-stadium .game-team span {
+  font-size: 0.96rem !important;
+  line-height: 1 !important;
+}
+
+.game-stadium-weather {
+  position: relative !important;
+  align-self: center !important;
+  width: 100% !important;
+  height: 90px !important;
+  min-height: 90px !important;
+  max-height: 90px !important;
+  overflow: visible !important;
+  border-radius: 10px !important;
+}
+
+.game-stadium-photo-frame {
+  position: relative !important;
+  height: 90px !important;
+  min-height: 90px !important;
+  max-height: 90px !important;
+  overflow: hidden !important;
+  border-radius: 10px !important;
+}
+
+.game-stadium-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.game-stadium-weather:hover .game-stadium-photo {
+  transform: none !important;
+}
+
+.game-stadium-weather-bar {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 5 !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
+  overflow: hidden !important;
+}
+
+.game-stadium-weather-stat {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.2rem !important;
+  padding: 0 0.2rem !important;
+}
+
+.game-stadium-weather-stat strong {
+  font-size: 0.66rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.game-stadium-weather-stat span:not(.game-stadium-weather-icon) {
+  display: none !important;
+}
+
+.game-stadium-weather-icon {
+  font-size: 0.7rem !important;
+  line-height: 1 !important;
+}
+
+.game-stadium-caption {
+  position: absolute !important;
+  left: 50% !important;
+  top: -1.08rem !important;
+  bottom: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 8 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  width: max-content !important;
+  max-width: min(92%, 420px) !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: none !important;
+  pointer-events: none !important;
+}
+
+.game-stadium-caption strong,
+.game-stadium-caption span {
+  overflow: hidden !important;
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.94) !important;
+  line-height: 1 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45) !important;
+}
+
+.game-stadium-caption strong {
+  max-width: 62% !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+.game-stadium-caption span {
+  max-width: 38% !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.04em !important;
+}
+
+.game-stadium-caption span::before {
+  content: "•" !important;
+  margin-right: 0.45rem !important;
+  color: rgba(82, 217, 222, 0.82) !important;
+}
+
+.game-stadium-rain-chance {
+  top: 0.26rem !important;
+  right: 0.32rem !important;
+  padding: 0.1rem 0.26rem !important;
+  font-size: 0.45rem !important;
+  line-height: 1 !important;
+}
+
+.game-stadium-weather.is-weather-hot .game-stadium-photo {
+  filter: saturate(1.02) brightness(0.86) contrast(1.02) !important;
+}
+
+.game-stadium-weather.is-weather-hot .game-stadium-weather-effect {
+  opacity: 0.14 !important;
+  background: linear-gradient(180deg, rgba(82, 217, 222, 0.06), transparent 58%) !important;
+}
+
+@media (max-width: 900px) {
+  .game-matchup.game-matchup-stadium {
+    margin-top: 1.25rem !important;
+    height: 108px !important;
+    min-height: 108px !important;
+    max-height: 108px !important;
+    padding: 0.34rem 0.55rem !important;
+    gap: 0.42rem !important;
+    grid-template-columns:
+      minmax(102px, 0.8fr)
+      minmax(260px, 1.5fr)
+      minmax(102px, 0.8fr) !important;
+  }
+
+  .game-matchup-stadium .game-team img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .game-matchup-stadium .game-team span {
+    font-size: 0.8rem !important;
+  }
+
+  .game-stadium-weather,
+  .game-stadium-photo-frame {
+    height: 82px !important;
+    min-height: 82px !important;
+    max-height: 82px !important;
+  }
+
+  .game-stadium-caption {
+    top: -1rem !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .game-matchup.game-matchup-stadium {
+    margin-top: 1.1rem !important;
+    height: 98px !important;
+    min-height: 98px !important;
+    max-height: 98px !important;
+    padding: 0.28rem !important;
+    gap: 0.25rem !important;
+    grid-template-columns:
+      minmax(60px, 0.72fr)
+      minmax(190px, 2fr)
+      minmax(60px, 0.72fr) !important;
+  }
+
+  .game-matchup-stadium .game-team,
+  .game-matchup-stadium .game-team.game-team-home {
+    flex-direction: column !important;
+    gap: 0.14rem !important;
+  }
+
+  .game-matchup-stadium .game-team img {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .game-matchup-stadium .game-team span {
+    font-size: 0.6rem !important;
+  }
+
+  .game-stadium-weather,
+  .game-stadium-photo-frame {
+    height: 74px !important;
+    min-height: 74px !important;
+    max-height: 74px !important;
+  }
+
+  .game-stadium-weather-bar {
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
+  }
+
+  .game-stadium-weather-stat strong {
+    font-size: 0.56rem !important;
+  }
+
+  .game-stadium-weather-icon {
+    font-size: 0.6rem !important;
+  }
+
+  .game-stadium-caption {
+    top: -0.9rem !important;
+    max-width: min(96%, 270px) !important;
+    gap: 0.3rem !important;
+  }
+
+  .game-stadium-caption strong {
+    font-size: 0.5rem !important;
+  }
+
+  .game-stadium-caption span {
+    font-size: 0.45rem !important;
+  }
+
+  .game-stadium-rain-chance {
+    font-size: 0.4rem !important;
+  }
+}
+
+/* BORING BETS: GAME HEADER CLEAN SKY + TIME V5 */
+
+/*
+  Clear weather should not paint a fake yellow sun/smog patch into a
+  static stadium photograph. Keep only a restrained neutral daylight wash.
+*/
+.game-stadium-weather.is-weather-clear .game-stadium-weather-effect {
+  opacity: 0.18 !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(115, 190, 225, 0.09),
+      transparent 58%
+    ) !important;
+  filter: none !important;
+}
+
+
+/* BORING BETS: LOANDEPOT ZERO WEATHER EFFECT TEST V1 */
+
+/*
+  Diagnostic clean mode for loanDepot park:
+  - no weather haze
+  - no blur
+  - no tint
+  - no blend mode
+  - no pseudo-element atmosphere
+  This establishes whether any remaining fog is baked into the photograph.
+*/
+.game-stadium-weather[data-venue-slug="loandepot-park"] {
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-image: none !important;
+}
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]::before,
+.game-stadium-weather[data-venue-slug="loandepot-park"]::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]
+  .game-stadium-photo {
+  opacity: 1 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]
+  .game-stadium-weather-effect,
+.game-stadium-weather[data-venue-slug="loandepot-park"]
+  [class*="weather-effect"],
+.game-stadium-weather[data-venue-slug="loandepot-park"]
+  [class*="weather-overlay"],
+.game-stadium-weather[data-venue-slug="loandepot-park"]
+  [class*="stadium-overlay"],
+.game-stadium-weather[data-venue-slug="loandepot-park"]
+  [class*="atmosphere"] {
+  display: none !important;
+  opacity: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+
+/* BORING BETS: GLOBAL INDOOR WEATHER GATE V2 */
+
+/*
+  Weather may alter a stadium photograph only when:
+  1. the venue is outdoor, or
+  2. a retractable roof is explicitly confirmed open.
+
+  Every non-outdoor venue with a closed or unknown roof state renders its
+  photograph without haze, rain, cloud tint, blur, dimming, or atmosphere.
+*/
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"]) {
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-image: none !important;
+}
+
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])::before,
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])::after {
+  content: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])
+  .game-stadium-photo {
+  opacity: 1 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])
+  .game-stadium-weather-effect,
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])
+  [class*="weather-effect"],
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])
+  [class*="weather-overlay"],
+.game-stadium-weather[data-roof-profile]:not([data-roof-profile="outdoor"]):not([data-roof-state="open"]):not([data-weather-exposed="true"])
+  [class*="atmosphere"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  mix-blend-mode: normal !important;
+}
+
+
+/* BORING BETS: T-MOBILE WEATHER EXPOSURE EXCEPTION V1 */
+
+/*
+  T-Mobile Park is weather-exposed even with the roof closed.
+  This exception affects only weather visuals. The roof-state attributes
+  remain intact so open/closed image selection continues to work normally.
+*/
+.game-stadium-weather[data-weather-exposed="true"] {
+  --boring-bets-weather-exposure: outdoor;
+}
+
+/*
+  BORING BETS: RAIN ANIMATION DISABLED V1
+
+  Rain remains available as weather data and as an admin-selected photograph.
+  Only animated/artificial rain overlays are disabled. Lightning effects remain.
+*/
+
+/* Stop motion on any rain-specific hero element without hiding weather text. */
+.game-header [class*="rain"],
+.game-hero [class*="rain"],
+.stadium-hero [class*="rain"],
+.matchup-hero [class*="rain"],
+[data-stadium-hero] [class*="rain"],
+[data-weather-effect="rain"],
+[data-effect="rain"],
+canvas[class*="rain"],
+canvas[data-weather="rain"] {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Remove dedicated rain overlay layers and generated rain streaks. */
+.game-header .rain-overlay,
+.game-header .rain-layer,
+.game-header .rain-effect,
+.game-header .rain-animation,
+.game-header .rain-canvas,
+.game-header .raindrops,
+.game-header .rain-drops,
+.game-header [class*="rain-overlay"],
+.game-header [class*="rain-layer"],
+.game-header [class*="rain-effect"],
+.game-header [class*="rain-animation"],
+.game-header [class*="raindrop"],
+.game-hero .rain-overlay,
+.game-hero .rain-layer,
+.game-hero .rain-effect,
+.game-hero .rain-animation,
+.game-hero .rain-canvas,
+.game-hero .raindrops,
+.game-hero .rain-drops,
+.game-hero [class*="rain-overlay"],
+.game-hero [class*="rain-layer"],
+.game-hero [class*="rain-effect"],
+.game-hero [class*="rain-animation"],
+.game-hero [class*="raindrop"],
+.stadium-hero .rain-overlay,
+.stadium-hero .rain-layer,
+.stadium-hero .rain-effect,
+.stadium-hero .rain-animation,
+.stadium-hero .rain-canvas,
+.stadium-hero .raindrops,
+.stadium-hero .rain-drops,
+.stadium-hero [class*="rain-overlay"],
+.stadium-hero [class*="rain-layer"],
+.stadium-hero [class*="rain-effect"],
+.stadium-hero [class*="rain-animation"],
+.stadium-hero [class*="raindrop"],
+[data-stadium-hero] .rain-overlay,
+[data-stadium-hero] .rain-layer,
+[data-stadium-hero] .rain-effect,
+[data-stadium-hero] .rain-animation,
+[data-stadium-hero] .rain-canvas,
+[data-stadium-hero] .raindrops,
+[data-stadium-hero] .rain-drops,
+[data-stadium-hero] [class*="rain-overlay"],
+[data-stadium-hero] [class*="rain-layer"],
+[data-stadium-hero] [class*="rain-effect"],
+[data-stadium-hero] [class*="rain-animation"],
+[data-stadium-hero] [class*="raindrop"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Disable pseudo-element rain streak generators on rain-state hero wrappers. */
+.game-header.weather-rain::before,
+.game-header.weather-rain::after,
+.game-header.is-rain::before,
+.game-header.is-rain::after,
+.game-header[data-weather="rain"]::before,
+.game-header[data-weather="rain"]::after,
+.game-header[data-weather*="rain"]::before,
+.game-header[data-weather*="rain"]::after,
+.game-hero.weather-rain::before,
+.game-hero.weather-rain::after,
+.game-hero.is-rain::before,
+.game-hero.is-rain::after,
+.game-hero[data-weather="rain"]::before,
+.game-hero[data-weather="rain"]::after,
+.game-hero[data-weather*="rain"]::before,
+.game-hero[data-weather*="rain"]::after,
+.stadium-hero.weather-rain::before,
+.stadium-hero.weather-rain::after,
+.stadium-hero.is-rain::before,
+.stadium-hero.is-rain::after,
+.stadium-hero[data-weather="rain"]::before,
+.stadium-hero[data-weather="rain"]::after,
+.stadium-hero[data-weather*="rain"]::before,
+.stadium-hero[data-weather*="rain"]::after,
+[data-stadium-hero].weather-rain::before,
+[data-stadium-hero].weather-rain::after,
+[data-stadium-hero].is-rain::before,
+[data-stadium-hero].is-rain::after,
+[data-stadium-hero][data-weather="rain"]::before,
+[data-stadium-hero][data-weather="rain"]::after,
+[data-stadium-hero][data-weather*="rain"]::before,
+[data-stadium-hero][data-weather*="rain"]::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background: none !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+/*
+  Do not target lightning/thunder classes here. The approved lightning
+  animation remains active.
+*/
+
+/*
+  BORING BETS: EXACT RAIN STREAK REMOVAL V2
+
+  The actual streak animation is applied to .game-stadium-weather-effect
+  through a rain/thunder parent state. Remove that shared streak layer while
+  preserving the separate lightning animation on .game-stadium-photo-frame.
+*/
+
+.game-stadium-weather.is-weather-rain
+  .game-stadium-weather-effect,
+.game-stadium-weather.is-weather-thunder
+  .game-stadium-weather-effect {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  animation: none !important;
+  animation-name: none !important;
+  background: none !important;
+  background-image: none !important;
+  background-size: auto !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.game-stadium-weather.is-weather-rain
+  .game-stadium-weather-effect::before,
+.game-stadium-weather.is-weather-rain
+  .game-stadium-weather-effect::after,
+.game-stadium-weather.is-weather-thunder
+  .game-stadium-weather-effect::before,
+.game-stadium-weather.is-weather-thunder
+  .game-stadium-weather-effect::after {
+  content: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  animation: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+/*
+  Intentionally untouched:
+  .game-stadium-weather.is-weather-thunder .game-stadium-photo-frame
+
+  That is the approved lightning animation.
+*/
+
+/*
+  BORING BETS: NO LIGHTNING IN ENCLOSED PARKS V1
+
+  Enclosed parks and retractable-roof parks with the roof confirmed closed
+  must never show lightning flashes. Outdoor/weather-exposed venues remain
+  unchanged.
+*/
+
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-photo-frame,
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-photo,
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-weather-effect,
+.game-stadium-weather.is-weather-roofed
+  .game-stadium-photo-frame[class*="lightning"],
+.game-stadium-weather.is-weather-roofed
+  .game-stadium-photo[class*="lightning"],
+.game-stadium-weather.is-weather-roofed
+  [class*="lightning"],
+.game-stadium-weather.is-weather-roofed
+  [class*="thunder"] {
+  animation: none !important;
+  animation-name: none !important;
+  transition: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-photo-frame::before,
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-photo-frame::after,
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-photo::before,
+.game-stadium-weather.is-weather-roofed.is-weather-thunder
+  .game-stadium-photo::after,
+.game-stadium-weather.is-weather-roofed
+  [class*="lightning"]::before,
+.game-stadium-weather.is-weather-roofed
+  [class*="lightning"]::after,
+.game-stadium-weather.is-weather-roofed
+  [class*="thunder"]::before,
+.game-stadium-weather.is-weather-roofed
+  [class*="thunder"]::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  animation: none !important;
+  background: none !important;
+  background-image: none !important;
+  filter: none !important;
+}
+
+/*
+  Keep the stadium photo itself visible and untreated. This rule removes only
+  the flashing/lightning presentation inside an enclosed park.
+*/
+
+/*
+  BORING BETS: LOANDEPOT CLOSED HARD PHOTO FREEZE V1
+
+  Final closed-roof LoanDepot safeguard. The photograph, its wrappers, and the
+  surrounding matchup header cannot animate, pulse, transition, or change
+  opacity while the roof is closed.
+*/
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"]),
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"]) *,
+.game-matchup.game-matchup-stadium.is-enclosed-static,
+.game-matchup.game-matchup-stadium.is-enclosed-static * {
+  animation: none !important;
+  animation-name: none !important;
+  transition: none !important;
+}
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-photo,
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-photo.is-loading {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-weather-effect {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])::before,
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])::after,
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-photo-frame::before,
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-photo-frame::after,
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-photo::before,
+.game-stadium-weather[data-venue-slug="loandepot-park"]:not([data-roof-state="open"])
+  .game-stadium-photo::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  animation: none !important;
+}
