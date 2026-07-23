@@ -122,5 +122,8 @@ def main():
     )
 
 
+# BORING BETS: BUILD UNIVERSAL VENUE IMAGE INDEX V1
 if __name__ == "__main__":
     main()
+    from build_venue_image_index import main as build_venue_index
+    build_venue_index()

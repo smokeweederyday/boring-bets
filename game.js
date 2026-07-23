@@ -1781,24 +1781,70 @@ function gameHeaderStadiumPhotoCandidates(game, venue = {}) {
       addAdminBase(adminTime);
       addAdminBase("default");
 
-      const adminExtensions = [
-        "webp",
-        "jpg",
-        "jpeg",
-        "png"
-      ];
+      /*
+        BORING BETS: UNIVERSAL NUMBERED VENUE IMAGE RESOLVER V1
 
-      const adminCandidates = [];
+        Numbered files are tried in deterministic order:
+          <variant>-01.webp = primary
+          <variant>-02.webp = fallback
+          <variant>-03.webp = next fallback
 
-      for (const base of adminBases) {
-        for (const extension of adminExtensions) {
-          adminCandidates.push(
-            `${adminFolder}/${base}.${extension}`
-          );
+        Existing unnumbered files remain supported as legacy fallbacks.
+        Other sports can use the same resolver with their own ordered variant
+        names, such as interior-night, clay-day, or closed-night.
+      */
+      const adminSportValue = String(
+        game?.sport ??
+        game?.sport_slug ??
+        game?.sportSlug ??
+        game?.league_sport ??
+        game?.leagueSport ??
+        venue?.sport ??
+        "baseball"
+      );
+
+      const adminIndexedCandidates =
+        window.BoringBetsVenueImages &&
+        typeof window.BoringBetsVenueImages.getCandidates === "function"
+          ? window.BoringBetsVenueImages.getCandidates({
+              sport: adminSportValue,
+              venueId: adminVenueId,
+              venueName: adminVenueName,
+              venueSlug: adminVenueFolder,
+              variants: adminBases
+            })
+          : [];
+
+      if (adminIndexedCandidates.length) {
+        venueSpecificFallbacks.unshift(
+          ...adminIndexedCandidates
+        );
+      } else {
+        /*
+          Safe legacy fallback when the generated venue index has not loaded.
+          This preserves every existing unnumbered stadium photograph.
+        */
+        const adminExtensions = [
+          "webp",
+          "jpg",
+          "jpeg",
+          "png"
+        ];
+
+        const adminCandidates = [];
+
+        for (const base of adminBases) {
+          for (const extension of adminExtensions) {
+            adminCandidates.push(
+              `${adminFolder}/${base}.${extension}`
+            );
+          }
         }
-      }
 
-      venueSpecificFallbacks.unshift(...adminCandidates);
+        venueSpecificFallbacks.unshift(
+          ...adminCandidates
+        );
+      }
     }
   }
 

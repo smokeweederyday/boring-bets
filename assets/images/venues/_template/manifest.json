@@ -1,0 +1,12 @@
+{
+  "venue_id": "",
+  "venue_name": "Replace With Venue Name",
+  "sport": "replace-with-sport",
+  "folder": "replace-with-venue-slug",
+  "aliases": [],
+  "preferred_format": "webp",
+  "recommended_size": {
+    "width": 1916,
+    "height": 821
+  }
+}
