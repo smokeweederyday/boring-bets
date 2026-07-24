@@ -309,18 +309,57 @@ function removeTierClasses(
 function applyRankElement(
   element
 ) {
+  const rawRank =
+    String(
+      element.dataset.globalRank
+      ?? ""
+    ).trim();
+
+  const rawLeagueSize =
+    String(
+      element.dataset.globalLeagueSize
+      ?? ""
+    ).trim();
+
   const rank =
-    element.dataset.globalRank;
+    Number(rawRank);
 
   const leagueSize =
-    element.dataset.globalLeagueSize
-    || 30;
+    Number(rawLeagueSize);
 
-  const className =
-    getGlobalRankTierClass(
-      rank,
-      leagueSize
-    );
+  const hasValidRank =
+    rawRank !== ""
+    && Number.isFinite(rank)
+    && rank >= 1
+    && Number.isFinite(leagueSize)
+    && leagueSize >= rank;
+
+  const benchmarkTier =
+    String(
+      element.dataset
+        .globalBenchmarkTier
+      || ""
+    ).trim();
+
+  let className =
+    "metric-missing";
+
+  if (hasValidRank) {
+    className =
+      getGlobalRankTierClass(
+        rank,
+        leagueSize
+      )
+      || "metric-missing";
+  } else if (
+    benchmarkTier !== "metric-missing"
+    && TIER_CLASSES.metric.includes(
+      benchmarkTier
+    )
+  ) {
+    className =
+      benchmarkTier;
+  }
 
   removeTierClasses(
     element,
@@ -422,22 +461,14 @@ function inferExistingSignal(
 
 
 function isExcludedBullpenCell(
-  element
+  _element
 ) {
-  const bullpen =
-    element.closest(
-      ".bullpen-widget-shell"
-    );
-
-  if (!bullpen) {
-    return false;
-  }
-
-  // Pitcher names follow the global
-  // preference. Bullpen data cells do not.
-  return !element.classList.contains(
-    "pitcher-name-signal"
-  );
+  /*
+    Bullpen names, summary metrics, ranks, and
+    reliever-stat cells all participate in the
+    shared highlighting bar.
+  */
+  return false;
 }
 
 
@@ -498,6 +529,12 @@ export function applyGlobalTierHighlights(
     ".matchup-intelligence-console .metric-average",
     ".matchup-intelligence-console .metric-poor",
     ".matchup-intelligence-console .metric-awful",
+
+    ".bullpen-widget-shell .metric-elite",
+    ".bullpen-widget-shell .metric-good",
+    ".bullpen-widget-shell .metric-average",
+    ".bullpen-widget-shell .metric-poor",
+    ".bullpen-widget-shell .metric-awful",
 
     ".pitcher-name-signal",
 

@@ -90,6 +90,23 @@ export function renderPitcherWidget({
   */
   const pitcherSignalFamily =
     `pitcher-signal-${container.id || "module"}`;
+
+  const nameSignalLabel = String(
+    module.nameSignalLabel
+    || "League-relative pitcher signal unavailable"
+  );
+
+  const hasNameSignal =
+    Boolean(module.nameSignalClass)
+    && !nameSignalLabel
+      .toLowerCase()
+      .includes("unavailable");
+
+  const renderedNameSignalClass =
+    hasNameSignal
+      ? module.nameSignalClass
+      : "";
+
   const historyPitcherId = pitcherHistoryId(module);
 
   const historySide =
@@ -139,15 +156,13 @@ export function renderPitcherWidget({
           <h2 class="pitcher-name-heading">
   <a
   class="pitcher-name-signal pitcher-name-link ${escapeHtml(
-  module.nameSignalClass ||
-  "pitcher-signal-neutral"
+  renderedNameSignalClass
   )}"
   href="${escapeAttribute(
   module.detailsUrl || "#"
   )}"
   title="${escapeAttribute(
-  module.nameSignalLabel ||
-  "League-relative pitcher signal"
+  nameSignalLabel
   )}"
   data-pitcher-history-name
   data-pitcher-id="${escapeAttribute(historyPitcherId)}"
@@ -786,6 +801,13 @@ function renderPitcherStatCell(value) {
     value.display !== "" &&
     value.display !== "—";
 
+  const benchmarkTier =
+    !hasRank &&
+    hasVisibleValue &&
+    heatClass !== "metric-missing"
+      ? heatClass
+      : "";
+
   const unrankedTooltip = [
     value.unrankedReason,
     value.sampleLabel ? `Sample: ${value.sampleLabel}` : "",
@@ -812,6 +834,7 @@ function renderPitcherStatCell(value) {
           ? poolSize
           : 30
       }"
+      data-global-benchmark-tier="${benchmarkTier}"
       title="${escapeAttribute(tooltip)}"
       aria-label="${escapeAttribute(tooltip)}"
     >

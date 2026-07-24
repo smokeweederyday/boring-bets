@@ -1,6 +1,6 @@
 import {
   applyGlobalTierHighlights
-} from "../engine/highlightPreferences.js?v=phase11z-exact-typed-spread3";
+} from "../engine/highlightPreferences.js?v=unified-highlight-benchmark-20260724-042928";
 
 const historyCache = new Map();
 const gameContextCache = new Map();

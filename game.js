@@ -1,10 +1,10 @@
 import {
   restorePitcherHistoryState
-} from "./assets/js/widgets/pitcherHistoryPanel.js?v=shared-neutral-20260724-024705";
+} from "./assets/js/widgets/pitcherHistoryPanel.js?v=unified-highlight-benchmark-20260724-042928";
 import {
   initializeHighlightControls,
   applyGlobalTierHighlights
-} from "./assets/js/engine/highlightPreferences.js?v=phase11z-exact-typed-spread3";
+} from "./assets/js/engine/highlightPreferences.js?v=unified-highlight-benchmark-20260724-042928";
 
 import {
   renderOffenseWidget
@@ -12,7 +12,7 @@ import {
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=bulk-button-20260724-012527";
+} from "./assets/js/widgets/pitcherWidget.js?v=unified-highlight-benchmark-20260724-042928";
 
 import {
   renderBullpenWidget
@@ -360,7 +360,210 @@ async function loadGame() {
   }
 }
 
+const GLOBAL_HIGHLIGHT_DISPLAY_MODE_STORAGE_KEY =
+  "boring-bets:global-highlight:display-mode-v2";
+
+const GLOBAL_HIGHLIGHT_DISPLAY_MODES =
+  new Set([
+    "color",
+    "black-white",
+    "text-only",
+    "off"
+  ]);
+
+function normalizeGlobalHighlightDisplayMode(
+  value
+) {
+  const normalized =
+    String(value || "")
+      .trim()
+      .toLowerCase();
+
+  return GLOBAL_HIGHLIGHT_DISPLAY_MODES.has(
+    normalized
+  )
+    ? normalized
+    : "color";
+}
+
+function initializeGlobalHighlightDisplayDefaults() {
+  const preferencesStorageKey =
+    "boringBetsGlobalHighlightPreferencesV3";
+
+  try {
+    const existingMode =
+      window.localStorage.getItem(
+        GLOBAL_HIGHLIGHT_DISPLAY_MODE_STORAGE_KEY
+      );
+
+    if (existingMode === null) {
+      /*
+        First run of the four-position control:
+        Neutral on and Color selected.
+      */
+      window.localStorage.setItem(
+        GLOBAL_HIGHLIGHT_DISPLAY_MODE_STORAGE_KEY,
+        "color"
+      );
+
+      const preferences = JSON.parse(
+        window.localStorage.getItem(
+          preferencesStorageKey
+        ) || "{}"
+      );
+
+      preferences.neutralCenter = true;
+
+      window.localStorage.setItem(
+        preferencesStorageKey,
+        JSON.stringify(preferences)
+      );
+    }
+
+    /*
+      Remove temporary settings from the previous
+      two- and three-position versions.
+    */
+    window.localStorage.removeItem(
+      "boring-bets:global-highlight:black-white"
+    );
+
+    window.localStorage.removeItem(
+      "boring-bets:global-highlight:black-white-mode"
+    );
+
+    window.localStorage.removeItem(
+      "boring-bets:global-highlight:mode"
+    );
+  } catch (_error) {
+    // Continue without browser persistence.
+  }
+}
+
+function readGlobalHighlightDisplayMode() {
+  try {
+    return normalizeGlobalHighlightDisplayMode(
+      window.localStorage.getItem(
+        GLOBAL_HIGHLIGHT_DISPLAY_MODE_STORAGE_KEY
+      )
+    );
+  } catch (_error) {
+    return "color";
+  }
+}
+
+function saveGlobalHighlightDisplayMode(
+  value
+) {
+  const mode =
+    normalizeGlobalHighlightDisplayMode(
+      value
+    );
+
+  try {
+    window.localStorage.setItem(
+      GLOBAL_HIGHLIGHT_DISPLAY_MODE_STORAGE_KEY,
+      mode
+    );
+  } catch (_error) {
+    // The control still works for this page.
+  }
+
+  return mode;
+}
+
+function applyGlobalHighlightDisplayMode(
+  value
+) {
+  const mode =
+    normalizeGlobalHighlightDisplayMode(
+      value
+    );
+
+  document.documentElement.dataset
+    .highlightDisplayMode =
+      mode;
+
+  /*
+    Remove attributes used by earlier versions.
+  */
+  delete document.documentElement.dataset
+    .highlightBlackWhite;
+
+  delete document.documentElement.dataset
+    .highlightBlackWhiteMode;
+
+  delete document.documentElement.dataset
+    .highlightMode;
+
+  return mode;
+}
+
+function initializeGlobalHighlightDisplayControl() {
+  initializeGlobalHighlightDisplayDefaults();
+
+  const inputs = Array.from(
+    document.querySelectorAll(
+      'input[name="globalHighlightDisplayMode"]'
+    )
+  );
+
+  const mode =
+    applyGlobalHighlightDisplayMode(
+      readGlobalHighlightDisplayMode()
+    );
+
+  inputs.forEach(input => {
+    input.checked =
+      input.value === mode;
+  });
+
+  inputs.forEach(input => {
+    if (
+      input.dataset
+        .highlightDisplayBound === "true"
+    ) {
+      return;
+    }
+
+    input.dataset
+      .highlightDisplayBound =
+        "true";
+
+    input.addEventListener(
+      "change",
+      () => {
+        if (!input.checked) {
+          return;
+        }
+
+        const nextMode =
+          saveGlobalHighlightDisplayMode(
+            input.value
+          );
+
+        applyGlobalHighlightDisplayMode(
+          nextMode
+        );
+
+        /*
+          Reapply the shared engine without changing
+          Neutral or Color Spread preferences.
+        */
+        applyGlobalTierHighlights(
+          document
+        );
+      }
+    );
+  });
+}
+
+
 function initializeGlobalHighlightControls() {
+  initializeGlobalHighlightDisplayControl();
+
+
+
   initializeHighlightControls({
     rangeInput:
       document.getElementById(

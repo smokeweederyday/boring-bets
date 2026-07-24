@@ -12,7 +12,7 @@
   >
   <title>Game Center | Boring Bets</title>
   <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="styles.css?v=phase11z-color-spread-preset25-1">
+  <link rel="stylesheet" href="styles.css?v=bullpen-highlights-20260724-033242">
   <link rel="stylesheet" href="assets/css/pitcher-history-panel.css?v=shared-neutral-20260724-024705">
 </head>
 <body class="game-page">
@@ -177,14 +177,13 @@
           </label>
 
           <label class="global-neutral-toggle">
-            <span class="global-neutral-label">
-              NEUTRAL
-            </span>
+
 
             <input
               id="globalHighlightNeutral"
               type="checkbox"
               checked
+              aria-label="Neutral highlighting"
             >
 
             <span
@@ -192,6 +191,100 @@
               aria-hidden="true"
             ></span>
           </label>
+
+
+
+
+          <fieldset
+            class="global-highlight-display-control"
+            aria-label="Highlight display"
+          >
+            <legend
+              class="global-highlight-display-legend"
+            >
+              Highlight display
+            </legend>
+
+            <label
+              class="global-highlight-display-option"
+              title="Color highlighting"
+            >
+              <input
+                type="radio"
+                name="globalHighlightDisplayMode"
+                value="color"
+                aria-label="Color highlighting"
+              >
+
+              <span
+                class="
+                  global-highlight-display-icon
+                  is-color
+                "
+                aria-hidden="true"
+              ></span>
+            </label>
+
+            <label
+              class="global-highlight-display-option"
+              title="Black and white highlighting"
+            >
+              <input
+                type="radio"
+                name="globalHighlightDisplayMode"
+                value="black-white"
+                aria-label="Black and white highlighting"
+              >
+
+              <span
+                class="
+                  global-highlight-display-icon
+                  is-black-white
+                "
+                aria-hidden="true"
+              ></span>
+            </label>
+
+            <label
+              class="global-highlight-display-option"
+              title="Colored text without highlighted boxes"
+            >
+              <input
+                type="radio"
+                name="globalHighlightDisplayMode"
+                value="text-only"
+                aria-label="Text-only highlighting"
+              >
+
+              <span
+                class="
+                  global-highlight-display-icon
+                  is-text-only
+                "
+                aria-hidden="true"
+              ></span>
+            </label>
+
+            <label
+              class="global-highlight-display-option"
+              title="Turn all highlighting off"
+            >
+              <input
+                type="radio"
+                name="globalHighlightDisplayMode"
+                value="off"
+                aria-label="Turn all highlighting off"
+              >
+
+              <span
+                class="
+                  global-highlight-display-icon
+                  is-off
+                "
+                aria-hidden="true"
+              ></span>
+            </label>
+          </fieldset>
         </aside>
       </section>
 
@@ -322,6 +415,6 @@
 
     <script src="assets/js/venue-image-index.js?v=weather-20260723-044422"></script>
   <script src="assets/js/venue-image-library.js?v=weather-20260723-044422"></script>
-<script type="module" src="game.js?v=shared-neutral-20260724-024705"></script>
+<script type="module" src="game.js?v=unified-highlight-benchmark-20260724-042928"></script>
 </body>
 </html>
