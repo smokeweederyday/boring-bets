@@ -2,6 +2,20 @@ import {
   escapeHtml
 } from "../engine/colorEngine.js";
 
+function pitcherHistoryId(module = {}) {
+  const direct =
+    module.id ??
+    module.pitcherId ??
+    module.playerId;
+
+  if (direct !== null && direct !== undefined && direct !== "") {
+    return String(direct);
+  }
+
+  const match = String(module.detailsUrl || "").match(/[?&]id=(\d+)/);
+  return match ? match[1] : "";
+}
+
 export function renderPitcherWidget({
   container,
   module,
@@ -22,6 +36,7 @@ export function renderPitcherWidget({
 
   const metrics = Array.isArray(module.metrics) ? module.metrics : [];
   const columns = Array.isArray(module.columns) ? module.columns : [];
+  const historyPitcherId = pitcherHistoryId(module);
 
   const startOptions =
     Array.isArray(module.startOptions) &&
@@ -68,13 +83,34 @@ export function renderPitcherWidget({
   module.nameSignalLabel ||
   "League-relative pitcher signal"
   )}"
+  data-pitcher-history-name
+  data-pitcher-id="${escapeAttribute(historyPitcherId)}"
   >
   ${escapeHtml(module.name || "Starter TBD")}
   </a>
+
+  
   </h2>
           <span class="pitcher-status-label">
             ${escapeHtml(module.statusLabel || "PROBABLE")}
           </span>
+${
+    historyPitcherId
+      ? `
+        <button
+          type="button"
+          class="pitcher-history-toggle"
+          data-pitcher-history-trigger
+          data-pitcher-id="${escapeAttribute(historyPitcherId)}"
+          aria-label="Open ${escapeAttribute(module.name || "pitcher")} recent history"
+          title="Show recent history"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true">▾</span>
+        </button>
+      `
+      : ""
+  }
         </div>
           <div class="pitcher-meta-line">
             <p>

@@ -1,3 +1,4 @@
+import "./assets/js/widgets/pitcherHistoryPanel.js?v=pitcher-history3";
 import {
   initializeHighlightControls,
   applyGlobalTierHighlights

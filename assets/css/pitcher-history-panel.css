@@ -1,0 +1,741 @@
+.pitcher-history-info-button {
+  appearance: none;
+  display: inline-grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-left: 0.35rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.72;
+}
+
+.pitcher-history-info-button:hover,
+.pitcher-history-info-button:focus-visible {
+  opacity: 1;
+}
+
+.pitcher-history-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.pitcher-history-layer[hidden] {
+  display: none;
+}
+
+.pitcher-history-backdrop {
+  display: none;
+}
+
+.pitcher-history-panel {
+  position: fixed;
+  width: min(920px, calc(100vw - 24px));
+  max-height: min(76vh, 720px);
+  overflow: hidden;
+  border: 1px solid rgba(145, 170, 204, 0.42);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 27, 38, 0.985),
+      rgba(8, 12, 19, 0.985)
+    );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.58),
+    0 0 0 1px rgba(255, 255, 255, 0.035);
+  color: #f7f9fc;
+  pointer-events: auto;
+}
+
+.pitcher-history-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.7rem;
+  z-index: 4;
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pitcher-history-content {
+  display: flex;
+  max-height: inherit;
+  flex-direction: column;
+}
+
+.pitcher-history-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  padding: 1rem 3.4rem 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 15, 23, 0.97);
+}
+
+.pitcher-history-name {
+  color: #7fa7ff;
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.pitcher-history-header p {
+  margin: 0.3rem 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.pitcher-history-table-scroll {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.pitcher-history-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pitcher-history-table th,
+.pitcher-history-table td {
+  min-width: 52px;
+  padding: 0.58rem 0.55rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.085);
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pitcher-history-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #171f2c;
+  color: #ff7e88;
+  font-size: 0.75rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.pitcher-history-table th:first-child,
+.pitcher-history-table td:first-child {
+  min-width: 132px;
+  text-align: left;
+}
+
+.pitcher-history-sticky-cell {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #121923;
+}
+
+.pitcher-history-table thead .pitcher-history-sticky-cell {
+  z-index: 3;
+  background: #171f2c;
+}
+
+.pitcher-history-season-row td {
+  background-color: rgba(255, 255, 255, 0.028);
+  font-weight: 750;
+}
+
+.pitcher-history-season-row .pitcher-history-sticky-cell {
+  background: #18212d;
+}
+
+.pitcher-history-section-row td {
+  background: rgba(124, 148, 177, 0.18);
+  font-weight: 900;
+}
+
+.pitcher-history-section-row .pitcher-history-sticky-cell {
+  background: #273241;
+}
+
+.pitcher-history-divider td {
+  height: 0.7rem;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pitcher-history-section-label-only th {
+  padding: 0.72rem;
+  background: rgba(124, 148, 177, 0.18);
+  text-align: left;
+  font-size: 0.82rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.pitcher-history-empty-row td {
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.66);
+  text-align: center;
+  white-space: normal;
+}
+
+.pitcher-history-rookie-note {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(76, 119, 176, 0.13);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.82rem;
+}
+
+.pitcher-history-rookie-note a,
+.pitcher-history-footer a {
+  color: #85aaff;
+  font-weight: 850;
+}
+
+.pitcher-history-footer {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(10, 15, 23, 0.97);
+  text-align: right;
+}
+
+.pitcher-history-loading,
+.pitcher-history-error {
+  margin: 0;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.74);
+  text-align: center;
+}
+
+body.pitcher-history-open {
+  overflow: hidden;
+}
+
+.pitcher-history-layer.is-mobile {
+  display: flex;
+  align-items: flex-end;
+}
+
+.pitcher-history-layer.is-mobile .pitcher-history-backdrop {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.62);
+  pointer-events: auto;
+}
+
+.pitcher-history-layer.is-mobile .pitcher-history-panel {
+  inset: auto 0 0;
+  width: 100%;
+  max-height: 84vh;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 18px 18px 0 0;
+}
+
+@media (min-width: 761px) and (hover: hover) {
+  .pitcher-history-info-button {
+    width: 1.15rem;
+    height: 1.15rem;
+    font-size: 0.65rem;
+    opacity: 0.48;
+  }
+
+  .pitcher-history-layer.is-desktop .pitcher-history-close {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .pitcher-history-table th,
+  .pitcher-history-table td {
+    padding: 0.58rem 0.5rem;
+  }
+
+  .pitcher-history-header {
+    padding-top: 1.15rem;
+  }
+}
+
+/* Compact pitcher-history typography */
+.pitcher-history-table th,
+.pitcher-history-table td {
+  font-size: 0.62rem;
+}
+
+.pitcher-history-header p,
+.pitcher-history-section-label-only th,
+.pitcher-history-empty-row td,
+.pitcher-history-rookie-note,
+.pitcher-history-footer {
+  font-size: 0.62rem;
+}
+
+.pitcher-history-name {
+  font-size: 1rem;
+}
+
+.pitcher-history-loading,
+.pitcher-history-error {
+  font-size: 0.7rem;
+}
+
+@media (max-width: 760px) {
+  .pitcher-history-table th,
+  .pitcher-history-table td,
+  .pitcher-history-header p,
+  .pitcher-history-section-label-only th,
+  .pitcher-history-empty-row td,
+  .pitcher-history-rookie-note,
+  .pitcher-history-footer {
+    font-size: 0.66rem;
+  }
+
+  .pitcher-history-name {
+    font-size: 1.05rem;
+  }
+}
+
+/* PITCHER_HISTORY_COMPACT_MODULE_START */
+
+/*
+  Match the density and visual weight of the existing
+  pitcher and offense data modules.
+*/
+.pitcher-history-layer.is-desktop .pitcher-history-panel {
+  width: min(720px, calc(100vw - 32px));
+  max-height: min(62vh, 560px);
+  border-radius: 10px;
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.pitcher-history-layer.is-desktop .pitcher-history-header {
+  padding: 0.65rem 0.8rem 0.55rem;
+}
+
+.pitcher-history-layer.is-desktop .pitcher-history-name {
+  font-size: 0.92rem;
+}
+
+.pitcher-history-layer.is-desktop .pitcher-history-header p {
+  margin-top: 0.18rem;
+  font-size: 0.58rem;
+}
+
+.pitcher-history-layer.is-desktop .pitcher-history-table {
+  min-width: 680px;
+}
+
+.pitcher-history-layer.is-desktop .pitcher-history-table th,
+.pitcher-history-layer.is-desktop .pitcher-history-table td {
+  min-width: 38px;
+  padding: 0.34rem 0.32rem;
+  font-size: 0.58rem;
+  line-height: 1.15;
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table th:first-child,
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table td:first-child {
+  min-width: 92px;
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table thead th {
+  font-size: 0.55rem;
+  letter-spacing: 0.025em;
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-section-label-only th {
+  padding: 0.42rem 0.5rem;
+  font-size: 0.57rem;
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-divider td {
+  height: 0.38rem;
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-empty-row td {
+  padding: 0.65rem;
+  font-size: 0.58rem;
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-rookie-note,
+.pitcher-history-layer.is-desktop
+  .pitcher-history-footer {
+  padding: 0.5rem 0.7rem;
+  font-size: 0.58rem;
+}
+
+/*
+  Mobile remains a readable full-width bottom sheet,
+  but uses the same compact table density.
+*/
+.pitcher-history-layer.is-mobile .pitcher-history-table {
+  min-width: 680px;
+}
+
+.pitcher-history-layer.is-mobile .pitcher-history-table th,
+.pitcher-history-layer.is-mobile .pitcher-history-table td {
+  min-width: 40px;
+  padding: 0.4rem 0.36rem;
+  font-size: 0.62rem;
+}
+
+.pitcher-history-layer.is-mobile
+  .pitcher-history-table th:first-child,
+.pitcher-history-layer.is-mobile
+  .pitcher-history-table td:first-child {
+  min-width: 100px;
+}
+
+/* PITCHER_HISTORY_COMPACT_MODULE_END */
+
+/* PITCHER_HISTORY_TIGHT_COLUMNS_START */
+
+/* Let the desktop panel shrink to the table's actual content. */
+.pitcher-history-layer.is-desktop .pitcher-history-panel {
+  width: max-content !important;
+  max-width: calc(100vw - 24px) !important;
+}
+
+/* Do not stretch the table across an artificial width. */
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table-scroll {
+  width: auto;
+  max-width: calc(100vw - 24px);
+}
+
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table {
+  display: table;
+  width: auto !important;
+  min-width: 0 !important;
+  table-layout: auto;
+}
+
+/* Every statistical column uses only the space its value requires. */
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table th,
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table td {
+  width: 1% !important;
+  min-width: 0 !important;
+  padding: 0.32rem 0.25rem !important;
+  white-space: nowrap;
+}
+
+/* Dates and section labels remain readable without excess width. */
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table th:first-child,
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table td:first-child {
+  width: auto !important;
+  min-width: 76px !important;
+  padding-right: 0.42rem !important;
+}
+
+/* Opponent and decision columns need only their short labels. */
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table th:nth-child(2),
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table td:nth-child(2),
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table th:nth-child(3),
+.pitcher-history-layer.is-desktop
+  .pitcher-history-table td:nth-child(3) {
+  width: 1% !important;
+  padding-right: 0.32rem !important;
+  padding-left: 0.32rem !important;
+}
+
+/* Keep the mobile sheet full width but remove inflated table columns. */
+.pitcher-history-layer.is-mobile
+  .pitcher-history-table {
+  width: max-content !important;
+  min-width: 0 !important;
+  table-layout: auto;
+}
+
+.pitcher-history-layer.is-mobile
+  .pitcher-history-table th,
+.pitcher-history-layer.is-mobile
+  .pitcher-history-table td {
+  width: 1% !important;
+  min-width: 0 !important;
+  padding-right: 0.32rem !important;
+  padding-left: 0.32rem !important;
+}
+
+/* PITCHER_HISTORY_TIGHT_COLUMNS_END */
+
+/* PITCHER_HISTORY_INLINE_MODULE_START */
+
+/* Dropdown indicator beside the pitcher name */
+.pitcher-history-toggle {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-left: 0.28rem;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: currentColor;
+  font: inherit;
+  cursor: pointer;
+  opacity: 0.68;
+  vertical-align: middle;
+}
+
+.pitcher-history-toggle span {
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1;
+  transition:
+    transform 150ms ease,
+    opacity 150ms ease;
+}
+
+.pitcher-history-toggle:hover,
+.pitcher-history-toggle:focus-visible {
+  opacity: 1;
+}
+
+.pitcher-history-toggle:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+.pitcher-history-toggle[aria-expanded="true"] span {
+  transform: rotate(180deg);
+}
+
+/* The history now lives inside the existing pitcher module */
+.pitcher-history-inline {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: block;
+  width: 100%;
+  margin: 0.32rem 0 0.45rem;
+  pointer-events: auto;
+  animation: pitcher-history-inline-open 140ms ease-out;
+}
+
+.pitcher-history-inline[hidden] {
+  display: none !important;
+}
+
+.pitcher-history-inline .pitcher-history-panel {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  overflow: visible;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit;
+}
+
+.pitcher-history-inline .pitcher-history-content {
+  display: block;
+  max-height: none;
+}
+
+/*
+  Pitcher identity already appears immediately above the dropdown,
+  so do not repeat the name, age, hand, record, or full-data link.
+*/
+.pitcher-history-inline .pitcher-history-header,
+.pitcher-history-inline .pitcher-history-footer,
+.pitcher-history-inline .pitcher-history-close,
+.pitcher-history-inline .pitcher-history-backdrop {
+  display: none !important;
+}
+
+.pitcher-history-inline .pitcher-history-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.pitcher-history-inline .pitcher-history-table {
+  display: table;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none;
+  margin: 0;
+  table-layout: auto;
+  border-collapse: collapse;
+}
+
+/*
+  Match the tight metric density used by the existing pitcher
+  and offense tables. Columns use only their content width.
+*/
+.pitcher-history-inline .pitcher-history-table th,
+.pitcher-history-inline .pitcher-history-table td {
+  width: 1% !important;
+  min-width: 0 !important;
+  padding: 0.32rem 0.28rem !important;
+  font-size: 0.59rem;
+  line-height: 1.15;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pitcher-history-inline
+  .pitcher-history-table th:first-child,
+.pitcher-history-inline
+  .pitcher-history-table td:first-child {
+  width: auto !important;
+  min-width: 76px !important;
+  padding-left: 0.42rem !important;
+  text-align: left;
+}
+
+.pitcher-history-inline
+  .pitcher-history-table thead th {
+  position: static;
+  font-size: 0.56rem;
+  letter-spacing: 0.025em;
+}
+
+.pitcher-history-inline
+  .pitcher-history-sticky-cell {
+  position: static;
+}
+
+.pitcher-history-inline
+  .pitcher-history-divider td {
+  height: 0.34rem;
+  padding: 0 !important;
+}
+
+.pitcher-history-inline
+  .pitcher-history-section-label-only th {
+  padding: 0.4rem !important;
+  font-size: 0.57rem;
+  text-align: left;
+}
+
+.pitcher-history-inline
+  .pitcher-history-empty-row td {
+  padding: 0.58rem !important;
+  font-size: 0.59rem;
+  text-align: center;
+  white-space: normal;
+}
+
+.pitcher-history-inline
+  .pitcher-history-rookie-note {
+  margin: 0;
+  padding: 0.46rem 0.5rem;
+  font-size: 0.59rem;
+}
+
+/* No modal behavior on mobile; it remains an inline dropdown */
+body.pitcher-history-open {
+  overflow: auto !important;
+}
+
+@keyframes pitcher-history-inline-open {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PITCHER_HISTORY_INLINE_MODULE_END */
+
+/* PITCHER_HISTORY_MINIMUM_DATE_COLUMN */
+
+/* Date/season column takes only the space its text requires. */
+.pitcher-history-inline
+  .pitcher-history-table th:first-child,
+.pitcher-history-inline
+  .pitcher-history-table td:first-child {
+  width: 1% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  padding-left: 0.18rem !important;
+  padding-right: 0.18rem !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Remove additional width previously reserved for the first column. */
+.pitcher-history-inline
+  .pitcher-history-sticky-cell {
+  width: 1% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+/* RECENT_HISTORY_STATUS_CHEVRON_START */
+
+.pitcher-name-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.pitcher-name-row .pitcher-name-heading {
+  min-width: 0;
+}
+
+.pitcher-name-row > .pitcher-status-label {
+  margin-left: auto;
+}
+
+.pitcher-name-row > .pitcher-history-toggle {
+  flex: 0 0 auto;
+  margin-right: 0;
+  margin-left: 0.28rem;
+}
+
+/* RECENT_HISTORY_STATUS_CHEVRON_END */

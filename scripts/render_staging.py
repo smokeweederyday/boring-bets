@@ -210,6 +210,32 @@ class NightlyOffenseSupervisor(threading.Thread):
             flush=True,
         )
 
+        history_command = [
+            sys.executable,
+            "-u",
+            str(ROOT / "scripts" / "build_pitcher_history.py"),
+            "--days-ahead",
+            "14",
+        ]
+
+        print(
+            "Starting MLB pitcher history refresh.",
+            flush=True,
+        )
+
+        history_completed = subprocess.run(
+            history_command,
+            cwd=ROOT,
+            env=environment,
+            check=False,
+        )
+
+        print(
+            "MLB pitcher history refresh exited with code "
+            f"{history_completed.returncode}.",
+            flush=True,
+        )
+
     def seconds_until_next_run(self) -> float:
         now = datetime.now(EASTERN)
         next_run = now.replace(
