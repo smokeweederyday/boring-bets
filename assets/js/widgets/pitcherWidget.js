@@ -36,6 +36,13 @@ export function renderPitcherWidget({
 
   const metrics = Array.isArray(module.metrics) ? module.metrics : [];
   const columns = Array.isArray(module.columns) ? module.columns : [];
+
+  /*
+    Away and home pitcher controls must never share
+    hover, focus, selection, or global-highlight state.
+  */
+  const pitcherSignalFamily =
+    `pitcher-signal-${container.id || "module"}`;
   const historyPitcherId = pitcherHistoryId(module);
 
   const startOptions =
@@ -154,8 +161,8 @@ ${
                 <button
                   type="button"
                   data-pitcher-location="${location}"
-                  data-global-signal-family="pitcher-signal"
-                  data-global-signal-score="${
+                  data-module-signal-family="${escapeHtml(pitcherSignalFamily)}"
+                  data-module-signal-score="${
                     Number.isFinite(
                       Number(signal.score)
                     )
@@ -246,8 +253,8 @@ ${
               <button
                 type="button"
                 data-pitcher-start-count="${option}"
-                data-global-signal-family="pitcher-signal"
-                data-global-signal-score="${
+                data-module-signal-family="${escapeHtml(pitcherSignalFamily)}"
+                data-module-signal-score="${
                   Number.isFinite(
                     Number(signal.score)
                   )

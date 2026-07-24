@@ -6,11 +6,11 @@ import {
 
 import {
   renderOffenseWidget
-} from "./assets/js/widgets/offenseWidget.js?v=phase11u-global-highlight-controls1";
+} from "./assets/js/widgets/offenseWidget.js?v=local-module-controls1";
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=phase11u-global-highlight-controls1";
+} from "./assets/js/widgets/pitcherWidget.js?v=local-module-controls1";
 
 import {
   renderBullpenWidget
@@ -2842,164 +2842,139 @@ function renderControls() {
 
 }
 
-function renderPitchers() {
-  const game =
-    state.game;
+function renderPitcher(side) {
+  const game = state.game;
+  const isAway = side === "away";
 
-  const awayPitcherModule =
+  const locationKey =
+    isAway
+      ? "awayPitcherLocation"
+      : "homePitcherLocation";
+
+  const startModeKey =
+    isAway
+      ? "awayPitcherStartMode"
+      : "homePitcherStartMode";
+
+  const startCountKey =
+    isAway
+      ? "awayPitcherStartCount"
+      : "homePitcherStartCount";
+
+  const containerId =
+    isAway
+      ? "awayPitcherCard"
+      : "homePitcherCard";
+
+  const pitcherModule =
     buildMlbPitcherModule({
       game,
-      side: "away",
-      timeframe:
-        "season",
-      location:
-        state.awayPitcherLocation,
-      startMode:
-        state.awayPitcherStartMode,
-      startCount:
-        state.awayPitcherStartCount
+      side,
+      timeframe: "season",
+      location: state[locationKey],
+      startMode: state[startModeKey],
+      startCount: state[startCountKey]
     });
 
   renderPitcherWidget({
     container:
       document.getElementById(
-        "awayPitcherCard"
+        containerId
       ),
 
     module:
-      awayPitcherModule,
+      pitcherModule,
 
     onLocationChange: location => {
-      state.awayPitcherLocation = location;
-      renderPitchers();
+      state[locationKey] = location;
+
+      /*
+        Only rebuild the pitcher whose
+        control was changed.
+      */
+      renderPitcher(side);
+
+      /*
+        Location affects matchup intelligence,
+        so refresh those matchup cards separately.
+      */
       renderLineupMatchups();
     },
 
     onStartModeChange: active => {
-      state.awayPitcherStartMode =
+      state[startModeKey] =
         Boolean(active);
 
       if (active) {
-        state.awayPitcherStartCount =
-          state.awayPitcherStartCount || 7;
+        state[startCountKey] =
+          state[startCountKey] || 7;
       }
 
-      renderPitchers();
+      renderPitcher(side);
     },
 
     onStartCountChange: count => {
-      state.awayPitcherStartCount =
+      state[startCountKey] =
         Number(count) || 7;
 
-      state.awayPitcherStartMode =
-        true;
+      state[startModeKey] = true;
 
-      renderPitchers();
+      renderPitcher(side);
     }
   });
+}
 
-  const homePitcherModule =
-    buildMlbPitcherModule({
+function renderPitchers() {
+  renderPitcher("away");
+  renderPitcher("home");
+}
+
+function renderOffense(side) {
+  const game = state.game;
+  const isAway = side === "away";
+
+  const timeframeKey =
+    isAway
+      ? "awayOffenseTimeframe"
+      : "homeOffenseTimeframe";
+
+  const containerId =
+    isAway
+      ? "awayOffenseCard"
+      : "homeOffenseCard";
+
+  const offenseModule =
+    buildMlbOffenseModule({
       game,
-      side: "home",
+      side,
       timeframe:
-        "season",
-      location:
-        state.homePitcherLocation,
-      startMode:
-        state.homePitcherStartMode,
-      startCount:
-        state.homePitcherStartCount
+        state[timeframeKey]
     });
 
-  renderPitcherWidget({
+  renderOffenseWidget({
     container:
       document.getElementById(
-        "homePitcherCard"
+        containerId
       ),
 
     module:
-      homePitcherModule,
+      offenseModule,
 
-    onLocationChange: location => {
-      state.homePitcherLocation = location;
-      renderPitchers();
-      renderLineupMatchups();
-    },
+    onTimeframeChange: timeframe => {
+      state[timeframeKey] = timeframe;
 
-    onStartModeChange: active => {
-      state.homePitcherStartMode =
-        Boolean(active);
-
-      if (active) {
-        state.homePitcherStartCount =
-          state.homePitcherStartCount || 7;
-      }
-
-      renderPitchers();
-    },
-
-    onStartCountChange: count => {
-      state.homePitcherStartCount =
-        Number(count) || 7;
-
-      state.homePitcherStartMode =
-        true;
-
-      renderPitchers();
+      /*
+        Only rebuild the offense whose
+        control was changed.
+      */
+      renderOffense(side);
     }
   });
 }
 
 function renderOffenses() {
-  const game =
-    state.game;
-
-  const homeOffenseModule =
-    buildMlbOffenseModule({
-      game,
-      side: "home",
-      timeframe:
-        state.homeOffenseTimeframe
-    });
-
-  renderOffenseWidget({
-    container:
-      document.getElementById(
-        "homeOffenseCard"
-      ),
-
-    module:
-      homeOffenseModule,
-
-    onTimeframeChange: timeframe => {
-      state.homeOffenseTimeframe = timeframe;
-      renderOffenses();
-    }
-  });
-
-  const awayOffenseModule =
-    buildMlbOffenseModule({
-      game,
-      side: "away",
-      timeframe:
-        state.awayOffenseTimeframe
-    });
-
-  renderOffenseWidget({
-    container:
-      document.getElementById(
-        "awayOffenseCard"
-      ),
-
-    module:
-      awayOffenseModule,
-
-    onTimeframeChange: timeframe => {
-      state.awayOffenseTimeframe = timeframe;
-      renderOffenses();
-    }
-  });
+  renderOffense("home");
+  renderOffense("away");
 }
 
 function renderLineupMatchups() {

@@ -38,6 +38,13 @@ export function renderOffenseWidget({
   const timeframeSignals =
     module.timeframeSignals || {};
 
+  /*
+    Away and home offense controls must never share
+    hover, focus, selection, or global-highlight state.
+  */
+  const offenseSignalFamily =
+    `offense-signal-${container.id || "module"}`;
+
   container.innerHTML = `
     <div
       class="segmented-control offense-timeframe-control"
@@ -65,8 +72,8 @@ export function renderOffenseWidget({
           <button
             type="button"
             data-offense-timeframe="${timeframe}"
-            data-global-signal-family="offense-signal"
-            data-global-signal-score="${
+            data-module-signal-family="${escapeHtml(offenseSignalFamily)}"
+            data-module-signal-score="${
               Number.isFinite(
                 Number(signal.score)
               )
