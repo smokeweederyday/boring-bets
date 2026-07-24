@@ -1,0 +1,6567 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-07-24T04:23:32Z",
+  "as_of": "2026-07-24",
+  "pitcher": {
+    "id": 684007,
+    "name": "Shota Imanaga",
+    "number": "18",
+    "age": 32,
+    "hand": "L",
+    "debut_date": "2024-04-01",
+    "debut_year": 2024,
+    "profile_url": "pitcher.html?id=684007",
+    "minor_league_url": "https://www.milb.com/player/684007",
+    "record": "6-8",
+    "era": 3.91,
+    "season": 2026
+  },
+  "recent_seasons": [
+    {
+      "label": "2026",
+      "decision": "6-8",
+      "wins": 6,
+      "losses": 8,
+      "games_started": 20,
+      "outs": 345,
+      "ip": "115.0",
+      "hits": 100,
+      "runs": 51,
+      "earned_runs": 50,
+      "walks": 28,
+      "strikeouts": 109,
+      "home_runs": 22,
+      "era": 3.91,
+      "whip": 1.11,
+      "season": 2026,
+      "ranks": {
+        "ip": [
+          23,
+          62,
+          2026,
+          "season"
+        ],
+        "hits": [
+          31,
+          62,
+          2026,
+          "season"
+        ],
+        "runs": [
+          34,
+          62,
+          2026,
+          "season"
+        ],
+        "earned_runs": [
+          41,
+          62,
+          2026,
+          "season"
+        ],
+        "walks": [
+          19,
+          62,
+          2026,
+          "season"
+        ],
+        "strikeouts": [
+          33,
+          62,
+          2026,
+          "season"
+        ],
+        "home_runs": [
+          58,
+          62,
+          2026,
+          "season"
+        ],
+        "era": [
+          41,
+          62,
+          2026,
+          "season"
+        ],
+        "whip": [
+          19,
+          62,
+          2026,
+          "season"
+        ]
+      }
+    },
+    {
+      "label": "2025",
+      "decision": "9-8",
+      "wins": 9,
+      "losses": 8,
+      "games_started": 25,
+      "outs": 434,
+      "ip": "144.2",
+      "hits": 117,
+      "runs": 62,
+      "earned_runs": 60,
+      "walks": 26,
+      "strikeouts": 117,
+      "home_runs": 31,
+      "era": 3.73,
+      "whip": 0.99,
+      "season": 2025,
+      "ranks": {
+        "ip": [
+          52,
+          52,
+          2025,
+          "season"
+        ],
+        "hits": [
+          15,
+          52,
+          2025,
+          "season"
+        ],
+        "runs": [
+          22,
+          52,
+          2025,
+          "season"
+        ],
+        "earned_runs": [
+          25,
+          52,
+          2025,
+          "season"
+        ],
+        "walks": [
+          3,
+          52,
+          2025,
+          "season"
+        ],
+        "strikeouts": [
+          41,
+          52,
+          2025,
+          "season"
+        ],
+        "home_runs": [
+          52,
+          52,
+          2025,
+          "season"
+        ],
+        "era": [
+          25,
+          52,
+          2025,
+          "season"
+        ],
+        "whip": [
+          5,
+          52,
+          2025,
+          "season"
+        ]
+      }
+    },
+    {
+      "label": "2024",
+      "decision": "15-3",
+      "wins": 15,
+      "losses": 3,
+      "games_started": 29,
+      "outs": 520,
+      "ip": "173.1",
+      "hits": 149,
+      "runs": 66,
+      "earned_runs": 56,
+      "walks": 28,
+      "strikeouts": 174,
+      "home_runs": 27,
+      "era": 2.91,
+      "whip": 1.02,
+      "season": 2024,
+      "ranks": {
+        "ip": [
+          39,
+          58,
+          2024,
+          "season"
+        ],
+        "hits": [
+          20,
+          58,
+          2024,
+          "season"
+        ],
+        "runs": [
+          10,
+          58,
+          2024,
+          "season"
+        ],
+        "earned_runs": [
+          5,
+          58,
+          2024,
+          "season"
+        ],
+        "walks": [
+          4,
+          58,
+          2024,
+          "season"
+        ],
+        "strikeouts": [
+          21,
+          58,
+          2024,
+          "season"
+        ],
+        "home_runs": [
+          52,
+          58,
+          2024,
+          "season"
+        ],
+        "era": [
+          5,
+          58,
+          2024,
+          "season"
+        ],
+        "whip": [
+          7,
+          58,
+          2024,
+          "season"
+        ]
+      }
+    }
+  ],
+  "last_starts": [
+    {
+      "date": "2026-07-19",
+      "season": 2026,
+      "game_pk": 824653,
+      "is_home": true,
+      "opponent_abbr": "MIN",
+      "opponent_label": "MIN",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 6,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          97,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          182,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          27,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-07-10",
+      "season": 2026,
+      "game_pk": 824493,
+      "is_home": false,
+      "opponent_abbr": "CIN",
+      "opponent_label": "@CIN",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 7,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 5,
+      "home_runs": 1,
+      "era": 1.8,
+      "whip": 1.6,
+      "ranks": {
+        "ip": [
+          258,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          216,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          195,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          5,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          267,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-07-04",
+      "season": 2026,
+      "game_pk": 824658,
+      "is_home": true,
+      "opponent_abbr": "STL",
+      "opponent_label": "STL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 14,
+      "ip": "4.2",
+      "hits": 4,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 3,
+      "strikeouts": 8,
+      "home_runs": 1,
+      "era": 3.86,
+      "whip": 1.5,
+      "ranks": {
+        "ip": [
+          279,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          28,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          33,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          207,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          73,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          116,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          236,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-29",
+      "season": 2026,
+      "game_pk": 824662,
+      "is_home": true,
+      "opponent_abbr": "SD",
+      "opponent_label": "SD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 19,
+      "ip": "6.1",
+      "hits": 9,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 2.84,
+      "whip": 1.42,
+      "ranks": {
+        "ip": [
+          111,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          238,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          33,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          52,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          200,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "season": 2026,
+      "game_pk": 823611,
+      "is_home": false,
+      "opponent_abbr": "NYM",
+      "opponent_label": "@NYM",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 16,
+      "ip": "5.1",
+      "hits": 4,
+      "runs": 4,
+      "earned_runs": 4,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 3,
+      "era": 6.75,
+      "whip": 0.94,
+      "ranks": {
+        "ip": [
+          209,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          28,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          204,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          214,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          284,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          276,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          15,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-15",
+      "season": 2026,
+      "game_pk": 824666,
+      "is_home": true,
+      "opponent_abbr": "COL",
+      "opponent_label": "COL",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 17,
+      "ip": "5.2",
+      "hits": 5,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 0,
+      "era": 1.59,
+      "whip": 1.06,
+      "ranks": {
+        "ip": [
+          163,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          101,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          295,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          4,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          35,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-10",
+      "season": 2026,
+      "game_pk": 824348,
+      "is_home": false,
+      "opponent_abbr": "COL",
+      "opponent_label": "@COL",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 2,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 2,
+      "strikeouts": 7,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.8,
+      "ranks": {
+        "ip": [
+          258,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          2,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          108,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          90,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          4,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    }
+  ],
+  "starts": [
+    {
+      "date": "2026-07-19",
+      "season": 2026,
+      "game_pk": 824653,
+      "is_home": true,
+      "opponent_abbr": "MIN",
+      "opponent_label": "MIN",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 6,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          97,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          182,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          27,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-07-10",
+      "season": 2026,
+      "game_pk": 824493,
+      "is_home": false,
+      "opponent_abbr": "CIN",
+      "opponent_label": "@CIN",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 7,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 5,
+      "home_runs": 1,
+      "era": 1.8,
+      "whip": 1.6,
+      "ranks": {
+        "ip": [
+          258,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          216,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          195,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          5,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          267,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-07-04",
+      "season": 2026,
+      "game_pk": 824658,
+      "is_home": true,
+      "opponent_abbr": "STL",
+      "opponent_label": "STL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 14,
+      "ip": "4.2",
+      "hits": 4,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 3,
+      "strikeouts": 8,
+      "home_runs": 1,
+      "era": 3.86,
+      "whip": 1.5,
+      "ranks": {
+        "ip": [
+          279,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          28,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          33,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          207,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          73,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          116,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          236,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-29",
+      "season": 2026,
+      "game_pk": 824662,
+      "is_home": true,
+      "opponent_abbr": "SD",
+      "opponent_label": "SD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 19,
+      "ip": "6.1",
+      "hits": 9,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 2.84,
+      "whip": 1.42,
+      "ranks": {
+        "ip": [
+          111,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          238,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          33,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          52,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          200,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "season": 2026,
+      "game_pk": 823611,
+      "is_home": false,
+      "opponent_abbr": "NYM",
+      "opponent_label": "@NYM",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 16,
+      "ip": "5.1",
+      "hits": 4,
+      "runs": 4,
+      "earned_runs": 4,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 3,
+      "era": 6.75,
+      "whip": 0.94,
+      "ranks": {
+        "ip": [
+          209,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          28,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          204,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          214,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          284,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          276,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          15,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-15",
+      "season": 2026,
+      "game_pk": 824666,
+      "is_home": true,
+      "opponent_abbr": "COL",
+      "opponent_label": "COL",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 17,
+      "ip": "5.2",
+      "hits": 5,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 0,
+      "era": 1.59,
+      "whip": 1.06,
+      "ranks": {
+        "ip": [
+          163,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          101,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          295,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          4,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          35,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-10",
+      "season": 2026,
+      "game_pk": 824348,
+      "is_home": false,
+      "opponent_abbr": "COL",
+      "opponent_label": "@COL",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 2,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 2,
+      "strikeouts": 7,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.8,
+      "ranks": {
+        "ip": [
+          258,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          2,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          108,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          90,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          4,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-06-04",
+      "season": 2026,
+      "game_pk": 824672,
+      "is_home": true,
+      "opponent_abbr": "ATH",
+      "opponent_label": "ATH",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 6,
+      "runs": 6,
+      "earned_runs": 6,
+      "walks": 1,
+      "strikeouts": 5,
+      "home_runs": 4,
+      "era": 9.0,
+      "whip": 1.17,
+      "ranks": {
+        "ip": [
+          127,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          182,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          246,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          252,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          195,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          294,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          295,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          81,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-05-29",
+      "season": 2026,
+      "game_pk": 823055,
+      "is_home": false,
+      "opponent_abbr": "STL",
+      "opponent_label": "@STL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 16,
+      "ip": "5.1",
+      "hits": 5,
+      "runs": 5,
+      "earned_runs": 5,
+      "walks": 1,
+      "strikeouts": 2,
+      "home_runs": 3,
+      "era": 8.44,
+      "whip": 1.12,
+      "ranks": {
+        "ip": [
+          209,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          101,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          232,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          239,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          311,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          284,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          291,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          63,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-05-24",
+      "season": 2026,
+      "game_pk": 824676,
+      "is_home": true,
+      "opponent_abbr": "HOU",
+      "opponent_label": "HOU",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 7,
+      "runs": 7,
+      "earned_runs": 7,
+      "walks": 1,
+      "strikeouts": 6,
+      "home_runs": 3,
+      "era": 10.5,
+      "whip": 1.33,
+      "ranks": {
+        "ip": [
+          127,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          216,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          259,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          266,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          123,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          284,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          302,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          155,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-05-18",
+      "season": 2026,
+      "game_pk": 824680,
+      "is_home": true,
+      "opponent_abbr": "MIL",
+      "opponent_label": "MIL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 13,
+      "ip": "4.1",
+      "hits": 9,
+      "runs": 8,
+      "earned_runs": 8,
+      "walks": 3,
+      "strikeouts": 2,
+      "home_runs": 2,
+      "era": 16.62,
+      "whip": 2.77,
+      "ranks": {
+        "ip": [
+          293,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          238,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          269,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          274,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          207,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          311,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          261,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          311,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          308,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-05-13",
+      "season": 2026,
+      "game_pk": 824928,
+      "is_home": false,
+      "opponent_abbr": "ATL",
+      "opponent_label": "@ATL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 5,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 0,
+      "strikeouts": 6,
+      "home_runs": 1,
+      "era": 2.57,
+      "whip": 0.71,
+      "ranks": {
+        "ip": [
+          97,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          101,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          33,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          123,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          28,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          2,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-05-07",
+      "season": 2026,
+      "game_pk": 824681,
+      "is_home": true,
+      "opponent_abbr": "CIN",
+      "opponent_label": "CIN",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 6,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 3,
+      "strikeouts": 10,
+      "home_runs": 1,
+      "era": 1.5,
+      "whip": 1.5,
+      "ranks": {
+        "ip": [
+          127,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          182,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          207,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          60,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          2,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          236,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-05-02",
+      "season": 2026,
+      "game_pk": 824685,
+      "is_home": true,
+      "opponent_abbr": "AZ",
+      "opponent_label": "AZ",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 4,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 5,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.71,
+      "ranks": {
+        "ip": [
+          97,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          28,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          195,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          2,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-04-26",
+      "season": 2026,
+      "game_pk": 823959,
+      "is_home": false,
+      "opponent_abbr": "LAD",
+      "opponent_label": "@LAD",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 16,
+      "ip": "5.1",
+      "hits": 6,
+      "runs": 5,
+      "earned_runs": 4,
+      "walks": 3,
+      "strikeouts": 6,
+      "home_runs": 0,
+      "era": 6.75,
+      "whip": 1.69,
+      "ranks": {
+        "ip": [
+          209,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          182,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          232,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          214,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          207,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          123,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          276,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          277,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-04-21",
+      "season": 2026,
+      "game_pk": 824690,
+      "is_home": true,
+      "opponent_abbr": "PHI",
+      "opponent_label": "PHI",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 3,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 1,
+      "home_runs": 1,
+      "era": 1.29,
+      "whip": 0.57,
+      "ranks": {
+        "ip": [
+          97,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          8,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          313,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          1,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-04-15",
+      "season": 2026,
+      "game_pk": 823477,
+      "is_home": false,
+      "opponent_abbr": "PHI",
+      "opponent_label": "@PHI",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 3,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 11,
+      "home_runs": 1,
+      "era": 1.5,
+      "whip": 0.67,
+      "ranks": {
+        "ip": [
+          127,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          8,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          53,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          2,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          2,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-04-10",
+      "season": 2026,
+      "game_pk": 824695,
+      "is_home": true,
+      "opponent_abbr": "PIT",
+      "opponent_label": "PIT",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 0,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 9,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.17,
+      "ranks": {
+        "ip": [
+          127,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          66,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          1,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-04-05",
+      "season": 2026,
+      "game_pk": 824460,
+      "is_home": false,
+      "opponent_abbr": "CLE",
+      "opponent_label": "@CLE",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 3,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 1.8,
+      "whip": 0.8,
+      "ranks": {
+        "ip": [
+          258,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          8,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          6,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          257,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          5,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          4,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-29",
+      "season": 2026,
+      "game_pk": 824700,
+      "is_home": true,
+      "opponent_abbr": "WSH",
+      "opponent_label": "WSH",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 6,
+      "runs": 4,
+      "earned_runs": 4,
+      "walks": 2,
+      "strikeouts": 7,
+      "home_runs": 1,
+      "era": 7.2,
+      "whip": 1.6,
+      "ranks": {
+        "ip": [
+          258,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          182,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          204,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          214,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          108,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          90,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          283,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          267,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-09-25",
+      "season": 2025,
+      "game_pk": 776187,
+      "is_home": true,
+      "opponent_abbr": "NYM",
+      "opponent_label": "NYM",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 17,
+      "ip": "5.2",
+      "hits": 9,
+      "runs": 8,
+      "earned_runs": 8,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 2,
+      "era": 12.71,
+      "whip": 1.76,
+      "ranks": {
+        "ip": [
+          194,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          264,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          297,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          301,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          357,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          289,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          364,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          342,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-09-19",
+      "season": 2025,
+      "game_pk": 776267,
+      "is_home": false,
+      "opponent_abbr": "CIN",
+      "opponent_label": "@CIN",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 4,
+      "runs": 4,
+      "earned_runs": 3,
+      "walks": 2,
+      "strikeouts": 4,
+      "home_runs": 3,
+      "era": 5.4,
+      "whip": 1.2,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          19,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          234,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          143,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          313,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          284,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          102,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-09-14",
+      "season": 2025,
+      "game_pk": 776321,
+      "is_home": true,
+      "opponent_abbr": "TB",
+      "opponent_label": "TB",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 7,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 9,
+      "home_runs": 2,
+      "era": 5.4,
+      "whip": 1.4,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          242,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          84,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          289,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          284,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          240,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-09-08",
+      "season": 2025,
+      "game_pk": 776412,
+      "is_home": false,
+      "opponent_abbr": "ATL",
+      "opponent_label": "@ATL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 1,
+      "era": 4.5,
+      "whip": 0.83,
+      "ranks": {
+        "ip": [
+          153,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          108,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          215,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          3,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-09-02",
+      "season": 2025,
+      "game_pk": 776487,
+      "is_home": true,
+      "opponent_abbr": "ATL",
+      "opponent_label": "ATL",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 1,
+      "strikeouts": 2,
+      "home_runs": 2,
+      "era": 4.5,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          153,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          108,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          367,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          289,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          215,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          26,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-08-28",
+      "season": 2025,
+      "game_pk": 776550,
+      "is_home": false,
+      "opponent_abbr": "SF",
+      "opponent_label": "@SF",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 1,
+      "strikeouts": 5,
+      "home_runs": 2,
+      "era": 3.86,
+      "whip": 0.86,
+      "ranks": {
+        "ip": [
+          120,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          108,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          229,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          289,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          142,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          4,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-08-21",
+      "season": 2025,
+      "game_pk": 776651,
+      "is_home": true,
+      "opponent_abbr": "MIL",
+      "opponent_label": "MIL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 3,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 2,
+      "strikeouts": 5,
+      "home_runs": 1,
+      "era": 2.57,
+      "whip": 0.71,
+      "ranks": {
+        "ip": [
+          120,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          6,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          34,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          50,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          143,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          229,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          31,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          2,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-08-16",
+      "season": 2025,
+      "game_pk": 776719,
+      "is_home": true,
+      "opponent_abbr": "PIT",
+      "opponent_label": "PIT",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 3,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 2,
+      "strikeouts": 6,
+      "home_runs": 1,
+      "era": 1.29,
+      "whip": 0.71,
+      "ranks": {
+        "ip": [
+          120,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          6,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          143,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          164,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          2,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-08-10",
+      "season": 2025,
+      "game_pk": 776795,
+      "is_home": false,
+      "opponent_abbr": "STL",
+      "opponent_label": "@STL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 20,
+      "ip": "6.2",
+      "hits": 4,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 9,
+      "home_runs": 1,
+      "era": 4.05,
+      "whip": 0.6,
+      "ranks": {
+        "ip": [
+          127,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          19,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          84,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          167,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          2,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-08-05",
+      "season": 2025,
+      "game_pk": 776860,
+      "is_home": true,
+      "opponent_abbr": "CIN",
+      "opponent_label": "CIN",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 19,
+      "ip": "6.1",
+      "hits": 3,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 0,
+      "strikeouts": 7,
+      "home_runs": 0,
+      "era": 1.42,
+      "whip": 0.47,
+      "ranks": {
+        "ip": [
+          135,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          6,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          119,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          1,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-07-30",
+      "season": 2025,
+      "game_pk": 776929,
+      "is_home": false,
+      "opponent_abbr": "MIL",
+      "opponent_label": "@MIL",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 8,
+      "home_runs": 2,
+      "era": 5.4,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          108,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          103,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          289,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          284,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          26,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-07-25",
+      "season": 2025,
+      "game_pk": 777017,
+      "is_home": false,
+      "opponent_abbr": "CHW",
+      "opponent_label": "@CHW",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 9,
+      "ip": "3.0",
+      "hits": 12,
+      "runs": 7,
+      "earned_runs": 7,
+      "walks": 0,
+      "strikeouts": 2,
+      "home_runs": 3,
+      "era": 21.0,
+      "whip": 4.0,
+      "ranks": {
+        "ip": [
+          368,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          282,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          280,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          292,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          367,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          313,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          369,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          369,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-07-19",
+      "season": 2025,
+      "game_pk": 777096,
+      "is_home": true,
+      "opponent_abbr": "BOS",
+      "opponent_label": "BOS",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 5,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 5,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.86,
+      "ranks": {
+        "ip": [
+          120,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          108,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          229,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          4,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-07-13",
+      "season": 2025,
+      "game_pk": 777122,
+      "is_home": false,
+      "opponent_abbr": "NYY",
+      "opponent_label": "@NYY",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 2,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 6,
+      "home_runs": 1,
+      "era": 1.29,
+      "whip": 0.43,
+      "ranks": {
+        "ip": [
+          120,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          2,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          164,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          1,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-07-08",
+      "season": 2025,
+      "game_pk": 777190,
+      "is_home": false,
+      "opponent_abbr": "MIN",
+      "opponent_label": "@MIN",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 5,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 0,
+      "strikeouts": 1,
+      "home_runs": 0,
+      "era": 3.0,
+      "whip": 0.83,
+      "ranks": {
+        "ip": [
+          153,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          108,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          34,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          50,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          368,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          63,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          3,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-07-02",
+      "season": 2025,
+      "game_pk": 777266,
+      "is_home": true,
+      "opponent_abbr": "CLE",
+      "opponent_label": "CLE",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 16,
+      "ip": "5.1",
+      "hits": 4,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 3,
+      "era": 5.06,
+      "whip": 0.75,
+      "ranks": {
+        "ip": [
+          257,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          19,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          152,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          174,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          313,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          264,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          2,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-06-26",
+      "season": 2025,
+      "game_pk": 777348,
+      "is_home": false,
+      "opponent_abbr": "STL",
+      "opponent_label": "@STL",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 1,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.4,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          357,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          1,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-05-04",
+      "season": 2025,
+      "game_pk": 778054,
+      "is_home": false,
+      "opponent_abbr": "MIL",
+      "opponent_label": "@MIL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 17,
+      "ip": "5.2",
+      "hits": 4,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 3.18,
+      "whip": 0.88,
+      "ranks": {
+        "ip": [
+          194,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          19,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          34,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          50,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          79,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          4,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-04-29",
+      "season": 2025,
+      "game_pk": 778135,
+      "is_home": false,
+      "opponent_abbr": "PIT",
+      "opponent_label": "@PIT",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 6,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 1.4,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          202,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          357,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          240,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-04-22",
+      "season": 2025,
+      "game_pk": 778220,
+      "is_home": true,
+      "opponent_abbr": "LAD",
+      "opponent_label": "LAD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 17,
+      "ip": "5.2",
+      "hits": 7,
+      "runs": 5,
+      "earned_runs": 5,
+      "walks": 2,
+      "strikeouts": 6,
+      "home_runs": 3,
+      "era": 7.94,
+      "whip": 1.59,
+      "ranks": {
+        "ip": [
+          194,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          242,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          261,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          266,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          143,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          164,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          313,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          353,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          318,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-04-15",
+      "season": 2025,
+      "game_pk": 778305,
+      "is_home": false,
+      "opponent_abbr": "SD",
+      "opponent_label": "@SD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 4,
+      "runs": 1,
+      "earned_runs": 0,
+      "walks": 3,
+      "strikeouts": 7,
+      "home_runs": 1,
+      "era": 0.0,
+      "whip": 1.4,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          19,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          244,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          119,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          240,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-04-09",
+      "season": 2025,
+      "game_pk": 778385,
+      "is_home": true,
+      "opponent_abbr": "TEX",
+      "opponent_label": "TEX",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 7,
+      "runs": 5,
+      "earned_runs": 5,
+      "walks": 1,
+      "strikeouts": 4,
+      "home_runs": 2,
+      "era": 9.0,
+      "whip": 1.6,
+      "ranks": {
+        "ip": [
+          308,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          242,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          261,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          266,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          9,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          289,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          359,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          321,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-04-04",
+      "season": 2025,
+      "game_pk": 778460,
+      "is_home": true,
+      "opponent_abbr": "SD",
+      "opponent_label": "SD",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 22,
+      "ip": "7.1",
+      "hits": 4,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 1,
+      "era": 1.23,
+      "whip": 0.55,
+      "ranks": {
+        "ip": [
+          117,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          19,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          201,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          2,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-03-29",
+      "season": 2025,
+      "game_pk": 778532,
+      "is_home": false,
+      "opponent_abbr": "AZ",
+      "opponent_label": "@AZ",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 3,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 2,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 1.29,
+      "whip": 0.71,
+      "ranks": {
+        "ip": [
+          120,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          6,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          143,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          307,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          2,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2025-03-18",
+      "season": 2025,
+      "game_pk": 778563,
+      "is_home": true,
+      "opponent_abbr": "LAD",
+      "opponent_label": "LAD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 12,
+      "ip": "4.0",
+      "hits": 0,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 4,
+      "strikeouts": 2,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          360,
+          369,
+          2025,
+          "start"
+        ],
+        "hits": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "walks": [
+          275,
+          369,
+          2025,
+          "start"
+        ],
+        "strikeouts": [
+          367,
+          369,
+          2025,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "era": [
+          1,
+          369,
+          2025,
+          "start"
+        ],
+        "whip": [
+          26,
+          369,
+          2025,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-09-22",
+      "season": 2024,
+      "game_pk": 746825,
+      "is_home": true,
+      "opponent_abbr": "WSH",
+      "opponent_label": "WSH",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 6,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.86,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          221,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          294,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          8,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-09-16",
+      "season": 2024,
+      "game_pk": 746828,
+      "is_home": true,
+      "opponent_abbr": "ATH",
+      "opponent_label": "ATH",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 5,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 3,
+      "strikeouts": 11,
+      "home_runs": 1,
+      "era": 3.0,
+      "whip": 1.33,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          106,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          30,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          43,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          266,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          57,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          55,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          199,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-09-10",
+      "season": 2024,
+      "game_pk": 746097,
+      "is_home": false,
+      "opponent_abbr": "LAD",
+      "opponent_label": "@LAD",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 7,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 4,
+      "home_runs": 3,
+      "era": 3.86,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          254,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          173,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          196,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          294,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          334,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          143,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          22,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-09-04",
+      "season": 2024,
+      "game_pk": 746835,
+      "is_home": true,
+      "opponent_abbr": "PIT",
+      "opponent_label": "PIT",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 0,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 2,
+      "strikeouts": 7,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.29,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          166,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          101,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          1,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-08-30",
+      "season": 2024,
+      "game_pk": 744810,
+      "is_home": false,
+      "opponent_abbr": "WSH",
+      "opponent_label": "@WSH",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 4,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 1,
+      "strikeouts": 8,
+      "home_runs": 1,
+      "era": 4.5,
+      "whip": 0.83,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          23,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          173,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          196,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          83,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          210,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          6,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-08-24",
+      "season": 2024,
+      "game_pk": 746022,
+      "is_home": false,
+      "opponent_abbr": "MIA",
+      "opponent_label": "@MIA",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 4,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 2,
+      "strikeouts": 3,
+      "home_runs": 2,
+      "era": 2.57,
+      "whip": 0.86,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          23,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          30,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          43,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          166,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          342,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          308,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          29,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          8,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-08-18",
+      "season": 2024,
+      "game_pk": 746838,
+      "is_home": true,
+      "opponent_abbr": "TOR",
+      "opponent_label": "TOR",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 4,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 6,
+      "home_runs": 1,
+      "era": 1.8,
+      "whip": 1.0,
+      "ranks": {
+        "ip": [
+          290,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          23,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          8,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          135,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          12,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          22,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-08-12",
+      "season": 2024,
+      "game_pk": 746603,
+      "is_home": false,
+      "opponent_abbr": "CLE",
+      "opponent_label": "@CLE",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 7,
+      "runs": 7,
+      "earned_runs": 3,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 2,
+      "era": 5.4,
+      "whip": 1.6,
+      "ranks": {
+        "ip": [
+          290,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          254,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          305,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          196,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          342,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          308,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          278,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          306,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-08-06",
+      "season": 2024,
+      "game_pk": 746840,
+      "is_home": true,
+      "opponent_abbr": "MIN",
+      "opponent_label": "MIN",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 2,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 1,
+      "strikeouts": 10,
+      "home_runs": 1,
+      "era": 2.57,
+      "whip": 0.43,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          3,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          30,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          43,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          63,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          29,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          1,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-08-01",
+      "season": 2024,
+      "game_pk": 746849,
+      "is_home": true,
+      "opponent_abbr": "STL",
+      "opponent_label": "STL",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 20,
+      "ip": "6.2",
+      "hits": 10,
+      "runs": 4,
+      "earned_runs": 4,
+      "walks": 0,
+      "strikeouts": 7,
+      "home_runs": 2,
+      "era": 5.4,
+      "whip": 1.5,
+      "ranks": {
+        "ip": [
+          114,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          292,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          249,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          261,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          101,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          308,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          278,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          266,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-07-27",
+      "season": 2024,
+      "game_pk": 746278,
+      "is_home": false,
+      "opponent_abbr": "KC",
+      "opponent_label": "@KC",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 17,
+      "ip": "5.2",
+      "hits": 6,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 0,
+      "strikeouts": 3,
+      "home_runs": 1,
+      "era": 4.76,
+      "whip": 1.06,
+      "ranks": {
+        "ip": [
+          185,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          221,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          173,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          196,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          342,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          232,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          39,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-07-21",
+      "season": 2024,
+      "game_pk": 746853,
+      "is_home": true,
+      "opponent_abbr": "AZ",
+      "opponent_label": "AZ",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 2,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 10,
+      "home_runs": 1,
+      "era": 1.29,
+      "whip": 0.43,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          3,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          8,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          63,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          1,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-07-10",
+      "season": 2024,
+      "game_pk": 747015,
+      "is_home": false,
+      "opponent_abbr": "BAL",
+      "opponent_label": "@BAL",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 6,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 6,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 1.17,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          221,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          135,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          94,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-07-03",
+      "season": 2024,
+      "game_pk": 746858,
+      "is_home": true,
+      "opponent_abbr": "PHI",
+      "opponent_label": "PHI",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 6,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 1,
+      "strikeouts": 8,
+      "home_runs": 2,
+      "era": 4.5,
+      "whip": 1.17,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          221,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          173,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          196,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          83,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          308,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          210,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          94,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-06-27",
+      "season": 2024,
+      "game_pk": 745324,
+      "is_home": false,
+      "opponent_abbr": "SF",
+      "opponent_label": "@SF",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 3,
+      "walks": 2,
+      "strikeouts": 3,
+      "home_runs": 0,
+      "era": 4.5,
+      "whip": 1.17,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          106,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          173,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          196,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          166,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          342,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          210,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          94,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-06-21",
+      "season": 2024,
+      "game_pk": 746861,
+      "is_home": true,
+      "opponent_abbr": "NYM",
+      "opponent_label": "NYM",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 9,
+      "ip": "3.0",
+      "hits": 11,
+      "runs": 10,
+      "earned_runs": 10,
+      "walks": 1,
+      "strikeouts": 3,
+      "home_runs": 3,
+      "era": 30.0,
+      "whip": 4.0,
+      "ranks": {
+        "ip": [
+          365,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          299,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          331,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          334,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          342,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          334,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          369,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          369,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-06-15",
+      "season": 2024,
+      "game_pk": 746865,
+      "is_home": true,
+      "opponent_abbr": "STL",
+      "opponent_label": "STL",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 4,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 0,
+      "strikeouts": 6,
+      "home_runs": 0,
+      "era": 1.29,
+      "whip": 0.57,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          23,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          8,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          135,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          2,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-06-09",
+      "season": 2024,
+      "game_pk": 746705,
+      "is_home": false,
+      "opponent_abbr": "CIN",
+      "opponent_label": "@CIN",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 20,
+      "ip": "6.2",
+      "hits": 5,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 1,
+      "strikeouts": 7,
+      "home_runs": 1,
+      "era": 2.7,
+      "whip": 0.9,
+      "ranks": {
+        "ip": [
+          114,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          106,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          30,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          43,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          101,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          37,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          11,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-06-04",
+      "season": 2024,
+      "game_pk": 746872,
+      "is_home": true,
+      "opponent_abbr": "CHW",
+      "opponent_label": "CHW",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 13,
+      "ip": "4.1",
+      "hits": 7,
+      "runs": 5,
+      "earned_runs": 1,
+      "walks": 0,
+      "strikeouts": 6,
+      "home_runs": 1,
+      "era": 2.08,
+      "whip": 1.62,
+      "ranks": {
+        "ip": [
+          339,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          254,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          277,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          8,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          135,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          19,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          311,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-05-29",
+      "season": 2024,
+      "game_pk": 745988,
+      "is_home": false,
+      "opponent_abbr": "MIL",
+      "opponent_label": "@MIL",
+      "decision": "L",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 13,
+      "ip": "4.1",
+      "hits": 8,
+      "runs": 7,
+      "earned_runs": 7,
+      "walks": 1,
+      "strikeouts": 1,
+      "home_runs": 2,
+      "era": 14.54,
+      "whip": 2.08,
+      "ranks": {
+        "ip": [
+          339,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          273,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          305,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          314,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          368,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          308,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          366,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          357,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-05-18",
+      "season": 2024,
+      "game_pk": 746882,
+      "is_home": true,
+      "opponent_abbr": "PIT",
+      "opponent_label": "PIT",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 4,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 7,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.71,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          23,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          101,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          4,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-05-13",
+      "season": 2024,
+      "game_pk": 747128,
+      "is_home": false,
+      "opponent_abbr": "ATL",
+      "opponent_label": "@ATL",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 15,
+      "ip": "5.0",
+      "hits": 7,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 3,
+      "strikeouts": 8,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 2.0,
+      "ranks": {
+        "ip": [
+          290,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          254,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          266,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          83,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          354,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-05-07",
+      "season": 2024,
+      "game_pk": 746885,
+      "is_home": true,
+      "opponent_abbr": "SD",
+      "opponent_label": "SD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 7,
+      "runs": 2,
+      "earned_runs": 2,
+      "walks": 1,
+      "strikeouts": 8,
+      "home_runs": 1,
+      "era": 2.57,
+      "whip": 1.14,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          254,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          30,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          43,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          83,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          29,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          77,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-05-01",
+      "season": 2024,
+      "game_pk": 745829,
+      "is_home": false,
+      "opponent_abbr": "NYM",
+      "opponent_label": "@NYM",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 21,
+      "ip": "7.0",
+      "hits": 3,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 1,
+      "strikeouts": 7,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.57,
+      "ranks": {
+        "ip": [
+          107,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          5,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          101,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          2,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-04-26",
+      "season": 2024,
+      "game_pk": 746972,
+      "is_home": false,
+      "opponent_abbr": "BOS",
+      "opponent_label": "@BOS",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 19,
+      "ip": "6.1",
+      "hits": 5,
+      "runs": 1,
+      "earned_runs": 1,
+      "walks": 1,
+      "strikeouts": 7,
+      "home_runs": 1,
+      "era": 1.42,
+      "whip": 0.95,
+      "ranks": {
+        "ip": [
+          120,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          106,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          8,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          16,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          101,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          8,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          15,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-04-20",
+      "season": 2024,
+      "game_pk": 746891,
+      "is_home": true,
+      "opponent_abbr": "MIA",
+      "opponent_label": "MIA",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 2,
+      "walks": 0,
+      "strikeouts": 5,
+      "home_runs": 1,
+      "era": 3.0,
+      "whip": 0.83,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          106,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          173,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          43,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          205,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          218,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          55,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          6,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-04-13",
+      "season": 2024,
+      "game_pk": 745272,
+      "is_home": false,
+      "opponent_abbr": "SEA",
+      "opponent_label": "@SEA",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 16,
+      "ip": "5.1",
+      "hits": 5,
+      "runs": 1,
+      "earned_runs": 0,
+      "walks": 2,
+      "strikeouts": 4,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 1.31,
+      "ranks": {
+        "ip": [
+          241,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          106,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          6,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          166,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          294,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          189,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-04-07",
+      "season": 2024,
+      "game_pk": 746895,
+      "is_home": true,
+      "opponent_abbr": "LAD",
+      "opponent_label": "LAD",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 12,
+      "ip": "4.0",
+      "hits": 2,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 0,
+      "strikeouts": 3,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.5,
+      "ranks": {
+        "ip": [
+          352,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          3,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          342,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          1,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    },
+    {
+      "date": "2024-04-01",
+      "season": 2024,
+      "game_pk": 746899,
+      "is_home": true,
+      "opponent_abbr": "COL",
+      "opponent_label": "COL",
+      "decision": "W",
+      "wins": 1,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 18,
+      "ip": "6.0",
+      "hits": 2,
+      "runs": 0,
+      "earned_runs": 0,
+      "walks": 0,
+      "strikeouts": 9,
+      "home_runs": 0,
+      "era": 0.0,
+      "whip": 0.33,
+      "ranks": {
+        "ip": [
+          144,
+          370,
+          2024,
+          "start"
+        ],
+        "hits": [
+          3,
+          370,
+          2024,
+          "start"
+        ],
+        "runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "earned_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "walks": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "strikeouts": [
+          73,
+          370,
+          2024,
+          "start"
+        ],
+        "home_runs": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "era": [
+          1,
+          370,
+          2024,
+          "start"
+        ],
+        "whip": [
+          1,
+          370,
+          2024,
+          "start"
+        ]
+      }
+    }
+  ],
+  "career_start_count": 74,
+  "rookie_candidate": false
+}

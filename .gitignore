@@ -29,7 +29,8 @@ data/live-games/*.json
 .DS_Store
 
 # Generated pitcher history previews
-/data/pitcher-history/
 
 # Generated pitcher-history season cache
 /.runtime-data/pitcher-history-season-cache/
+
+# Pitcher-history JSON is public static site data and must be deployed.

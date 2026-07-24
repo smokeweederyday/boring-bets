@@ -1,0 +1,257 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-07-24T04:23:36Z",
+  "as_of": "2026-07-24",
+  "pitcher": {
+    "id": 702566,
+    "name": "Owen Murphy",
+    "number": "73",
+    "age": 22,
+    "hand": "R",
+    "debut_date": "2026-07-06",
+    "debut_year": 2026,
+    "profile_url": "pitcher.html?id=702566",
+    "minor_league_url": "https://www.milb.com/player/702566",
+    "record": "0-1",
+    "era": 4.05,
+    "season": 2026
+  },
+  "recent_seasons": [
+    {
+      "label": "2026",
+      "decision": "0-1",
+      "wins": 0,
+      "losses": 1,
+      "games_started": 1,
+      "outs": 20,
+      "ip": "6.2",
+      "hits": 6,
+      "runs": 5,
+      "earned_runs": 3,
+      "walks": 2,
+      "strikeouts": 6,
+      "home_runs": 1,
+      "era": 4.05,
+      "whip": 1.2,
+      "season": 2026,
+      "ranks": {
+        "ip": [
+          62,
+          62,
+          2026,
+          "season"
+        ],
+        "hits": [
+          38,
+          62,
+          2026,
+          "season"
+        ],
+        "runs": [
+          62,
+          62,
+          2026,
+          "season"
+        ],
+        "earned_runs": [
+          46,
+          62,
+          2026,
+          "season"
+        ],
+        "walks": [
+          31,
+          62,
+          2026,
+          "season"
+        ],
+        "strikeouts": [
+          39,
+          62,
+          2026,
+          "season"
+        ],
+        "home_runs": [
+          50,
+          62,
+          2026,
+          "season"
+        ],
+        "era": [
+          46,
+          62,
+          2026,
+          "season"
+        ],
+        "whip": [
+          33,
+          62,
+          2026,
+          "season"
+        ]
+      }
+    }
+  ],
+  "last_starts": [
+    {
+      "date": "2026-07-18",
+      "season": 2026,
+      "game_pk": 824899,
+      "is_home": true,
+      "opponent_abbr": "TEX",
+      "opponent_label": "TEX",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 8,
+      "ip": "2.2",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 2,
+      "walks": 2,
+      "strikeouts": 2,
+      "home_runs": 1,
+      "era": 6.75,
+      "whip": 2.62,
+      "ranks": {
+        "ip": [
+          309,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          101,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          132,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          108,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          311,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          276,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          307,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    }
+  ],
+  "starts": [
+    {
+      "date": "2026-07-18",
+      "season": 2026,
+      "game_pk": 824899,
+      "is_home": true,
+      "opponent_abbr": "TEX",
+      "opponent_label": "TEX",
+      "decision": "ND",
+      "wins": 0,
+      "losses": 0,
+      "games_started": 1,
+      "outs": 8,
+      "ip": "2.2",
+      "hits": 5,
+      "runs": 3,
+      "earned_runs": 2,
+      "walks": 2,
+      "strikeouts": 2,
+      "home_runs": 1,
+      "era": 6.75,
+      "whip": 2.62,
+      "ranks": {
+        "ip": [
+          309,
+          313,
+          2026,
+          "start"
+        ],
+        "hits": [
+          101,
+          313,
+          2026,
+          "start"
+        ],
+        "runs": [
+          132,
+          313,
+          2026,
+          "start"
+        ],
+        "earned_runs": [
+          44,
+          313,
+          2026,
+          "start"
+        ],
+        "walks": [
+          108,
+          313,
+          2026,
+          "start"
+        ],
+        "strikeouts": [
+          311,
+          313,
+          2026,
+          "start"
+        ],
+        "home_runs": [
+          176,
+          313,
+          2026,
+          "start"
+        ],
+        "era": [
+          276,
+          313,
+          2026,
+          "start"
+        ],
+        "whip": [
+          307,
+          313,
+          2026,
+          "start"
+        ]
+      }
+    }
+  ],
+  "career_start_count": 1,
+  "rookie_candidate": true
+}
