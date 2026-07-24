@@ -753,31 +753,26 @@ td.pitcher-history-ranked-cell.global-tier-highlight {
 
 .pitcher-history-table
 td.pitcher-history-ranked-cell.global-tier-highlight.metric-elite {
-  color: #63ff9b !important;
   background: transparent !important;
 }
 
 .pitcher-history-table
 td.pitcher-history-ranked-cell.global-tier-highlight.metric-good {
-  color: #a2f5bf !important;
   background: transparent !important;
 }
 
 .pitcher-history-table
 td.pitcher-history-ranked-cell.global-tier-highlight.metric-average {
-  color: var(--text) !important;
   background: transparent !important;
 }
 
 .pitcher-history-table
 td.pitcher-history-ranked-cell.global-tier-highlight.metric-poor {
-  color: #ffadb8 !important;
   background: transparent !important;
 }
 
 .pitcher-history-table
 td.pitcher-history-ranked-cell.global-tier-highlight.metric-awful {
-  color: #ff7184 !important;
   background: transparent !important;
 }
 
@@ -975,31 +970,26 @@ td.pitcher-history-ranked-cell.global-tier-highlight.metric-awful {
 .pitcher-history-table
 thead
 th.pitcher-history-combined-header.metric-elite {
-  color: #63ff9b !important;
 }
 
 .pitcher-history-table
 thead
 th.pitcher-history-combined-header.metric-good {
-  color: #a2f5bf !important;
 }
 
 .pitcher-history-table
 thead
 th.pitcher-history-combined-header.metric-average {
-  color: var(--text) !important;
 }
 
 .pitcher-history-table
 thead
 th.pitcher-history-combined-header.metric-poor {
-  color: #ffadb8 !important;
 }
 
 .pitcher-history-table
 thead
 th.pitcher-history-combined-header.metric-awful {
-  color: #ff7184 !important;
 }
 
 .pitcher-history-table
@@ -1227,3 +1217,33 @@ td.pitcher-history-decision-neutral {
 }
 
 /* HISTORY_DECISION_HIGHLIGHTS_END */
+
+/* HISTORY_SHARED_HIGHLIGHT_ENGINE_START */
+
+/*
+  Recent History receives its colors from the shared global
+  highlighting engine, including the yellow/orange Neutral
+  palette. Only the text changes color.
+*/
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight,
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.global-tier-highlight {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/*
+  Preserve the normal dark structural header background while
+  allowing the shared engine to control header text color.
+*/
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.global-tier-highlight {
+  background: #171f2c !important;
+}
+
+/* HISTORY_SHARED_HIGHLIGHT_ENGINE_END */

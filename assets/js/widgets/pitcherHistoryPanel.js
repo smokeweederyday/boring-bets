@@ -929,12 +929,27 @@ function combinedHistoryColumnInfo(
     tierClass = "metric-awful";
   }
 
+  const globalPoolSize = 1000;
+
+  const globalRank = Math.max(
+    1,
+    Math.min(
+      globalPoolSize,
+      Math.round(
+        average
+        * (globalPoolSize - 1)
+      ) + 1
+    )
+  );
+
   return {
     tierClass,
     sampleSize: percentiles.length,
     rating: Math.round(
       (1 - average) * 100
-    )
+    ),
+    globalRank,
+    globalPoolSize
   };
 }
 
@@ -950,10 +965,13 @@ function renderHistoryMetricHeader(
       metric
     );
 
-  const tierClass =
+  const globalRankAttributes =
     enabled && info
-      ? info.tierClass
-      : "metric-average";
+      ? (
+          `data-global-rank="${info.globalRank}" ` +
+          `data-global-league-size="${info.globalPoolSize}"`
+        )
+      : "";
 
   const title =
     info
@@ -968,10 +986,11 @@ function renderHistoryMetricHeader(
     <th
       class="pitcher-history-combined-header ${
         enabled
-          ? tierClass
+          ? ""
           : "is-highlight-disabled"
       }"
       data-history-column-metric="${escapeHtml(metric)}"
+      ${globalRankAttributes}
       title="${escapeHtml(title)}"
     >
       ${escapeHtml(label)}
