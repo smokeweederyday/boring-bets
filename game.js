@@ -958,6 +958,18 @@ function renderGameStadiumWeather(game) {
 
   card.className = `game-stadium-weather ${weatherClass}`;
   /*
+    BORING BETS: FULL BAR WEATHER APP V1
+    Paint the entire matchup bar behind the stadium-photo module.
+  */
+  gameHeaderApplyFullBarWeather(
+    game,
+    venue,
+    weather,
+    weatherClass,
+    card
+  );
+
+  /*
     BORING BETS: ROBUST INDOOR ROOF ATTRIBUTES V2
     Record whether this header image is truly exposed to weather.
   */
@@ -4567,3 +4579,1809 @@ function escapeHtml(value) {
 loadGame();
 
 /* BORING BETS: LOANDEPOT COMMONS HERO V1 */
+
+/*
+  BORING BETS: FULL BAR WEATHER APP V1
+
+  This is the visual weather layer for the full matchup bar. The stadium
+  photograph remains a separate foreground module. Rain is intentionally
+  static and restrained; lightning may animate when the venue is exposed.
+*/
+function gameHeaderApplyFullBarWeather(
+  game,
+  venue = {},
+  weather = {},
+  weatherClass = "",
+  stadiumCard = null
+) {
+  const bar = document.querySelector(
+    ".game-matchup.game-matchup-stadium"
+  );
+
+  if (!bar) return;
+
+  const preview = gameHeaderFullBarWeatherPreview();
+  const text = [
+    weather.condition,
+    weather.summary,
+    weather.description,
+    weather.short_forecast,
+    weather.forecast,
+    game?.weather_condition,
+    game?.weather_text,
+    game?.forecast
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const venueName = String(
+    venue?.name ??
+    venue?.venue_name ??
+    venue?.venueName ??
+    game?.venue_name ??
+    game?.venueName ??
+    game?.venue?.name ??
+    ""
+  );
+
+  const venueId = String(
+    venue?.id ??
+    venue?.venue_id ??
+    venue?.venueId ??
+    game?.venue_id ??
+    game?.venueId ??
+    game?.venue?.id ??
+    ""
+  ).trim();
+
+  const venueSlug =
+    typeof gameHeaderVariantSlug === "function"
+      ? gameHeaderVariantSlug(venueName)
+      : venueName
+          .toLowerCase()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+
+  const roofData =
+    typeof gameHeaderVenueRoofState === "function"
+      ? gameHeaderVenueRoofState(
+          game,
+          venue,
+          venueSlug
+        )
+      : {
+          profile:
+            stadiumCard?.dataset?.roofProfile ||
+            "outdoor",
+          state:
+            stadiumCard?.dataset?.roofState ||
+            "unknown"
+        };
+
+  const explicitlyExposed =
+    stadiumCard?.dataset?.weatherExposed === "true" ||
+    weather?.weather_exposed === true ||
+    weather?.weatherExposed === true ||
+    venue?.weather_exposed === true ||
+    venue?.weatherExposed === true ||
+    venueId === "680" ||
+    venueSlug === "t-mobile-park";
+
+  const indoor =
+    roofData?.profile !== "outdoor" &&
+    roofData?.state !== "open" &&
+    !explicitlyExposed;
+
+  let state = gameHeaderFullBarWeatherState(
+    text,
+    weatherClass
+  );
+
+  let intensity = gameHeaderFullBarWeatherIntensity(
+    weather,
+    text,
+    state
+  );
+
+  if (preview) {
+    state = preview.state;
+    intensity = preview.intensity;
+  } else if (indoor) {
+    state = "indoor";
+    intensity = 0;
+  }
+
+  const precipitationState =
+    state === "rain" ||
+    state === "thunder" ||
+    state === "freezing-rain";
+
+  const snowState =
+    state === "snow" ||
+    state === "sleet";
+
+  const level =
+    intensity >= 0.76
+      ? "heavy"
+      : intensity >= 0.43
+        ? "moderate"
+        : intensity > 0.08
+          ? "light"
+          : "none";
+
+  const wetGlass = precipitationState
+    ? Math.min(
+        0.96,
+        Math.max(0, (intensity - 0.08) * 1.04)
+      )
+    : 0;
+
+  const rainDensity = precipitationState
+    ? Math.min(1, Math.max(0.08, intensity))
+    : 0;
+
+  const snowDensity = snowState
+    ? Math.min(1, Math.max(0.1, intensity))
+    : 0;
+
+  const haze =
+    state === "fog"
+      ? Math.max(0.58, intensity)
+      : state === "cloudy"
+        ? 0.18 + intensity * 0.34
+        : precipitationState
+          ? 0.12 + intensity * 0.38
+          : snowState
+            ? 0.24 + intensity * 0.34
+            : 0;
+
+  const darkness =
+    state === "thunder"
+      ? 0.46 + intensity * 0.38
+      : precipitationState
+        ? 0.18 + intensity * 0.42
+        : state === "cloudy"
+          ? 0.08 + intensity * 0.25
+          : state === "fog"
+            ? 0.04 + intensity * 0.14
+            : 0;
+
+  bar.dataset.bbWeather = state;
+  bar.dataset.bbWeatherLevel = level;
+  bar.dataset.bbWeatherExposed =
+    indoor ? "false" : "true";
+  bar.dataset.bbWeatherPreview =
+    preview ? "true" : "false";
+
+  bar.style.setProperty(
+    "--bb-weather-intensity",
+    intensity.toFixed(3)
+  );
+  bar.style.setProperty(
+    "--bb-rain-density",
+    rainDensity.toFixed(3)
+  );
+  bar.style.setProperty(
+    "--bb-snow-density",
+    snowDensity.toFixed(3)
+  );
+  bar.style.setProperty(
+    "--bb-wet-glass",
+    wetGlass.toFixed(3)
+  );
+  bar.style.setProperty(
+    "--bb-weather-haze",
+    haze.toFixed(3)
+  );
+  bar.style.setProperty(
+    "--bb-weather-darkness",
+    darkness.toFixed(3)
+  );
+  bar.style.setProperty(
+    "--bb-glass-blur",
+    `${(wetGlass * 1.55).toFixed(2)}px`
+  );
+}
+
+function gameHeaderFullBarWeatherPreview() {
+  try {
+    const host = window.location.hostname;
+    const local =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host === "0.0.0.0";
+
+    if (!local) return null;
+
+    const requested = new URLSearchParams(
+      window.location.search
+    )
+      .get("weatherPreview")
+      ?.trim()
+      .toLowerCase();
+
+    const previews = {
+      clear: { state: "clear", intensity: 0.18 },
+      cloudy: { state: "cloudy", intensity: 0.56 },
+      fog: { state: "fog", intensity: 0.72 },
+      drizzle: { state: "rain", intensity: 0.24 },
+      rain: { state: "rain", intensity: 0.54 },
+      "heavy-rain": { state: "rain", intensity: 0.94 },
+      thunder: { state: "thunder", intensity: 0.88 },
+      thunderstorm: { state: "thunder", intensity: 0.88 },
+      snow: { state: "snow", intensity: 0.55 },
+      "heavy-snow": { state: "snow", intensity: 0.92 },
+      indoor: { state: "indoor", intensity: 0 }
+    };
+
+    return previews[requested] || null;
+  } catch (_error) {
+    return null;
+  }
+}
+
+function gameHeaderFullBarWeatherState(
+  text,
+  weatherClass = ""
+) {
+  if (
+    weatherClass.includes("is-weather-thunder") ||
+    /\b(thunder|lightning|electrical storm)\b/.test(text)
+  ) {
+    return "thunder";
+  }
+
+  if (
+    /\b(freezing rain|ice storm)\b/.test(text)
+  ) {
+    return "freezing-rain";
+  }
+
+  if (/\b(sleet|wintry mix)\b/.test(text)) {
+    return "sleet";
+  }
+
+  if (
+    weatherClass.includes("is-weather-snow") ||
+    /\b(snow|flurr|blizzard)\b/.test(text)
+  ) {
+    return "snow";
+  }
+
+  if (
+    weatherClass.includes("is-weather-rain") ||
+    /\b(rain|showers?|drizzle|downpour|sprinkle)\b/.test(text)
+  ) {
+    return "rain";
+  }
+
+  if (/\b(fog|mist|haze|smoke)\b/.test(text)) {
+    return "fog";
+  }
+
+  if (
+    weatherClass.includes("is-weather-cloudy") ||
+    /\b(cloud|overcast)\b/.test(text)
+  ) {
+    return "cloudy";
+  }
+
+  if (
+    weatherClass.includes("is-weather-clear") ||
+    /\b(clear|sunny|fair)\b/.test(text)
+  ) {
+    return "clear";
+  }
+
+  if (weatherClass.includes("is-weather-roofed")) {
+    return "indoor";
+  }
+
+  return "neutral";
+}
+
+function gameHeaderFullBarWeatherIntensity(
+  weather = {},
+  text = "",
+  state = "neutral"
+) {
+  const normalized = gameHeaderFullBarFirstNumber(
+    weather.weather_intensity,
+    weather.weatherIntensity,
+    weather.precipitation_intensity,
+    weather.precipitationIntensity,
+    weather.precip_intensity,
+    weather.precipIntensityNormalized,
+    weather.rain_intensity,
+    weather.rainIntensity,
+    weather.snow_intensity,
+    weather.snowIntensity
+  );
+
+  const mmPerHour = gameHeaderFullBarFirstNumber(
+    weather.precipitation_mm_per_hour,
+    weather.precipitationMmPerHour,
+    weather.precip_mm_per_hour,
+    weather.precipMmPerHour,
+    weather.rain_mm_per_hour,
+    weather.rainMmPerHour,
+    weather.snow_mm_per_hour,
+    weather.snowMmPerHour
+  );
+
+  const inchesPerHour = gameHeaderFullBarFirstNumber(
+    weather.precipitation_in_per_hour,
+    weather.precipitationInPerHour,
+    weather.rain_in_per_hour,
+    weather.rainInPerHour,
+    weather.precipIntensity
+  );
+
+  const probability = gameHeaderFullBarProbability(
+    weather.rain_probability,
+    weather.rainProbability,
+    weather.precipitation_probability,
+    weather.precipitationProbability,
+    weather.precip_probability,
+    weather.precipProbability,
+    weather.pop
+  );
+
+  let numericIntensity = 0;
+
+  if (Number.isFinite(normalized)) {
+    numericIntensity = normalized <= 1
+      ? normalized
+      : Math.min(1, normalized / 10);
+  }
+
+  if (Number.isFinite(mmPerHour)) {
+    numericIntensity = Math.max(
+      numericIntensity,
+      Math.min(1, mmPerHour / 12)
+    );
+  }
+
+  if (Number.isFinite(inchesPerHour)) {
+    numericIntensity = Math.max(
+      numericIntensity,
+      Math.min(1, inchesPerHour / 0.48)
+    );
+  }
+
+  let textIntensity = 0;
+
+  if (
+    /\b(torrential|downpour|cloudburst|monsoon|blizzard)\b/.test(text)
+  ) {
+    textIntensity = 1;
+  } else if (
+    /\b(very heavy|extreme|severe)\b/.test(text)
+  ) {
+    textIntensity = 0.94;
+  } else if (
+    /\b(heavy|intense|strong)\b/.test(text)
+  ) {
+    textIntensity = 0.84;
+  } else if (
+    /\b(moderate|steady|widespread)\b/.test(text)
+  ) {
+    textIntensity = 0.58;
+  } else if (
+    /\b(light|drizzle|sprinkle|flurr)\b/.test(text)
+  ) {
+    textIntensity = 0.24;
+  } else if (
+    state === "thunder"
+  ) {
+    textIntensity = 0.76;
+  } else if (
+    state === "rain" ||
+    state === "freezing-rain" ||
+    state === "snow" ||
+    state === "sleet"
+  ) {
+    textIntensity = 0.48;
+  } else if (state === "fog") {
+    textIntensity = 0.64;
+  } else if (state === "cloudy") {
+    textIntensity = 0.44;
+  } else if (state === "clear") {
+    textIntensity = 0.18;
+  }
+
+  const probabilityFloor =
+    Number.isFinite(probability) &&
+    (
+      state === "rain" ||
+      state === "thunder" ||
+      state === "freezing-rain" ||
+      state === "snow" ||
+      state === "sleet"
+    )
+      ? 0.12 + probability * 0.28
+      : 0;
+
+  return Math.min(
+    1,
+    Math.max(
+      numericIntensity,
+      textIntensity,
+      probabilityFloor
+    )
+  );
+}
+
+function gameHeaderFullBarFirstNumber(...values) {
+  for (const value of values) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      continue;
+    }
+
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+
+  return null;
+}
+
+function gameHeaderFullBarProbability(...values) {
+  const value = gameHeaderFullBarFirstNumber(...values);
+  if (!Number.isFinite(value)) return null;
+
+  return Math.min(
+    1,
+    Math.max(0, value > 1 ? value / 100 : value)
+  );
+}
+
+/* BORING BETS: VENUE ROW FLUSH WITH PHOTO V2 */
+(() => {
+  const BAR_SELECTOR =
+    ".game-matchup.game-matchup-stadium";
+
+  const PHOTO_SELECTORS = [
+    ".game-stadium-weather img",
+    ".game-stadium-photo img",
+    ".stadium-photo img",
+    "picture img",
+    "img[alt*='stadium' i]",
+    "img[alt*='park' i]",
+    "img[alt*='field' i]"
+  ];
+
+  const NAMED_META_SELECTORS = [
+    "[class*='venue']",
+    "[class*='stadium-name']",
+    "[class*='park-name']",
+    "[class*='stadium-meta']",
+    "[class*='venue-meta']",
+    "[class*='game-time']",
+    "[class*='start-time']",
+    "[class*='first-pitch']"
+  ];
+
+  const VENUE_WORDS =
+    /\b(field|park|stadium|ballpark|dome|center|centre|grounds|coliseum)\b/i;
+
+  const TIME_TEXT =
+    /\b\d{1,2}:\d{2}\s*(?:a\.?m\.?|p\.?m\.?)?(?:\s+[A-Z]{2,4})?\b/i;
+
+  function visible(element) {
+    if (!(element instanceof HTMLElement)) return false;
+
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+
+    return (
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      Number(style.opacity || 1) > 0 &&
+      rect.width > 0 &&
+      rect.height > 0
+    );
+  }
+
+  function findPhoto(bar) {
+    for (const selector of PHOTO_SELECTORS) {
+      const photo = [...bar.querySelectorAll(selector)].find(visible);
+      if (photo) return photo;
+    }
+
+    return [...bar.querySelectorAll("img")]
+      .filter(visible)
+      .sort((a, b) => {
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+        return (br.width * br.height) - (ar.width * ar.height);
+      })[0] || null;
+  }
+
+  function candidateElements(bar) {
+    const result = [];
+
+    for (const selector of NAMED_META_SELECTORS) {
+      for (const element of bar.querySelectorAll(selector)) {
+        if (
+          visible(element) &&
+          !element.closest(".game-team") &&
+          !element.closest(".game-header-weather-scene") &&
+          !result.includes(element)
+        ) {
+          result.push(element);
+        }
+      }
+    }
+
+    for (const element of bar.querySelectorAll(
+      "div, p, span, small, strong, time"
+    )) {
+      if (
+        !visible(element) ||
+        element.closest(".game-team") ||
+        element.closest(".game-header-weather-scene")
+      ) {
+        continue;
+      }
+
+      const text = element.textContent
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (
+        text.length <= 90 &&
+        (VENUE_WORDS.test(text) || TIME_TEXT.test(text)) &&
+        !result.includes(element)
+      ) {
+        result.push(element);
+      }
+    }
+
+    return result;
+  }
+
+  function chooseRow(bar, photo) {
+    const candidates = candidateElements(bar);
+
+    const combined = candidates.find(element => {
+      const text = element.textContent
+        .replace(/\s+/g, " ")
+        .trim();
+
+      return (
+        VENUE_WORDS.test(text) &&
+        TIME_TEXT.test(text) &&
+        !element.contains(photo)
+      );
+    });
+
+    if (combined) return combined;
+
+    const venue = candidates.find(element =>
+      VENUE_WORDS.test(
+        element.textContent.replace(/\s+/g, " ").trim()
+      )
+    );
+
+    const time = candidates.find(element =>
+      TIME_TEXT.test(
+        element.textContent.replace(/\s+/g, " ").trim()
+      )
+    );
+
+    if (venue && time) {
+      let ancestor = venue;
+
+      while (
+        ancestor &&
+        ancestor !== bar &&
+        !ancestor.contains(time)
+      ) {
+        ancestor = ancestor.parentElement;
+      }
+
+      if (
+        ancestor &&
+        ancestor !== bar &&
+        !ancestor.contains(photo)
+      ) {
+        return ancestor;
+      }
+    }
+
+    return venue || time || null;
+  }
+
+  function alignVenueRow() {
+    const bar = document.querySelector(BAR_SELECTOR);
+    if (!bar) return;
+
+    const photo = findPhoto(bar);
+    const row = photo ? chooseRow(bar, photo) : null;
+
+    if (!photo || !row) return;
+
+    for (const old of bar.querySelectorAll(
+      ".bb-stadium-text-aligned, .bb-venue-row-photo-aligned"
+    )) {
+      old.classList.remove("bb-stadium-text-aligned");
+      old.style.removeProperty("--bb-stadium-text-lower");
+      old.style.removeProperty("--bb-venue-row-lower");
+    }
+
+    row.classList.add("bb-venue-row-photo-aligned");
+    row.style.removeProperty("--bb-venue-row-lower");
+
+    const photoTop = photo.getBoundingClientRect().top;
+    const rowTop = row.getBoundingClientRect().top;
+
+    /*
+      Move the venue row down only. The screenshot shows roughly a 30px
+      correction; the runtime measurement keeps it exact at other sizes.
+    */
+    const lowerBy = Math.max(
+      0,
+      Math.min(Math.round(photoTop - rowTop), 70)
+    );
+
+    row.style.setProperty(
+      "--bb-venue-row-lower",
+      `${lowerBy}px`
+    );
+  }
+
+  let frame = 0;
+
+  function scheduleAlignment() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(alignVenueRow);
+  }
+
+  window.addEventListener("load", scheduleAlignment);
+  window.addEventListener("resize", scheduleAlignment);
+
+  const observer = new MutationObserver(scheduleAlignment);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["src", "class"]
+  });
+
+  scheduleAlignment();
+})();
+
+/* BORING BETS: VENUE TEXT ABOVE STADIUM PHOTO V3 */
+(() => {
+  const MODULE_SELECTOR =
+    ".game-matchup.game-matchup-stadium .game-stadium-weather";
+
+  const PHOTO_SELECTORS = [
+    ".game-stadium-photo img",
+    ".stadium-photo img",
+    "picture img",
+    "img[alt*='stadium' i]",
+    "img[alt*='park' i]",
+    "img[alt*='field' i]"
+  ];
+
+  const META_SELECTORS = [
+    "[class*='venue']",
+    "[class*='stadium-name']",
+    "[class*='park-name']",
+    "[class*='stadium-meta']",
+    "[class*='venue-meta']",
+    "[class*='game-time']",
+    "[class*='start-time']",
+    "[class*='first-pitch']"
+  ];
+
+  const VENUE_WORDS =
+    /\b(field|park|stadium|ballpark|dome|center|centre|grounds|coliseum)\b/i;
+
+  const TIME_TEXT =
+    /\b\d{1,2}:\d{2}\s*(?:a\.?m\.?|p\.?m\.?)?(?:\s+[A-Z]{2,4})?\b/i;
+
+  function findPhoto(module) {
+    for (const selector of PHOTO_SELECTORS) {
+      const photo = module.querySelector(selector);
+      if (photo) return photo;
+    }
+
+    return [...module.querySelectorAll("img")]
+      .sort((a, b) => {
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+        return (br.width * br.height) - (ar.width * ar.height);
+      })[0] || null;
+  }
+
+  function normalizedText(element) {
+    return (element?.textContent || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function findVenueRow(module, photo) {
+    const candidates = [];
+
+    for (const selector of META_SELECTORS) {
+      for (const element of module.querySelectorAll(selector)) {
+        if (
+          element !== photo &&
+          !element.contains(photo) &&
+          !candidates.includes(element)
+        ) {
+          candidates.push(element);
+        }
+      }
+    }
+
+    for (const element of module.querySelectorAll(
+      "div, p, span, small, strong, time"
+    )) {
+      const text = normalizedText(element);
+
+      if (
+        text.length > 0 &&
+        text.length <= 100 &&
+        !element.contains(photo) &&
+        (VENUE_WORDS.test(text) || TIME_TEXT.test(text)) &&
+        !candidates.includes(element)
+      ) {
+        candidates.push(element);
+      }
+    }
+
+    const combined = candidates
+      .filter(element => {
+        const text = normalizedText(element);
+        return VENUE_WORDS.test(text) && TIME_TEXT.test(text);
+      })
+      .sort((a, b) =>
+        normalizedText(a).length - normalizedText(b).length
+      )[0];
+
+    if (combined) return combined;
+
+    const venue = candidates.find(element =>
+      VENUE_WORDS.test(normalizedText(element))
+    );
+
+    const time = candidates.find(element =>
+      TIME_TEXT.test(normalizedText(element))
+    );
+
+    if (venue && time && venue !== time) {
+      let ancestor = venue;
+
+      while (
+        ancestor &&
+        ancestor !== module &&
+        !ancestor.contains(time)
+      ) {
+        ancestor = ancestor.parentElement;
+      }
+
+      if (
+        ancestor &&
+        ancestor !== module &&
+        !ancestor.contains(photo)
+      ) {
+        return ancestor;
+      }
+    }
+
+    return venue || time || null;
+  }
+
+  function placeVenueRow() {
+    const module = document.querySelector(MODULE_SELECTOR);
+    if (!module) return;
+
+    const photo = findPhoto(module);
+    const row = photo ? findVenueRow(module, photo) : null;
+
+    if (!photo || !row) return;
+
+    /*
+      Neutralize the two earlier alignment experiments before measuring.
+    */
+    row.classList.remove(
+      "bb-stadium-text-aligned",
+      "bb-venue-row-photo-aligned"
+    );
+
+    row.style.removeProperty("--bb-stadium-text-lower");
+    row.style.removeProperty("--bb-venue-row-lower");
+    row.style.removeProperty("translate");
+    row.style.removeProperty("transform");
+
+    row.classList.add("bb-venue-text-above-photo");
+
+    const moduleRect = module.getBoundingClientRect();
+    const photoRect = photo.getBoundingClientRect();
+
+    /*
+      Measure the text at its natural size, then place it in the gap
+      immediately above the picture with a 5px gap.
+    */
+    row.style.setProperty("--bb-venue-left", "0px");
+    row.style.setProperty("--bb-venue-top", "0px");
+    row.style.setProperty(
+      "--bb-venue-width",
+      `${Math.round(photoRect.width)}px`
+    );
+
+    const rowHeight = Math.max(
+      row.getBoundingClientRect().height,
+      14
+    );
+
+    const left = Math.round(photoRect.left - moduleRect.left);
+    const top = Math.max(
+      2,
+      Math.round(
+        photoRect.top -
+        moduleRect.top -
+        rowHeight -
+        5
+      )
+    );
+
+    row.style.setProperty("--bb-venue-left", `${left}px`);
+    row.style.setProperty("--bb-venue-top", `${top}px`);
+  }
+
+  let frame = 0;
+
+  function schedulePlacement() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(placeVenueRow);
+  }
+
+  window.addEventListener("load", schedulePlacement);
+  window.addEventListener("resize", schedulePlacement);
+
+  const observer = new MutationObserver(schedulePlacement);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["src", "class"]
+  });
+
+  schedulePlacement();
+})();
+
+/* BORING BETS: FINAL VENUE ROW POSITION V4 */
+(() => {
+  const MODULE_SELECTOR =
+    ".game-matchup.game-matchup-stadium .game-stadium-weather";
+
+  function visible(element) {
+    if (!(element instanceof HTMLElement)) return false;
+
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+
+    return (
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      rect.width > 0 &&
+      rect.height > 0
+    );
+  }
+
+  function findPhoto(module) {
+    return [...module.querySelectorAll("img")]
+      .filter(image => {
+        if (!visible(image)) return false;
+        const rect = image.getBoundingClientRect();
+        return rect.width > 250 && rect.height > 50;
+      })
+      .sort((a, b) => {
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+
+        return (
+          br.width * br.height -
+          ar.width * ar.height
+        );
+      })[0] || null;
+  }
+
+  function findVenueRow(module, photo) {
+    return [...module.querySelectorAll("*")]
+      .filter(element => {
+        if (!visible(element) || element.contains(photo)) {
+          return false;
+        }
+
+        const text = element.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+
+        return (
+          text.length <= 100 &&
+          /\b(field|park|stadium|ballpark|dome|center|centre|grounds|coliseum)\b/i.test(text) &&
+          /\b\d{1,2}:\d{2}\b/.test(text)
+        );
+      })
+      .sort((a, b) => {
+        const aText = a.textContent.replace(/\s+/g, " ").trim();
+        const bText = b.textContent.replace(/\s+/g, " ").trim();
+
+        return aText.length - bText.length;
+      })[0] || null;
+  }
+
+  function positionVenueRow() {
+    const module = document.querySelector(MODULE_SELECTOR);
+    if (!module) return;
+
+    const photo = findPhoto(module);
+    const row = photo ? findVenueRow(module, photo) : null;
+
+    if (!photo || !row) return;
+
+    /*
+      Neutralize all previous experimental movement rules.
+    */
+    row.classList.remove(
+      "bb-stadium-text-aligned",
+      "bb-venue-row-photo-aligned",
+      "bb-venue-text-above-photo"
+    );
+
+    row.style.removeProperty("--bb-stadium-text-lower");
+    row.style.removeProperty("--bb-venue-row-lower");
+    row.style.removeProperty("--bb-venue-left");
+    row.style.removeProperty("--bb-venue-top");
+    row.style.removeProperty("--bb-venue-width");
+    row.style.removeProperty("translate");
+    row.style.removeProperty("transform");
+    row.style.removeProperty("left");
+    row.style.removeProperty("top");
+    row.style.removeProperty("width");
+    row.style.removeProperty("outline");
+
+    row.classList.add("bb-final-venue-row");
+
+    requestAnimationFrame(() => {
+      const photoRect = photo.getBoundingClientRect();
+      const rowRect = row.getBoundingClientRect();
+
+      const targetTop = photoRect.top - rowRect.height - 4;
+      const targetLeft =
+        photoRect.left +
+        (photoRect.width - rowRect.width) / 2;
+
+      const moveX = Math.round(targetLeft - rowRect.left);
+      const moveY = Math.round(targetTop - rowRect.top);
+
+      row.style.setProperty(
+        "--bb-final-venue-x",
+        `${moveX}px`
+      );
+
+      row.style.setProperty(
+        "--bb-final-venue-y",
+        `${moveY}px`
+      );
+    });
+  }
+
+  let frame = 0;
+
+  function schedulePosition() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(positionVenueRow);
+  }
+
+  window.addEventListener("load", schedulePosition);
+  window.addEventListener("resize", schedulePosition);
+
+  const observer = new MutationObserver(schedulePosition);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["src", "class"]
+  });
+
+  schedulePosition();
+})();
+
+/* BORING BETS: ISOLATED VENUE LABEL V5 */
+(() => {
+  const BAR_SELECTOR =
+    ".game-matchup.game-matchup-stadium";
+  const MODULE_SELECTOR =
+    ".game-stadium-weather";
+  const OVERLAY_CLASS =
+    "bb-isolated-venue-label";
+
+  const VENUE_TEXT =
+    /\b(field|park|stadium|ballpark|dome|center|centre|grounds|coliseum|yards|arena)\b/i;
+
+  const TIME_TEXT =
+    /\b\d{1,2}:\d{2}\s*(?:a\.?m\.?|p\.?m\.?)?(?:\s+[A-Z]{2,4})?\b/i;
+
+  const OLD_CLASSES = [
+    "bb-stadium-text-aligned",
+    "bb-venue-row-photo-aligned",
+    "bb-venue-text-above-photo",
+    "bb-final-venue-row"
+  ];
+
+  const OLD_PROPERTIES = [
+    "--bb-stadium-text-lower",
+    "--bb-venue-row-lower",
+    "--bb-venue-left",
+    "--bb-venue-top",
+    "--bb-venue-width",
+    "--bb-final-venue-x",
+    "--bb-final-venue-y",
+    "translate",
+    "transform",
+    "left",
+    "top",
+    "width",
+    "outline"
+  ];
+
+  function visible(element) {
+    if (!(element instanceof HTMLElement)) return false;
+
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+
+    return (
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      rect.width > 0 &&
+      rect.height > 0
+    );
+  }
+
+  function normalize(value) {
+    return String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function findPhoto(module) {
+    return [...module.querySelectorAll("img")]
+      .filter(image => {
+        if (!visible(image)) return false;
+
+        const rect = image.getBoundingClientRect();
+        return rect.width > 250 && rect.height > 50;
+      })
+      .sort((a, b) => {
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+
+        return (
+          br.width * br.height -
+          ar.width * ar.height
+        );
+      })[0] || null;
+  }
+
+  function neutralizeOldMovement(bar) {
+    for (const element of bar.querySelectorAll(
+      OLD_CLASSES.map(name => `.${name}`).join(",")
+    )) {
+      element.classList.remove(...OLD_CLASSES);
+
+      for (const property of OLD_PROPERTIES) {
+        element.style.removeProperty(property);
+      }
+    }
+  }
+
+  function matchingTextNodes(module, photo) {
+    const walker = document.createTreeWalker(
+      module,
+      NodeFilter.SHOW_TEXT
+    );
+
+    const result = [];
+    let node;
+
+    while ((node = walker.nextNode())) {
+      const text = normalize(node.nodeValue);
+      const parent = node.parentElement;
+
+      if (
+        !text ||
+        !parent ||
+        parent.closest(`.${OVERLAY_CLASS}`) ||
+        !visible(parent)
+      ) {
+        continue;
+      }
+
+      const rect = parent.getBoundingClientRect();
+
+      /*
+        Venue and first-pitch text belong above the picture. This prevents
+        wind, temperature and humidity text below the picture from matching.
+      */
+      if (rect.top >= photo.getBoundingClientRect().top) {
+        continue;
+      }
+
+      if (VENUE_TEXT.test(text) || TIME_TEXT.test(text)) {
+        result.push({
+          node,
+          parent,
+          text,
+          rect
+        });
+      }
+    }
+
+    return result;
+  }
+
+  function compareDomOrder(a, b) {
+    if (a.node === b.node) return 0;
+
+    const relation = a.node.compareDocumentPosition(b.node);
+
+    return relation & Node.DOCUMENT_POSITION_FOLLOWING
+      ? -1
+      : 1;
+  }
+
+  function extractVenueLabel(module, photo) {
+    const matches = matchingTextNodes(module, photo)
+      .sort(compareDomOrder);
+
+    if (!matches.length) return "";
+
+    const combined = matches.find(item =>
+      VENUE_TEXT.test(item.text) &&
+      TIME_TEXT.test(item.text)
+    );
+
+    if (combined) {
+      combined.node.nodeValue = "";
+      return combined.text;
+    }
+
+    const time = matches.find(item =>
+      TIME_TEXT.test(item.text)
+    );
+
+    const venue = matches.find(item =>
+      VENUE_TEXT.test(item.text)
+    );
+
+    if (!time && !venue) return "";
+
+    const selected = [time, venue]
+      .filter(Boolean)
+      .filter(
+        (item, index, array) =>
+          array.findIndex(other => other.node === item.node) === index
+      )
+      .sort(compareDomOrder);
+
+    const text = selected
+      .map(item => item.text)
+      .join(" · ");
+
+    for (const item of selected) {
+      item.node.nodeValue = "";
+    }
+
+    return text;
+  }
+
+  function getExistingText(bar) {
+    const overlay = bar.querySelector(`.${OVERLAY_CLASS}`);
+    return normalize(overlay?.textContent);
+  }
+
+  function ensureOverlay(bar, text) {
+    let overlay = bar.querySelector(`.${OVERLAY_CLASS}`);
+
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.className = OVERLAY_CLASS;
+      overlay.setAttribute("aria-label", text);
+      bar.appendChild(overlay);
+    }
+
+    if (text) {
+      overlay.textContent = text;
+      overlay.setAttribute("aria-label", text);
+    }
+
+    return overlay;
+  }
+
+  function positionOverlay(bar, photo, overlay) {
+    const barRect = bar.getBoundingClientRect();
+    const photoRect = photo.getBoundingClientRect();
+
+    overlay.style.setProperty(
+      "--bb-venue-overlay-left",
+      `${Math.round(photoRect.left - barRect.left)}px`
+    );
+
+    overlay.style.setProperty(
+      "--bb-venue-overlay-width",
+      `${Math.round(photoRect.width)}px`
+    );
+
+    /*
+      Let the browser measure the real label height, then place its bottom
+      four pixels above the stadium photograph.
+    */
+    const overlayHeight = Math.max(
+      overlay.getBoundingClientRect().height,
+      12
+    );
+
+    const top = Math.max(
+      2,
+      Math.round(
+        photoRect.top -
+        barRect.top -
+        overlayHeight -
+        4
+      )
+    );
+
+    overlay.style.setProperty(
+      "--bb-venue-overlay-top",
+      `${top}px`
+    );
+  }
+
+  function renderVenueLabel() {
+    const bar = document.querySelector(BAR_SELECTOR);
+    const module = bar?.querySelector(MODULE_SELECTOR);
+
+    if (!bar || !module) return;
+
+    neutralizeOldMovement(bar);
+
+    const photo = findPhoto(module);
+    if (!photo) return;
+
+    const existingText = getExistingText(bar);
+    const extractedText =
+      extractVenueLabel(module, photo);
+
+    const text = extractedText || existingText;
+    if (!text) return;
+
+    const overlay = ensureOverlay(bar, text);
+    positionOverlay(bar, photo, overlay);
+  }
+
+  let frame = 0;
+
+  function scheduleRender() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(renderVenueLabel);
+  }
+
+  window.addEventListener("load", scheduleRender);
+  window.addEventListener("resize", scheduleRender);
+
+  const observer = new MutationObserver(scheduleRender);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    characterData: true,
+    attributeFilter: ["src", "class"]
+  });
+
+  scheduleRender();
+})();
+
+/* BORING BETS: CLEAN CENTERED MATCHUP HEADER V1 */
+(() => {
+  const BAR_SELECTOR =
+    ".game-matchup.game-matchup-stadium";
+  const MODULE_SELECTOR =
+    ".game-stadium-weather";
+
+  const VENUE_WORDS =
+    /\b(field|park|stadium|ballpark|dome|center|centre|grounds|coliseum|yards|arena)\b/i;
+
+  const TIME_TEXT =
+    /\b\d{1,2}:\d{2}\b/;
+
+  const OLD_CLASSES = [
+    "bb-stadium-text-aligned",
+    "bb-venue-row-photo-aligned",
+    "bb-venue-text-above-photo",
+    "bb-final-venue-row",
+    "bb-venue-row-over-cap",
+    "bb-venue-row-above-outer-cap"
+  ];
+
+  const OLD_PROPERTIES = [
+    "--bb-stadium-text-lower",
+    "--bb-venue-row-lower",
+    "--bb-venue-left",
+    "--bb-venue-top",
+    "--bb-venue-width",
+    "--bb-final-venue-x",
+    "--bb-final-venue-y",
+    "--bb-stadium-top-cap-height",
+    "--bb-outer-content-shift",
+    "--bb-outer-content-shift-mobile",
+    "translate",
+    "transform",
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "width",
+    "height",
+    "outline"
+  ];
+
+  function normalize(element) {
+    return (element?.textContent || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function visible(element) {
+    if (!(element instanceof HTMLElement)) return false;
+
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+
+    return (
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      rect.width > 0 &&
+      rect.height > 0
+    );
+  }
+
+  function removeOldArtifacts(bar) {
+    bar.querySelectorAll(
+      ".bb-explicit-stadium-top-cap, " +
+      ".bb-outer-team-box-top-cap, " +
+      ".bb-isolated-venue-label"
+    ).forEach(element => element.remove());
+
+    for (const element of bar.querySelectorAll("*")) {
+      element.classList.remove(...OLD_CLASSES);
+
+      for (const property of OLD_PROPERTIES) {
+        element.style.removeProperty(property);
+      }
+    }
+
+    for (const property of OLD_PROPERTIES) {
+      bar.style.removeProperty(property);
+    }
+  }
+
+  function findVenueRow(bar, module) {
+    const candidates = [...bar.querySelectorAll("*")]
+      .filter(element => {
+        if (
+          !visible(element) ||
+          element === bar ||
+          element === module ||
+          element.contains(module) ||
+          element.closest(".game-team") ||
+          element.closest(".game-header-weather-scene")
+        ) {
+          return false;
+        }
+
+        const text = normalize(element);
+
+        return (
+          text.length > 0 &&
+          text.length <= 110 &&
+          VENUE_WORDS.test(text) &&
+          TIME_TEXT.test(text)
+        );
+      })
+      .sort((a, b) =>
+        normalize(a).length - normalize(b).length
+      );
+
+    return candidates[0] || null;
+  }
+
+  function moveVenueRowIntoModule(bar, module) {
+    const row = findVenueRow(bar, module);
+    if (!row) return null;
+
+    /*
+      Move only the exact venue/time row into the center stadium stack.
+      This is a normal DOM move, not an overlay or translation.
+    */
+    if (row.parentElement !== module) {
+      module.prepend(row);
+    }
+
+    row.classList.add("bb-clean-venue-row");
+    return row;
+  }
+
+  function initializeHeader() {
+    const bar = document.querySelector(BAR_SELECTOR);
+    const module = bar?.querySelector(MODULE_SELECTOR);
+
+    if (!bar || !module) return;
+
+    removeOldArtifacts(bar);
+
+    bar.classList.add("bb-clean-matchup-header");
+    module.classList.add("bb-clean-stadium-stack");
+
+    const teams = [
+      ...bar.querySelectorAll(":scope > .game-team")
+    ];
+
+    teams.forEach((team, index) => {
+      team.classList.add("bb-clean-team-block");
+
+      if (index === 0) {
+        team.classList.add("bb-clean-team-away");
+      }
+
+      if (index === teams.length - 1) {
+        team.classList.add("bb-clean-team-home");
+      }
+    });
+
+    moveVenueRowIntoModule(bar, module);
+  }
+
+  let frame = 0;
+
+  function scheduleInitialize() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(initializeHeader);
+  }
+
+  window.addEventListener("load", scheduleInitialize);
+  window.addEventListener("resize", scheduleInitialize);
+
+  const observer = new MutationObserver(scheduleInitialize);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  scheduleInitialize();
+})();
+
+/* BORING BETS: DEDUPE VENUE TIME ROW V1 */
+(() => {
+  const BAR_SELECTOR =
+    ".game-matchup.game-matchup-stadium";
+  const MODULE_SELECTOR =
+    ".game-stadium-weather";
+
+  const VENUE_WORDS =
+    /\b(field|park|stadium|ballpark|dome|center|centre|grounds|coliseum|yards|arena)\b/i;
+
+  const TIME_TEXT =
+    /\b\d{1,2}:\d{2}\b/;
+
+  function normalize(value) {
+    return String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function elementDepth(element) {
+    let depth = 0;
+    let current = element;
+
+    while (current?.parentElement) {
+      depth += 1;
+      current = current.parentElement;
+    }
+
+    return depth;
+  }
+
+  function removeLegacyDuplicates(bar) {
+    bar.querySelectorAll(
+      ".bb-isolated-venue-label, " +
+      ".bb-explicit-stadium-top-cap, " +
+      ".bb-outer-team-box-top-cap"
+    ).forEach(element => element.remove());
+  }
+
+  function findKeeper(bar, module) {
+    const preferred =
+      module.querySelector(":scope > .bb-clean-venue-row");
+
+    if (
+      preferred &&
+      VENUE_WORDS.test(normalize(preferred.textContent)) &&
+      TIME_TEXT.test(normalize(preferred.textContent))
+    ) {
+      return preferred;
+    }
+
+    return [...module.querySelectorAll("*")]
+      .filter(element => {
+        const text = normalize(element.textContent);
+
+        return (
+          text.length > 0 &&
+          text.length <= 120 &&
+          VENUE_WORDS.test(text) &&
+          TIME_TEXT.test(text)
+        );
+      })
+      .sort((a, b) => {
+        const depthDifference =
+          elementDepth(b) - elementDepth(a);
+
+        if (depthDifference) return depthDifference;
+
+        return (
+          normalize(a.textContent).length -
+          normalize(b.textContent).length
+        );
+      })[0] || null;
+  }
+
+  function hideCombinedDuplicateRows(bar, module, keeper) {
+    const candidates = [...bar.querySelectorAll("*")]
+      .filter(element => {
+        if (
+          element === keeper ||
+          element.contains(keeper) ||
+          keeper.contains(element) ||
+          element === bar ||
+          element === module ||
+          element.contains(module) ||
+          element.closest(".game-team") ||
+          element.closest(".game-header-weather-scene")
+        ) {
+          return false;
+        }
+
+        const text = normalize(element.textContent);
+
+        return (
+          text.length > 0 &&
+          text.length <= 120 &&
+          VENUE_WORDS.test(text) &&
+          TIME_TEXT.test(text)
+        );
+      });
+
+    for (const duplicate of candidates) {
+      duplicate.classList.add(
+        "bb-duplicate-venue-time-hidden"
+      );
+      duplicate.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  function clearDuplicateTextNodes(bar, keeper) {
+    const keeperText = normalize(keeper.textContent);
+    const walker = document.createTreeWalker(
+      bar,
+      NodeFilter.SHOW_TEXT
+    );
+
+    const duplicateNodes = [];
+    let node;
+
+    while ((node = walker.nextNode())) {
+      const parent = node.parentElement;
+      const text = normalize(node.nodeValue);
+
+      if (
+        !text ||
+        !parent ||
+        keeper.contains(parent) ||
+        parent.closest(".game-team") ||
+        parent.closest(".game-header-weather-scene")
+      ) {
+        continue;
+      }
+
+      const looksLikeVenueOrTime =
+        VENUE_WORDS.test(text) ||
+        TIME_TEXT.test(text);
+
+      if (
+        looksLikeVenueOrTime &&
+        keeperText.includes(text)
+      ) {
+        duplicateNodes.push(node);
+      }
+    }
+
+    for (const node of duplicateNodes) {
+      node.nodeValue = "";
+    }
+  }
+
+  function dedupeVenueTime() {
+    const bar = document.querySelector(BAR_SELECTOR);
+    const module = bar?.querySelector(MODULE_SELECTOR);
+
+    if (!bar || !module) return;
+
+    removeLegacyDuplicates(bar);
+
+    const keeper = findKeeper(bar, module);
+    if (!keeper) return;
+
+    keeper.classList.add("bb-clean-venue-row");
+    keeper.classList.remove(
+      "bb-duplicate-venue-time-hidden"
+    );
+    keeper.removeAttribute("aria-hidden");
+
+    hideCombinedDuplicateRows(
+      bar,
+      module,
+      keeper
+    );
+
+    clearDuplicateTextNodes(bar, keeper);
+  }
+
+  let frame = 0;
+
+  function scheduleDedupe() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(dedupeVenueTime);
+  }
+
+  window.addEventListener("load", scheduleDedupe);
+  window.addEventListener("resize", scheduleDedupe);
+
+  const observer = new MutationObserver(scheduleDedupe);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  scheduleDedupe();
+})();
+
+/* BORING BETS: TIGHT HEADER ORIGINAL VENUE FONT V1 */
+(() => {
+  const BAR_SELECTOR =
+    ".game-matchup.game-matchup-stadium.bb-clean-matchup-header";
+  const ROW_SELECTOR =
+    ".game-stadium-weather > .bb-clean-venue-row";
+
+  function copyOriginalVenueFont() {
+    const bar = document.querySelector(BAR_SELECTOR);
+    const row = bar?.querySelector(ROW_SELECTOR);
+
+    if (!bar || !row) return;
+
+    /*
+      The venue row kept its original classes when it was moved into the
+      center stack. Clone it into the old outer-header context, remove only
+      the classes added by our rebuild, and measure the stylesheet's original
+      typography there. The clone is never visible.
+    */
+    const probe = row.cloneNode(true);
+
+    probe.classList.remove(
+      "bb-clean-venue-row",
+      "bb-duplicate-venue-time-hidden",
+      "bb-stadium-text-aligned",
+      "bb-venue-row-photo-aligned",
+      "bb-venue-text-above-photo",
+      "bb-final-venue-row",
+      "bb-venue-row-over-cap",
+      "bb-venue-row-above-outer-cap"
+    );
+
+    probe.removeAttribute("aria-hidden");
+
+    probe.style.cssText = [
+      "position:absolute!important",
+      "left:-100000px!important",
+      "top:0!important",
+      "display:block!important",
+      "visibility:hidden!important",
+      "opacity:0!important",
+      "transform:none!important",
+      "translate:0 0!important",
+      "width:auto!important",
+      "height:auto!important",
+      "pointer-events:none!important"
+    ].join(";");
+
+    bar.insertBefore(
+      probe,
+      bar.querySelector(".game-stadium-weather")
+    );
+
+    const style = getComputedStyle(probe);
+
+    row.style.setProperty(
+      "--bb-original-venue-font-family",
+      style.fontFamily
+    );
+    row.style.setProperty(
+      "--bb-original-venue-font-size",
+      style.fontSize
+    );
+    row.style.setProperty(
+      "--bb-original-venue-font-weight",
+      style.fontWeight
+    );
+    row.style.setProperty(
+      "--bb-original-venue-font-style",
+      style.fontStyle
+    );
+    row.style.setProperty(
+      "--bb-original-venue-letter-spacing",
+      style.letterSpacing
+    );
+    row.style.setProperty(
+      "--bb-original-venue-text-transform",
+      style.textTransform
+    );
+    row.style.setProperty(
+      "--bb-original-venue-line-height",
+      style.lineHeight
+    );
+
+    probe.remove();
+  }
+
+  let frame = 0;
+
+  function scheduleCopy() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(copyOriginalVenueFont);
+  }
+
+  window.addEventListener("load", scheduleCopy);
+  window.addEventListener("resize", scheduleCopy);
+
+  const observer = new MutationObserver(scheduleCopy);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  scheduleCopy();
+})();
+

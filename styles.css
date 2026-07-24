@@ -8992,3 +8992,1338 @@ a.pitcher-name-link[class*="pitcher-signal-"] {
 }
 
 /* TRUE_OFF_ALL_PITCHER_SIGNAL_NAMES_END */
+
+/* BORING BETS: FULL BAR WEATHER APP V1 */
+
+/*
+  Weather is painted across the entire matchup bar. The stadium photograph,
+  team logos, names, weather readings, and venue caption remain foreground
+  modules above these layers.
+*/
+.game-matchup.game-matchup-stadium {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden !important;
+  --bb-weather-intensity: 0;
+  --bb-rain-density: 0;
+  --bb-snow-density: 0;
+  --bb-wet-glass: 0;
+  --bb-weather-haze: 0;
+  --bb-weather-darkness: 0;
+  --bb-glass-blur: 0px;
+}
+
+.game-matchup.game-matchup-stadium
+  > :not(.game-header-weather-scene) {
+  position: relative;
+  z-index: 2;
+}
+
+.game-header-weather-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  contain: paint;
+}
+
+.game-header-weather-atmosphere,
+.game-header-weather-precipitation,
+.game-header-weather-glass,
+.game-header-weather-lightning {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.game-header-weather-atmosphere {
+  z-index: 0;
+  opacity: 0;
+  transition:
+    opacity 260ms ease,
+    background 260ms ease;
+}
+
+/* Neutral / indoor retain the existing team-color bar background. */
+.game-matchup-stadium[data-bb-weather="neutral"]
+  .game-header-weather-atmosphere,
+.game-matchup-stadium[data-bb-weather="indoor"]
+  .game-header-weather-atmosphere {
+  opacity: 0;
+}
+
+/* Familiar weather-app clear sky, kept subtle behind the modules. */
+.game-matchup-stadium[data-bb-weather="clear"]
+  .game-header-weather-atmosphere {
+  opacity: 0.64;
+  background:
+    radial-gradient(
+      circle at 78% -18%,
+      rgba(255, 232, 154, 0.38),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(70, 157, 210, 0.34),
+      rgba(24, 75, 112, 0.1) 58%,
+      rgba(3, 11, 20, 0.18)
+    );
+}
+
+/* Broad static cloud masses instead of a cartoon icon. */
+.game-matchup-stadium[data-bb-weather="cloudy"]
+  .game-header-weather-atmosphere {
+  opacity: calc(
+    0.48 + var(--bb-weather-intensity) * 0.42
+  );
+  background:
+    radial-gradient(
+      ellipse at 13% 18%,
+      rgba(188, 204, 217, 0.28) 0 16%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 48% 8%,
+      rgba(160, 177, 193, 0.24) 0 20%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 88% 26%,
+      rgba(199, 211, 220, 0.2) 0 14%,
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(64, 82, 99, 0.62),
+      rgba(14, 27, 42, 0.38)
+    );
+  filter:
+    saturate(0.72)
+    brightness(
+      calc(1 - var(--bb-weather-darkness) * 0.36)
+    );
+}
+
+.game-matchup-stadium[data-bb-weather="fog"]
+  .game-header-weather-atmosphere {
+  opacity: calc(
+    0.58 + var(--bb-weather-haze) * 0.36
+  );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(203, 216, 222, 0.22),
+      rgba(143, 163, 174, 0.46) 46%,
+      rgba(208, 219, 223, 0.32)
+    ),
+    radial-gradient(
+      ellipse at 50% 52%,
+      rgba(231, 238, 240, 0.36),
+      transparent 72%
+    );
+  backdrop-filter:
+    blur(2.2px)
+    saturate(0.68);
+  -webkit-backdrop-filter:
+    blur(2.2px)
+    saturate(0.68);
+}
+
+/* Rain and thunder darken the complete bar, not the photo module alone. */
+.game-matchup-stadium[data-bb-weather="rain"]
+  .game-header-weather-atmosphere,
+.game-matchup-stadium[data-bb-weather="freezing-rain"]
+  .game-header-weather-atmosphere,
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-atmosphere {
+  opacity: calc(
+    0.58 + var(--bb-weather-intensity) * 0.36
+  );
+  background:
+    radial-gradient(
+      ellipse at 25% -8%,
+      rgba(126, 155, 177, 0.2),
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse at 80% 8%,
+      rgba(91, 118, 144, 0.22),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(25, 45, 65, 0.7),
+      rgba(4, 13, 24, 0.76)
+    );
+  filter:
+    saturate(0.7)
+    brightness(
+      calc(1 - var(--bb-weather-darkness) * 0.46)
+    );
+}
+
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-atmosphere {
+  background:
+    radial-gradient(
+      ellipse at 28% -10%,
+      rgba(106, 120, 160, 0.22),
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 82% 6%,
+      rgba(82, 91, 128, 0.28),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(21, 25, 48, 0.88),
+      rgba(2, 7, 17, 0.9)
+    );
+}
+
+.game-matchup-stadium[data-bb-weather="snow"]
+  .game-header-weather-atmosphere,
+.game-matchup-stadium[data-bb-weather="sleet"]
+  .game-header-weather-atmosphere {
+  opacity: calc(
+    0.52 + var(--bb-weather-intensity) * 0.32
+  );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(174, 198, 214, 0.4),
+      rgba(74, 103, 127, 0.32) 58%,
+      rgba(10, 26, 42, 0.36)
+    );
+  filter: saturate(0.58);
+}
+
+/*
+  Precipitation remains static by design. Intensity changes density and
+  visibility without creating a distracting looping rain animation.
+*/
+.game-header-weather-precipitation {
+  z-index: 1;
+  opacity: 0;
+}
+
+.game-matchup-stadium[data-bb-weather="rain"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="freezing-rain"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-precipitation {
+  opacity: calc(
+    0.08 + var(--bb-rain-density) * 0.7
+  );
+  background-image:
+    repeating-linear-gradient(
+      106deg,
+      transparent 0 11px,
+      rgba(210, 231, 245, 0.46) 12px,
+      transparent 13px 24px
+    ),
+    repeating-linear-gradient(
+      106deg,
+      transparent 0 23px,
+      rgba(150, 191, 219, 0.32) 24px,
+      transparent 25px 39px
+    );
+  background-size:
+    26px 34px,
+    41px 55px;
+  background-position:
+    0 0,
+    13px 7px;
+  filter:
+    blur(0.2px)
+    brightness(1.08);
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-precipitation {
+  background-size:
+    17px 25px,
+    29px 38px;
+  filter:
+    blur(0.35px)
+    brightness(1.12);
+}
+
+.game-matchup-stadium[data-bb-weather="snow"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="sleet"]
+  .game-header-weather-precipitation {
+  opacity: calc(
+    0.1 + var(--bb-snow-density) * 0.68
+  );
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(246, 251, 255, 0.92) 0 1.3px,
+      transparent 1.7px
+    ),
+    radial-gradient(
+      circle,
+      rgba(220, 236, 247, 0.78) 0 1.8px,
+      transparent 2.2px
+    ),
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.72) 0 0.9px,
+      transparent 1.3px
+    );
+  background-size:
+    31px 34px,
+    49px 55px,
+    19px 23px;
+  background-position:
+    0 0,
+    17px 11px,
+    8px 4px;
+}
+
+/*
+  Water-on-glass increases sharply with rainfall intensity. The trails and
+  large drops live across the bar behind the stadium card and team modules.
+*/
+.game-header-weather-glass {
+  z-index: 2;
+  opacity: 0;
+  background:
+    radial-gradient(
+      ellipse at 7% 18%,
+      rgba(231, 245, 255, 0.44) 0 1.5px,
+      rgba(111, 166, 199, 0.18) 2.5px,
+      transparent 5px
+    ),
+    radial-gradient(
+      ellipse at 22% 64%,
+      rgba(227, 243, 253, 0.4) 0 2px,
+      rgba(92, 151, 188, 0.16) 3px,
+      transparent 6px
+    ),
+    radial-gradient(
+      ellipse at 39% 27%,
+      rgba(235, 247, 255, 0.38) 0 1.4px,
+      rgba(101, 157, 192, 0.15) 2.6px,
+      transparent 5.5px
+    ),
+    radial-gradient(
+      ellipse at 58% 72%,
+      rgba(235, 247, 255, 0.42) 0 2.1px,
+      rgba(99, 158, 195, 0.17) 3.2px,
+      transparent 6.5px
+    ),
+    radial-gradient(
+      ellipse at 74% 22%,
+      rgba(232, 245, 255, 0.4) 0 1.8px,
+      rgba(93, 151, 188, 0.16) 3px,
+      transparent 6px
+    ),
+    radial-gradient(
+      ellipse at 91% 57%,
+      rgba(239, 249, 255, 0.38) 0 2.3px,
+      rgba(98, 155, 191, 0.15) 3.4px,
+      transparent 7px
+    ),
+    repeating-linear-gradient(
+      91deg,
+      transparent 0 31px,
+      rgba(194, 224, 241, 0.11) 32px 33px,
+      transparent 34px 68px
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0 62%,
+      rgba(116, 174, 207, 0.08) 78%,
+      rgba(201, 228, 241, 0.13) 100%
+    );
+  background-size:
+    83px 79px,
+    101px 96px,
+    73px 89px,
+    119px 107px,
+    91px 83px,
+    127px 113px,
+    100% 100%,
+    100% 100%;
+  background-position:
+    0 0,
+    8px 15px,
+    21px 5px,
+    2px 9px,
+    17px 23px,
+    5px 3px,
+    0 0,
+    0 0;
+  backdrop-filter:
+    blur(var(--bb-glass-blur))
+    saturate(0.9);
+  -webkit-backdrop-filter:
+    blur(var(--bb-glass-blur))
+    saturate(0.9);
+  mix-blend-mode: screen;
+}
+
+.game-matchup-stadium[data-bb-weather="rain"]
+  .game-header-weather-glass,
+.game-matchup-stadium[data-bb-weather="freezing-rain"]
+  .game-header-weather-glass,
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-glass {
+  opacity: var(--bb-wet-glass);
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-glass {
+  background-size:
+    61px 57px,
+    79px 72px,
+    53px 67px,
+    87px 81px,
+    69px 61px,
+    97px 83px,
+    100% 100%,
+    100% 100%;
+}
+
+/* Lightning remains the only animated weather effect. */
+.game-header-weather-lightning {
+  z-index: 3;
+  opacity: 0;
+  background:
+    radial-gradient(
+      circle at 72% 2%,
+      rgba(224, 231, 255, 0.82),
+      rgba(139, 156, 229, 0.28) 22%,
+      transparent 48%
+    );
+  mix-blend-mode: screen;
+}
+
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-lightning {
+  animation:
+    boring-bets-full-bar-lightning
+    8.4s
+    steps(1, end)
+    infinite;
+}
+
+@keyframes boring-bets-full-bar-lightning {
+  0%,
+  7%,
+  9%,
+  12%,
+  54%,
+  57%,
+  100% {
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.72;
+  }
+
+  10% {
+    opacity: 0.24;
+  }
+
+  55% {
+    opacity: 0.46;
+  }
+
+  56% {
+    opacity: 0.12;
+  }
+}
+
+/* Indoor and closed-roof parks have no exterior atmosphere. */
+.game-matchup-stadium[data-bb-weather="indoor"]
+  .game-header-weather-scene,
+.game-matchup-stadium[data-bb-weather-exposed="false"]
+  .game-header-weather-scene {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Keep all game information legible over intense weather. */
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-team,
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-team {
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.9),
+    0 0 18px rgba(0, 0, 0, 0.58);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-matchup-stadium[data-bb-weather="thunder"]
+    .game-header-weather-lightning {
+    animation: none !important;
+    opacity: 0.08;
+  }
+}
+
+/* BORING BETS: REALISTIC FULL BAR RAIN V3 */
+
+/*
+  Replace the uniform striped rain with three irregular depth planes.
+  Rain stays static. Intensity still comes from --bb-rain-density.
+*/
+.game-header-weather-precipitation {
+  overflow: hidden !important;
+}
+
+.game-matchup-stadium[data-bb-weather="rain"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="freezing-rain"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-precipitation {
+  opacity: calc(
+    0.12 + var(--bb-rain-density) * 0.68
+  ) !important;
+
+  /*
+    Far rain: thin, dim, short streaks. The tile sizes deliberately do not
+    share common multiples, so the pattern does not form obvious columns.
+  */
+  background-image:
+    linear-gradient(
+      108deg,
+      transparent 0 46%,
+      rgba(203, 225, 239, 0.26) 47% 48%,
+      transparent 49% 100%
+    ),
+    linear-gradient(
+      105deg,
+      transparent 0 43%,
+      rgba(173, 207, 229, 0.2) 44% 45.2%,
+      transparent 46.2% 100%
+    ),
+    linear-gradient(
+      111deg,
+      transparent 0 52%,
+      rgba(224, 238, 247, 0.18) 53% 54%,
+      transparent 55% 100%
+    ) !important;
+
+  background-size:
+    43px 71px,
+    67px 103px,
+    97px 137px !important;
+
+  background-position:
+    7px -13px,
+    29px 17px,
+    -41px 43px !important;
+
+  background-repeat: repeat !important;
+  background-blend-mode: screen !important;
+
+  filter:
+    blur(0.18px)
+    brightness(1.03) !important;
+}
+
+/* Mid-distance rain. */
+.game-header-weather-precipitation::before {
+  content: "";
+  position: absolute;
+  inset: -12% -4%;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      106deg,
+      transparent 0 45%,
+      rgba(224, 239, 248, 0.48) 46% 47.2%,
+      transparent 48.5% 100%
+    ),
+    linear-gradient(
+      109deg,
+      transparent 0 51%,
+      rgba(184, 215, 234, 0.34) 52% 53.3%,
+      transparent 54.5% 100%
+    ),
+    linear-gradient(
+      103deg,
+      transparent 0 39%,
+      rgba(232, 243, 250, 0.28) 40% 41%,
+      transparent 42% 100%
+    );
+
+  background-size:
+    79px 119px,
+    113px 157px,
+    149px 197px;
+
+  background-position:
+    -19px 23px,
+    47px -31px,
+    91px 61px;
+
+  background-repeat: repeat;
+  background-blend-mode: screen;
+
+  opacity: 0.52;
+  filter: blur(0.28px);
+}
+
+/* Sparse foreground streaks. These create depth without covering the copy. */
+.game-header-weather-precipitation::after {
+  content: "";
+  position: absolute;
+  inset: -18% -7%;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      104deg,
+      transparent 0 47%,
+      rgba(240, 248, 253, 0.62) 48% 49.5%,
+      transparent 51% 100%
+    ),
+    linear-gradient(
+      110deg,
+      transparent 0 55%,
+      rgba(202, 226, 241, 0.48) 56% 57.5%,
+      transparent 59% 100%
+    );
+
+  background-size:
+    173px 231px,
+    241px 307px;
+
+  background-position:
+    37px -53px,
+    -83px 71px;
+
+  background-repeat: repeat;
+  background-blend-mode: screen;
+
+  opacity: 0.1;
+  filter: blur(0.62px);
+}
+
+.game-matchup-stadium[data-bb-weather-level="moderate"]
+  .game-header-weather-precipitation::after {
+  opacity: 0.28;
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-precipitation::before {
+  opacity: 0.72;
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-precipitation::after {
+  opacity: 0.48;
+}
+
+/*
+  Realistic glass: small and medium beads with a bright upper edge and
+  darker lower edge. Incommensurate tile sizes prevent obvious repetition.
+*/
+.game-header-weather-glass {
+  background-image:
+    radial-gradient(
+      ellipse 4px 6px at 47% 42%,
+      rgba(244, 251, 255, 0.56) 0 13%,
+      rgba(155, 196, 220, 0.18) 31%,
+      rgba(18, 53, 76, 0.16) 57%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 6px 9px at 54% 48%,
+      rgba(239, 249, 255, 0.46) 0 12%,
+      rgba(135, 183, 211, 0.18) 30%,
+      rgba(11, 42, 64, 0.17) 58%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 3px 4px at 44% 39%,
+      rgba(250, 253, 255, 0.6) 0 15%,
+      rgba(152, 197, 222, 0.16) 34%,
+      rgba(13, 44, 66, 0.14) 60%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 8px 12px at 51% 52%,
+      rgba(235, 247, 253, 0.38) 0 10%,
+      rgba(117, 170, 202, 0.16) 29%,
+      rgba(8, 37, 58, 0.18) 59%,
+      transparent 76%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0 66%,
+      rgba(94, 148, 181, 0.08) 82%,
+      rgba(197, 224, 239, 0.14) 100%
+    ) !important;
+
+  background-size:
+    71px 83px,
+    109px 127px,
+    47px 59px,
+    157px 181px,
+    100% 100% !important;
+
+  background-position:
+    3px 11px,
+    29px -17px,
+    -13px 31px,
+    67px 43px,
+    0 0 !important;
+
+  background-repeat:
+    repeat,
+    repeat,
+    repeat,
+    repeat,
+    no-repeat !important;
+
+  background-blend-mode:
+    screen,
+    screen,
+    screen,
+    screen,
+    normal !important;
+
+  mix-blend-mode: normal !important;
+
+  backdrop-filter:
+    blur(var(--bb-glass-blur))
+    saturate(0.88)
+    contrast(1.02) !important;
+
+  -webkit-backdrop-filter:
+    blur(var(--bb-glass-blur))
+    saturate(0.88)
+    contrast(1.02) !important;
+}
+
+/* A few localized runoff trails instead of evenly spaced vertical stripes. */
+.game-header-weather-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0 8%,
+      rgba(225, 241, 250, 0.2) 18%,
+      rgba(99, 157, 191, 0.1) 48%,
+      transparent 78%
+    ) 8% 0 / 2px 100% no-repeat,
+
+    linear-gradient(
+      180deg,
+      transparent 0 24%,
+      rgba(231, 244, 251, 0.18) 34%,
+      rgba(87, 145, 180, 0.1) 67%,
+      transparent 92%
+    ) 23% 0 / 3px 100% no-repeat,
+
+    linear-gradient(
+      180deg,
+      transparent 0 4%,
+      rgba(230, 244, 252, 0.16) 16%,
+      rgba(82, 140, 176, 0.09) 52%,
+      transparent 71%
+    ) 47% 0 / 2px 100% no-repeat,
+
+    linear-gradient(
+      180deg,
+      transparent 0 31%,
+      rgba(238, 248, 253, 0.2) 42%,
+      rgba(91, 151, 185, 0.1) 75%,
+      transparent 96%
+    ) 68% 0 / 4px 100% no-repeat,
+
+    linear-gradient(
+      180deg,
+      transparent 0 13%,
+      rgba(229, 243, 251, 0.17) 24%,
+      rgba(86, 144, 178, 0.09) 58%,
+      transparent 84%
+    ) 89% 0 / 2px 100% no-repeat;
+
+  opacity: calc(
+    0.06 + var(--bb-rain-density) * 0.42
+  );
+
+  filter: blur(0.38px);
+}
+
+/* Heavy rain adds broader merged water paths and a stronger lower wet edge. */
+.game-header-weather-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 13% 107%,
+      rgba(183, 217, 235, 0.16),
+      transparent 31%
+    ),
+    radial-gradient(
+      ellipse at 54% 112%,
+      rgba(173, 210, 231, 0.13),
+      transparent 37%
+    ),
+    radial-gradient(
+      ellipse at 91% 105%,
+      rgba(193, 222, 238, 0.15),
+      transparent 29%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0 76%,
+      rgba(111, 169, 201, 0.09) 90%,
+      rgba(215, 235, 245, 0.15) 100%
+    );
+
+  opacity: calc(
+    0.04 + var(--bb-rain-density) * 0.5
+  );
+
+  filter: blur(0.5px);
+}
+
+.game-matchup-stadium[data-bb-weather-level="light"]
+  .game-header-weather-glass::before {
+  opacity: 0.1;
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-glass::before {
+  opacity: 0.52;
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-glass::after {
+  opacity: 0.58;
+}
+
+/* Freezing rain is slightly sharper and colder than normal rain. */
+.game-matchup-stadium[data-bb-weather="freezing-rain"]
+  .game-header-weather-precipitation {
+  filter:
+    blur(0.08px)
+    brightness(1.15) !important;
+}
+
+/* BORING BETS: RESTRAINED WEATHER APP V4 */
+
+/*
+  Preserve the weather-state system. Remove repeating rain lines,
+  explicit droplets and decorative runoff. Rain is communicated through
+  atmosphere, reduced clarity, glass softness and a wet lower sheen.
+*/
+
+.game-matchup-stadium[data-bb-weather="rain"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="freezing-rain"]
+  .game-header-weather-precipitation,
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-precipitation {
+  background:
+    radial-gradient(
+      ellipse at 18% 8%,
+      rgba(183, 210, 226, 0.12),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 74% 15%,
+      rgba(138, 177, 201, 0.10),
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(205, 225, 236, 0.035),
+      rgba(79, 126, 157, 0.07) 58%,
+      rgba(14, 42, 65, 0.12)
+    ) !important;
+
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  opacity: calc(
+    0.12 + var(--bb-rain-density) * 0.24
+  ) !important;
+  filter: blur(7px) !important;
+  transform: scale(1.04);
+}
+
+/* Remove all pseudo-element rain streaks installed by earlier versions. */
+.game-header-weather-precipitation::before,
+.game-header-weather-precipitation::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/*
+  Broad, non-repeating glass distortion. No beads or repeated dots.
+  Heavier rain increases blur and lower-edge wetness.
+*/
+.game-header-weather-glass {
+  background:
+    radial-gradient(
+      ellipse 30% 58% at 9% 18%,
+      rgba(229, 241, 247, 0.075),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 24% 52% at 43% 1%,
+      rgba(198, 222, 235, 0.06),
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 32% 65% at 87% 22%,
+      rgba(222, 237, 245, 0.065),
+      transparent 76%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0 68%,
+      rgba(78, 133, 166, 0.05) 82%,
+      rgba(179, 211, 228, 0.13) 100%
+    ) !important;
+
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  background-position: center !important;
+  opacity: calc(
+    0.08 + var(--bb-wet-glass) * 0.46
+  ) !important;
+
+  backdrop-filter:
+    blur(calc(0.2px + var(--bb-wet-glass) * 1.15px))
+    saturate(calc(1 - var(--bb-wet-glass) * 0.12))
+    contrast(calc(1 + var(--bb-wet-glass) * 0.025)) !important;
+
+  -webkit-backdrop-filter:
+    blur(calc(0.2px + var(--bb-wet-glass) * 1.15px))
+    saturate(calc(1 - var(--bb-wet-glass) * 0.12))
+    contrast(calc(1 + var(--bb-wet-glass) * 0.025)) !important;
+
+  mix-blend-mode: normal !important;
+  filter: none !important;
+}
+
+/* Remove explicit runoff trails and pooled-drop graphics. */
+.game-header-weather-glass::before,
+.game-header-weather-glass::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* Light rain barely alters the bar. */
+.game-matchup-stadium[data-bb-weather-level="light"]
+  .game-header-weather-precipitation {
+  opacity: 0.12 !important;
+}
+
+.game-matchup-stadium[data-bb-weather-level="light"]
+  .game-header-weather-glass {
+  opacity: 0.13 !important;
+  backdrop-filter: blur(0.3px) saturate(0.98) !important;
+  -webkit-backdrop-filter: blur(0.3px) saturate(0.98) !important;
+}
+
+/* Moderate rain adds visible haze without literal rain lines. */
+.game-matchup-stadium[data-bb-weather-level="moderate"]
+  .game-header-weather-precipitation {
+  opacity: 0.24 !important;
+}
+
+.game-matchup-stadium[data-bb-weather-level="moderate"]
+  .game-header-weather-glass {
+  opacity: 0.30 !important;
+}
+
+/* Heavy rain becomes wetter, darker and less clear rather than busier. */
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-precipitation {
+  opacity: 0.38 !important;
+  filter: blur(10px) !important;
+}
+
+.game-matchup-stadium[data-bb-weather-level="heavy"]
+  .game-header-weather-glass {
+  opacity: 0.52 !important;
+  backdrop-filter: blur(1.35px) saturate(0.88) contrast(1.025) !important;
+  -webkit-backdrop-filter: blur(1.35px) saturate(0.88) contrast(1.025) !important;
+}
+
+/* Thunder stays darker; lightning remains the obvious animation. */
+.game-matchup-stadium[data-bb-weather="thunder"]
+  .game-header-weather-precipitation {
+  background:
+    radial-gradient(
+      ellipse at 20% 0%,
+      rgba(141, 151, 202, 0.12),
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 78% 12%,
+      rgba(102, 123, 177, 0.11),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(169, 178, 219, 0.035),
+      rgba(44, 57, 99, 0.095) 60%,
+      rgba(6, 13, 34, 0.14)
+    ) !important;
+}
+
+/* Fog is atmospheric obscuration rather than wet glass. */
+.game-matchup-stadium[data-bb-weather="fog"]
+  .game-header-weather-precipitation {
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      rgba(235, 242, 245, 0.28),
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(214, 226, 232, 0.11),
+      rgba(129, 151, 163, 0.18)
+    ) !important;
+  opacity: 0.68 !important;
+  filter: blur(12px) !important;
+}
+
+/* Snow remains visually distinct without borrowing the rain treatment. */
+.game-matchup-stadium[data-bb-weather="snow"]
+  .game-header-weather-glass,
+.game-matchup-stadium[data-bb-weather="sleet"]
+  .game-header-weather-glass {
+  opacity: 0.12 !important;
+  backdrop-filter: blur(0.35px) saturate(0.9) !important;
+  -webkit-backdrop-filter: blur(0.35px) saturate(0.9) !important;
+}
+
+/* BORING BETS: CLEAN CENTERED MATCHUP HEADER V1 */
+
+/*
+  One real large header box:
+    away team | venue + stadium + weather | home team
+
+  No fake caps, no translated containers, no floating text.
+*/
+.game-matchup.game-matchup-stadium.bb-clean-matchup-header {
+  box-sizing: border-box !important;
+  position: relative !important;
+
+  display: grid !important;
+  grid-template-columns:
+    minmax(170px, 1fr)
+    minmax(360px, 430px)
+    minmax(170px, 1fr) !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  column-gap: clamp(20px, 4vw, 58px) !important;
+
+  min-height: 154px !important;
+  padding: 14px clamp(24px, 5vw, 72px) !important;
+
+  overflow: hidden !important;
+  isolation: isolate !important;
+
+  border-top-color:
+    rgba(74, 116, 167, 0.48) !important;
+}
+
+/* Remove every obsolete cap artifact, even before JavaScript removes it. */
+.game-matchup.game-matchup-stadium
+  > :is(
+    .bb-explicit-stadium-top-cap,
+    .bb-outer-team-box-top-cap,
+    .bb-isolated-venue-label
+  ) {
+  display: none !important;
+}
+
+/* Full-bar weather remains attached to the whole header box. */
+.game-matchup.game-matchup-stadium
+  > .game-header-weather-scene {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  transform: none !important;
+  translate: 0 0 !important;
+}
+
+/* Both team/logo blocks are genuinely centered in their thirds. */
+.game-matchup.game-matchup-stadium
+  > .bb-clean-team-block {
+  position: relative !important;
+  inset: auto !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  align-self: center !important;
+  justify-self: stretch !important;
+
+  margin: 0 !important;
+  transform: none !important;
+  translate: 0 0 !important;
+
+  min-width: 0 !important;
+  z-index: 4 !important;
+}
+
+/*
+  Center stack: venue/time as a normal row, then the stadium picture,
+  then the weather strip. Nothing floats over anything else.
+*/
+.game-matchup.game-matchup-stadium
+  > .game-stadium-weather.bb-clean-stadium-stack {
+  position: relative !important;
+  inset: auto !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+
+  align-self: center !important;
+  justify-self: center !important;
+
+  width: min(100%, 430px) !important;
+  max-width: 430px !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 5px !important;
+
+  transform: none !important;
+  translate: 0 0 !important;
+
+  overflow: visible !important;
+  z-index: 5 !important;
+}
+
+/* Exact venue/time row, now inside the center stack above the picture. */
+.game-stadium-weather
+  > .bb-clean-venue-row {
+  position: static !important;
+  inset: auto !important;
+
+  order: -100 !important;
+  flex: 0 0 auto !important;
+  align-self: stretch !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  translate: 0 0 !important;
+
+  color: rgba(255, 255, 255, 0.98) !important;
+  -webkit-text-fill-color:
+    rgba(255, 255, 255, 0.98) !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+  line-height: 1.1 !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  z-index: 8 !important;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 2px 6px rgba(0, 0, 0, 0.86) !important;
+}
+
+/* Reset any surviving movement from previous experiments. */
+.game-matchup.game-matchup-stadium
+  :is(
+    .bb-stadium-text-aligned,
+    .bb-venue-row-photo-aligned,
+    .bb-venue-text-above-photo,
+    .bb-final-venue-row,
+    .bb-venue-row-over-cap,
+    .bb-venue-row-above-outer-cap
+  ) {
+  transform: none !important;
+  translate: 0 0 !important;
+}
+
+@media (max-width: 820px) {
+  .game-matchup.game-matchup-stadium.bb-clean-matchup-header {
+    grid-template-columns:
+      minmax(105px, 1fr)
+      minmax(270px, 1.6fr)
+      minmax(105px, 1fr) !important;
+    column-gap: 14px !important;
+    min-height: 142px !important;
+    padding: 12px 16px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .game-matchup.game-matchup-stadium.bb-clean-matchup-header {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-areas:
+      "away home"
+      "stadium stadium" !important;
+    row-gap: 10px !important;
+    min-height: auto !important;
+    padding: 14px !important;
+  }
+
+  .game-matchup.game-matchup-stadium
+    > .bb-clean-team-away {
+    grid-area: away !important;
+  }
+
+  .game-matchup.game-matchup-stadium
+    > .bb-clean-team-home {
+    grid-area: home !important;
+  }
+
+  .game-matchup.game-matchup-stadium
+    > .game-stadium-weather.bb-clean-stadium-stack {
+    grid-area: stadium !important;
+    width: min(100%, 430px) !important;
+  }
+}
+
+/* BORING BETS: DEDUPE VENUE TIME ROW V1 */
+
+.game-matchup.game-matchup-stadium
+  .bb-duplicate-venue-time-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Ensure the single retained row remains readable. */
+.game-stadium-weather
+  > .bb-clean-venue-row {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* BORING BETS: TIGHT HEADER ORIGINAL VENUE FONT V1 */
+
+/*
+  Tighten the real outer header. Content height now determines the box;
+  there is no large forced minimum height or oversized empty padding.
+*/
+.game-matchup.game-matchup-stadium.bb-clean-matchup-header {
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(340px, 410px)
+    minmax(150px, 1fr) !important;
+
+  column-gap: clamp(14px, 2.4vw, 34px) !important;
+
+  min-height: 0 !important;
+  height: auto !important;
+
+  padding:
+    8px clamp(18px, 3vw, 42px) 9px !important;
+}
+
+/* Tighten the center stack without allowing overlap. */
+.game-matchup.game-matchup-stadium
+  > .game-stadium-weather.bb-clean-stadium-stack {
+  width: min(100%, 410px) !important;
+  max-width: 410px !important;
+  gap: 3px !important;
+}
+
+/* Remove extra vertical margins inside the three major columns. */
+.game-matchup.game-matchup-stadium
+  > .bb-clean-team-block,
+.game-matchup.game-matchup-stadium
+  > .game-stadium-weather.bb-clean-stadium-stack {
+  margin-block: 0 !important;
+}
+
+/*
+  Restore the original venue/time typography measured in the old outer
+  header context. Do not impose a new uppercase, weight, size, or spacing.
+*/
+.game-stadium-weather
+  > .bb-clean-venue-row {
+  font-family:
+    var(--bb-original-venue-font-family, inherit) !important;
+  font-size:
+    var(--bb-original-venue-font-size, inherit) !important;
+  font-weight:
+    var(--bb-original-venue-font-weight, inherit) !important;
+  font-style:
+    var(--bb-original-venue-font-style, normal) !important;
+  letter-spacing:
+    var(--bb-original-venue-letter-spacing, normal) !important;
+  text-transform:
+    var(--bb-original-venue-text-transform, none) !important;
+  line-height:
+    var(--bb-original-venue-line-height, normal) !important;
+
+  margin: 0 !important;
+  padding: 0 0 2px !important;
+}
+
+/* Keep compact behavior sensible at narrower desktop/tablet widths. */
+@media (max-width: 820px) {
+  .game-matchup.game-matchup-stadium.bb-clean-matchup-header {
+    grid-template-columns:
+      minmax(105px, 1fr)
+      minmax(260px, 1.55fr)
+      minmax(105px, 1fr) !important;
+    column-gap: 10px !important;
+    min-height: 0 !important;
+    padding: 7px 12px 8px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .game-matchup.game-matchup-stadium.bb-clean-matchup-header {
+    row-gap: 7px !important;
+    padding: 9px 10px !important;
+  }
+
+  .game-matchup.game-matchup-stadium
+    > .game-stadium-weather.bb-clean-stadium-stack {
+    width: min(100%, 410px) !important;
+  }
+}
+
+/* BORING BETS: VENUE TEXT DOWN 3PX V1 */
+
+/* Nudge only the park-name / game-time row. */
+.game-stadium-weather
+  > .bb-clean-venue-row {
+  position: relative !important;
+  top: 3px !important;
+}
+
