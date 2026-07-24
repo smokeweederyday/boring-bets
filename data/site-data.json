@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-07-24T01:02:58.987068+00:00",
+    "updated_at": "2026-07-24T04:27:00.696283+00:00",
     "deadline": "2026-08-03T18:00:00-04:00"
   },
   "teams": [
@@ -95,10 +95,10 @@
     {
       "team": "DET",
       "division": "",
-      "w": 48,
+      "w": 49,
       "l": 54,
-      "wcgb": 4.5,
-      "run_diff": 28,
+      "wcgb": 4.0,
+      "run_diff": 29,
       "tier": "Bubble",
       "need": "Right-handed bat / deadline direction",
       "betting_note": "Skubal rumors create scratch and F5 volatility"
@@ -107,9 +107,9 @@
       "team": "KC",
       "division": "",
       "w": 43,
-      "l": 60,
-      "wcgb": 10.0,
-      "run_diff": -96,
+      "l": 61,
+      "wcgb": 10.5,
+      "run_diff": -97,
       "tier": "Seller",
       "need": "Editorial review needed",
       "betting_note": "Review roster and market impact"
