@@ -17,6 +17,97 @@ const mobileQuery = window.matchMedia(
   "(max-width: 760px), (hover: none), (pointer: coarse)"
 );
 
+
+const PITCHER_HISTORY_OPEN_STORAGE_PREFIX =
+  "boring-bets:pitcher-history-open:";
+
+function normalizePitcherHistorySide(value) {
+  const side = String(value || "")
+    .trim()
+    .toLowerCase();
+
+  return (
+    side === "away" ||
+    side === "home"
+  )
+    ? side
+    : "";
+}
+
+function pitcherHistorySide(trigger) {
+  const direct =
+    normalizePitcherHistorySide(
+      trigger?.dataset
+        ?.pitcherHistorySide
+    );
+
+  if (direct) return direct;
+
+  const container =
+    trigger?.closest(
+      "#awayPitcherCard, #homePitcherCard"
+    );
+
+  if (
+    container?.id ===
+    "awayPitcherCard"
+  ) {
+    return "away";
+  }
+
+  if (
+    container?.id ===
+    "homePitcherCard"
+  ) {
+    return "home";
+  }
+
+  return "";
+}
+
+function readPitcherHistoryOpenState(side) {
+  const normalizedSide =
+    normalizePitcherHistorySide(side);
+
+  if (!normalizedSide) {
+    return false;
+  }
+
+  try {
+    return (
+      window.sessionStorage.getItem(
+        `${PITCHER_HISTORY_OPEN_STORAGE_PREFIX}${normalizedSide}`
+      ) === "true"
+    );
+  } catch {
+    return false;
+  }
+}
+
+function savePitcherHistoryOpenState(
+  side,
+  isOpen
+) {
+  const normalizedSide =
+    normalizePitcherHistorySide(side);
+
+  if (!normalizedSide) {
+    return;
+  }
+
+  try {
+    window.sessionStorage.setItem(
+      `${PITCHER_HISTORY_OPEN_STORAGE_PREFIX}${normalizedSide}`,
+      isOpen ? "true" : "false"
+    );
+  } catch {
+    /*
+      Storage can be unavailable in
+      restricted browser modes.
+    */
+  }
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -749,7 +840,13 @@ function positionDesktop(trigger) {
   panel.style.top = `${Math.round(top)}px`;
 }
 
-async function openPanel(trigger) {
+async function openPanel(
+  trigger,
+  {
+    persist = true,
+    forceOpen = false
+  } = {}
+) {
   const inlineRoot = createRoot(trigger);
 
   if (!inlineRoot) return;
@@ -771,7 +868,16 @@ async function openPanel(trigger) {
     trigger.getAttribute("aria-expanded") === "true";
 
   if (alreadyOpen) {
-    closePanel(inlineRoot, trigger);
+    if (forceOpen) {
+      return;
+    }
+
+    closePanel(
+      inlineRoot,
+      trigger,
+      { persist }
+    );
+
     return;
   }
 
@@ -790,6 +896,13 @@ async function openPanel(trigger) {
     "title",
     "Hide recent history"
   );
+
+  if (persist) {
+    savePitcherHistoryOpenState(
+      pitcherHistorySide(trigger),
+      true
+    );
+  }
 
   targetContent.innerHTML = `
     <p class="pitcher-history-loading">
@@ -834,7 +947,10 @@ async function openPanel(trigger) {
 
 function closePanel(
   targetRoot = null,
-  targetTrigger = null
+  targetTrigger = null,
+  {
+    persist = true
+  } = {}
 ) {
   clearTimeout(closeTimer);
   clearTimeout(openTimer);
@@ -869,6 +985,13 @@ function closePanel(
       "title",
       "Show recent history"
     );
+
+    if (persist) {
+      savePitcherHistoryOpenState(
+        pitcherHistorySide(trigger),
+        false
+      );
+    }
   });
 }
 
@@ -902,6 +1025,60 @@ function scheduleOpen(trigger) {
     () => openPanel(trigger),
     160
   );
+}
+
+
+export function restorePitcherHistoryState(
+  container,
+  side
+) {
+  const normalizedSide =
+    normalizePitcherHistorySide(side);
+
+  if (
+    !container ||
+    !normalizedSide ||
+    !readPitcherHistoryOpenState(
+      normalizedSide
+    )
+  ) {
+    return;
+  }
+
+  const trigger =
+    container.querySelector(
+      "[data-pitcher-history-trigger]"
+    );
+
+  if (!trigger) {
+    return;
+  }
+
+  trigger.dataset.pitcherHistorySide =
+    normalizedSide;
+
+  window.queueMicrotask(() => {
+    if (!container.isConnected) {
+      return;
+    }
+
+    const currentTrigger =
+      container.querySelector(
+        "[data-pitcher-history-trigger]"
+      );
+
+    if (!currentTrigger) {
+      return;
+    }
+
+    openPanel(
+      currentTrigger,
+      {
+        persist: false,
+        forceOpen: true
+      }
+    );
+  });
 }
 
 document.addEventListener("click", event => {

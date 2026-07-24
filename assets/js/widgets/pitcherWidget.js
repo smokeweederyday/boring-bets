@@ -45,6 +45,13 @@ export function renderPitcherWidget({
     `pitcher-signal-${container.id || "module"}`;
   const historyPitcherId = pitcherHistoryId(module);
 
+  const historySide =
+    container.id === "awayPitcherCard"
+      ? "away"
+      : container.id === "homePitcherCard"
+        ? "home"
+        : "";
+
   const startOptions =
     Array.isArray(module.startOptions) &&
     module.startOptions.length
@@ -109,6 +116,7 @@ ${
           class="pitcher-history-toggle"
           data-pitcher-history-trigger
           data-pitcher-id="${escapeAttribute(historyPitcherId)}"
+          data-pitcher-history-side="${escapeAttribute(historySide)}"
           aria-label="Open ${escapeAttribute(module.name || "pitcher")} recent history"
           title="Show recent history"
           aria-expanded="false"

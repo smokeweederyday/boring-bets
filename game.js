@@ -1,4 +1,6 @@
-import "./assets/js/widgets/pitcherHistoryPanel.js?v=ranked-20260723-234049";
+import {
+  restorePitcherHistoryState
+} from "./assets/js/widgets/pitcherHistoryPanel.js?v=sticky-open-20260724-003146";
 import {
   initializeHighlightControls,
   applyGlobalTierHighlights
@@ -10,7 +12,7 @@ import {
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=local-module-controls1";
+} from "./assets/js/widgets/pitcherWidget.js?v=sticky-open-20260724-003146";
 
 import {
   renderBullpenWidget
@@ -2975,6 +2977,13 @@ function renderPitcher(side) {
       renderPitcher(side);
     }
   });
+
+  restorePitcherHistoryState(
+    document.getElementById(
+      containerId
+    ),
+    side
+  );
 }
 
 function renderPitchers() {
