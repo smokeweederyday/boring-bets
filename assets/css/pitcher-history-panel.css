@@ -781,5 +781,104 @@ td.pitcher-history-ranked-cell.global-tier-highlight.metric-awful {
   background: transparent !important;
 }
 
+/* RECENT_HISTORY_DEVICE_CHEVRON_START */
 
+/*
+  Identical Recent History control on desktop and mobile.
+  The CSS triangle avoids device-specific font glyph sizing.
+*/
+.pitcher-name-row
+> .pitcher-history-toggle {
+  -webkit-appearance: none !important;
+  appearance: none !important;
 
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  flex: 0 0 1.15rem !important;
+
+  width: 1.15rem !important;
+  min-width: 1.15rem !important;
+  max-width: 1.15rem !important;
+
+  height: 1.15rem !important;
+  min-height: 1.15rem !important;
+  max-height: 1.15rem !important;
+
+  margin:
+    0
+    0
+    0
+    0.28rem !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 3px !important;
+
+  background: transparent !important;
+  color: currentColor !important;
+
+  font: inherit !important;
+  line-height: 1 !important;
+
+  opacity: 0.68;
+
+  position: relative;
+  z-index: 3;
+
+  cursor: pointer;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+.pitcher-name-row
+> .pitcher-history-toggle
+> span {
+  display: block !important;
+
+  width: 0 !important;
+  height: 0 !important;
+
+  font-size: 0 !important;
+  line-height: 0 !important;
+
+  border-left:
+    3.5px solid transparent;
+
+  border-right:
+    3.5px solid transparent;
+
+  border-top:
+    5px solid currentColor;
+
+  transform: rotate(0deg);
+  transform-origin: 50% 45%;
+
+  transition:
+    transform 150ms ease,
+    opacity 150ms ease;
+}
+
+.pitcher-name-row
+> .pitcher-history-toggle:hover,
+.pitcher-name-row
+> .pitcher-history-toggle:focus-visible,
+.pitcher-name-row
+> .pitcher-history-toggle:active {
+  opacity: 1;
+}
+
+.pitcher-name-row
+> .pitcher-history-toggle[
+  aria-expanded="true"
+]
+> span {
+  transform: rotate(180deg);
+}
+
+/* RECENT_HISTORY_DEVICE_CHEVRON_END */
