@@ -253,6 +253,7 @@ def build_card_game(game: Dict[str, Any], card_date: str) -> Dict[str, Any]:
         "linescore": game.get("linescore") if isinstance(game.get("linescore"), dict) else {},
         "decisions": game.get("decisions") if isinstance(game.get("decisions"), dict) else {},
         "pitchers": {"away": away_pitcher, "home": home_pitcher},
+        "bullpen_start": game.get("bullpen_start") or {},
         "weather": weather_summary(game.get("weather")),
         "market": market_summary(game.get("market")),
         "context": context_summary(game.get("context")),

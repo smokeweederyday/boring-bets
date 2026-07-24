@@ -16,12 +16,59 @@ function pitcherHistoryId(module = {}) {
   return match ? match[1] : "";
 }
 
+
+let bullpenPitcherListenerInstalled = false;
+
+function ensureBullpenPitcherListener() {
+  if (bullpenPitcherListenerInstalled) {
+    return;
+  }
+
+  bullpenPitcherListenerInstalled = true;
+
+  document.addEventListener(
+    "click",
+    event => {
+      const button =
+        event.target.closest(
+          "[data-bullpen-pitcher-toggle]"
+        );
+
+      if (!button) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const container =
+        button.closest(
+          "#awayPitcherCard, #homePitcherCard"
+        );
+
+      const callback =
+        container
+          ?._bullpenPitcherToggle;
+
+      if (
+        typeof callback !== "function"
+      ) {
+        return;
+      }
+
+      callback(
+        button.dataset
+          .bullpenPitcherNextView
+      );
+    }
+  );
+}
+
 export function renderPitcherWidget({
   container,
   module,
   onLocationChange,
   onStartModeChange,
-  onStartCountChange
+  onStartCountChange,
+  onBullpenPitcherToggle
 }) {
   if (!container) return;
 
@@ -74,6 +121,11 @@ export function renderPitcherWidget({
   const startSignals =
     module.startSignals || {};
 
+  ensureBullpenPitcherListener();
+
+  container._bullpenPitcherToggle =
+    onBullpenPitcherToggle;
+
   applyPitcherAtmosphere(
     container,
     module
@@ -108,6 +160,34 @@ export function renderPitcherWidget({
           <span class="pitcher-status-label">
             ${escapeHtml(module.statusLabel || "PROBABLE")}
           </span>
+
+${
+  module.bullpenStart
+    ? `
+      <button
+        type="button"
+        class="pitcher-bulk-toggle"
+        data-bullpen-pitcher-toggle
+        data-bullpen-pitcher-next-view="${escapeAttribute(
+          module.bullpenStart.nextView
+        )}"
+        aria-label="Show ${escapeAttribute(
+          module.bullpenStart.alternateName
+        )} pitcher data"
+        title="Show ${escapeAttribute(
+          module.bullpenStart.alternateName
+        )}"
+      >
+        ${
+          module.bullpenStart.nextView === "bulk"
+            ? "Bulk"
+            : "Opener"
+        }
+      </button>
+    `
+    : ""
+}
+
 ${
     historyPitcherId
       ? `
@@ -143,6 +223,7 @@ ${
         </div>
         <a class="open-data" href="${escapeAttribute(module.detailsUrl || "#")}">Full data →</a>
       </div>
+
 
 
       <div class="pitcher-filter-row">

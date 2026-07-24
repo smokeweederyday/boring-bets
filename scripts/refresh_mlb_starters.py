@@ -287,6 +287,454 @@ def fetch_snapshot_with_retries(
     ) from last_error
 
 
+
+def pitching_outs(value: Any) -> int:
+    if isinstance(value, dict):
+        direct = int_or_none(value.get("outs"))
+        if direct is not None:
+            return direct
+
+        innings = value.get("inningsPitched")
+    else:
+        innings = value
+
+    text = str(innings or "0").strip()
+
+    try:
+        whole, _, remainder = text.partition(".")
+        return max(
+            0,
+            int(whole or 0) * 3
+            + int(remainder or 0),
+        )
+    except (TypeError, ValueError):
+        return 0
+
+
+def pitcher_season_summary(
+    pitcher: Dict[str, Any],
+) -> Dict[str, Any]:
+    stats = pitcher.get("stats")
+    stats = stats if isinstance(stats, dict) else {}
+
+    season = stats.get("season")
+    if not isinstance(season, dict):
+        season = pitcher.get("season")
+
+    season = season if isinstance(season, dict) else {}
+
+    if isinstance(season.get("all"), dict):
+        return season.get("all") or {}
+
+    return season
+
+
+def likely_opener_profile(
+    pitcher: Dict[str, Any],
+) -> bool:
+    season = pitcher_season_summary(pitcher)
+
+    games = int_or_none(
+        season.get("games")
+    ) or 0
+
+    starts = int_or_none(
+        season.get("games_started")
+        or season.get("gamesStarted")
+    ) or 0
+
+    if games >= 8 and starts <= 3:
+        return (starts / max(games, 1)) <= 0.30
+
+    last_30 = pitcher.get("last_30")
+    last_30 = (
+        last_30
+        if isinstance(last_30, dict)
+        else {}
+    )
+
+    recent_starts = int_or_none(
+        last_30.get("games_started")
+        or last_30.get("gamesStarted")
+    ) or 0
+
+    return recent_starts <= 1 and games >= 8
+
+
+def likely_bulk_profile(
+    pitcher: Dict[str, Any],
+) -> bool:
+    season = pitcher_season_summary(pitcher)
+
+    starts = int_or_none(
+        season.get("games_started")
+        or season.get("gamesStarted")
+    ) or 0
+
+    if starts >= 5:
+        return True
+
+    stats = pitcher.get("stats")
+    stats = stats if isinstance(stats, dict) else {}
+
+    last_starts = stats.get("last_starts")
+    last_starts = (
+        last_starts
+        if isinstance(last_starts, dict)
+        else {}
+    )
+
+    sample = last_starts.get("7")
+    sample = sample if isinstance(sample, dict) else {}
+
+    all_sample = sample.get("all")
+    all_sample = (
+        all_sample
+        if isinstance(all_sample, dict)
+        else sample
+    )
+
+    used = int_or_none(
+        all_sample.get("starts_used")
+        or all_sample.get("games_started")
+    ) or 0
+
+    return used >= 3
+
+
+def complete_identity_snapshot(
+    identity: Dict[str, Any],
+    target_date: str,
+    snapshot_cache: Dict[
+        Tuple[int, str],
+        Dict[str, Any]
+    ],
+    status: str,
+    source: str,
+) -> Optional[Dict[str, Any]]:
+    pitcher_id = int_or_none(identity.get("id"))
+
+    if not pitcher_id:
+        return None
+
+    key = (pitcher_id, target_date)
+
+    if key not in snapshot_cache:
+        name = str(
+            identity.get("name")
+            or pitcher_id
+        )
+
+        try:
+            snapshot_cache[key] = (
+                fetch_snapshot_with_retries(
+                    pitcher_id,
+                    target_date,
+                    name,
+                )
+            )
+        except Exception as error:
+            snapshot_cache[key] = {
+                "__snapshot_error__": str(error),
+            }
+
+    cached = snapshot_cache.get(key) or {}
+
+    if cached.get("__snapshot_error__"):
+        snapshot = copy.deepcopy(identity)
+        snapshot["snapshot_status"] = "pending"
+        snapshot["snapshot_error"] = cached.get(
+            "__snapshot_error__"
+        )
+    else:
+        snapshot = copy.deepcopy(cached)
+
+    snapshot["id"] = pitcher_id
+    snapshot["name"] = (
+        identity.get("name")
+        or snapshot.get("name")
+        or "Pitcher"
+    )
+    snapshot["status"] = status
+    snapshot["source"] = source
+
+    return snapshot
+
+
+def likely_bullpen_plan_from_transition(
+    previous: Dict[str, Any],
+    replacement: Dict[str, Any],
+) -> Optional[Dict[str, Any]]:
+    previous_id = int_or_none(previous.get("id"))
+    replacement_id = int_or_none(
+        replacement.get("id")
+    )
+
+    if (
+        not previous_id
+        or not replacement_id
+        or previous_id == replacement_id
+    ):
+        return None
+
+    previous_status = str(
+        previous.get("status") or ""
+    ).lower()
+
+    if previous_status not in (
+        "probable",
+        "confirmed",
+    ):
+        return None
+
+    if not likely_opener_profile(replacement):
+        return None
+
+    if not likely_bulk_profile(previous):
+        return None
+
+    return {
+        "detected": True,
+        "confidence": "likely",
+        "status": "likely",
+        "source":
+            "Starter assignment changed from a "
+            "starter-profile pitcher to a "
+            "reliever-profile pitcher.",
+        "opener": copy.deepcopy(replacement),
+        "bulk": copy.deepcopy(previous),
+        "updated_at": iso_now(),
+    }
+
+
+def likely_bullpen_plan_from_history(
+    current: Dict[str, Any],
+    target_date: str,
+    snapshot_cache: Dict[
+        Tuple[int, str],
+        Dict[str, Any]
+    ],
+) -> Optional[Dict[str, Any]]:
+    if not likely_opener_profile(current):
+        return None
+
+    history = current.get("starter_history")
+    history = (
+        history
+        if isinstance(history, list)
+        else []
+    )
+
+    if not history:
+        return None
+
+    latest = history[-1]
+    latest = (
+        latest
+        if isinstance(latest, dict)
+        else {}
+    )
+
+    previous = latest.get("previous")
+    previous = (
+        previous
+        if isinstance(previous, dict)
+        else {}
+    )
+
+    previous_id = int_or_none(
+        previous.get("id")
+    )
+
+    current_id = int_or_none(
+        current.get("id")
+    )
+
+    if (
+        not previous_id
+        or previous_id == current_id
+    ):
+        return None
+
+    bulk = complete_identity_snapshot(
+        previous,
+        target_date,
+        snapshot_cache,
+        "probable",
+        "Previous MLB probable pitcher",
+    )
+
+    if (
+        not bulk
+        or not likely_bulk_profile(bulk)
+    ):
+        return None
+
+    return {
+        "detected": True,
+        "confidence": "likely",
+        "status": "likely",
+        "source":
+            "Probable-pitcher history indicates "
+            "an opener and expected bulk pitcher.",
+        "opener": copy.deepcopy(current),
+        "bulk": bulk,
+        "updated_at": iso_now(),
+    }
+
+
+def confirmed_bullpen_plan_from_live_feed(
+    game_pk: int,
+    side: str,
+    schedule_status: str,
+    target_date: str,
+    snapshot_cache: Dict[
+        Tuple[int, str],
+        Dict[str, Any]
+    ],
+) -> Optional[Dict[str, Any]]:
+    normalized = str(
+        schedule_status or ""
+    ).lower()
+
+    if not any(
+        token in normalized
+        for token in (
+            "live",
+            "in progress",
+            "final",
+            "game over",
+            "completed",
+        )
+    ):
+        return None
+
+    try:
+        raw = get_json(
+            "https://statsapi.mlb.com/"
+            f"api/v1.1/game/{game_pk}/feed/live",
+            timeout=30,
+        )
+    except Exception as error:
+        print(
+            "Bullpen-start confirmation "
+            f"unavailable for {game_pk}: {error}"
+        )
+        return None
+
+    team_box = (
+        ((raw.get("liveData") or {})
+        .get("boxscore") or {})
+        .get("teams", {})
+        .get(side, {})
+    )
+
+    players = team_box.get("players") or {}
+    pitching_order = team_box.get("pitchers") or []
+
+    appearances = []
+
+    for raw_id in pitching_order:
+        pitcher_id = int_or_none(raw_id)
+
+        if not pitcher_id:
+            continue
+
+        player = (
+            players.get(f"ID{pitcher_id}")
+            or {}
+        )
+
+        person = player.get("person") or {}
+        pitching = (
+            (player.get("stats") or {})
+            .get("pitching")
+            or {}
+        )
+
+        appearances.append({
+            "id": pitcher_id,
+            "name":
+                person.get("fullName")
+                or "Pitcher",
+            "outs": pitching_outs(pitching),
+            "games_started":
+                int_or_none(
+                    pitching.get("gamesStarted")
+                )
+                or 0,
+        })
+
+    if len(appearances) < 2:
+        return None
+
+    opener_index = 0
+
+    for index, appearance in enumerate(
+        appearances
+    ):
+        if appearance.get("games_started", 0) >= 1:
+            opener_index = index
+            break
+
+    opener_game = appearances[opener_index]
+    followers = appearances[opener_index + 1:]
+
+    if not followers:
+        return None
+
+    bulk_game = max(
+        followers,
+        key=lambda appearance:
+            appearance.get("outs", 0),
+    )
+
+    opener_outs = int(
+        opener_game.get("outs") or 0
+    )
+
+    bulk_outs = int(
+        bulk_game.get("outs") or 0
+    )
+
+    if (
+        opener_outs > 6
+        or bulk_outs < 6
+        or bulk_outs <= opener_outs
+    ):
+        return None
+
+    opener = complete_identity_snapshot(
+        opener_game,
+        target_date,
+        snapshot_cache,
+        "confirmed",
+        "MLB live boxscore opener",
+    )
+
+    bulk = complete_identity_snapshot(
+        bulk_game,
+        target_date,
+        snapshot_cache,
+        "confirmed",
+        "MLB live boxscore bulk pitcher",
+    )
+
+    if not opener or not bulk:
+        return None
+
+    return {
+        "detected": True,
+        "confidence": "confirmed",
+        "status": "confirmed",
+        "source": "MLB live pitching order",
+        "opener": opener,
+        "bulk": bulk,
+        "opener_game_outs": opener_outs,
+        "bulk_game_outs": bulk_outs,
+        "updated_at": iso_now(),
+    }
+
 def compact_pitcher(pitcher: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "id": pitcher.get("id"),
@@ -700,6 +1148,49 @@ def main() -> int:
                     args.force_snapshots,
                 )
                 pitchers[side] = updated
+
+                bullpen_plan = (
+                    confirmed_bullpen_plan_from_live_feed(
+                        game_pk,
+                        side,
+                        detailed_status,
+                        target_date,
+                        snapshot_cache,
+                    )
+                )
+
+                if bullpen_plan is None:
+                    bullpen_plan = (
+                        likely_bullpen_plan_from_transition(
+                            existing,
+                            updated,
+                        )
+                    )
+
+                if bullpen_plan is None:
+                    bullpen_plan = (
+                        likely_bullpen_plan_from_history(
+                            updated,
+                            target_date,
+                            snapshot_cache,
+                        )
+                    )
+
+                if bullpen_plan:
+                    stored.setdefault(
+                        "bullpen_start",
+                        {},
+                    )[side] = bullpen_plan
+
+                    updated[
+                        "bullpen_start_detected"
+                    ] = True
+
+                    updated[
+                        "bullpen_start_confidence"
+                    ] = bullpen_plan.get(
+                        "confidence"
+                    )
 
                 append_virtual_start(
                     team_id,

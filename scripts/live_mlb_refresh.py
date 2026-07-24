@@ -284,7 +284,13 @@ def apply_live_feed(game: dict[str, Any], feed: dict[str, Any]) -> None:
         half = str(linescore.get("inningHalf") or "").lower()
         defensive_side = "home" if half == "top" else "away" if half == "bottom" else None
         if defensive_side:
-            game.setdefault("pitchers", {})[defensive_side] = pitcher
+            # The active pitcher is not necessarily the official starter.
+            # Preserve the starter module and publish the active pitcher
+            # separately for live-game display.
+            game.setdefault(
+                "current_pitchers",
+                {},
+            )[defensive_side] = pitcher
 
     metadata = feed.get("metaData") if isinstance(feed.get("metaData"), dict) else {}
     game["live_feed_updated_at"] = metadata.get("timeStamp") or utc_now()

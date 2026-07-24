@@ -463,11 +463,60 @@ def merge_official_result(local: dict[str, Any], official: dict[str, Any]) -> bo
         if not isinstance(incoming_pitcher, dict):
             continue
         current_pitcher = local_pitchers.get(side) if isinstance(local_pitchers.get(side), dict) else {}
-        for key in ("id", "name", "status"):
+        current_status = str(
+            current_pitcher.get("status")
+            or "unknown"
+        ).lower()
+
+        incoming_status = str(
+            incoming_pitcher.get("status")
+            or "unknown"
+        ).lower()
+
+        status_precedence = {
+            "unknown": 0,
+            "projected": 1,
+            "probable": 2,
+            "confirmed": 3,
+            "current": 4,
+        }
+
+        preserve_confirmed_identity = (
+            current_pitcher.get("id")
+            and current_status
+            in ("confirmed", "current")
+            and incoming_status
+            in ("unknown", "projected", "probable")
+        )
+
+        for key in ("id", "name"):
+            if preserve_confirmed_identity:
+                continue
+
             value = incoming_pitcher.get(key)
-            if value is not None and current_pitcher.get(key) != value:
+
+            if (
+                value is not None
+                and current_pitcher.get(key)
+                != value
+            ):
                 current_pitcher[key] = value
                 changed = True
+
+        if (
+            status_precedence.get(
+                incoming_status,
+                0,
+            )
+            > status_precedence.get(
+                current_status,
+                0,
+            )
+        ):
+            current_pitcher["status"] = (
+                incoming_status
+            )
+            changed = True
         local_pitchers[side] = current_pitcher
     if local_pitchers:
         local["pitchers"] = local_pitchers
@@ -505,6 +554,8 @@ def build_live_status_document(document: dict[str, Any], schedule_date: str) -> 
                     "away_team",
                     "home_team",
                     "pitchers",
+                    "current_pitchers",
+                    "bullpen_start",
                     "score",
                     "linescore",
                     "decisions",

@@ -882,3 +882,80 @@ td.pitcher-history-ranked-cell.global-tier-highlight.metric-awful {
 }
 
 /* RECENT_HISTORY_DEVICE_CHEVRON_END */
+
+/* BULLPEN_START_PITCHER_TOGGLE_START */
+
+/*
+  Compact opener/bulk switch beside the pitcher name.
+*/
+.pitcher-name-row
+> .pitcher-bulk-toggle {
+  -webkit-appearance: none;
+  appearance: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-height: 1.15rem;
+  margin:
+    0
+    0
+    0
+    0.34rem;
+
+  padding:
+    0.16rem
+    0.42rem;
+
+  border:
+    1px solid
+    rgba(255, 190, 70, 0.78);
+
+  border-radius: 4px;
+
+  background:
+    rgba(255, 153, 32, 0.18);
+
+  color: #ffc15a;
+
+  font: inherit;
+  font-size: 0.56rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+.pitcher-name-row
+> .pitcher-bulk-toggle:hover,
+.pitcher-name-row
+> .pitcher-bulk-toggle:focus-visible,
+.pitcher-name-row
+> .pitcher-bulk-toggle:active {
+  border-color: #ffd084;
+  background:
+    rgba(255, 153, 32, 0.28);
+  color: #ffd084;
+}
+
+.pitcher-name-row
+> .pitcher-bulk-toggle:focus-visible {
+  outline:
+    1px solid
+    rgba(255, 208, 132, 0.95);
+
+  outline-offset: 2px;
+}
+
+/* BULLPEN_START_PITCHER_TOGGLE_END */

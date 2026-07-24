@@ -883,11 +883,50 @@ def read_pitcher_ids(first_date: str, last_date: str) -> Set[int]:
             continue
 
         for game in document.get("games") or []:
-            pitchers = game.get("pitchers") or {}
+            candidates = []
+
+            pitchers = game.get("pitchers")
+            pitchers = (
+                pitchers
+                if isinstance(pitchers, dict)
+                else {}
+            )
 
             for side in ("away", "home"):
-                pitcher = pitchers.get(side) or {}
-                pitcher_id = to_int(pitcher.get("id"))
+                pitcher = pitchers.get(side)
+
+                if isinstance(pitcher, dict):
+                    candidates.append(pitcher)
+
+            bullpen_start = game.get(
+                "bullpen_start"
+            )
+
+            bullpen_start = (
+                bullpen_start
+                if isinstance(
+                    bullpen_start,
+                    dict,
+                )
+                else {}
+            )
+
+            for side in ("away", "home"):
+                plan = bullpen_start.get(side)
+
+                if not isinstance(plan, dict):
+                    continue
+
+                for role in ("opener", "bulk"):
+                    pitcher = plan.get(role)
+
+                    if isinstance(pitcher, dict):
+                        candidates.append(pitcher)
+
+            for pitcher in candidates:
+                pitcher_id = to_int(
+                    pitcher.get("id")
+                )
 
                 if pitcher_id:
                     pitcher_ids.add(pitcher_id)

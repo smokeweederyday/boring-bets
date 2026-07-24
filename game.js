@@ -12,7 +12,7 @@ import {
 
 import {
   renderPitcherWidget
-} from "./assets/js/widgets/pitcherWidget.js?v=sticky-open-20260724-003146";
+} from "./assets/js/widgets/pitcherWidget.js?v=bulk-button-20260724-012527";
 
 import {
   renderBullpenWidget
@@ -2921,15 +2921,94 @@ function renderPitcher(side) {
       ? "awayPitcherCard"
       : "homePitcherCard";
 
+  const bullpenStart =
+    game?.bullpen_start?.[side];
+
+  const hasBullpenPlan =
+    Boolean(
+      bullpenStart?.detected &&
+      bullpenStart?.opener?.id &&
+      bullpenStart?.bulk?.id
+    );
+
+  const bullpenViewKey =
+    `${game?.id || "game"}:${side}`;
+
+  state.bullpenPitcherViews =
+    state.bullpenPitcherViews || {};
+
+  const bullpenView =
+    hasBullpenPlan
+      ? (
+          state.bullpenPitcherViews[
+            bullpenViewKey
+          ] || "opener"
+        )
+      : "opener";
+
+  const selectedBullpenPitcher =
+    hasBullpenPlan
+      ? (
+          bullpenView === "bulk"
+            ? bullpenStart.bulk
+            : bullpenStart.opener
+        )
+      : null;
+
+  const pitcherGame =
+    selectedBullpenPitcher
+      ? {
+          ...game,
+          pitchers: {
+            ...(game.pitchers || {}),
+            [side]: selectedBullpenPitcher
+          }
+        }
+      : game;
+
   const pitcherModule =
     buildMlbPitcherModule({
-      game,
+      game: pitcherGame,
       side,
       timeframe: "season",
       location: state[locationKey],
       startMode: state[startModeKey],
       startCount: state[startCountKey]
     });
+
+  if (hasBullpenPlan) {
+
+    const showingBulk =
+      bullpenView === "bulk";
+
+
+    pitcherModule.bullpenStart = {
+      confidence:
+        bullpenStart.confidence
+        || "likely",
+
+      showing:
+        bullpenView,
+
+      showingName:
+        showingBulk
+          ? bullpenStart.bulk.name
+          : bullpenStart.opener.name,
+
+      alternateName:
+        showingBulk
+          ? bullpenStart.opener.name
+          : bullpenStart.bulk.name,
+
+      nextView:
+        showingBulk
+          ? "opener"
+          : "bulk",
+
+      source:
+        bullpenStart.source || ""
+    };
+  }
 
   renderPitcherWidget({
     container:
@@ -2975,7 +3054,23 @@ function renderPitcher(side) {
       state[startModeKey] = true;
 
       renderPitcher(side);
-    }
+    },
+
+    onBullpenPitcherToggle:
+      nextView => {
+        state.bullpenPitcherViews =
+          state.bullpenPitcherViews
+          || {};
+
+        state.bullpenPitcherViews[
+          bullpenViewKey
+        ] =
+          nextView === "bulk"
+            ? "bulk"
+            : "opener";
+
+        renderPitcher(side);
+      }
   });
 
   restorePitcherHistoryState(
