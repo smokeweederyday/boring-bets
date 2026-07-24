@@ -115,6 +115,195 @@ const state = {
     readGameTimeframePreference("home-offense")
 };
 
+
+function mergeGamePageLivePitcher(
+  enrichedPitcher = {},
+  livePitcher = {}
+) {
+  const enriched =
+    enrichedPitcher &&
+    typeof enrichedPitcher === "object"
+      ? enrichedPitcher
+      : {};
+
+  const live =
+    livePitcher &&
+    typeof livePitcher === "object"
+      ? livePitcher
+      : {};
+
+  const liveId =
+    live.id ?? null;
+
+  const liveName =
+    String(
+      live.name || ""
+    ).trim();
+
+  const liveStatus =
+    String(
+      live.status || "unknown"
+    ).toLowerCase();
+
+  const hasKnownLivePitcher =
+    Boolean(
+      liveId &&
+      liveName &&
+      liveName !== "Starter TBD" &&
+      liveStatus !== "unknown"
+    );
+
+  /*
+    MLB currently has no named starter. Never preserve an old inferred
+    pitcher or their statistics underneath a live TBD assignment.
+  */
+  if (!hasKnownLivePitcher) {
+    return {
+      name:
+        liveName ||
+        "Starter TBD",
+      status:
+        liveStatus ||
+        "unknown",
+      source:
+        "MLB live schedule overlay",
+      live_overlay: true,
+      stats_pending: true
+    };
+  }
+
+  const enrichedId =
+    enriched.id ?? null;
+
+  /*
+    The live assignment still refers to the same pitcher. Preserve the
+    enriched statistics and apply the freshest name/status fields.
+  */
+  if (
+    enrichedId &&
+    String(enrichedId) === String(liveId)
+  ) {
+    return {
+      ...enriched,
+      ...live,
+      source:
+        live.source ||
+        enriched.source ||
+        "MLB schedule probablePitcher",
+      live_overlay: true
+    };
+  }
+
+  /*
+    A different pitcher has replaced the enriched pitcher. Display the
+    new identity immediately, but discard the previous pitcher's stats.
+  */
+  return {
+    id: liveId,
+    name: liveName,
+    status: liveStatus,
+    throws:
+      live.throws || "",
+    profile_url:
+      `pitcher.html?id=${encodeURIComponent(
+        liveId
+      )}`,
+    source:
+      live.source ||
+      "MLB live schedule overlay",
+    live_overlay: true,
+    stats_pending: true
+  };
+}
+
+function findGamePageLiveGame(
+  liveGames,
+  enrichedGame
+) {
+  const enrichedPk =
+    enrichedGame?.mlb_game_pk;
+
+  return (
+    (liveGames || []).find(
+      liveGame =>
+        liveGame?.id ===
+          enrichedGame?.id ||
+        (
+          enrichedPk &&
+          String(
+            liveGame?.mlb_game_pk || ""
+          ) ===
+            String(enrichedPk)
+        )
+    ) ||
+    null
+  );
+}
+
+function mergeGamePageLiveOverlay(
+  enrichedGame,
+  liveGame
+) {
+  if (
+    !liveGame ||
+    typeof liveGame !== "object"
+  ) {
+    return enrichedGame;
+  }
+
+  const enrichedPitchers =
+    enrichedGame?.pitchers &&
+    typeof enrichedGame.pitchers === "object"
+      ? enrichedGame.pitchers
+      : {};
+
+  const livePitchers =
+    liveGame?.pitchers &&
+    typeof liveGame.pitchers === "object"
+      ? liveGame.pitchers
+      : {};
+
+  return {
+    ...enrichedGame,
+
+    status:
+      liveGame.status ??
+      enrichedGame.status,
+
+    abstract_status:
+      liveGame.abstract_status ??
+      enrichedGame.abstract_status,
+
+    score:
+      liveGame.score ??
+      enrichedGame.score,
+
+    linescore:
+      liveGame.linescore ??
+      enrichedGame.linescore,
+
+    live_feed_updated_at:
+      liveGame.live_feed_updated_at ??
+      enrichedGame.live_feed_updated_at,
+
+    pitchers: {
+      ...enrichedPitchers,
+
+      away:
+        mergeGamePageLivePitcher(
+          enrichedPitchers.away,
+          livePitchers.away
+        ),
+
+      home:
+        mergeGamePageLivePitcher(
+          enrichedPitchers.home,
+          livePitchers.home
+        )
+    }
+  };
+}
+
 async function loadGame() {
   const status =
     document.getElementById("gameStatus");
@@ -276,6 +465,37 @@ async function loadGame() {
         ? gamesData.games
         : [];
 
+    let liveGames = [];
+
+    try {
+      const liveGamesResponse =
+        await fetch(
+          `data/live-games/${encodeURIComponent(
+            gameDate
+          )}.json?v=${Date.now()}`,
+          {
+            cache: "no-store"
+          }
+        );
+
+      if (liveGamesResponse.ok) {
+        const liveGamesData =
+          await liveGamesResponse.json();
+
+        liveGames =
+          Array.isArray(
+            liveGamesData.games
+          )
+            ? liveGamesData.games
+            : [];
+      }
+    } catch (error) {
+      console.warn(
+        "Unable to load the live MLB overlay; using enriched matchup data.",
+        error
+      );
+    }
+
     let game =
       games.find(
         item => item.id === gameId
@@ -294,11 +514,41 @@ async function loadGame() {
       );
     }
 
+    const liveGame =
+      findGamePageLiveGame(
+        liveGames,
+        game
+      );
+
+    if (liveGame) {
+      game =
+        mergeGamePageLiveOverlay(
+          game,
+          liveGame
+        );
+    }
+
+    const renderedGames =
+      games.some(
+        item =>
+          item.id === game.id
+      )
+        ? games.map(
+            item =>
+              item.id === game.id
+                ? game
+                : item
+          )
+        : [
+            ...games,
+            game
+          ];
+
     state.game =
       game;
 
     state.games =
-      games;
+      renderedGames;
 
     state.days =
       Array.isArray(daysData.days)
