@@ -2145,6 +2145,9 @@ function findMlbCardArticle(event) {
 }
 
 function mlbLiveRenderSignature(event) {
+  const awayPitcher = event?.pitchers?.away || {};
+  const homePitcher = event?.pitchers?.home || {};
+
   return JSON.stringify([
     event?.status || null,
     event?.abstractStatus || event?.abstract_status || null,
@@ -2153,7 +2156,19 @@ function mlbLiveRenderSignature(event) {
     event?.away?.score ?? null,
     event?.home?.score ?? null,
     event?.liveState || event?.live_state || null,
-    event?.linescore || null
+    event?.linescore || null,
+
+    awayPitcher.id ?? null,
+    awayPitcher.name || null,
+    awayPitcher.status || null,
+    awayPitcher.confirmed_at || null,
+    awayPitcher.source || null,
+
+    homePitcher.id ?? null,
+    homePitcher.name || null,
+    homePitcher.status || null,
+    homePitcher.confirmed_at || null,
+    homePitcher.source || null
   ]);
 }
 
