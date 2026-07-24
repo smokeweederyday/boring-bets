@@ -8271,3 +8271,724 @@ html[data-highlight-display-mode="black-white"]
 }
 
 /* BULLPEN_HIGHLIGHTING_BAR_END */
+
+/* TEXT_ONLY_SPECTRUM_NUMBERS_ONLY_START */
+
+/*
+  Four-way switch position 3:
+  preserve spectrum text colors, but remove the
+  colored box treatment around numeric metrics.
+*/
+html[
+  data-highlight-display-mode="text-only"
+][
+  data-highlight-neutral="spectrum"
+]
+.global-tier-highlight.metric-elite,
+
+html[
+  data-highlight-display-mode="text-only"
+][
+  data-highlight-neutral="spectrum"
+]
+.global-tier-highlight.metric-good,
+
+html[
+  data-highlight-display-mode="text-only"
+][
+  data-highlight-neutral="spectrum"
+]
+.global-tier-highlight.metric-average,
+
+html[
+  data-highlight-display-mode="text-only"
+][
+  data-highlight-neutral="spectrum"
+]
+.global-tier-highlight.metric-poor,
+
+html[
+  data-highlight-display-mode="text-only"
+][
+  data-highlight-neutral="spectrum"
+]
+.global-tier-highlight.metric-awful {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/*
+  Numeric children inherit the tier color from
+  their cell instead of reverting to white.
+*/
+html[
+  data-highlight-display-mode="text-only"
+][
+  data-highlight-neutral="spectrum"
+]
+.global-tier-highlight
+.metric-value {
+  color: inherit !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* TEXT_ONLY_SPECTRUM_NUMBERS_ONLY_END */
+
+/* TRUE_OFF_NO_HIGHLIGHT_COLOR_START */
+
+/*
+  Four-way switch position 4:
+  remove every shared highlighting treatment while
+  leaving the underlying Neutral and spread preferences saved.
+*/
+html[data-highlight-display-mode="off"]
+.global-tier-highlight,
+
+html[data-highlight-display-mode="off"]
+.metric-elite,
+
+html[data-highlight-display-mode="off"]
+.metric-good,
+
+html[data-highlight-display-mode="off"]
+.metric-average,
+
+html[data-highlight-display-mode="off"]
+.metric-poor,
+
+html[data-highlight-display-mode="off"]
+.metric-awful,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-elite,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-good,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-neutral,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-poor,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-awful {
+  color: inherit !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+html[data-highlight-display-mode="off"]
+.global-tier-highlight *,
+
+html[data-highlight-display-mode="off"]
+.metric-elite *,
+
+html[data-highlight-display-mode="off"]
+.metric-good *,
+
+html[data-highlight-display-mode="off"]
+.metric-average *,
+
+html[data-highlight-display-mode="off"]
+.metric-poor *,
+
+html[data-highlight-display-mode="off"]
+.metric-awful *,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-elite *,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-good *,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-neutral *,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-poor *,
+
+html[data-highlight-display-mode="off"]
+.pitcher-signal-awful * {
+  color: inherit !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+/* TRUE_OFF_NO_HIGHLIGHT_COLOR_END */
+
+/* TRUE_OFF_MODULE_SPECIFIC_COLORS_START */
+
+/*
+  Four-way switch position 4 must defeat module-specific
+  color rules as well as the shared highlighting classes.
+*/
+
+/* Pitcher module numeric stats */
+html[data-highlight-display-mode="off"]
+.pitcher-data-table
+td.pitcher-stat-cell,
+
+html[data-highlight-display-mode="off"]
+.pitcher-data-table
+td.pitcher-stat-cell
+.metric-value {
+  color:
+    var(--text, #f4f7f5) !important;
+
+  background:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+
+/* Pitcher location buttons and recent-start slider */
+html[data-highlight-display-mode="off"]
+.pitcher-location-control
+button.pitcher-control-signal,
+
+html[data-highlight-display-mode="off"]
+.pitcher-start-compact
+button.pitcher-control-signal {
+  color:
+    rgba(235, 243, 239, 0.82) !important;
+
+  background:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    rgba(235, 243, 239, 0.22) !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+html[data-highlight-display-mode="off"]
+.pitcher-start-compact
+button.pitcher-control-signal
+small {
+  color:
+    rgba(235, 243, 239, 0.82) !important;
+}
+
+html[data-highlight-display-mode="off"]
+.pitcher-start-compact
+.pitcher-start-dot {
+  background:
+    rgba(235, 243, 239, 0.68) !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+}
+
+html[data-highlight-display-mode="off"]
+.pitcher-start-compact
+.pitcher-start-track {
+  background:
+    rgba(235, 243, 239, 0.18) !important;
+
+  box-shadow:
+    none !important;
+}
+
+/*
+  Preserve a neutral selected-state indicator without
+  restoring the underlying green/red tier color.
+*/
+html[data-highlight-display-mode="off"]
+.pitcher-location-control
+button.pitcher-control-signal.active,
+
+html[data-highlight-display-mode="off"]
+.pitcher-start-compact
+button.pitcher-control-signal.selected {
+  color:
+    #f4f7f5 !important;
+
+  outline:
+    1px solid rgba(244, 247, 245, 0.62) !important;
+
+  outline-offset:
+    -1px;
+
+  box-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+html[data-highlight-display-mode="off"]
+.pitcher-start-compact
+button.pitcher-control-signal.selected
+.pitcher-start-dot {
+  background:
+    #f4f7f5 !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* Recent History W, L and ND decisions */
+html[data-highlight-display-mode="off"]
+.pitcher-history-table
+td.pitcher-history-decision-win,
+
+html[data-highlight-display-mode="off"]
+.pitcher-history-table
+td.pitcher-history-decision-loss,
+
+html[data-highlight-display-mode="off"]
+.pitcher-history-table
+td.pitcher-history-decision-neutral {
+  color:
+    rgba(235, 243, 239, 0.82) !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+
+/* Ranked numeric cells inside Recent History */
+html[data-highlight-display-mode="off"]
+.pitcher-history-table
+td.pitcher-history-ranked-cell {
+  color:
+    rgba(235, 243, 239, 0.82) !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+}
+
+
+/* Rank columns inside the offense module */
+html[data-highlight-display-mode="off"]
+.offense-data-table
+td.rank-cell,
+
+html[data-highlight-display-mode="off"]
+.offense-data-table
+td.rank-cell.global-tier-highlight {
+  color:
+    rgba(235, 243, 239, 0.82) !important;
+
+  background:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+/* TRUE_OFF_MODULE_SPECIFIC_COLORS_END */
+
+/* TRUE_OFF_NEUTRAL_INERT_START */
+
+/*
+  Position four is True Off.
+
+  Neutral and Color Spread remain saved, but neither
+  preference may recolor module content while Off is active.
+*/
+
+
+/* Offense ranking cells and their number children */
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-data-table
+td.rank-cell,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-data-table
+td.rank-cell
+*,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-data-table
+[data-global-rank],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-data-table
+[data-global-rank]
+* {
+  color:
+    rgba(235, 243, 239, 0.84) !important;
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+
+/* Offense timeframe/day and location controls */
+html[data-highlight-display-mode="off"]
+body.game-page
+button[data-offense-timeframe],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+button[data-offense-location],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-timeframe-control
+button,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-location-control
+button,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-control-signal {
+  color:
+    rgba(235, 243, 239, 0.82) !important;
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    rgba(235, 243, 239, 0.22) !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+
+/*
+  Keep active offense controls recognizable,
+  but use only neutral white/gray.
+*/
+html[data-highlight-display-mode="off"]
+body.game-page
+button[data-offense-timeframe].active,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+button[data-offense-timeframe][aria-pressed="true"],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+button[data-offense-location].active,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+button[data-offense-location][aria-pressed="true"],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-control-signal.active,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.offense-control-signal.selected {
+  color:
+    #f4f7f5 !important;
+
+  background:
+    rgba(244, 247, 245, 0.07) !important;
+
+  border-color:
+    rgba(244, 247, 245, 0.46) !important;
+
+  outline:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+}
+
+
+/* Starter, opener, bulk pitcher and bullpen-arm names */
+html[data-highlight-display-mode="off"]
+body.game-page
+.pitcher-name-signal,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.pitcher-name-link,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.bullpen-arm-player-name,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.bullpen-arm-player-link,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.pitcher-name-signal
+*,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.pitcher-name-link
+*,
+
+html[data-highlight-display-mode="off"]
+body.game-page
+.bullpen-arm-player-name
+* {
+  color:
+    #f4f7f5 !important;
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+
+/*
+  Final safety net for ranked/signal-driven module elements.
+  This intentionally excludes the highlighting bar itself.
+*/
+html[data-highlight-display-mode="off"]
+body.game-page
+main
+[data-global-rank],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+main
+[data-global-signal-score],
+
+html[data-highlight-display-mode="off"]
+body.game-page
+main
+[data-module-signal-score] {
+  background-image:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+/* TRUE_OFF_NEUTRAL_INERT_END */
+
+/* TRUE_OFF_ALL_PITCHER_SIGNAL_NAMES_START */
+
+/*
+  True Off must override every pitcher-signal variant,
+  including pitcher-signal-positive and
+  pitcher-signal-negative.
+*/
+html[data-highlight-display-mode="off"][data-highlight-neutral]
+body.game-page
+#awayPitcherCard
+a.pitcher-name-link,
+
+html[data-highlight-display-mode="off"][data-highlight-neutral]
+body.game-page
+#homePitcherCard
+a.pitcher-name-link,
+
+html[data-highlight-display-mode="off"][data-highlight-neutral]
+body.game-page
+#awayPitcherCard
+a.pitcher-name-link[class*="pitcher-signal-"],
+
+html[data-highlight-display-mode="off"][data-highlight-neutral]
+body.game-page
+#homePitcherCard
+a.pitcher-name-link[class*="pitcher-signal-"] {
+  color: #f4f7f5 !important;
+
+  -webkit-text-fill-color:
+    #f4f7f5 !important;
+
+  background:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-filter:
+    none !important;
+}
+
+/* TRUE_OFF_ALL_PITCHER_SIGNAL_NAMES_END */
