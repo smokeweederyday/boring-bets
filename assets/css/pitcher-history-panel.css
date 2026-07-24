@@ -739,3 +739,55 @@ body.pitcher-history-open {
 }
 
 /* RECENT_HISTORY_STATUS_CHEVRON_END */
+
+/* Ranked Recent History cells use the shared color-spread system. */
+
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight {
+  transition:
+    color 120ms ease,
+    background 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight.metric-elite {
+  color: #63ff9b !important;
+  background:
+    rgba(57, 255, 136, 0.18)
+    !important;
+}
+
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight.metric-good {
+  color: #a2f5bf !important;
+  background:
+    rgba(57, 255, 136, 0.08)
+    !important;
+}
+
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight.metric-average {
+  color: var(--text) !important;
+  background:
+    rgba(130, 144, 135, 0.05)
+    !important;
+}
+
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight.metric-poor {
+  color: #ffadb8 !important;
+  background:
+    rgba(255, 97, 117, 0.08)
+    !important;
+}
+
+.pitcher-history-table
+td.pitcher-history-ranked-cell.global-tier-highlight.metric-awful {
+  color: #ff7184 !important;
+  background:
+    rgba(255, 97, 117, 0.17)
+    !important;
+}
+
+

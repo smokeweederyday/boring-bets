@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
+import threading
 import os
 import time
 import urllib.error
@@ -27,6 +29,26 @@ RUNTIME_ROOT = Path(
     )
 )
 CACHE_DIRECTORY = RUNTIME_ROOT / "pitcher-history-season-cache"
+RANK_CACHE_DIRECTORY = (
+    RUNTIME_ROOT
+    / "pitcher-history-rank-cache"
+)
+
+RANK_CACHE_LOCK = threading.Lock()
+RANK_CACHE_MEMORY: Dict[int, Dict[str, Any]] = {}
+
+HISTORY_RANK_DIRECTIONS = {
+    "ip": True,
+    "hits": False,
+    "runs": False,
+    "earned_runs": False,
+    "walks": False,
+    "strikeouts": True,
+    "home_runs": False,
+    "era": False,
+    "whip": False,
+}
+
 
 EASTERN = ZoneInfo("America/New_York")
 MLB_API_BASE = "https://statsapi.mlb.com/api/v1"
@@ -189,6 +211,440 @@ def team_abbreviation(value: Any) -> str:
 
     name = str(value.get("name") or "").strip().lower()
     return TEAM_ABBR_BY_NAME.get(name, "")
+
+
+
+def to_float(value: Any) -> Optional[float]:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+
+    return number if math.isfinite(number) else None
+
+
+def rank_cache_path(season: int) -> Path:
+    return RANK_CACHE_DIRECTORY / f"{season}.json"
+
+
+def fetch_season_rank_splits(
+    season: int,
+    player_pool: str,
+) -> List[Dict[str, Any]]:
+    limit = 1000
+    offset = 0
+    splits: List[Dict[str, Any]] = []
+
+    while True:
+        params = urllib.parse.urlencode(
+            {
+                "stats": "season",
+                "group": "pitching",
+                "season": season,
+                "sportIds": 1,
+                "playerPool": player_pool,
+                "limit": limit,
+                "offset": offset,
+            }
+        )
+
+        document = get_json(
+            f"{MLB_API_BASE}/stats?{params}"
+        )
+
+        groups = document.get("stats") or []
+
+        if not groups:
+            break
+
+        group = groups[0] or {}
+        page = [
+            split
+            for split in group.get("splits") or []
+            if isinstance(split, dict)
+        ]
+
+        splits.extend(page)
+
+        total = (
+            to_int(group.get("totalSplits"))
+            or len(splits)
+        )
+
+        if (
+            not page
+            or len(splits) >= total
+        ):
+            break
+
+        offset += len(page)
+
+    return splits
+
+
+def normalize_rank_source(
+    split: Dict[str, Any],
+) -> Optional[Dict[str, Any]]:
+    stat = split.get("stat") or {}
+
+    outs = (
+        to_int(stat.get("outs"))
+        or to_int(stat.get("outsPitched"))
+        or innings_to_outs(
+            stat.get("inningsPitched")
+        )
+    )
+
+    if outs <= 0:
+        return None
+
+    innings = outs / 3
+    hits = to_int(stat.get("hits")) or 0
+    runs = to_int(stat.get("runs")) or 0
+    earned_runs = (
+        to_int(stat.get("earnedRuns"))
+        or 0
+    )
+    walks = (
+        to_int(stat.get("baseOnBalls"))
+        or 0
+    )
+    strikeouts = (
+        to_int(stat.get("strikeOuts"))
+        or 0
+    )
+    home_runs = (
+        to_int(stat.get("homeRuns"))
+        or 0
+    )
+
+    era = to_float(stat.get("era"))
+
+    if era is None and innings:
+        era = earned_runs * 9 / innings
+
+    whip = to_float(stat.get("whip"))
+
+    if whip is None and innings:
+        whip = (hits + walks) / innings
+
+    return {
+        "games_started":
+            to_int(stat.get("gamesStarted"))
+            or 0,
+        "outs": outs,
+        "hits": hits,
+        "runs": runs,
+        "earned_runs": earned_runs,
+        "walks": walks,
+        "strikeouts": strikeouts,
+        "home_runs": home_runs,
+        "era": era,
+        "whip": whip,
+    }
+
+
+def history_rank_value(
+    row: Dict[str, Any],
+    metric: str,
+    mode: str,
+) -> Optional[float]:
+    outs = to_int(row.get("outs")) or 0
+    starts = (
+        to_int(row.get("games_started"))
+        or 0
+    )
+
+    if metric == "ip":
+        if mode == "season":
+            return float(outs) if outs else None
+
+        return (
+            outs / starts
+            if starts > 0
+            else None
+        )
+
+    counting_fields = {
+        "hits",
+        "runs",
+        "earned_runs",
+        "walks",
+        "strikeouts",
+        "home_runs",
+    }
+
+    if metric in counting_fields:
+        count = to_float(row.get(metric))
+
+        if count is None:
+            return None
+
+        if mode == "season":
+            return (
+                count * 27 / outs
+                if outs > 0
+                else None
+            )
+
+        return (
+            count / starts
+            if starts > 0
+            else None
+        )
+
+    if metric in {"era", "whip"}:
+        return to_float(row.get(metric))
+
+    return None
+
+
+def build_rank_pools(
+    rows: List[Dict[str, Any]],
+    mode: str,
+) -> Dict[str, List[float]]:
+    pools = {
+        metric: []
+        for metric
+        in HISTORY_RANK_DIRECTIONS
+    }
+
+    for row in rows:
+        for metric in pools:
+            value = history_rank_value(
+                row,
+                metric,
+                mode,
+            )
+
+            if (
+                value is not None
+                and math.isfinite(value)
+            ):
+                pools[metric].append(value)
+
+    return pools
+
+
+def build_year_rank_baseline(
+    season: int,
+) -> Dict[str, Any]:
+    print(
+        f"Building pitcher-history rank baseline "
+        f"for {season}.",
+        flush=True,
+    )
+
+    qualified_splits = (
+        fetch_season_rank_splits(
+            season,
+            "QUALIFIED",
+        )
+    )
+
+    all_splits = fetch_season_rank_splits(
+        season,
+        "ALL",
+    )
+
+    qualified_rows = [
+        row
+        for split in qualified_splits
+        if (
+            row := normalize_rank_source(
+                split
+            )
+        )
+    ]
+
+    starter_rows = [
+        row
+        for split in all_splits
+        if (
+            row := normalize_rank_source(
+                split
+            )
+        )
+        and (
+            to_int(
+                row.get("games_started")
+            )
+            or 0
+        ) > 0
+    ]
+
+    return {
+        "schema_version": "1.0",
+        "season": season,
+        "qualified_pitchers":
+            len(qualified_rows),
+        "starters":
+            len(starter_rows),
+        "season_pools":
+            build_rank_pools(
+                qualified_rows,
+                "season",
+            ),
+        "start_pools":
+            build_rank_pools(
+                starter_rows,
+                "start",
+            ),
+    }
+
+
+def load_year_rank_baseline(
+    season: int,
+    current_year: int,
+    force: bool,
+) -> Dict[str, Any]:
+    cached = RANK_CACHE_MEMORY.get(season)
+
+    if cached:
+        return cached
+
+    with RANK_CACHE_LOCK:
+        cached = RANK_CACHE_MEMORY.get(season)
+
+        if cached:
+            return cached
+
+        path = rank_cache_path(season)
+
+        if (
+            season < current_year
+            and path.exists()
+            and not force
+        ):
+            try:
+                document = json.loads(
+                    path.read_text(
+                        encoding="utf-8"
+                    )
+                )
+
+                if isinstance(document, dict):
+                    RANK_CACHE_MEMORY[
+                        season
+                    ] = document
+
+                    return document
+
+            except (
+                OSError,
+                json.JSONDecodeError,
+            ):
+                pass
+
+        document = build_year_rank_baseline(
+            season
+        )
+
+        path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        path.write_text(
+            json.dumps(
+                document,
+                separators=(",", ":"),
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+        RANK_CACHE_MEMORY[season] = document
+
+        return document
+
+
+def rank_against_pool(
+    value: Optional[float],
+    pool: List[Any],
+    higher_is_better: bool,
+) -> Optional[List[Any]]:
+    if value is None:
+        return None
+
+    clean = []
+
+    for raw_value in pool or []:
+        number = to_float(raw_value)
+
+        if number is not None:
+            clean.append(number)
+
+    if len(clean) < 2:
+        return None
+
+    if higher_is_better:
+        better = sum(
+            1
+            for pool_value in clean
+            if pool_value > value
+        )
+    else:
+        better = sum(
+            1
+            for pool_value in clean
+            if pool_value < value
+        )
+
+    pool_size = len(clean)
+
+    return [
+        max(
+            1,
+            min(
+                better + 1,
+                pool_size,
+            ),
+        ),
+        pool_size,
+    ]
+
+
+def attach_history_ranks(
+    row: Dict[str, Any],
+    season: int,
+    mode: str,
+    baseline: Dict[str, Any],
+) -> None:
+    pool_key = (
+        "season_pools"
+        if mode == "season"
+        else "start_pools"
+    )
+
+    pools = baseline.get(pool_key) or {}
+    ranks: Dict[str, List[Any]] = {}
+
+    for (
+        metric,
+        higher_is_better,
+    ) in HISTORY_RANK_DIRECTIONS.items():
+        value = history_rank_value(
+            row,
+            metric,
+            mode,
+        )
+
+        result = rank_against_pool(
+            value,
+            pools.get(metric) or [],
+            higher_is_better,
+        )
+
+        if result:
+            ranks[metric] = [
+                result[0],
+                result[1],
+                season,
+                mode,
+            ]
+
+    row["ranks"] = ranks
 
 
 def player_information(pitcher_id: int) -> Dict[str, Any]:
@@ -497,6 +953,63 @@ def build_pitcher(
         reverse=True,
     )[:3]
 
+    years_needed = sorted(
+        {
+            int(row.get("season"))
+            for row in (
+                list(recent_seasons)
+                + list(starts)
+            )
+            if to_int(row.get("season"))
+        }
+    )
+
+    rank_baselines = {}
+
+    for season in years_needed:
+        try:
+            rank_baselines[season] = (
+                load_year_rank_baseline(
+                    season,
+                    current_year,
+                    force,
+                )
+            )
+        except Exception as error:
+            print(
+                "Pitcher-history rank baseline "
+                f"failed for {season}: {error}",
+                flush=True,
+            )
+
+    for row in recent_seasons:
+        season = to_int(row.get("season"))
+        baseline = rank_baselines.get(
+            season
+        )
+
+        if season and baseline:
+            attach_history_ranks(
+                row,
+                season,
+                "season",
+                baseline,
+            )
+
+    for row in starts:
+        season = to_int(row.get("season"))
+        baseline = rank_baselines.get(
+            season
+        )
+
+        if season and baseline:
+            attach_history_ranks(
+                row,
+                season,
+                "start",
+                baseline,
+            )
+
     header_season = next(
         (
             row
@@ -527,7 +1040,7 @@ def build_pitcher(
     )
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "generated_at": datetime.now(timezone.utc)
             .replace(microsecond=0)
             .isoformat()
@@ -547,10 +1060,189 @@ def build_pitcher(
     }
 
 
+
+def ensure_payload_history_ranks(
+    payload: Dict[str, Any],
+    force: bool = False,
+) -> Dict[str, Any]:
+    as_of = str(
+        payload.get("as_of")
+        or datetime.now(EASTERN)
+            .date()
+            .isoformat()
+    )
+
+    try:
+        current_year = int(as_of[:4])
+    except (TypeError, ValueError):
+        current_year = datetime.now(
+            EASTERN
+        ).year
+
+    recent_seasons = (
+        payload.get("recent_seasons")
+        or []
+    )
+
+    starts = (
+        payload.get("starts")
+        or []
+    )
+
+    years_needed = sorted(
+        {
+            season
+            for row in (
+                list(recent_seasons)
+                + list(starts)
+            )
+            if (
+                season := to_int(
+                    row.get("season")
+                )
+            )
+        }
+    )
+
+    baselines = {}
+
+    for season in years_needed:
+        try:
+            baselines[season] = (
+                load_year_rank_baseline(
+                    season,
+                    current_year,
+                    force,
+                )
+            )
+        except Exception as error:
+            print(
+                "Unable to load pitcher-history "
+                f"rank baseline for {season}: "
+                f"{error}",
+                flush=True,
+            )
+
+    for row in recent_seasons:
+        season = to_int(
+            row.get("season")
+        )
+
+        baseline = baselines.get(season)
+
+        if season and baseline:
+            attach_history_ranks(
+                row,
+                season,
+                "season",
+                baseline,
+            )
+
+    for row in starts:
+        season = to_int(
+            row.get("season")
+        )
+
+        baseline = baselines.get(season)
+
+        if season and baseline:
+            attach_history_ranks(
+                row,
+                season,
+                "start",
+                baseline,
+            )
+
+    # last_starts must contain the newly ranked
+    # versions of the same first seven starts.
+    payload["last_starts"] = [
+        dict(row)
+        for row in starts[:7]
+    ]
+
+    # Clamp older rank formats too.
+    for row in (
+        list(recent_seasons)
+        + list(starts)
+        + list(
+            payload.get("last_starts")
+            or []
+        )
+    ):
+        ranks = row.get("ranks") or {}
+
+        for rank_value in ranks.values():
+            if (
+                isinstance(rank_value, list)
+                and len(rank_value) >= 2
+            ):
+                try:
+                    rank = int(rank_value[0])
+                    pool_size = int(
+                        rank_value[1]
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                ):
+                    continue
+
+                if pool_size > 0:
+                    rank_value[0] = max(
+                        1,
+                        min(
+                            rank,
+                            pool_size,
+                        ),
+                    )
+
+            elif isinstance(
+                rank_value,
+                dict,
+            ):
+                try:
+                    rank = int(
+                        rank_value.get("rank")
+                        or 0
+                    )
+
+                    pool_size = int(
+                        rank_value.get(
+                            "pool_size"
+                        )
+                        or rank_value.get(
+                            "poolSize"
+                        )
+                        or 0
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                ):
+                    continue
+
+                if rank > 0 and pool_size > 0:
+                    rank_value["rank"] = max(
+                        1,
+                        min(
+                            rank,
+                            pool_size,
+                        ),
+                    )
+
+    payload["schema_version"] = "1.1"
+
+    return payload
+
+
 def write_pitcher_file(
     pitcher_id: int,
     payload: Dict[str, Any],
 ) -> None:
+    payload = ensure_payload_history_ranks(
+        payload,
+        False,
+    )
     OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
 
     destination = OUTPUT_DIRECTORY / f"{pitcher_id}.json"

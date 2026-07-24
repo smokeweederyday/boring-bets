@@ -1,3 +1,7 @@
+import {
+  applyGlobalTierHighlights
+} from "../engine/highlightPreferences.js?v=phase11z-exact-typed-spread3";
+
 const historyCache = new Map();
 const gameContextCache = new Map();
 
@@ -38,6 +42,226 @@ function formatIp(value) {
   const text = String(value ?? "").trim();
   return text || "–";
 }
+
+const HISTORY_RANK_KEYS = [
+  "ip",
+  "hits",
+  "runs",
+  "earned_runs",
+  "walks",
+  "strikeouts",
+  "home_runs",
+  "era",
+  "whip"
+];
+
+const HISTORY_RANK_LABELS = {
+  ip: "IP",
+  hits: "H",
+  runs: "R",
+  earned_runs: "ER",
+  walks: "BB",
+  strikeouts: "SO",
+  home_runs: "HR",
+  era: "ERA",
+  whip: "WHIP"
+};
+
+function normalizeRankInfo(
+  row,
+  metric
+) {
+  const raw = row?.ranks?.[metric];
+
+  if (!raw) return null;
+
+  if (Array.isArray(raw)) {
+    return {
+      rank: Number(raw[0]),
+      poolSize: Number(raw[1]),
+      year: raw[2],
+      basis: String(raw[3] || "")
+    };
+  }
+
+  return {
+    rank: Number(raw.rank),
+    poolSize: Number(
+      raw.pool_size
+      ?? raw.poolSize
+    ),
+    year:
+      raw.year
+      ?? raw.season
+      ?? "",
+    basis: String(raw.basis || "")
+  };
+}
+
+function historyRankTooltip(
+  info,
+  metric
+) {
+  if (!info) return "";
+
+  const label =
+    HISTORY_RANK_LABELS[metric]
+    || metric;
+
+  if (info.basis === "season") {
+    return (
+      `Rank ${info.rank} of ` +
+      `${info.poolSize} qualifying ` +
+      `MLB pitchers in ${info.year} · ` +
+      `${label} season ranking`
+    );
+  }
+
+  if (info.basis === "start") {
+    return (
+      `Rank ${info.rank} of ` +
+      `${info.poolSize} MLB starters ` +
+      `in ${info.year} · ` +
+      `${label} compared with that ` +
+      `season's starter baseline`
+    );
+  }
+
+  if (
+    info.basis === "year-adjusted"
+  ) {
+    return (
+      `Year-adjusted ${label} ranking · ` +
+      `Rank ${info.rank} of ` +
+      `${info.poolSize}`
+    );
+  }
+
+  return (
+    `Rank ${info.rank} of ` +
+    `${info.poolSize}`
+  );
+}
+
+function rankedHistoryCell(
+  row,
+  metric,
+  display
+) {
+  const info = normalizeRankInfo(
+    row,
+    metric
+  );
+
+  if (
+    !info
+    || !Number.isFinite(info.rank)
+    || !Number.isFinite(
+      info.poolSize
+    )
+    || info.rank < 1
+    || info.poolSize < 2
+  ) {
+    return `
+      <td>
+        ${escapeHtml(display)}
+      </td>
+    `;
+  }
+
+  const tooltip =
+    historyRankTooltip(
+      info,
+      metric
+    );
+
+  return `
+    <td
+      class="pitcher-history-ranked-cell"
+      data-global-rank="${info.rank}"
+      data-global-league-size="${info.poolSize}"
+      title="${escapeHtml(tooltip)}"
+      aria-label="${escapeHtml(tooltip)}"
+    >
+      ${escapeHtml(display)}
+    </td>
+  `;
+}
+
+function aggregateHistoryRanks(rows) {
+  const ranks = {};
+
+  HISTORY_RANK_KEYS.forEach(
+    metric => {
+      const values = rows
+        .map(row =>
+          normalizeRankInfo(
+            row,
+            metric
+          )
+        )
+        .filter(info =>
+          info
+          && Number.isFinite(
+            info.rank
+          )
+          && Number.isFinite(
+            info.poolSize
+          )
+          && info.poolSize > 1
+        );
+
+      if (!values.length) {
+        return;
+      }
+
+      const averagePercentile =
+        values.reduce(
+          (total, info) => {
+            const percentile =
+              1 - (
+                (
+                  info.rank - 1
+                ) / (
+                  info.poolSize - 1
+                )
+              );
+
+            return total + percentile;
+          },
+          0
+        ) / values.length;
+
+      const syntheticPool = 100;
+
+      const syntheticRank =
+        Math.max(
+          1,
+          Math.min(
+            syntheticPool,
+            Math.round(
+              1
+              + (
+                1 - averagePercentile
+              ) * (
+                syntheticPool - 1
+              )
+            )
+          )
+        );
+
+      ranks[metric] = {
+        rank: syntheticRank,
+        pool_size: syntheticPool,
+        year: "",
+        basis: "year-adjusted"
+      };
+    }
+  );
+
+  return ranks;
+}
+
 
 function createRoot(trigger) {
   const card = trigger?.closest(".pitcher-card-link");
@@ -235,7 +459,8 @@ function aggregateRows(rows, label) {
     strikeouts: totals.strikeouts,
     home_runs: totals.homeRuns,
     era: innings ? totals.earnedRuns * 9 / innings : null,
-    whip: innings ? (totals.hits + totals.walks) / innings : null
+    whip: innings ? (totals.hits + totals.walks) / innings : null,
+    ranks: aggregateHistoryRanks(rows)
   };
 }
 
@@ -244,17 +469,63 @@ function cells(row, firstLabel, opponentLabel = "") {
     <td class="pitcher-history-sticky-cell">
       ${escapeHtml(firstLabel || "–")}
     </td>
-    <td>${escapeHtml(opponentLabel || "")}</td>
-    <td>${escapeHtml(row?.decision || "–")}</td>
-    <td>${formatIp(row?.ip)}</td>
-    <td>${formatInteger(row?.hits)}</td>
-    <td>${formatInteger(row?.runs)}</td>
-    <td>${formatInteger(row?.earned_runs)}</td>
-    <td>${formatInteger(row?.walks)}</td>
-    <td>${formatInteger(row?.strikeouts)}</td>
-    <td>${formatInteger(row?.home_runs)}</td>
-    <td>${formatRate(row?.era)}</td>
-    <td>${formatRate(row?.whip)}</td>
+    <td>
+      ${escapeHtml(opponentLabel || "")}
+    </td>
+    <td>
+      ${escapeHtml(row?.decision || "–")}
+    </td>
+    ${rankedHistoryCell(
+      row,
+      "ip",
+      formatIp(row?.ip)
+    )}
+    ${rankedHistoryCell(
+      row,
+      "hits",
+      formatInteger(row?.hits)
+    )}
+    ${rankedHistoryCell(
+      row,
+      "runs",
+      formatInteger(row?.runs)
+    )}
+    ${rankedHistoryCell(
+      row,
+      "earned_runs",
+      formatInteger(
+        row?.earned_runs
+      )
+    )}
+    ${rankedHistoryCell(
+      row,
+      "walks",
+      formatInteger(row?.walks)
+    )}
+    ${rankedHistoryCell(
+      row,
+      "strikeouts",
+      formatInteger(
+        row?.strikeouts
+      )
+    )}
+    ${rankedHistoryCell(
+      row,
+      "home_runs",
+      formatInteger(
+        row?.home_runs
+      )
+    )}
+    ${rankedHistoryCell(
+      row,
+      "era",
+      formatRate(row?.era)
+    )}
+    ${rankedHistoryCell(
+      row,
+      "whip",
+      formatRate(row?.whip)
+    )}
   `;
 }
 
@@ -445,6 +716,10 @@ function renderHistory(
       </a>
     </footer>
   `;
+
+  applyGlobalTierHighlights(
+    targetContent
+  );
 }
 
 function positionDesktop(trigger) {
