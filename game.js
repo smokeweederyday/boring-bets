@@ -1,6 +1,6 @@
 import {
   restorePitcherHistoryState
-} from "./assets/js/widgets/pitcherHistoryPanel.js?v=sticky-open-20260724-003146";
+} from "./assets/js/widgets/pitcherHistoryPanel.js?v=decision-highlights-20260724-023207";
 import {
   initializeHighlightControls,
   applyGlobalTierHighlights

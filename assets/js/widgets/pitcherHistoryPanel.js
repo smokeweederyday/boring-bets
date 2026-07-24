@@ -551,9 +551,139 @@ function aggregateRows(rows, label) {
     home_runs: totals.homeRuns,
     era: innings ? totals.earnedRuns * 9 / innings : null,
     whip: innings ? (totals.hits + totals.walks) / innings : null,
-    ranks: aggregateHistoryRanks(rows)
+    ranks: {
+      ...aggregateHistoryRanks(rows),
+      ...aggregateDecisionRank(rows)
+    }
   };
 }
+
+function decisionHistoryCell(row) {
+  const decision = String(
+    row?.decision || "–"
+  ).trim().toUpperCase();
+
+  if (decision === "W") {
+    return `
+      <td
+        class="
+          pitcher-history-decision-cell
+          pitcher-history-decision-win
+        "
+        title="Winning decision"
+      >
+        W
+      </td>
+    `;
+  }
+
+  if (decision === "L") {
+    return `
+      <td
+        class="
+          pitcher-history-decision-cell
+          pitcher-history-decision-loss
+        "
+        title="Losing decision"
+      >
+        L
+      </td>
+    `;
+  }
+
+  if (
+    decision === "ND" ||
+    decision === "–" ||
+    !decision
+  ) {
+    return `
+      <td
+        class="
+          pitcher-history-decision-cell
+          pitcher-history-decision-neutral
+        "
+        title="No decision"
+      >
+        ${escapeHtml(decision || "–")}
+      </td>
+    `;
+  }
+
+  if (/^\d+\s*-\s*\d+$/.test(decision)) {
+    return rankedHistoryCell(
+      row,
+      "decision_pct",
+      decision
+    );
+  }
+
+  return `
+    <td
+      class="
+        pitcher-history-decision-cell
+        pitcher-history-decision-neutral
+      "
+    >
+      ${escapeHtml(decision)}
+    </td>
+  `;
+}
+
+
+function aggregateDecisionRank(rows) {
+  const percentiles = (rows || [])
+    .map(row =>
+      historyRankPercentile(
+        row,
+        "decision_pct"
+      )
+    )
+    .filter(value =>
+      Number.isFinite(value)
+    );
+
+  if (!percentiles.length) {
+    return {};
+  }
+
+  const average =
+    percentiles.reduce(
+      (sum, value) => sum + value,
+      0
+    ) / percentiles.length;
+
+  const syntheticPoolSize = 1000;
+
+  const syntheticRank = Math.max(
+    1,
+    Math.min(
+      syntheticPoolSize,
+      Math.round(
+        average
+        * (syntheticPoolSize - 1)
+      ) + 1
+    )
+  );
+
+  const season = Math.max(
+    0,
+    ...(rows || [])
+      .map(row => Number(row?.season))
+      .filter(value =>
+        Number.isFinite(value)
+      )
+  );
+
+  return {
+    decision_pct: [
+      syntheticRank,
+      syntheticPoolSize,
+      season || null,
+      "aggregate"
+    ]
+  };
+}
+
 
 function cells(row, firstLabel, opponentLabel = "") {
   return `
@@ -563,9 +693,7 @@ function cells(row, firstLabel, opponentLabel = "") {
     <td>
       ${escapeHtml(opponentLabel || "")}
     </td>
-    <td>
-      ${escapeHtml(row?.decision || "–")}
-    </td>
+    ${decisionHistoryCell(row)}
     ${rankedHistoryCell(
       row,
       "ip",
@@ -650,6 +778,208 @@ function sectionHeader(label, rows) {
   `;
 }
 
+const HISTORY_COLUMN_HIGHLIGHT_STORAGE_KEY =
+  "boring-bets:recent-history:column-highlights";
+
+const HISTORY_COLUMN_METRICS = [
+  ["decision_pct", "DEC"],
+  ["ip", "IP"],
+  ["hits", "H"],
+  ["runs", "R"],
+  ["earned_runs", "ER"],
+  ["walks", "BB"],
+  ["strikeouts", "SO"],
+  ["home_runs", "HR"],
+  ["era", "ERA"],
+  ["whip", "WHIP"]
+];
+
+function historyColumnHighlightsEnabled() {
+  try {
+    return localStorage.getItem(
+      HISTORY_COLUMN_HIGHLIGHT_STORAGE_KEY
+    ) === "on";
+  } catch {
+    return false;
+  }
+}
+
+function saveHistoryColumnHighlights(
+  enabled
+) {
+  try {
+    localStorage.setItem(
+      HISTORY_COLUMN_HIGHLIGHT_STORAGE_KEY,
+      enabled ? "on" : "off"
+    );
+  } catch {
+    // Highlighting remains off when storage
+    // is unavailable.
+  }
+}
+
+function historyRankPercentile(
+  row,
+  metric
+) {
+  const rankInfo =
+    row?.ranks?.[metric];
+
+  if (
+    !Array.isArray(rankInfo) ||
+    rankInfo.length < 2
+  ) {
+    return null;
+  }
+
+  const rank = Number(rankInfo[0]);
+  const poolSize = Number(rankInfo[1]);
+
+  if (
+    !Number.isFinite(rank) ||
+    !Number.isFinite(poolSize) ||
+    rank < 1 ||
+    poolSize < 2
+  ) {
+    return null;
+  }
+
+  return Math.max(
+    0,
+    Math.min(
+      1,
+      (rank - 1) / (poolSize - 1)
+    )
+  );
+}
+
+function combinedHistoryHeaderRows(
+  recentSeasons,
+  lastStarts,
+  opponentStarts
+) {
+  const rows = [
+    ...(recentSeasons || [])
+  ];
+
+  const seenStarts = new Set();
+
+  [
+    ...(lastStarts || []),
+    ...(opponentStarts || [])
+  ].forEach(row => {
+    const key =
+      row?.game_pk
+        ? `game:${row.game_pk}`
+        : [
+            "start",
+            row?.date || "",
+            row?.opponent_abbr || "",
+            row?.outs || "",
+            row?.earned_runs || ""
+          ].join(":");
+
+    if (seenStarts.has(key)) {
+      return;
+    }
+
+    seenStarts.add(key);
+    rows.push(row);
+  });
+
+  return rows;
+}
+
+function combinedHistoryColumnInfo(
+  rows,
+  metric
+) {
+  const percentiles = (rows || [])
+    .map(row =>
+      historyRankPercentile(
+        row,
+        metric
+      )
+    )
+    .filter(value =>
+      Number.isFinite(value)
+    );
+
+  if (!percentiles.length) {
+    return null;
+  }
+
+  const average =
+    percentiles.reduce(
+      (sum, value) => sum + value,
+      0
+    ) / percentiles.length;
+
+  let tierClass = "metric-average";
+
+  if (average <= 0.20) {
+    tierClass = "metric-elite";
+  } else if (average <= 0.40) {
+    tierClass = "metric-good";
+  } else if (average <= 0.60) {
+    tierClass = "metric-average";
+  } else if (average <= 0.80) {
+    tierClass = "metric-poor";
+  } else {
+    tierClass = "metric-awful";
+  }
+
+  return {
+    tierClass,
+    sampleSize: percentiles.length,
+    rating: Math.round(
+      (1 - average) * 100
+    )
+  };
+}
+
+function renderHistoryMetricHeader(
+  metric,
+  label,
+  rows,
+  enabled
+) {
+  const info =
+    combinedHistoryColumnInfo(
+      rows,
+      metric
+    );
+
+  const tierClass =
+    enabled && info
+      ? info.tierClass
+      : "metric-average";
+
+  const title =
+    info
+      ? (
+          `Combined ${label} rating: ` +
+          `${info.rating}/100 from ` +
+          `${info.sampleSize} visible ranked rows`
+        )
+      : `Combined ${label} ranking unavailable`;
+
+  return `
+    <th
+      class="pitcher-history-combined-header ${
+        enabled
+          ? tierClass
+          : "is-highlight-disabled"
+      }"
+      data-history-column-metric="${escapeHtml(metric)}"
+      title="${escapeHtml(title)}"
+    >
+      ${escapeHtml(label)}
+    </th>
+  `;
+}
+
+
 function renderHistory(
   data,
   opponentAbbr,
@@ -675,6 +1005,29 @@ function renderHistory(
         )
         .slice(0, 5)
     : [];
+
+
+  const columnHighlightsEnabled =
+    historyColumnHighlightsEnabled();
+
+  const combinedHeaderRows =
+    combinedHistoryHeaderRows(
+      recentSeasons,
+      lastStarts,
+      opponentStarts
+    );
+
+  const combinedMetricHeaders =
+    HISTORY_COLUMN_METRICS
+      .map(([metric, label]) =>
+        renderHistoryMetricHeader(
+          metric,
+          label,
+          combinedHeaderRows,
+          columnHighlightsEnabled
+        )
+      )
+      .join("");
 
   const handedness = pitcher?.hand
     ? `${String(pitcher.hand).toUpperCase()}HP`
@@ -750,18 +1103,37 @@ function renderHistory(
       <table class="data-table pitcher-data-table pitcher-history-table">
         <thead>
           <tr>
-            <th class="pitcher-history-sticky-cell">Date / Season</th>
+            <th
+              class="
+                pitcher-history-sticky-cell
+                pitcher-history-highlight-control-cell
+              "
+            >
+              <button
+                type="button"
+                class="pitcher-history-column-highlight-toggle"
+                data-history-column-highlight-toggle
+                aria-label="${
+                  columnHighlightsEnabled
+                    ? "Turn column-title highlighting off"
+                    : "Turn column-title highlighting on"
+                }"
+                aria-pressed="${
+                  columnHighlightsEnabled
+                    ? "true"
+                    : "false"
+                }"
+                title="${
+                  columnHighlightsEnabled
+                    ? "Turn column-title highlighting off"
+                    : "Turn column-title highlighting on"
+                }"
+              >
+                <span aria-hidden="true"></span>
+              </button>
+            </th>
             <th>Opp</th>
-            <th>DEC</th>
-            <th>IP</th>
-            <th>H</th>
-            <th>R</th>
-            <th>ER</th>
-            <th>BB</th>
-            <th>SO</th>
-            <th>HR</th>
-            <th>ERA</th>
-            <th>WHIP</th>
+            ${combinedMetricHeaders}
           </tr>
         </thead>
 
@@ -811,6 +1183,30 @@ function renderHistory(
   applyGlobalTierHighlights(
     targetContent
   );
+
+  const headerHighlightToggle =
+    targetContent.querySelector(
+      "[data-history-column-highlight-toggle]"
+    );
+
+  headerHighlightToggle?.addEventListener(
+    "click",
+    event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      saveHistoryColumnHighlights(
+        !columnHighlightsEnabled
+      );
+
+      renderHistory(
+        data,
+        opponentAbbr,
+        targetContent
+      );
+    }
+  );
+
 }
 
 function positionDesktop(trigger) {

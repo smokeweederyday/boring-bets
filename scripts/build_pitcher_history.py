@@ -38,6 +38,7 @@ RANK_CACHE_LOCK = threading.Lock()
 RANK_CACHE_MEMORY: Dict[int, Dict[str, Any]] = {}
 
 HISTORY_RANK_DIRECTIONS = {
+    "decision_pct": True,
     "ip": True,
     "hits": False,
     "runs": False,
@@ -318,6 +319,9 @@ def normalize_rank_source(
         or 0
     )
 
+    wins = to_int(stat.get("wins")) or 0
+    losses = to_int(stat.get("losses")) or 0
+
     era = to_float(stat.get("era"))
 
     if era is None and innings:
@@ -332,6 +336,8 @@ def normalize_rank_source(
         "games_started":
             to_int(stat.get("gamesStarted"))
             or 0,
+        "wins": wins,
+        "losses": losses,
         "outs": outs,
         "hits": hits,
         "runs": runs,
@@ -354,6 +360,17 @@ def history_rank_value(
         to_int(row.get("games_started"))
         or 0
     )
+
+    if metric == "decision_pct":
+        wins = to_int(row.get("wins")) or 0
+        losses = to_int(row.get("losses")) or 0
+        decisions = wins + losses
+
+        return (
+            wins / decisions
+            if decisions > 0
+            else None
+        )
 
     if metric == "ip":
         if mode == "season":
@@ -380,16 +397,12 @@ def history_rank_value(
         if count is None:
             return None
 
-        if mode == "season":
-            return (
-                count * 27 / outs
-                if outs > 0
-                else None
-            )
-
+        # Counting-stat highlights are always
+        # evaluated relative to innings pitched.
+        # Raw values remain unchanged in the table.
         return (
-            count / starts
-            if starts > 0
+            count * 27 / outs
+            if outs > 0
             else None
         )
 
@@ -474,12 +487,19 @@ def build_year_rank_baseline(
     ]
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.2",
         "season": season,
         "qualified_pitchers":
             len(qualified_rows),
         "starters":
             len(starter_rows),
+        "decision_pct_pool": (
+            build_rank_pools(
+                starter_rows,
+                "season",
+            ).get("decision_pct")
+            or []
+        ),
         "season_pools":
             build_rank_pools(
                 qualified_rows,
@@ -523,7 +543,14 @@ def load_year_rank_baseline(
                     )
                 )
 
-                if isinstance(document, dict):
+                if (
+                    isinstance(document, dict)
+                    and str(
+                        document.get(
+                            "schema_version"
+                        )
+                    ) == "1.2"
+                ):
                     RANK_CACHE_MEMORY[
                         season
                     ] = document
@@ -630,9 +657,17 @@ def attach_history_ranks(
             mode,
         )
 
+        metric_pool = (
+            baseline.get(
+                "decision_pct_pool"
+            )
+            if metric == "decision_pct"
+            else pools.get(metric)
+        )
+
         result = rank_against_pool(
             value,
-            pools.get(metric) or [],
+            metric_pool or [],
             higher_is_better,
         )
 

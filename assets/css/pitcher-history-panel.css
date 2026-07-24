@@ -959,3 +959,271 @@ td.pitcher-history-ranked-cell.global-tier-highlight.metric-awful {
 }
 
 /* BULLPEN_START_PITCHER_TOGGLE_END */
+
+/* HISTORY_COMBINED_COLUMN_HIGHLIGHTS_START */
+
+/* Structural columns remain neutral. */
+.pitcher-history-table thead th {
+  color: var(--muted) !important;
+  text-shadow: none !important;
+}
+
+/*
+  Only IP and the statistical columns after it receive
+  their combined visible-row ranking color.
+*/
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.metric-elite {
+  color: #63ff9b !important;
+}
+
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.metric-good {
+  color: #a2f5bf !important;
+}
+
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.metric-average {
+  color: var(--text) !important;
+}
+
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.metric-poor {
+  color: #ffadb8 !important;
+}
+
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.metric-awful {
+  color: #ff7184 !important;
+}
+
+.pitcher-history-table
+thead
+th.pitcher-history-combined-header.is-highlight-disabled {
+  color: var(--muted) !important;
+}
+
+/* Upper-left square replacing Date / Season. */
+.pitcher-history-highlight-control-cell {
+  padding: 0 !important;
+  text-align: center !important;
+  vertical-align: middle;
+}
+
+.pitcher-history-column-highlight-toggle {
+  -webkit-appearance: none;
+  appearance: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 0.9rem;
+  min-width: 0.9rem;
+  height: 0.9rem;
+
+  margin: 0.18rem;
+  padding: 0;
+
+  border: 1px solid
+    rgba(150, 180, 205, 0.65);
+  border-radius: 2px;
+
+  background:
+    rgba(12, 20, 29, 0.9);
+
+  color: #69dce2;
+
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.pitcher-history-column-highlight-toggle
+span {
+  display: block;
+
+  width: 0.42rem;
+  height: 0.42rem;
+
+  border-radius: 1px;
+
+  background: transparent;
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+] {
+  border-color: currentColor;
+  box-shadow:
+    0 0 7px
+    rgba(105, 220, 226, 0.38);
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+]
+span {
+  background: currentColor;
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] {
+  opacity: 0.52;
+}
+
+.pitcher-history-column-highlight-toggle:hover,
+.pitcher-history-column-highlight-toggle:focus-visible {
+  opacity: 1;
+  border-color: currentColor;
+}
+
+.pitcher-history-column-highlight-toggle:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* HISTORY_COMBINED_COLUMN_HIGHLIGHTS_END */
+
+/* HISTORY_NEUTRAL_CHECKBOX_START */
+
+/*
+  The column-highlight toggle remains grayscale in
+  both states. No teal fill appears when enabled.
+*/
+.pitcher-history-column-highlight-toggle,
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+],
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] {
+  color: rgba(255, 255, 255, 0.72) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.pitcher-history-column-highlight-toggle span,
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+] span,
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] span {
+  position: relative;
+  background: transparent !important;
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+] span::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: "✓";
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+  transform: translate(-50%, -52%);
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] span::after {
+  content: "";
+}
+
+/* HISTORY_NEUTRAL_CHECKBOX_END */
+
+/* HISTORY_BOX_IN_BOX_TOGGLE_START */
+
+/*
+  Neutral box-inside-box indicator.
+  No checkmark, teal fill, or glow.
+*/
+.pitcher-history-column-highlight-toggle,
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+],
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] {
+  color: rgba(255, 255, 255, 0.7) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.pitcher-history-column-highlight-toggle span,
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+] span,
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] span {
+  position: relative;
+  width: 0.42rem;
+  height: 0.42rem;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  background: transparent !important;
+}
+
+.pitcher-history-column-highlight-toggle
+span::after {
+  content: none !important;
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="true"
+] span {
+  border-color:
+    rgba(255, 255, 255, 0.72);
+  background:
+    rgba(255, 255, 255, 0.22) !important;
+}
+
+.pitcher-history-column-highlight-toggle[
+  aria-pressed="false"
+] span {
+  border-color: transparent;
+  background: transparent !important;
+}
+
+/* HISTORY_BOX_IN_BOX_TOGGLE_END */
+
+/* HISTORY_DECISION_HIGHLIGHTS_START */
+
+/*
+  Individual decisions use fixed semantic colors.
+  Numeric records continue through the ranked-cell system.
+*/
+.pitcher-history-table
+td.pitcher-history-decision-cell {
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-weight: 850;
+}
+
+.pitcher-history-table
+td.pitcher-history-decision-win {
+  color: #63ff9b !important;
+}
+
+.pitcher-history-table
+td.pitcher-history-decision-loss {
+  color: #ff7184 !important;
+}
+
+.pitcher-history-table
+td.pitcher-history-decision-neutral {
+  color: var(--muted) !important;
+}
+
+/* HISTORY_DECISION_HIGHLIGHTS_END */
